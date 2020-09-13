@@ -1,0 +1,44 @@
+#!/bin/bash
+
+##
+#
+# Generate a pallete of 8 unique colors for each
+# image in youe Wallpaper directory
+#
+# Palettes are save in the pallete directory
+#
+##
+
+. GlobalNeeds
+
+GREEN="$(tput setaf 2)"
+RESET="$(tput sgr0)"
+
+for image in $(find $WALLPAPER_DIR -regex ".*\.\(jpg\|gif\|png\|jpeg\)")
+do
+    name=$(basename $image)
+    echo "Scanning $name..."
+    if [ ! -f $PALETTE_DIR/$name.plt ]; then
+	convert $image +dither -colors 8 -unique-colors txt: | awk -F" " '{print $3}' | sed '/pixel/d' | sort >> $PALETTE_DIR/$name.plt
+    fi
+    echo -ne "${GREEN}Done${RESET}\n"
+done
+
+for PALETTE in $PALETTE_DIR/*.plt
+do
+    CC_DARK_TONE=$(cat $PALETTE | head -n1)
+    CC_LIGHT_TONE=$(cat $PALETTE | tail -n1)
+
+    DARK_HEX=$(echo $CC_DARK_TONE | sed 's/#/0x/g')
+    LIGHT_HEX=$(echo $CC_LIGHT_TONE | sed 's/#/0x/g')
+    DIFFERENCE=$(printf "0x%X\n" $(($LIGHT_HEX-$DARK_HEX)))    
+    
+    DIFF_DEC=$(printf "%d" "$DIFFERENCE")
+    
+    if [ $DIFF_DEC -gt 6500000 ]; then
+	NEW_CC_DARK_TONE=$((($DARK_HEX & 0xfefefe) >> 1))
+	NEW_CC_DARK_TONE=$(printf "#%06x" "$NEW_CC_DARK_TONE" )
+	sed -i "s/$CC_DARK_TONE/$NEW_CC_DARK_TONE/g" $PALETTE
+    fi
+done
+

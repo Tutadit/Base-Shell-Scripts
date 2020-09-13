@@ -1,0 +1,12 @@
+#!/bin/bash
+PALETTE=$HOME/.config/colors/scheme
+
+# Custom colors
+CC_DARK_TONE=$(cat $PALETTE | head -n1)
+CC_LIGHT_TONE=$(cat $PALETTE | tail -n1)
+CC_MID_TONE_1=$(cat $PALETTE | head -n2 | tail -n1 )
+CC_MID_TONE_2=$(cat $PALETTE | head -n3 | tail -n1 )
+CC_MID_TONE_3=$(cat $PALETTE | head -n4 | tail -n1 )
+CC_MID_TONE_4=$(cat $PALETTE | head -n5 | tail -n1 )
+CC_MID_TONE_5=$(cat $PALETTE | head -n6 | tail -n1 )
+CC_MID_TONE_6=$(cat $PALETTE | head -n7 | tail -n1 )

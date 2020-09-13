@@ -1,0 +1,63 @@
+#!/bin/bash
+
+. GlobalNeeds
+
+IMAGE=$(find $WALLPAPER_DIR -regex ".*\.\(jpg\|gif\|png\|jpeg\)" | shuf -n1)
+# Set Background
+feh --bg-fill $IMAGE
+
+#
+#Change color palette based on image
+#
+
+NAME=$(basename $IMAGE)
+PALETTE=$PALETTE_DIR/$NAME.plt
+cp $PALETTE $HOME/.config/colors/scheme
+
+
+##
+#
+# Set the firefox theme based on pallete
+#
+# I use DynamicTheme Add-on to acomplish this
+# https://github.com/Tutadit/DynamicTheme-FirefoxAddon# 
+#
+##
+
+. getPalette
+
+cat> /home/jp/.mozilla/extensions/dynamicTheme/firefox_theme.json <<EOF 
+{ 
+   "colors": { 
+      "button_background_active": "$CC_MID_TONE_2",
+      "button_background_hover":"$CC_MID_TONE_2",
+      "icons_attention": "$CC_LIGHT_TONE",
+      "frame":"$CC_DARK_TONE",
+      "ntp_background":"$CC_DARK_TONE",
+      "ntp_text":"$CC_LIGHT_TONE",
+      "tab_background_text":"$CC_LIGHT_TONE",
+      "tab_line":"$CC_LIGHT_TONE",
+      "tab_loading":"$CC_LIGHT_TONE",
+      "tab_selected":"$CC_MID_TONE_1",
+      "tab_text":"$CC_LIGHT_TONE",
+      "toolbar":"$CC_DARK_TONE",
+      "toolbar_field":"$CC_MID_TONE_5",
+      "toolbar_field_highlight":"$CC_DARK_TONE",
+      "toolbar_field_highlight_text":"$CC_LIGHT_TONE",
+      "toolbar_field_separator":"$CC_LIGHT_TONE",
+      "toolbar_field_text":"$CC_MID_TONE_1",
+      "toolbar_field_text_focus":"$CC_MID_TONE_1",
+      "toolbar_text":"$CC_LIGHT_TONE",
+      "popup":"$CC_DARK_TONE",
+      "popup_highlight": "$CC_LIGHT_TONE",	
+      "popup_border":"$CC_DARK_TONE",
+      "popup_highlight_text": "$CC_MID_TONE_2",
+      "popup_text":"$CC_LIGHT_TONE",
+      "sidebar":"$CC_DARK_TONE",
+      "sidebar_border":"$CC_DARK_TONE",
+      "sidebar_highlight":"$CC_LIGHT_TONE",
+      "sidebar_highlight_text":"$CC_DARK_TONE",
+      "sidebar_text":"$CC_LIGHT_TONE"
+    }
+}
+EOF
