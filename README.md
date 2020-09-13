@@ -22,7 +22,7 @@ are sorted from dark to light tones
 ## setBackground
 
 Sets a random image from the Wallpaper directory as the
-background image, as well as changinf the color scheme to
+background image, as well as changing the color scheme to
 the scheme of the new background image
 
 Within this scrip I also set the contents of the firefox
