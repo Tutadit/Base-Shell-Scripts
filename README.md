@@ -1,11 +1,13 @@
 # Base-Shell-Scripts
 Collection of various shell scripts
 
+All config options are in `GlobalNeeds`
+
 # Color and Background scripts
 There are a few scripts that I use to customize the look
 of my machine.
 
-I use the current background to set to
+I use the current background to set the
 color scheme, using `generateColorPalette` to achieve this.
 
 I use `setBackground` to grab a random image from the
