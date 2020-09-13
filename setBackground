@@ -26,7 +26,7 @@ cp $PALETTE $HOME/.config/colors/scheme
 
 . getPalette
 
-cat> /home/jp/.mozilla/extensions/dynamicTheme/firefox_theme.json <<EOF 
+cat> $FIREFOX_THEME <<EOF 
 { 
    "colors": { 
       "button_background_active": "$CC_MID_TONE_2",

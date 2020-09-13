@@ -23,6 +23,11 @@ Sets a random image from the Wallpaper directory as the
 background image, as well as changinf the color scheme to
 the scheme of the new background image
 
+Within this scrip I also set the contents of the firefox
+them file used by DynamicTheme addon
+
+https://github.com/Tutadit/DynamicTheme-FirefoxAddon
+
 ## getPallete
 
 A little API to get the color pallete as named constants
