@@ -1,0 +1,489 @@
+% Created 2020-02-03 Mon 11:59
+% Intended LaTeX compiler: pdflatex
+\documentclass[a4paper,titlepage,openany,oneside]{book}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{graphicx}
+\usepackage{grffile}
+\usepackage{longtable}
+\usepackage{wrapfig}
+\usepackage{rotating}
+\usepackage[normalem]{ulem}
+\usepackage{amsmath}
+\usepackage{textcomp}
+\usepackage{amssymb}
+\usepackage{capt-of}
+\usepackage{hyperref}
+\usepackage{fullpage} \usepackage{fancyhdr}
+\author{JP Lozano}
+\date{\today}
+\title{English 303\\\medskip
+\large Read at your own risk}
+\hypersetup{
+ pdfauthor={JP Lozano},
+ pdftitle={English 303},
+ pdfkeywords={},
+ pdfsubject={Notes on English},
+ pdfcreator={Emacs 26.3 (Org mode 9.1.9)}, 
+ pdflang={English}}
+\begin{document}
+
+\maketitle
+\makeatletter
+\renewcommand{\@chapapp}{Section}
+\makeatother
+\maketitle
+\part*{ENGL303}
+\label{sec:org225b81f}
+\chapter*{Introduction}
+\label{sec:org8214ec3}
+\section*{Intro to class}
+\label{sec:orgb682e79}
+\textbf{Infinite oneness and respect for otherness}, big time. \textbf{Liberation Pedagogy}, becoming free from the standard education and teaching structure. Being liberated by education. \textbf{open ended process}. No one has the final say. \textbf{truth is partial}. 
+\subsection*{Objectives}
+\label{sec:orge972022}
+Learning about contemporary theory practices. And gain experience applying. Reading the same text through different theoretical lenses. Learning to frame ideas differently. We'll writ an essay, gotta be a \textbf{clear arguable} thesis.
+
+\textbf{NO MULTIPLE CHOICE :c}
+
+Two parts: Short Answer by passages, Analyze phrases or terms. And a short essay writing.
+\section*{Critical Theory - Tyson}
+\label{sec:org99024e8}
+Theory is used by pricks to feel better bout themselves, but don't let them destroy it's beauty. Theory is fun and engaging. 
+
+\textbf{the death of the author:} The change in attitude toward the role of the author in our interpretation of literary works. Early 20th century, people studied the author to get to the meaning of the work, this is called \textbf{authorial intention}, now we don't do that. Instead of worrying about the authors life and their ideologies and beliefs and all that bullshit, we now focus on the reader on the ideological, rhetorical, or aesthetic structure of the text itself. The culture when the text was written is also important. 
+\subsection*{In what way can we benefit from Critical Theory?}
+\label{sec:org21aa6ad}
+Aight listen, theory helps us see ourselves and our world in a whole different way, a way that will change our whole perspective of the world. With theoretical knowledge you'll watch The Simpsons through so many lenses that you'll grow no problem. It'll help you be chill when someone who disagrees with ya presents themselves. And all human productions, reflecting human experience will be valuable tools of learning.
+\subsection*{How to go about it}
+\label{sec:org6c3a40a}
+Basically each theory is a different lens, in order to understand work through each lens we must ignore the other lenses. Although there is overlap between theories. Each methodology is a different way to see the world. Things can get \textbf{political} because each theory offers a different interpretation of history and current events, like government policies. And also the most popular theories of the day receive the most attention and funding. 
+\subsection*{It works because it doesn't}
+\label{sec:orge26bf6c}
+All theories are flawed and there is constant debate within the advocates of each theory as well as between theories. All theories have assumptions, and often this assumptions are stupid. 
+\subsection*{Other shit}
+\label{sec:org236531c}
+\emph{Critic} and \emph{Literary Criticism} don't mean to find flaws with texts but rather to find explanations of the production, the meaning, the design, the beauty. Critics critique one another more than text. 
+
+\textbf{Critical Theory} attempts to teach the assumptions and values upon which various ways of literary criticism rest.
+
+\textbf{When interpret a literary text, we are doing literary criticism; when we examine the criteria upon which our interpretation rests, we are doing critical theory}
+
+\subsection*{The Grain}
+\label{sec:orgc8990f7}
+\textbf{reading "with the grain" or "against the grain"} - With the grain reading is an interpretation invited by the text, against the grain is an interpretation that goes against the text, not in a way to attack the text but in a way that goes against the obvious. With the grain would be something the author wanted to portray, against it would be seething the author might have been unaware of.
+\section*{Modern Literary Theory - Rice \& Waugh}
+\label{sec:orga71bf89}
+Theory suggests that what are often taken to be 'natural' and 'commonsensical' ways of studying literature actually rest upon a set of theoretical injunctions which have been neutralized to the point at which they no longer have to justify their own practices.
+
+All theories accept a broadly mimetic view of the text where literature, in various ways, reflects upon and delivers up truths about life and the human condition.
+
+One of the most important challenged assumptions is the idea of language as a transparent medium, a medium through which reality can be transcribed and re-presented in aesthetic form, and of reality as self-contained and coherent, always transcending its formulation in words.
+
+COOL SHIT
+\section*{Intro to theory - Xie}
+\label{sec:orgeeba9ee}
+As Jonathan Culler defines: "an unbounded group of writings about everything under the sun, from the most technical problems of academic philosophy to the changing ways in which people have talked about and thought about the body\ldots{}". He is the first person to introduce New French theory to Anglo-America. Excellent writing. The 20th century as we started, begins with socioloty. In the 1960s everyone applied with the linguistic theory is done through the lens of structuralist. Theory is translatable, from fields to fields. \textbf{Theory is inter-disciplinary and cross-disciplinary.} It offers a useful \textbf{metalanguage} for analysize the world, the text, and the self. 
+
+There is nothing natural or permanent; everything is \textbf{socio-historically} specific. Time, place, time, individually specific. \uline{Ideology transforms history into nature.} \emph{Ronald Barthes}.
+
+Pre 20th century theory:
+\begin{itemize}
+\item The mimetic. Plato, Sidney, Arnold: Imitation; copy of ideal or real.
+\item The pragmatic: Plato Sidney, Arnold: Didactic, Moral, special effect
+\item The expressive: Romantic, Shelley: Expression of authors creative imagination.
+\item The Objective: Marllame, Kant, Eliot, Brooks: Object, formal qualities, internal.
+\end{itemize}
+
+
+Ideology is with you, but you not aware. \emph{Louis Althusser} leading Marxism. "Ideology is like air" which means it is everywhere, it informs your thinking, your writing, your being.
+
+M. H. Abraham's diagram:
+
+Work at the center of a triangular structure: universe, artist, and audience the points. \uline{Mimetic} theory accentuates the relations between work and universe. \uline{expressive} between work and artist. \uline{didactic} work and audience. \uline{Formalism} theory focuses on the work itself. Formal qualities, prioritizes form, which is content. When we talk about it we have two schools: Russian and New Criticism (Anglo-American). New Criticism cuts text from history and society. But formalism still emphazises historical events.
+
+\emph{Digression} $\backslash$ 
+Ronald Barthes, manifestorial piece titled "Death of Author". The author has no control over the meaning of the text. Readers have as much right to the interpretation of the text as the author. 
+\emph{Done} $\backslash$ 
+
+Structiuralism, 1960s to early 80s. It's focus to discuss functions and relations instead of meanings. The problem of \uline{inderteminacy.} 
+
+Decontructionist theory foregrounds the crisis of referentiality.
+
+Reading is both objective and subjective. Language is thoroughly divorced from reality.
+
+In Plato's view two world: apparent world of objects grasped by senses. And the unchanging and unseen world of \uline{Form}. Everything seen in concrete world is the copy of the ideal world, the world of form. \uline{Poetry is a copy of a copy, twice remove from the world of ideas}. Poetry cannot capture truth and teach morality on the grounds that poetic representation "threatens social stability by offering false images and unsuitable role models". Aristotle thinks poetry reveals truth, it is a more creative version of reality. \uline{The poet is both an immitator and a creator. It speaks to universal truth.}.
+
+Friedrich Whilmen Nietszhe is the beggining point of 20th cetury theory. Rethinking western tradition. Whatever you say, think, write, percieved through the lens of human perception. We can never know anything outside human perception. \uline{truth is a useful illusion}: an oxymoron, or a paradox. We need the illusions to survive. The outer world impinges on the human perceiver. The first metaphor, intrudeces an unbridigable gap leading to "subject and obeejct" are absolutely different spheres. Substitution of one "concept" in the place of multiple experiences, the second metaphor. "Whenever you use a word, two meaning: dictionary and specific social encounters". "Concept erases difference". "Making equal that which is not equal". Which raises a question: Are concepts useless? No no. Always be critical. 
+
+\subsection*{Twentieth century literary theory}
+\label{sec:org50f3697}
+\begin{itemize}
+\item Formalism: Form is content; defamiliarization - to present familiar things in unfamiliar ways. Victor Shiklovosky "Art as Technique". What is art? Art is creative and novel (new). Art presents familiar in unfamiliar, offering new perspectives.
+\item New Criticism: test is aesthetic object for contemplation, ironies and paradoxes; contradictions resolvable into organic pattern.
+\item Archetypal Criticism. self-contained literary universe; archetypes of culture and literature; recurrent images.
+\item Structuralism: self-sufficient or determining structure; implicit rules of underlying system. Paradimatic/syntagmatic, langue/parole, phoneme, signifier/signified.
+\item Reader-response: experience, consciousness, gaps, interaction between text and reader produces meaning. (Stanley fish; Wolfgang Iser)
+\item Psychoanalytic: unconscious, repressed desire, Oedipus complex, allegory of the unconscious.
+\item Deconstruction: restless reversal of irony; the play of language/difference. \uline{differance}: menaing is a matter of difference and diferant.
+\item Marxism: Literature and socio-historical life; class structure, and class confrontation inscribed in text.
+\item Feminism: Anglo-American feminism, gender inequality and so on. Anglo-american politicizes critical methods and French.
+\item New Historicism - No objective truth
+\item Post-colonialism: designates a gesture of anxiety to move beyond eurocentric ideology, beyond colonialist binary of imperialism. A radical critique of colonial structures of attitudes and references (Edward Said, Gayatri Spivak, Homi Bihabha)
+\item Ecocriticism: Study of relationship between literature and environment. It examines the various ways literature treats the subject of nature.
+\end{itemize}
+\chapter*{Psychoanalytic Criticism}
+\label{sec:org6a6ad86}
+\section*{Psychoanalytic Criticism - Tyson}
+\label{sec:org7f15a3f}
+Psychoanalytic language is used in every day conversations, sort of. Psychoanalysis helps understand human behavior, applying it to literature, which is reflective of human behavior. Theory discussed is of the \emph{classical psychoanalysis} established by Sigmund Freud. 
+\subsection*{The origins of the unconscious}
+\label{sec:org12ffe38}
+Each human has a psychological history that starts as a child, throughout the life of the dude they experience \emph{adolescent} and \emph{adult} behavior being a direct result from those early experiences.
+
+The focus is of behavioral patterns that are somewhat destructive. This problems are unknown to us, the \textbf{unconscious}.
+
+Humans are motivated by desires, fears, needs, and conflicts known only to the unconscious mind. \emph{The unconscious is a dynamic entity that engages us at the deepest level of out being}. The unconscious mind is filled with repressed emotions. Shaped by the role given in the family-complex. The \emph{oedipal} conflict: competing against your parent of the same gender for the love of your parent of the opposite gender.
+
+This conflicts are natural developmental stages, failing to outgrow them leads to issues. Recognizing the problems is the only way to fix behavior.
+\subsection*{The defenses, anxiety, and core issues}
+\label{sec:org6511799}
+Defenses are the gate-keepers of the  unconscious. Avoiding dealing with them due to fear of breaking. This defenses include \emph{Selective Perception}, \emph{selective Memory}, \emph{Denial}, \emph{Avoidance}, \emph{Displacement}, and \emph{Projection}. A more complex defense is \emph{Regression}, meaning coming back to a psychological state previous to trauma or t the trauma itself. Regression allow one to relive the trauma and work through it with better perspective.
+
+When defenses fail to keep them gates anxiety gets out, anxiety is helpful as it reveals the core issues of the dude:
+\begin{itemize}
+\item \emph{Fear of Intimacy} - Chronic and overpowering feeling, emotional closeness will hurt or destroy. Safe only at an emotional distance. This \emph{defense} turns into a \emph{core issue} if it occurs frequently  or continually
+\item \emph{Fear of abandonment} - Unshakable belief that our loved ones will physically abandon us or that they don't care about us
+\item \emph{Fear of betrayal} - A nagging feeling that our loved ones are not to be trusted.
+\item \emph{Low self esteem} - Belief that we are worth less than others and therefore undeserving of their love, deserving of punishment.
+\item \emph{Insecure or unstable sense of self} - The inability to sustain a personal identity, not knowing ourselves. Makes one vulnerable to the influence of others.
+\item \emph{Oedipal fixation (or oedipal complex)} - Dysfunctional bond with a parent of the opposite sex that seeps through our ability to make mature connections with peers.
+\end{itemize}
+
+
+Core issues are interconnected, one issue can lead to the development of other core issues. Core issues define out being in a fundamental way. Core issues stay with the individual until they are properly addressed. \textbf{Anxiety always involves the return of the repressed.} The goal of psychoanalysis isn't to strengthen the defenses, rather to break them down in order to inflict basic changes in the foundation of our personalities.
+
+Even though \emph{anxiety} comes from a break in our \emph{defenses} it is hard to peep into our unconscious mind through it. To access and learn about the unconscious mind one must analyze their own behavior, as this provides clues, especially in the area of interpersonal relationships and within them especially in the romantic and sexual relationships. It is in this the relationships that the core unresolved issues generated in the family seep through. We can also access our unconscious through our dreams and creative activities, this draw directly from the unconscious.
+
+\subsection*{Dreams and dream symbols}
+\label{sec:orgbebc64a}
+It is believed that our defenses do not operate in the same way in our dreams. The unconscious operates through our dreams, however there is some censorship called \emph{dream distortion}. A dream's "message", or meaning, called the \emph{latent content}. This \emph{latent content} is altered so as to not be recognized through precesses called \emph{displacement} and \emph{condensation}. \textbf{Dream displacement} occurs whenever a "safe" person, event, or object is used in place of a more threatening person, event, or object.*Dream condensation* occurs when we use a single dream image or event to represent more than one unconscious wound or conflict. Dream displacement and dream condensation are referred as \emph{primary revision}. Once primary revision disguises the latent content it becomes the \emph{manifest content}. The meaning of the manifest content is the latent content. This latent content is recognized through the interpretation of the manifest content. Interpretation of dreams is a conscious action that can be affected by the unconscious so that the manifest content may not be remembered as it happened, this is the \emph{secondary revision.}
+
+The dreams manifest content is a kind of \emph{dream symbolism} and as with other symbolism there is no one-to-one correspondence of its meaning. Although often times a symbol will carry the same meaning within the same culture, it's meaning is still relative to the individual. In order to interpret symbols properly one must observe how a certain image makes them feel. Within the dream context is important.
+
+\subsubsection*{There are some general principles of dream interpretation}
+\label{sec:org049bd03}
+Dreamers create all the "characters", each "character" is a part of our own psychological experience projected during the dream onto a stand-in.
+
+Our dreams about our gender roles or about our attitude towards our selves and other sexual beings are also revealing of our psychological being. In order to interpret properly we must be aware of the male and female imagery. Male imagery or \textbf{phallic symbols}, can include towers, rockets, guns, arrows, pens, swords. If it stands upright or goes off it might be phallic. \emph{Female imagery} includes caves, rooms, walled-in gardens, cups, or enclosures and containers of any kind. Food and the containers they are in, womb imagery, breasts imagery is also female imagery.   
+
+Dreaming about water - a fluid, changeable, sometimes soothing, sometimes dangerous, often deeper than it looks - the dream could be about sexuality, or the realm of the emotions, or the realm of the unconscious. Water is also related to our experience in the womb.
+
+Dreams about buildings may refer to our relationship with ourselves, with the attic or basement being the unconscious. The building may represent an institution.
+
+Re occurring dreams and dream imagery are flags of unresolved issues.
+\subsection*{The meaning of death}
+\label{sec:orga2e5869}
+\textbf{Crisis} brings into th spotlight wounds, fears, guilty desires, or unresolved conflicts. \textbf{Trauma} is also used to refer to painful experience that scars us psychologically. Our relationship with death is a principal organizer of our psychological experience. Often theorist distance themselves from the meaning of death. Death is a biological drive called the \emph{death drive} or \emph{thanatos}.
+
+
+Freud saw an alarming degree of self-destructive behavior in individuals and nations that he called the \emph{death work}. The \emph{thenatos} is that biological drive that lead to the death work. Death, and specifically fear of death, is intimately connected to a number of other psychological realities.
+
+For many this fear keys into the fear of abandonment, of being alone. Death being the ultimate abandonment. Thus why some religions assure that in death one won't be alone. Fear of abandonment plays a role on the death of loved ones. This fear often drives the fear of intimacy, holding back as to not be hurt when death comes. Fear of death results in fear of life or risk. Often resulting in suicide. Fear of death translates into a fear of emotional death. The greater the fear the greater the fascination.
+
+\subsection*{The meaning of sexuality}
+\label{sec:org622c528}
+Fred places the sexual drive of humans opposite to thenatos, and called it \emph{eros}. Our sexuality is part and parcel of our identity and relates to our capacity to feel pleasure in ways not considered sexual. The origin of our sexual being is in the nature of the affirmation or disruption of our sense of self occurring in childhood. Our sexuality is a matter of meanings. 
+
+The \emph{superego} is in direct opposition to the \emph{id} and our \emph{libido}, or sexual energy. The \emph{ego} is the product of conflicts between what society says we can't have and what we want. The relationship between the \emph{ego} the \emph{id} and the \emph{superego} tells us as much about our culture as ourselves.
+
+Freud said that girls, upon learning that boys had penises, suffered from \emph{penis envy} and boys suffered from \emph{castration anxiety}. In analyzing the Victorian's culturally rigidly defined gender roles, being used to oppress woman of all ages, and to elevate men to positions of dominance, It is no wonder that girls will suffer from \emph{penis envy},-power envy- by wanting the privilege boys where giving and even feeling guilty of possessing such desires. And it is no wonder boys would suffer from \emph{castration anxiety} due to the fear of loosing their power. 
+
+\subsection*{Lacanian Psychoanalysis}
+\label{sec:org57e75f0}
+Of the French Psychoanalytic Jaques Lacan(1901-1981). His wroks on the unconscious was ambiguous and difficult to understand, this is because he believed that because the unconscious is difficult to understand then the so should the explanation. 
+\subsubsection*{The psychological development of the infant}
+\label{sec:org6b7825e}
+In the early stages of development an infant experiences themselves and their environment as a random, fragmented formless mass. The infant is unable to distinguish themselves from their environment. They have no sense of self. At some point between the ages of six to eight months the \emph{Mirror Stage} occurs. In this stage the child starts to develop a sense of self. The Mirror Stage initiates the \emph{Imaginary Order}, the world of images. 
+
+The \emph{Imaginary Order} is \textbf{not} the world of imagination, but the world of perception. The child perceives the world as themselves, and thus feels as if they have control over their environment, this is an satisfying and enjoyable illusion. 
+
+Lacan describes the illusion of the union between the child and the mother as being of mutual satisfaction as the \emph{Desire of the Mother}. This feeling of connection with the mother is their first and most important experience. This dyad continues until the child learns language.
+
+A child's acquisition of language is their initiation into the \emph{Symbolic Order}, language is first and foremost a symbolic system of signification. of meaning-making. Among the first meaning a child makes is the separation of the self from the others, and the separation of gender. This journey into the symbolic order requires the separation from others, and the separation from that perfect union between the mother and the child. This separation constitutes out most important experience of loss, haunting us for the rest of our lives. Forever looking for a replacement of that perfect union in the Symbolic Order. We will never be able to sustain that feeling of complete fulfillment. That complete union disappeared as we entered the Symbolic Order. This lost object of desire is the \emph{objet petit a}, or "object small a" with \emph{a} standing for \emph{autre} the french word for \emph{other}. \emph{objet petit a} also refers to anything that puts one in tough with the repressed desire for that lost object. 
+
+The importance of loss and lack in Lacanian psychoanalysis is vital. The use of language implies a loss, a lack, because we wouldn't need words as stand-ins for things if I still felt that I was an inseparable part of those things. The \emph{Symbolic Order} marks the split into conscious and unconscious mind. The unconscious is created by the repression of our desire for the union. "the unconscious is structured like a language", the unconscious desire is always seeking the union. The operations of the unconscious resemble two very common processes of language that imply loss or lack: metaphor and metonymy. Both involve an absence, both being stand-ins for something being pushed aside. 
+
+Metaphor is akin to the unconscious process called \emph{condensation}, both bring dissimilar things together. Metonymy is akin to \emph{displacement} because both processes substitute a person or object for another person or object with which the first is somewhat associated. The key ingredient in the relation between language and the unconscious is lack and loss. 
+
+The rule that \textbf{Mother Belongs to Father and not to me}, this initiation into the Symbolic order is what Freud called the oedipal prohibition. Junior must find substitute for mother. 
+
+Our desires, beliefs, biases, and so forth are constructed for us as a result of our immersion in the Symbolic Order, especially as the immersion is carried out by our parents and influenced by their own responses to the Symbolic Order. "desire is always the desire of the Other". We desire what we are taught to desire. The Symbolic Order consists of societies ideologies: its beliefs, values, and biases; its system of government, laws, educational practices, religious tenets, and the like. \emph{Other} refers to anything that contributes to the creation of our subjectivity, our "selfhood".
+
+The Imaginary Order continues to exist in the background of consciousness even as the Symbolic Order holds sway in the foreground. The Symbolic Order dominates society. Both the Symbolic and Imaginary order attempt to control or avoid the \emph{Real}.
+
+\subsubsection*{The concept of \emph{Real}}
+\label{sec:org5abfc3a}
+One way to think of the \emph{Real} is that which is beyond all our meaning-making systems, that which lies outside the world created by ideologies society uses to explain existence. The uninterpretable dimension of existence. The Real is that experience when there is no meaning. We can know nothing of the Real except that it is there. The \emph{trauma of the Real}.
+\subsubsection*{Lacanian literary analysis}
+\label{sec:org88fdfba}
+Do any characters, events, or episodes in the narrative seem to embody the Imaginary Order? What parts of the text seem informed by the Symbolic Order? Where do we see ideology and social norms in control of characters' behavior and narrative events? How is the relationship between this two orders portrayed? 
+\subsection*{Classical Psychoanalysis and literature}
+\label{sec:orge36339c}
+There is many disagreements among psychoanalytic theories of the development of personalities and the best way to treat dysfunctional behavior. And lots of disagreement in how psychoanalytic concepts can be applied to literature. 
+
+Our job, is to see which concepts appear in the text in such ways as to enrich our understanding of the work. 
+\subsubsection*{Some questions about literary text}
+\label{sec:org175ce84}
+It is important to note that the psychoanalytic dimension of the text helps drive the narrative.
+
+\begin{enumerate}
+\item How do the operations of repression structure or inform the work? What unconscious motives are operating in the main character(s); what core issues are thereby illustrated; and how do these core issues structure or inform the piece?
+\item Are there any oedipal dynamics--or any other family dynamics-- at work? Is it possible to relate a character's patterns of adult behavior to early experiences in the family represented in the story? How do these patterns of behavior and family dynamics operate and what do they reveal?
+\item How can characters' behaviour, narrative events, and/or images be explained in terms of psychoanalytic concepts of any kind (ex: regression, crisis, projection, fear of or fascination with death, sexuality--which includes love and romance as well as sexual behavior- as primary indicator of psychological identity, or the operations of ego-id-superego)?
+\item In what ways can we view a literary work as analogous to a dream? How might recurrent or striking dream symbols reveal the ways in which the narrator or speaker is projecting his or her unconscious desires, fears, wounds, or unresolved conflicts onto other characters, onto the setting, or onto the events portrayed? Symbols relevant to death, sexuality, and the unconscious are especially helpful. Indeed, the use of dream symbols can be very useful in interpreting literary works, or passages, that seem unrealistic or fantastic.
+\item What doe the work suggest about the psychological being of the author? The literary text is interpreted much as if it were the authors dream.
+\item What might a given interpretation of a literary work suggest about the psychological motives of the reader? Or what might a critical trend suggest about the psychological motives of a group of readers
+\item In what ways does the text seem to reveal characters' emotional investments in the Symbolic Order, the Imaginary Order, the Mirror Stage, or what Lacan calls \emph{objet petit a}? Does any part of the text seem to represent Lacan's notion of the Real? Do any Lacaninan concepts account for so much of the text that we might say the text is structured by one or more of this concepts?
+\end{enumerate}
+
+\section*{Psychoanalytic Criticism according to Xie}
+\label{sec:orga7de236}
+\subsection*{Keywords}
+\label{sec:org64bc6c2}
+\emph{The Oedipal complex} or \emph{triangle}; \emph{The unconscious}; \emph{id, ego, and superego}; \emph{desire}; \textbf{objet petit a} - That very thing that motivates us and disappoint us. \emph{mirror stage}, \emph{mirror image}, \emph{Imaginary Order}, \emph{Symbolic Order}, the \emph{Real}, the subject \emph{enunciation}, the subject of the \emph{enunciated}.
+
+\emph{Slavoj Zizek} - "The Sublime Object of Ideology", in which he departed from traditional Marxist theory to develop a materialist conception of ideology that drew heavily on \textbf{Lacanian} psychoanalysis and Hegelian idealism
+
+\subsection*{Real vs reality}
+\label{sec:orgf829209}
+According to Lacan the Real is that which is unobtainable. \emph{See above}
+\subsection*{Mirror Stage}
+\label{sec:org85e9d8d}
+Lacan. A sense of blurred distinction between the self and the environment. \emph{See above}
+\subsection*{The unconscious}
+\label{sec:org681e373}
+Repressed feelings. \textbf{Through the repression, the expunging from consciousness of the unhappy psychological events} We unconsciously behave in ways that allow us to play out without admittance. 
+
+According to Lacan the unconscious is "structured like a language". Both language and the unconscious are made thorough signifier but no signified.
+
+Language is always pursuing meaning-making, language involves loss or lack. To come into Language, into the Symbolic Order, is to experience loss. Language is there before we emerge in the world, it is out of our control. The world is always beyond us. \textbf{Metaphor and Metonymy}. Metaphor is comparable to "dream displacement", metonymy to "dream condensation". Loss (metaphor) and Lack(metonymy). 
+\subsection*{Jaques Lacan}
+\label{sec:org3070952}
+He is disturbing and challenging. He modifies his ideas over time, sing that he is exploring a challenging subject.
+\subsubsection*{Imaginary Oder}
+\label{sec:org51695f4}
+Fulfillment, a world in which everything is possible. No gaps, no lack. The child has the illusion of complete union with the mother. World of images, imagination, fantasies. 
+Dialetic of identifications with the Other, the \emph{self} never had a sense of self, yet the mirror image event, in which a sense of sense is developed by recognizing an image of the other. Merge with the Other self.
+\subsubsection*{Symbolic Order}
+\label{sec:org8340f5b}
+The symbolic world is a world confronted by rules, laws, language, there before one is born. One there is split from the Imaginary world of perfection, one can never be fulfilled in this order. \textbf{Lack} is the normalcy of existence. Pre-given instruction, comes before birth, institution rules, the system of social interaction.
+\subsubsection*{Real}
+\label{sec:org8f81716}
+Zizek, the dude to read up on.
+
+The Real is a solid existence. It is unrepresentable. It is all driven by processes beyond our control. The Real is internal to the Symbolic. The Symbolic makes the Real. A symbol cannot represent that which is unrepresentable, symbols are are illusions. The Real is not external to the outside. The Real is the effect of the gap.
+
+Is the Real created by the Symbolic? The Real marks the unreachable end of limit, of the symbolic. 
+
+The Real, it is universal. Ziaek. Lacanian Real is unrepresentable, unconfrontable. Narrativized, it ordered in a certain matter. Lacanian Real is a real thing, except it is unrepresentable. It is the Real existence, except it is unreachable. Real can be glimpsed. The real is unarrativized. \emph{Kant}. The Real is everywhere. 
+
+By the \emph{Mirror Stage}  or \emph{Imaginary Order} we have to aspects, they both have ahistorical value or aspect, and a structural aspect. They refer to an infant period in which the child begins to have a sense of self, but it comes uncertain. The child becomes exited by the mirror, an image of the other separated from himself, but it reflects his movements. With this reflected image the infant has a sense of self. Infancy is a phase of uncertainty. In the Imaginary Order, a domain of images, perceptions or mis-perceptions. 
+
+When we are in our adult ages, we still have the Imaginary Order in the background. Imaginary Order refers to illusions that make you at odds with the rules. Because of this world we still have a domain of life, in which we are not governed by the Symbolic Order. We have forms of resistance of the symbolic order. Because of the Imaginary world we can escape this Symbolic World.
+
+\subsubsection*{Lack}
+\label{sec:org8862542}
+Desire springs from lack. With Lacan, he uncovers desire is endless movement from signifier to signifier never reaching a signified. Desire is never fulfilled. Lack is the normality of existence.
+\subsubsection*{Passages}
+\label{sec:org6a63eb3}
+In the early stages of the infants life he experiences himself and his environment as a random, fragmented and a formless mass. The infant begins to experience self-alienation. At this phase, the infant is united as a whole with the environment. Self-alienation is yet to come. In the \emph{Mirror Stage} the infant develops a sense of self as a whole. As if it identified with the reflection. The child is \textbf{preverbal}.
+
+The \emph{Mirror Stage} initiates the \emph{Imaginary Order}, th world of images, a world of perception experiences through images rather than words. A world of fullness, completeness, and delight. It comes an illusion of control over the environment. This mirage becomes shattered when entering the \emph{Symbolic Order}, initiated by the aqusition of language. 
+
+In the Symbolic Order the child becomes separated from the world. Language, rules, ideologies. the big Other, that tells you what to do, ethical rules, moral codes and the like. The \emph{objet petit a} that lost object, it is what guides your life, it is the unreachable. In the Symbolic Order one makes the first realization of self, separation from others, biggest one of them all is the one experienced with Mother, the complete fulfillment of life. We spend our lives unconsciously reaching for that lost union, seeking to fill that empty hole with anything possible. The Symbolic Order tells us what we want. The Symbolic Order changed our Mother into an other. The objet petit a is person specific, it referes to anything that puts one in touch with that repressed desire of that union.
+
+The importance of loss or lack, \textbf{VERY IMPORTANT}. The use of language implies it. We would need no words to stand in for the things, if I felt as if I was in union with such things. 
+
+It is repression that first creates the unconscious, "The unconscious is structured like a language", seeking a lost object of desire. Language can never capture the Real experience. It is also structured in a way involving loss or lack, metaphor and mtonomy. Relative to dream condensation and dream displacement. 
+
+\emph{Name of the Father}, first rule according to Lacan is that Mother belongs to the father. The Oedipal Complex. The father forbids the child from the procession of the mother. Through language we are socially programmed. We learn the rules in society, unable to be free. This rules are authored by the father, men in authority.
+
+Phallus is a symbol for patrirtical power. Out desires are the desire of the Other. We may think that our desire is our uniqueness, however our desire is what we are taught to desire. We are taught to desire, it is made from us through language. Society manufactures desire. 
+
+Lacan's concept of the Real is that which is beyond all meaning-making systems. It is that which lies outside ideologies. Ultimately another name for the void. The pursuit of the Real involves total annihilation. 
+
+"We have only to understand the mirror stage as \emph{an identification}, in the full sense that analysis gives to the term: namely, the transformation that takes place in the subject when he assumes an image -- whose predestination to this phase--effect is sufficiently indicated by the use, in analytic theory, of the ancient term \emph{imago}".
+
+
+
+"The jubilant assumption of his specular image by the child at the \emph{infans} stage, still sunk in his motor incapacity and nursling dependence, would seem to exhibit in an exemplary situation the symbolic matrix in which the \emph{I} is precipitated in a primordial form, before it is objectified in the dialect of identification with the other, and before language restores to it, in the universal, its function as subject"
+The infant makes their first recognition of themselves in the mirror, by the image of an other which is immedeatly recognized as the self. It is a situation that will occur again and agin in social contact. 
+
+"This form would have to be called the ideal-I, if we wished to incorporate it into our usual register, in the sense that it will also be the source of secondary identification, under which term I would place the functions of libidinal normalization. But the important point is that this form situates the agency of the ego, before its social determination, in a fictional direction, which will always remain irreducible for the individual alone, or rather, which will only rejoin the coming-into-being (\emph{le devenir}) of the subject asymptotically, whatever the success of the dialectical syntheses by which he must resolve as \emph{I} his discordance with his own reality."
+The \emph{ideal} means the whole, perfect image. This ideal will be at odds with the symbolic world. This is a fictional dimension. What append now is the dialectic of identification with the other. The other becomes the self. 
+
+"The fact is that the total form of the body by which the subject anticipates in a mirage the maturation of his power is given to him only as \emph{Gesalt}, that is to say, in an \uline{exteriority} in which this form is certainly more constituent than constitute, but in which it appears to him above all in a contrasting size (\emph{un relief de stature}) that fixes it and in a symmetry that inverts it, in contrast with the \uline{turbulent} movements that the subject feels are animating him. Thus, this \emph{Gesalt}--whose pregnancy should be regarded as bound up with the species, though its motor style remains scarcely recognizable-- by these two aspects of its appearance, \uline{symbolizes the mental permanence of the \emph{I},} at the same time as it prefigures its alienating destination; it is still pregnant with the correspondence that \uline{unite the \emph{I} with the statue in which man projects himself}, which the phantoms that dominate him , or with the automaton in which, in ambiguous relation, the world of his own making tends to find completion."
+The total form of the body is given to the body as Gestalt. How do you recognize the self? Without this total image the self would be unrecognizable. We often identify with an object that is made us as completion. According to Lacan the self always changes. This object(s) are ways of recognizing the self(? haha) 
+\subsubsection*{The Mirror Stage}
+\label{sec:orgfa76735}
+Our life is a road with the Real, the Symbolic, and the Imaginary. This re occurs again and again. The mirror stage is fragmented. The ideal-I is the I as a whole of the self, the perfect union. The imaginary world arrived upon from The Mirror Stage is the Imaginary Order. It tries to make sense of its environment. The significance of this identification is the start of the unconscious mind. This dialectic re occurs again and again. The self is defined by different desires, dreams, fears. 
+
+Interpolation,  Louis Althusser. 
+\subsubsection*{Sum up}
+\label{sec:org28ec025}
+The passages are about the dialectic of identification with the other, which happens again and again and again.
+\section*{Jaques Lacan - The Mirror Stage}
+\label{sec:orgcc210ec}
+\subsection*{Quotes}
+\label{sec:org7caccf5}
+"[Recognizing one self in the mirror] is indicated in the illuminative mimicry of the \emph{Aha-Erlebnis}, which Kohler sees as the expression of situational apperception, an essential stage of the act of intelligence"
+
+"\ldots{}once the image has been mastered and found empty"
+
+"This meaning disclosed a libidinal dynamism, which has hitherto remained problematic, as well as an ontological structure of the human world that accords with my reflections on paranoiac knowledge"
+
+"The mirror stage \emph{as an identification},\ldots{},namely the transformation that takes place in the subject when he assumes an image- whose predestination to this phase-effect is sufficiently indicated by the use, in analytic theory, of the ancient term \emph{imago}".
+
+"[The child] would seem to exhibit in an exemplary situation the symbolic matrix in which the \emph{I} is precipitated in a primordial form, before it is objectified in the dialectic of identification with the other, and before language restores to it, in he universal, its function as subject"
+
+"This form situates the agency of the ego, before its social determination, in a fictional direction, which will always remain irreducible for the individual alone, or rather, which will only rejoin the coming-into-being (\emph{le devenir}) of the subject asymptotically, whatever the success of the dialectical syntheses by which he must resolve as \emph{I} his discordance with his own reality."
+
+
+"in which this form is certainly more constituent than constitute"
+
+"Morphological mimicry as an obsession with space in its derealizing effect"
+\subsection*{Notes}
+\label{sec:org9eeeed0}
+The ego is an object rather than a subject. The ego, despite conscious senses to the contrary, is not a locus of autonomous agency, the seat of a free, true "I" determining its own fate.
+
+Lacan views the ego as thoroughly compromised and inherently neurotic to its very core, as a passionate defense of a constitutive ignorance of the unconscious. 
+
+The ego is an inert fixed bundle of objectified coordinates, a libidinally invested and reified entity. According to Lacan, individuals spend their lives chasing in vain after an unattainable state of harmony and mastery first falsely promised by the mirror.
+\section*{Psychoanalytic Criticism - Elizabeth Wright}
+\label{sec:org1654b9f}
+\subsection*{Introduction}
+\label{sec:org8442779}
+Psychoanalysis addresses itself to the problems of language, starting with Freud's original insight concerning the determining force within utterance: he draws attention to the effects of desire in language and, indeed, in all forms of symbolic interaction. \textbf{The language of desire is veiled and does not show itself openly.} What is of peculiar interest to psychoanalysis is that aspect of experience which has been ignored or prohibited by the rules of language. 
+
+No experience the body has is ever erased form the mind. Psychoanalysis is a theory of interpretation which calls into question the 'common sense' facts of consciousness, facts which it maintains can only be reconstructed after the event. If there is one key issue it is probably the question of the role of sexuality in the constitution of the self, and crucially, how this sexuality is to be defined. 
+
+Sigmund Freud (1886-1939) gives genetic explanation of the evolutionary development of the human mind as a "psychical apparatus". Freud looks at the mind from three points of view: the 'dynamic', the 'economic', and the 'topographical' (see Freud 1953, XX, pp. 265-266 for a brief summary). 
+\subsubsection*{The Dynamic}
+\label{sec:org6fb9159}
+The dynamic point of view stresses the interplay of forces within the mind, arising from the tensions that develop when instinctual drives meet the necessities of external reality. What is necessarily given at the start are the needs of the body itself: these are inseparably connected to feelings of pleasure and pain.
+\subsubsection*{The economic}
+\label{sec:org48e09f1}
+From the economic point of view, pleasure results from a decrease in the degree to which the body is disturbed by any stimulus. Unpleasure results from an increase in disturbance. In the interaction of the body with the external environment a part of the mind Freud calls the 'ego' evolves to mediate the actions of the body so as to achieve the optimal satisfaction of its needs. The ego is concerned with self-preservation.
+\subsubsection*{The topographical}
+\label{sec:org758a694}
+The topographical scheme was introduced by Frued in 1923, when he came to view the mind as having three distinct agencies: the 'id', a term applied retrospectively to the instinctual drives that spring from constitutional needs of the body; the ego as having developed out of the id to be an agency which regulates and opposes the drives; and the superego, as a representative of parental and social influences upon the drives, a transformation of them rather than an external agency. This model is known as the structural model.
+
+The id wants its wishes satisfied, whether or not they are compatible with external demands. The ego finds itself threatened by the pressure of the unacceptable wishes. Memories of these experiences, that is images and ideas associated with them, become charged with unpleassurable feeling, and are thus barred from consciouses. This is the operation known as \textbf{repression}.
+
+\textbf{Primal repression} initiates the formation of the unconscious and is ineradicable and permanent. Although the forces of instinct are experienced before socialization, such experience is neither conscious nor unconscious. Primal repression consists of denying a 'psychical representative' entry to the conscious: a fixation is thereby established, splitting conscious from unconscious. Primal repression marks a pre-linguistic entry into a symbolic world. \emph{Lacan}, on the other hand, reserves the term for the second stage of symbolization, the entry into language.
+
+The second way in which 'repression' is made sense is 'after-pressure': it serves to keep guilt-laden wishes out of conscious experience. The symptoms, dreams and parapraxes ('Freudian slips') that turn up in the course of this process represent the 'return of the repressed'. 
+
+Sexuality is to be understood as not specifically limited to the process of reproduction: 'Sexual life includes the function of obtaining pleasure from zones of the body - a function which is subsequently brought into the service of reproduction. The two functions often fail to coincide completely'. Sexuality is not a mere matter of a biological urge but involves the production of fantasies under pressure of external circumstances. 
+
+Freud sees the child's relationship with its parents as critical for the achievement of its proper sexual identity. The difficulties begging with child's dependence on the mother. Not only are there problems specific to the very formation of a self-concept in the initial separation from the mother's body, but the love of the mother remains dominant in the early formative years. According to Freud, a perception of the father as rival in this love becomes insistent for the boy-child to the point where he is drawn into fantasies of the killing of his rival and possession of the mother. This is the \emph{Oedipus complex}. 
+
+For Frued this Oedipus complex is the nucleus of desire, repression and sexual identity. 
+
+\subsubsection*{The dream and the strategies of desire}
+\label{sec:org16d69e8}
+'The interpretation of dreams is the royal road to a knowledge of unconscious activities of the mind' (V, p 608). They occur where intentions are in opposition, where bodily desires have to come to terms with society.
+
+According to Freud in the condition of sleep the force of repression is relaxed because there is no immediate likelihood of unconscious impulse being carried through into dangerous action.According to Freud, the energizing force of dreams springs from an unconscious impulse seeking fulfillment, a desire not fulfilled in waking life. 
+
+\chapter*{Essays}
+\label{sec:org9c42d42}
+\subsection*{Review essay}
+\label{sec:orgf36724d}
+What do you think about the theory? Pin-point concepts of the theory. The reader should have a good idea about the theory. A critical summary, say something to evaluate the strengths and the weaknesses of the theory. 
+\subsection*{Critical theory}
+\label{sec:org67e83e3}
+Two options: Apply two theories about literary or cultural work, but not the Great Gatsby. Or compare three theory, their similarities and their differences, their strengths and weakness. Any amount of research, 5 to 6 texts (article, essay, or book)  cited. 
+\chapter*{Marxism}
+\label{sec:org2f31a12}
+\section*{Marxist Criticism - Tyson}
+\label{sec:org56cf920}
+There has never been, as far as we know, a true Marxist society on the face of the earth. 
+\subsection*{The fundamental premises of Marxism}
+\label{sec:org4974ba1}
+Marxist theory would criticize psychoanalytic theory, and most other theories, saying that by focusing our attention on the individual psyche and its roots in the family complex, psychoanalysis distracts our attention from the real forces that create human experience: the economic systems that structure human societies.
+If a theory does not foreground the economic realities of human culture, then it misunderstands human culture. For Marxism, getting and keeping economic power is the motive behind all social and political activities, including education, philosophy, religion, government, the arts, science, technology, the media, and so on. Thus, economics is the \emph{base} on which the \emph{superstructure} of social/political/ideological realities is built. Marxists today refer to \emph{socioeconomic class} rather than economic class, when talking about class structure. 
+Economic conditions are referred to as \emph{material} circumstances, and the social/political/ideological atmosphere generated by material conditions is called the \emph{historical} situation. From a Marxist critic, neither human events nor human productions can be understood without understanding the specific material/historical circumstances in which those events and productions occur. Marxist analysis of human events and productions focuses on relationships among socioeconomic classes, both within a society and among societies, and it explains all human activities in terms of the distribution and dynamics of economic power. And Marxist \emph{praxis}, or methodology, dictates that theoretical ideas can be judged to have value only in terms of their concrete applications, that is, only in terms of their applicability to the real world.
+From a Marxist perfective, differences in socioeconomic class divide people in ways that are much more significant than differences in religion,race,ethnicity, or gender. For the real battle lines are drawn between the "haves" and the "have-nots", between the \emph{bourgeoisie}-those who control the world's natural, economic, and human resources-and the \emph{proletariat}, the majority of the global population who live in substandard conditions and who have always performed manual labor. Unfortunately, those proletariat are the last to recognize this fact, and are often separated amongst themselves by ethnicity, religion, or gender which accomplish little or no social change. However, were the proletariat of any given country were to act as a group, regardless of their differences, the current power structure would be radically altered.
+\subsection*{The class system in America}
+\label{sec:orgc521d7d}
+In America the distinction between the bourgeoisie (bourjoasi) and the proletariat is blurry. A small bossiness owner might have several employees yet still make much less than a salesperson working for a big corporation. To complicate thing even more, the words bourgeoisie and bourgeois have come to refer to the middle class. It is now more useful to classify Americans according to socioeconomic lifestyle, without reference to the manner in which the income was acquired. 
+
+So it will be useful to split up the Americans based on their lifestyle. We have the homeless, who have few or no material possessions and little hope of improvement; the poor, whose limited education and career opportunities keep them struggling to support their families and living in fear of becoming homeless; the financially established, who own nice homes and cars and can usually afford to send their children to college; the well-to-do, who can afford two or more expensive homes, several cars, and luxury items; and the extremely wealthy, such as the owners of large, well-established corporations, for whom money is no problem. \emph{Under class}, \emph{lower class}, \emph{middle class}, \emph{upper class}, \emph{aristocracy}. 
+
+Members of the under and lower classes are economically oppressed, suffering the ills of economic privation, are hardest hit by economic recessions, and have limited means of improving their lot. In contrast those in the upper class and aristocracy are economically privileged, enjoying luxurious lifestyles and being unaffected by economic recessions. Members of the middle class are both privileged and oppressed, suffering greatly from economic recession, enjoying the privilege of health care,at a cost, and suffering greatly from taxation.
+
+Those who suffer have a hard time retaliating against the socioeconomic powers because they are too busy trying to stay alive, trying to feed their children, having no time to be even politically aware. Other elements oppressing them are the police and the government strong-arm agencies, who, under government orders, have mistreated lower-class and under class perceived as a threat to the power structure. 
+\subsection*{The role of ideology}
+\label{sec:org7feb3e7}
+An \emph{ideology} is a belief system, all ideologies are products of cultural conditioning. Not all ideologies are equally productive or desirable. Undesirable ideologies promote repressive political agendas and pass themselves off as natural ways of seeing the world. 
+These repressive ideologies prevent us from understanding the material/historical conditions in which we live because they refuse to acknowledge that those conditions have any bearing on the way we see the world. 
+Marxism works to make us constantly aware of the ways in which we are products of material/historical circumstance and of the repressive ideologies that serve to blind us to this fact in order to keep us subservient to the ruing power system. The most successful ideologies are not perceived as ideologies, rather as natural ways of looking at the world. 
+All ideologies, in a sense, are \emph{natural}, however it becomes a problem when one does not question the \emph{nature} of the ideology and assumes its beliefs blindly.
+For example: In America the middle class "side" with the wealthy against the poor, this is because the government "helps" the poor with the money taxed from the middle class. However they fail to realize that it is the wealthy who set the rules and they are the ones forcing the middle class to take care of the poor, also much of the money taxed does not go to the poor but to the wealthy. The ideology of the \emph{American Dream}, in which financial stability can be reached through hard work and initiative, leads the middle class to believe the poor are poor because they are lazy and shiftless.
+In this country it is natural to want to "get ahead", to want to own better things. The keyword is \emph{better}, this idea is embedded into the nature of the \emph{American Dream}, in which it is thought to be the nature of humans to want better things than their neighbor, this isn't questioned, after all nature is \emph{survival of the fittest}, right? And oh ho ho this fits so nicely with the rugged individualism of the capitalistic world, how wonderful. The success of the American Dream rests on the misery of many. 
+The role of ideology in maintaining those in power is so important. \emph{Classism} is an ideology that equates one's value as human being with the social class to which one belongs. \emph{Patriotism} is an ideology that keeps poor people fighting wars against poor people from other countries, while the rich on both sides rake in the profits of war-time economy. \emph{Religion}, "the opiate of the masses", is an ideology that helps keep the faithful poor in line. Marx don't give a hoot weather God exists or not, but rather what people do in Gods name, organized religion is the focus. \emph{Rugged individualism} is an ideology that romanticizes the individual who strikes out alone in pursuit of a goal not easily achieved. \emph{Consumerism}, and ideology which says "I'm only as good as what I buy"
+The role in Marxist criticism is to identify ideologies in cultural productions and analyze how that ideology supports, or undermines the socioeconomic system in which that cultural production plays a significant role. 
+\subsection*{Human behavior, the commodity, and the family}
+\label{sec:orge598a30}
+This involved the damaging effects of capitalism on human psychology, which often appear in relation to the commodity. An object becomes a commodity when the society gives it value. Commodification is the act of relating to objects or persons in terms of their exchange value or sign-exchange value. 
+Capitalism runs by commodity, by the idea that one must look good, and how do you look good? Buy better clothes, get whiter teeth, get a better car, get a better face. Consume, consume, consume, the market will never run out and there will always be insecurities within people exploited by the market. 
+This constant need for new markets is also responsible for the spread of \emph{imperialism}: the military, economic, and/or cultural domination of one nation by another for the financial benefit of the dominating nation with little or no concern for the welfare of the dominated. But nations are not the only things capable of colonization, consciousness is also colonized. To \emph{colonize} consciousness of subordinate peoples means to convince them to see their situation the way the imperialist nation wants them to see it, to convince the, for example, that they are mentally, spiritually, and culturally inferior to their conquerors and that their lot will be improved under the guidance and protection of their new leader. 
+Marxism focuses on the material/historical forces-the politics and ideologies of socioeconomic systems-that shape the psychological experience and behavior of individual's psychological identity, for both the individual and the family are products of material/historical circumstances. Thus, while psychoanalytic critics examine the family conflicts and psychological wounds that determine individual behavior, Marxist critics examine the same behavior as a product of the ideological forces carried. 
+\subsection*{Marxism and literature}
+\label{sec:org9f282a7}
+For Marxism, literature does not exist in some timeless, anesthetic real as an object to be passively contemplated. Rather it is a product of the socioeconomic and hence ideological conditions of the time and place in which it was written, weather or not the author intended it or not. Because \textbf{human beings are products of their socioeconomic and ideological environment.} The literary work might tend to reinforce in the reader the ideologies it embodies, or it might invite the reader to criticize the ideologies it represents. Many texts do both. It is the \emph{content} and the \emph{form} that carry out the ideologies, most Marxists would say that the form primarily. The content is the "what", the form is the "how". Thus form is a kind of content. 
+\subsection*{Some questions to ask about literary text}
+\label{sec:org54316c5}
+\begin{enumerate}
+\item Does the work reinforce (intentionally or not) capitalist, imperialist, or classist values? If so, then the work may be said to have a capitalist, imperialist, or classist agenda, and it is the critics job to expose and condemn this aspect of the work.
+\item How might the work be seen as a critique of capitalism, imperialism or classism? That is, in what ways does the text reveal, and invite us to condemn, oppressive socioeconomic forces (including repressive ideologies)? If a work criticizes or invites us to criticize oppressive socioeconomic forces, then it may be said to have a Marxist agenda.
+\item Does the work in some ways support a Marxist agenda but in other ways (perhaps unintentionally) support capitalist, imperialist, or classist agenda? In other words, is the work ideologically conflicted?
+\item How does the literary work reflect (intentionally or not) the socioeconomic conditions of the time in which it was written and/or the time in which it is set, and what do this conditions reveal about the history of class struggle?
+\item How might the work be seen as a critique of organized religion? That is, how does religion function in the text to keep a character or characters from realizing and resisting socioeconomic oppression?
+\end{enumerate}
+
+
+Ultimately we should use Marxist theory to \textbf{help us see the ways in which ideology blinds us to our own participation in oppressive socio political agendas.}
+
+\section*{Marxism and Literature - Raymond Williams}
+\label{sec:orga591799}
+There are three common versions of the concept of ideology, all common in Marxist witting:
+\begin{enumerate}
+\item a system of beliefs characteristics of particular class or group;
+\item a system of illusory beliefs - false ideas or false consciousness- which can be contrasted with true or scientific knowledge
+\item the general precess of the production of meanings and ideas
+\end{enumerate}
+
+
+In a class society all beliefs are founded on class position, and the system of belief of all classes are in part or wholly false. 
+\section*{Marxism - According to Xie}
+\label{sec:org49c2ee6}
+\subsection*{What the fuck is it?}
+\label{sec:org7c5a711}
+A way to analyze class structure, \emph{Ernest Mandel} he said something like this: "Marxism is truer today in Marx own time". \textbf{Commodification}. Everything becomes a commodity. Marxism offers a method to analyze commodity. The need of a constantly changing market, unifying the world into a single system of economy. We all consume, few of us profit. 
+\subsection*{Give me more}
+\label{sec:orgef8b256}
+Marxism is not dated, many believe it. It is truer and more useful than ever, not for the theory of class struggle, not for socialist revolution, but for its theory of ideology,  of reification ( alienation ) for its ability to produce a whole picture f social life, a sense of totality. You are able to see behind any phonomena, any belief, as being a economic desire. Commodity is all which has exchange value. 
+Marxism is used by many contemporary schools of thought and criticism. Most theories relate to Marxism. Marxism is a philosophy of practice, intended to change the world. 
+\subsection*{Quick history}
+\label{sec:org0e7c392}
+"The philosophers have only \emph{interpreted} the world, in various ways. The point, however, is to \emph{change it}." - Karl Marx (1818-1883)
+People to Know: Georg Lukacs, Antonio Gramsci, Teodor Adorno. Louis Althusser. Raymond Williams (keywords). Frederic Jameson. Michel Foucault. Also \emph{Selections from the Prison Notebook}. - All society's basic struggle is the social conflict for leadership. Frankfurt School.
+\subsection*{Lets talk about Tyson}
+\label{sec:orge6cafb6}
+With Marxism you have to focus on material/historical circumstances. Ideologies are time specific, society specific. All critical theories are ideologies. Many different ways to define ideology. "Ideology represents the \uline{imaginary} relationship of individuals to their real conditions of existence" \emph{Althusser} "Ideology is defined as the processes and products of all signification, including the signification values". "ideology is the cognital mapping"
+Undesirable ideologies misguide the peeps. Any ideology claims to profess the truth. \textbf{We have always to be critical, of the structure we intimately inhabit}. Be aware of the limitations. If it is repressive it prevents us from seeing the truth, hiding them from us. Marxism makes us aware in the ways in which we are products, why, and how. 
+\emph{American Dream} - work hard and you'll be rewarded. It implies that we are all equal, if you're not you don't work hard enough. But this is a big fat lie. The opportunities differ widely amongst the classes. This ideology is an illusion. In a capitalist society competition is the way to success. Because it pits everyone against themselves. The American Dream and rugged individualism. 
+\end{document}

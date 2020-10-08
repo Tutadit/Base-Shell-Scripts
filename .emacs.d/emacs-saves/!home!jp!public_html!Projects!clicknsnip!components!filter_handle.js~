@@ -1,0 +1,26 @@
+import { motion } from "framer-motion";
+import {RiCheckboxBlankLine} from 'react-icons/ri';
+
+function FilterHandle(props) {
+    const item_anim = {
+        hidden: {
+            margin:`0 0 0 50px`,
+            opacity:0.5,
+        },
+        visible: {
+            margin:`0 0 0 0px`,
+            opacity:1,
+        },
+    };
+
+    return (
+        <motion.li variants={item_anim}>
+          <a className="filter-handle">
+            <RiCheckboxBlankLine  />
+            {props.label}
+          </a>
+        </motion.li>
+    );
+}
+
+export default FilterHandle;

@@ -1,0 +1,12 @@
+var html_tags = [];
+
+var add_block="<button class=\"add_block\"></button>"
+$("#block").click(function() {
+    $("div",$("#content")).addClass("select").after(add_block);
+    $("#content").prepend(add_block);
+});
+
+$("#content").on('click', '.add_block', function() {
+    $(this).after("<div></div>");
+    $(this).next().addClass("select").after(add_block);
+});

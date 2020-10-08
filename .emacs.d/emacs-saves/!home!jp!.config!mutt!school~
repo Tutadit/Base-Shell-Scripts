@@ -1,0 +1,20 @@
+## Receive options.
+set imap_user=juanpablo.lozanosarm@ucalgary.ca
+set imap_pass=Qu@si.m0d0
+set folder = imaps://outlook.office365.com
+set spoolfile = +INBOX
+set postponed = +Drafts
+set record = +Sent
+
+## Send options.
+set smtp_url=smtps://$imap_user:$imap_pass@outlook.office365.com
+set realname='JP Lozano'
+set from=juanpablo.lozanosarm@ucalgary.ca
+set hostname="ucalgary.ca"
+set signature="JP Lozano"
+# Connection options
+set ssl_force_tls = yes
+unset ssl_starttls
+
+## Hook -- IMPORTANT!
+account-hook $folder "set imap_user=juanpablo.lozanosarm@ucalgary.ca imap_pass=Qu@sim0d0"

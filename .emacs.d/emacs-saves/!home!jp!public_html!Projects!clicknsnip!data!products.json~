@@ -1,0 +1,14 @@
+{
+    "amazon":{
+	"img":"https://cdn.usbrandcolors.com/images/logos/amazon-logo.svg",
+	"color":"#f90"
+    },
+    "costco":{
+	"img":"https://brandpalettes.com/wp-content/uploads/2018/08/Costco_Wholesale_logo_2010-10-26.png",
+	"color":"#e31837"
+    },
+    "wal-mart": {
+	"img":"https://brandpalettes.com/wp-content/uploads/2018/03/walmart_logo_colors-768x225.jpg",
+	"color":"#0072CE"
+    }
+}

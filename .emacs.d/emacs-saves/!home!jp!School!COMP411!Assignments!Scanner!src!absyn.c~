@@ -1,0 +1,109 @@
+#include <stdio.h>
+#include "util.h"
+#include "absyn.h"
+
+A_literal A_NumLit(A_pos pos, int value){}
+A_literal A_LitLit(A_pos pos, string value){}
+A_literal A_TrueLit(A_pos pos){}
+A_literal A_FalseLit(A_pos pos){}
+
+A_type A_BoolType(A_pos pos){}
+A_type A_IntType(A_pos pos){}
+
+A_global_declarations A_GloGloDecs(A_pos pos, A_global_declaration dec){}
+A_global_declarations A_GlosGloDecs(A_pos pos, A_global_declarations decs, A_global_declaration dec){}
+
+A_global_declaration A_VarGloDec(A_pos pos, A_var_dec dec){}
+A_global_declaration A_FunGloDec(A_pos pos, A_fun_dec dec){}
+A_global_declaration A_MainGloDec(A_pos pos, A_main_dec dec){}
+
+A_var_dec A_VarDec(A_pos pos, A_type type, A_id id){}
+
+A_id A_Id(A_pos pos, string id){}
+
+A_func_dec A_FuncDec(A_pos pos, A_func_head head, A_block block){}
+
+A_func_head A_TypeFuncHead(A_pos pos, A_type type, A_func_decor dec){}
+A_func_head A_VoidFuncHead(A_pos pos, A_func_dec dec){}
+
+A_func_decor A_FuncDecor(A_pos pos, A_id id, A_formal_param_list list){}
+A_func_decor A_EmptyFuncDecor(A_pos pos, A_id id){}
+
+A_formal_param_list A_SingleFormParamList(A_pos pos, A_formal_param param){}
+A_formal_param_list A_FormParamList(A_pos pos, A_formal_param_list list, A_formal_param param){}
+
+A_formal_param A_FormParam(A_pos pos, A_type type, A_id id){}
+
+A_main_dec A_MainFuncDec(A_pos pos, A_main_func_dec dec, A_block block){}
+
+A_main_func_dec A_MainFunDecor(A_pos pos, A_id id){}
+
+A_block A_Block(A_pos pos, A_block_statements statements){}
+A_block A_EmptyBlock(A_pos pos){}
+
+A_block_statements A_SingleBlockStmnts(A_pos pos, A_block_statement statement){}
+A_block_statements A_BlockStmnts(A_pos pos, A_block_statements statements, A_block_statement statement){}
+
+A_block_statement A_VarBlockState(A_pos pos, A_var_dec dec){}
+A_block_statement A_StateBlockState(A_pos pos, A_statement statement){}
+
+A_statement A_BlockState(A_pos pos, A_block block){}
+A_statement A_NilState(A_pos pos){}
+A_statement A_State(A_pos pos, A_state_exp exp){}
+A_statement A_BreakState(A_pos pos){}
+A_statement A_ReturnState(A_pos pos, A_exp exp){}
+A_statement A_EmptyReturnState(A_pos pos){}
+A_statement A_IfState(A_pos pos, A_exp exp, A_statement statement){}
+A_statement A_IfElseState(A_pos pos, A_exp exp, A_statement iff, A_statement then){}
+A_statement A_Whilestate(A_pos pos, A_exp exp, A_statement statement){}
+
+A_state_exp A_AssignStateExp(A_pos pos, A_assignment assignment){}
+A_state_exp A_FunInStateExp(A_pos pos, A_functioninvocation function){}
+
+A_primary A_LitPrim(A_pos pos, A_literal literal){}
+A_primary A_ExpPrim(A_pos pos, A_exp exp){}
+A_primary A_FunInPrim(A_pos pos, A_functioninvocation function){}
+
+A_argumentlist A_SingleArgList(A_pos pos, A_exp exp){}
+A_argumentlist A_Arglist(A_pos pos, A_argumentlist list, A_exp exp){}
+
+A_functioninvocation A_FuncIn(A_pos pos, A_id id, A_argumentlist list){}
+A_functioninvocation A_EmptyFuncIn(A_pos pos, A_id id){}
+
+A_postfixexpression A_PrimPostFixExp(A_pos pos, A_primary primary){}
+A_postfixexpression A_IdPostFixExp(A_pos pos, A_id id){}
+
+A_unaryexpression A_MinUnExp(A_pos pos, A_unaryexpression expression){}
+A_unaryexpression A_BangUnExp(A_pos pos, A_unaryexpression expression){}
+A_unaryexpression A_PosUnExp(A_pos pos, A_postfixexpression expression){}
+
+A_multiplicativeexpression A_UnMulExp(A_pos pos, A_unaryexpression expression){}
+A_multiplicativeexpression A_MulMulExp(A_pos pos, A_multiplicativeexpression exp1, A_unaryexpression exp2){}
+A_multiplicativeexpression A_DivMulExp(A_pos pos, A_multiplicativeexpression exp1, A_unaryexpression exp2){}
+A_multiplicativeexpression A_ModMulExp(A_pos pos, A_multiplicativeexpression exp1, A_unaryexpression exp2){}
+
+A_additiveexpression A_MulAddExp(A_pos pos, A_multiplicativeexpression exp){}
+A_additiveexpression A_AddAddExp(A_pos pos, A_additiveexpression exp1, A_multiplicativeexpression exp2){}
+A_additiveexpression A_MinAddExp(A_pos pos, A_additiveexpression exp1, A_multiplicativeexpression exp2){}
+
+A_relationalexpression A_AddRelExp(A_pos pos, A_additiveexpression exp){}
+A_relationalexpression A_LTRelExp(A_pos pos, A_relationalexpression exp1, A_additiveexpression exp2){}
+A_relationalexpression A_GTRelExp(A_pos pos, A_relationalexpression exp1, A_additiveexpression exp2){}
+A_relationalexpression A_LERelExp(A_pos pos, A_relationalexpression exp1, A_additiveexpression exp2){}
+A_relationalexpression A_GERelExp(A_pos pos, A_relationalexpression exp1, A_additiveexpression exp2){}
+
+A_equalityexpression A_RatEqExp(A_pos pos, A_relationalexpression exp){}
+A_equalityexpression A_EqEqExp(A_pos pos, A_equalityexpression exp1, A_relationalexpression exp2){}
+A_equalityexpression A_NEqEqExp(A_pos pos, A_equalityexpression exp1, A_relationalexpression exp2){}
+
+A_conditionalandexpression A_EqConAndExp(A_pos pos, A_equalityexpression exp){}
+A_conditionalandexpression A_AndCondAndExp(A_pos pos, A_conditionalandexpression exp1, A_equalityexpression exp2){}
+
+A_conditionalorexpression A_AndCondOrExp(A_pos pos, A_conditionalandexpression exp){}
+A_conditionalandexpression A_OrCondOrExp(A_pos pos, A_conditionalorexpression exp1, A_conditionalandexpression exp2){}
+
+A_assignmentexpression A_CondAssExp(A_pos pos, A_conditionalorexpression exp){}
+A_assignmentexpression A_AssAssExp(A_pos pos, A_assignment ass){}
+
+A_assignment A_Ass(A_pos pos, A_id id, A_assignmentexpression exp){}
+A_exp A_AssExp(A_pos pos, A_assignmentexpression exp){}

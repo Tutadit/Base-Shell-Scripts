@@ -1,0 +1,9 @@
+"hello this is just a literal"
+
+\\"A literal in comments, ignore me"
+
+""  \\empty
+
+"hahahah"
+
+"b, \f, \t, \r, \n, \', \", \\" 

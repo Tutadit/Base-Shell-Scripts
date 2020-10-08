@@ -1,0 +1,16 @@
+// This default export is required in a new `pages/_app.js` file.
+import '../style/less/app.less';
+
+import Layout from '../components/layout.js';
+import Navigation from '../components/navigation.js';
+import dynamic from 'next/dynamic';
+
+export default function ClicknSnip({ Component, pageProps }) {
+    return (
+        <div>
+          <Navigation />
+          <Component {...pageProps} />
+        </div>
+
+    );
+}

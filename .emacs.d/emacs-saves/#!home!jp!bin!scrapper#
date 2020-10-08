@@ -1,0 +1,238 @@
+#!/usr/bin/env python
+"""
+Scrapper for amazon deals
+"""
+from selenium.webdriver import Chrome
+from selenium.webdriver.common.by import By
+from selenium.common.exceptions import NoSuchElementException, StaleElementReferenceException
+from bs4 import BeautifulSoup
+from datetime import datetime, timedelta
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+import pandas as pd
+import json
+import re
+import time
+
+driver = Chrome()
+
+driver.get("https://www.amazon.ca/gp/goldbox?ref_=nav_cs_gb")
+#driver.get("https://www.amazon.ca/electronics-tv-pc-xbmc-gopro-bose/b?ie=UTF8&node=667823011&ref_=sd_allcat_mj_all_electronics")
+Deals = []
+
+def findCategory(cats,name):
+    for cat in cats:
+        if cat.find_element(By.TAG_NAME,"span").text == name:            
+            return cat
+    return None
+
+next_cat_page=driver.find_element(By.ID,"nextShovlButton").find_element(By.TAG_NAME,"a")
+
+def getErDone(her):
+    try:
+        return her
+    except:
+        return getErDone(her)
+    
+content = driver.page_source
+soup = BeautifulSoup(content,features='lxml')
+
+#categories = driver.find_element(By.ID,"widgetFilters").find_element(By.CLASS_NAME,"tiles").find_elements(By.TAG_NAME,"a")
+categories = soup.find('div', id="widgetFilters").find('div',class_='a-section tiles').findAll('a')
+names = []
+for cat in categories:
+    names.append(cat.find("span").string)
+
+def has_discount(tag):
+    return re.compile(".*% off").search(tag)
+
+def isPrice(tag):    
+    text = tag.getText(strip=True)
+    if re.match('.*\$[0-9]+[\.[0-9]+]?', text.replace('\ ','')):
+        return True
+    else :
+        return False
+    
+def isProduct(tag):
+    if tag != None and tag.name == 'div':        
+        link=tag.find('a')
+        price=tag.find_all(isPrice)
+        image=tag.find_all('img')
+        if link and len(price) == 1 and len(image) == 1:
+            return True                            
+    return False
+    
+def loadProducts(sopita,name,counter):
+    for deal in sopita.findAll('div',class_='dealContainer'):
+        
+        title=deal.find('a',id='dealTitle')
+        href=None
+        if title != None :
+            href=title['href']
+            title=title.text.replace("\\n","").strip()
+        else :
+            title='Nada'
+            href='Nada'        
+            
+        price=deal.select('span.gb-font-size-medium.dealPriceText')
+        if price != None and len(price) > 0:
+            price_text = price[0].text.replace('C$','')
+            price = price_text
+            try:
+                float(price)
+                price = float(price)
+            except ValueError:
+                ranges = price_text.replace('\ ','').split('-')
+                if len(ranges) == 2:
+                    price = {
+                        "from":float(ranges[0]),
+                        "to":float(ranges[1])
+                    }                    
+                else :
+                    price = 'Nada'
+                        
+        old_price=deal.find('span',class_='a-text-strike')
+        if old_price != None :
+            old_price_text = old_price.text.replace('C$','')
+            try:
+                float(old_price_text)
+                old_price = float(old_price_text)
+            except ValueError:
+                ranges = old_price_text.replace('\ ','').split('-')
+                if len(ranges) == 2:
+                    old_price = {
+                        "from":float(ranges[0]),
+                        "to":float(ranges[1])
+                    }
+                else:
+                    old_price = 'Nada'
+            else:
+                old_price = 'Nada'
+                
+        discount=deal.find('span', string=re.compile('.*% off'))
+        if discount != None :
+            numbers=[int(s) for s in
+                     discount.text.strip().replace('(','').split('%')
+                     if s.isdigit()]
+            if len(numbers) > 0 :
+                discount=numbers[0]            
+            else :
+                discount = 0
+        else:
+            discount = 0
+            
+        expires=deal.find('span',role='timer')
+        if expires != None :
+            expires = expires.text
+            times = expires.split(':')
+            if len(times) == 3 :
+                date = (datetime.today() -
+                        timedelta( hours=int(times[0]),
+                                   minutes=int(times[1]),
+                                   seconds=int(times[2])))
+                expires=date.strftime("%m/%d/%Y, %H:%M:%S")
+            else :
+                expires='Nada'
+        else :
+            expires = 'Nada'
+            
+        rating=deal.select('i.a-icon-star')
+        if rating != None and len(rating) > 0:
+            res = [i for i in rating[0]['class'] if 'a-star' in i]
+            if len(res) > 0 :
+                rating = res[0].replace("a-star-","").replace("-",".")
+                try :
+                    float(rating)
+                    rating = float(rating)
+                except ValueError:
+                    rating = 'Nada'
+                else:
+                    rating = 'Nada'
+            else:
+                rating = 'Nada'
+                
+        image_link=deal.find('a',id='dealImage')
+        image='Nada'
+        if image_link != None :
+            image=image_link.find('img')
+            if image != None:
+                image=image['src']
+                
+        if title != 'Nada' and price != 'Nada':
+            index_deal = -1
+            for deel in Deals:
+                if type(deel) is dict:
+                    if 'title' in deel and deel['title'] == title:
+                        index_deal = 1;
+                        in_there = False
+                        for badge in deel['badges']:
+                            if name == badge['name']:
+                                in_there = True
+                        if not in_there:
+                            if deel['badges']:
+                                deel['badges'].append({"name":name, "id":re.sub('[^0-9a-zA-Z]+', '_', name)})
+                                
+            if index_deal < 0:
+                Deals.append({
+                    "title":title,
+                    "id":counter,
+                    "description":'Nada',
+                    "suppliers":[{
+                        "name":"Amazon",
+                        "id":"amazon",
+                        "price":price,
+                        "discount":discount,
+                        "discount_expiration":expires,
+                        "old_price":old_price,
+                        "rating":rating,
+                        "url":href
+                    }],
+                    "images":[{
+                        "src":image,
+                        "title":title
+                    }],
+                    "brand_name":"Nada",
+                    "brand_url":"Nada",
+                    "badges":[{"name":name, "id":re.sub('[^0-9a-zA-Z]+', '_', name)}]
+                })
+                counter = counter + 1
+
+                                                            
+    return counter;
+
+counter=0    
+for name in names:
+    widget_filters = getErDone(driver.find_element(By.ID,"widgetFilters"))
+    tiles = getErDone(widget_filters.find_element(By.CLASS_NAME,"tiles"))
+    proper_categories = getErDone(tiles.find_elements(By.TAG_NAME,"a"));
+    proper_category = getErDone(findCategory(proper_categories, name))
+
+    if proper_category == None:
+        next_cat_page=getErDone(driver.find_element(By.ID,"nextShovlButton").find_element(By.TAG_NAME,"a"))
+        getErDone(next_cat_page.click())
+        widget_filters = getErDone(driver.find_element(By.ID,"widgetFilters"))
+        tiles = getErDone(widget_filters.find_element(By.CLASS_NAME,"tiles"))
+        proper_categories = getErDone(tiles.find_elements(By.TAG_NAME,"a"));
+        proper_category = getErDone(findCategory(proper_categories, name))
+    
+    if name == '':        
+        categories = driver.find_element(By.ID,"widgetFilters").find_element(By.CLASS_NAME,"tiles").find_elements(By.TAG_NAME,"a")
+        #soup.find('div', id="widgetFilters").find('div',class_='a-section tiles').findAll('a')
+        names = []
+        for cat in categories:
+            names.append(cat.find_element(By.TAG_NAME,"span").text)
+            
+    elif name != 'Shop all deals':
+        if proper_category != None:
+            proper_category.click()
+            time.sleep(3)
+            content = driver.page_source
+            soup = BeautifulSoup(content,features='lxml')
+            counter = loadProducts(soup,name,counter)
+            
+            driver.refresh()
+            
+
+driver.close()
+with open('products.json', 'w') as outfile:
+    json.dump(Deals, outfile, ensure_ascii=False, indent=4)

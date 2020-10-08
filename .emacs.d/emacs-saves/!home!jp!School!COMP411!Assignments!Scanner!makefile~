@@ -1,0 +1,45 @@
+PROGRAM_NAME=lextest
+
+SRC_DIR=src
+OBJ_DIR=obj
+BIN_DIR=bin
+
+SRC_FILES=$(wildcard $(SRC_DIR)/*.c)
+OBJ_FILES=$(patsubst $(SRC_DIR)/%.c,$(OBJ_DIR)/%.o,$(SRC_FILES))
+LEX_DRIVER=$(SRC_DIR)/lex.yy.c
+LEX_OBJ=$(OBJ_DIR)/lex.yy.o
+LEX_FILES=$(wildcard $(SRC_DIR)/*.lex)
+YACC_DRIVER=$(SRC_DIR)/y.tab.c
+YACC_OBJ=$(OBJ_DIR)/y.tab.o
+YACC_FILES=$(wildcard $(SRC_DIR)/*.y)
+
+TARGET=$(BIN_DIR)/$(PROGRAM_NAME)
+
+CC=cc
+LEX=lex
+YACC=yacc
+C_FLAGS=-Wall
+INC=-Iinclude
+
+$(TARGET): $(OBJ_FILES) $(YACC_OBJ) $(LEX_OBJ) 
+	$(CC) $(C_FLAGS) $(INC) -o $@ $^
+
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c $(LEX_DRIVER)
+	$(CC) $(C_FLAGS) $(INC) -c -o $@ $<
+
+$(YACC_DRIVER): $(YACC_FILES)
+	$(YACC) -dv $<
+	mv y.tab.c src/.
+	mv y.tab.h include/.
+
+$(LEX_DRIVER): $(LEX_FILES)
+	$(LEX) -t $< > $@
+
+all: clean $(TARGET)
+clean:
+	@echo Cleaning...
+	@rm -f $(TARGET)
+	@rm -f $(OBJ_DIR)/*.o
+	@rm -f $(LEX_DRIVER)
+	@rm -f $(YACC_DRIVER)
+	@rm -f include/y.tab.h

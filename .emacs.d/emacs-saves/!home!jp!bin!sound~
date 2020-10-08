@@ -1,0 +1,61 @@
+#!/bin/bash
+PANEL_FONT="Roboto:style=Bold:size=10"
+
+display=0
+
+circle_thin="\uf1db"
+circle_fill="\uf111"
+
+speaker="\uf028"
+mute="\uf026"
+
+do_sound() {
+    current_sound=$(amixer get Master | grep -oP '\[\K[^%^\]]+' | head -n1)
+    current_status=$(amixer get Master | grep -oP '\[\K[^%^\]]+' | tail -n1)
+    current_sound=$(($current_sound / 10))
+    echo -ne "%{c}"
+    if [ $current_status == "off" ]; then
+	echo -ne "$mute   "
+    else
+	echo -ne "$speaker "
+    fi
+
+    if [[ $current_sound -gt 0 ]]; then
+	for circle in $( eval echo {1..$current_sound} )
+	do
+	    echo -ne "$circle_fill "
+	done
+    fi
+
+    if [[ $current_sound -lt 10 ]]; then
+	for circle in $( eval echo {$(($current_sound + 1))..10} )
+	do
+	    echo -ne "$circle_thin "
+	done
+    fi
+}
+
+LOCKFILE=/tmp/sound.lock
+SOUND_TIME=/tmp/sound.time
+if [ -e ${LOCKFILE} ] && kill -0 `cat ${LOCKFILE}`; then
+    echo $(($(cat $SOUND_TIME) + 0.25)) > $SOUND_TIME
+    exit
+fi
+
+# make sure the lockfile is removed when we exit and then claim it
+trap "rm -f ${LOCKFILE}; exit" INT TERM EXIT
+echo $$ > ${LOCKFILE}
+
+end_time=$(($(date +%s) + 3))
+echo $end_time > $SOUND_TIME
+current_time=$(date +%s)
+while [ $current_time -lt $(cat $SOUND_TIME) ]; do
+    . palette
+    echo -ne "%{F$CC_LIGHT_TONE}"
+    echo -ne "%{B$CC_DARK_TONE}"
+    do_sound
+    echo
+    current_time=$(date +%s)
+done | lemonbar -g 210x30+855+1050 -u 0 -B "$CC_DARK_TONE" -F "$CC_LIGHT_TONE" -f "$PANEL_FONT" -f "Font Awesome:size=10"
+
+rm -f ${LOCKFILE}

@@ -1,0 +1,55 @@
+{
+    "departments": [
+	{
+	    "label": "Provider",
+	    "href": "",
+	    "id":"provider",
+	    "children":[
+		{
+		    "label":"amazon",
+		    "href":"/yes",
+		    "id":"amazon",
+		    "children":[
+			{
+			    "label":"Prime",
+			    "href":"",
+			    "id":"prime"
+			},{
+			    "label":"Not here",
+			    "href":"",
+			    "id":"here",
+			    "children":[
+				{
+				    "label":"deep in",
+				    "href":"",
+				    "id":"deep"
+
+				}
+			    ]
+			}
+		    ]
+		},
+		{
+		    "label":"costco",
+		    "href":"/yes",
+		    "id":"costco"
+		}
+	    ]
+	},
+	{
+	    "label":"Books",
+	    "href":"",
+	    "id":"books"
+	},
+	{
+	    "label":"Tech",
+	    "href":"",
+	    "id":"tech"
+	},
+	{
+	    "label":"Home",
+	    "href":"",
+	    "id":"home"
+	}
+    ]
+}

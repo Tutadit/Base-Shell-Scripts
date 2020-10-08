@@ -1,0 +1,9 @@
+function Product() {
+    return(
+	<div className="main-content">              
+          lol
+        </div>
+    );
+}
+
+export default Product;

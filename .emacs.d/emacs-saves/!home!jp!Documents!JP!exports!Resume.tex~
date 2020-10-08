@@ -1,0 +1,92 @@
+% Created 2020-07-24 Fri 11:08
+% Intended LaTeX compiler: pdflatex
+\documentclass[10pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{graphicx}
+\usepackage{grffile}
+\usepackage{longtable}
+\usepackage{wrapfig}
+\usepackage{rotating}
+\usepackage[normalem]{ulem}
+\usepackage{amsmath}
+\usepackage{textcomp}
+\usepackage{amssymb}
+\usepackage{capt-of}
+\usepackage{hyperref}
+\usepackage{fullpage} \usepackage{fancyhdr}
+\usepackage{enumitem}
+\setlist[itemize]{label={-}}
+\date{\today}
+\title{}
+\hypersetup{
+ pdfauthor={},
+ pdftitle={},
+ pdfkeywords={},
+ pdfsubject={},
+ pdfcreator={Emacs 26.3 (Org mode 9.1.9)}, 
+ pdflang={English}}
+\begin{document}
+
+\begin{center}
+\begin{LARGE}
+\textbf{Juan Pablo Lozano Sarmiento}
+\end{LARGE}
+
+     jp.lozano.sa@gmail.com |
+     403.404.8360 |
+     Calgary, Alberta T3G-5N3
+\end{center}
+\section*{\textbf{Skills}}
+\label{sec:org5ae2485}
+\begin{itemize}
+\item \textbf{Communication:} Developed through various personal and professional interactions
+\item \textbf{Organization:} Plan ahead to meet deadlines and prioritize tasks to balance academics
+\item \textbf{Problem Solving:} Creative problem-solver who works hard and loves a challenge
+\end{itemize}
+\section*{\textbf{Education}}
+\label{sec:org24f2745}
+\begin{itemize}
+\item \textbf{Bachelor of Science.} Sep 2019 - \emph{present}
+\begin{itemize}
+\item Computer Science
+\item University of Calgary, Alberta
+\end{itemize}
+\item \textbf{Bachelor of Science.} Sep 2016 - April 2019
+\begin{itemize}
+\item Completed years one and two
+\item Transfer to University of Calgary
+\item Mount Royal University, Calgary, Alberta
+\end{itemize}
+\end{itemize}
+\section*{\textbf{Work Experience}}
+\label{sec:org75d9a2b}
+\begin{itemize}
+\item \textbf{Woodridge Ford and Lincoln}, Shipper/Receiver. April 2017 - \emph{present}
+\begin{itemize}
+\item Organized and maintained one of Alberta's largest parts inventories
+\item Incorporated the use of a scanner and coded bin locations resulting in a substantial increase in inventory management efficiency
+\end{itemize}
+\item \textbf{The Hub Cafe and Wine}, Assistant Manager. March 2016 - July 2020
+\begin{itemize}
+\item Aided in the creation and up-keep of the menu by keeping up with various trends
+\item Participated in planning and organizing various concerts with 70+ guests each
+\end{itemize}
+\item \textbf{Best Buy Canada}, Sales Associate. September 2016 - April 2018
+\begin{itemize}
+\item Resolved intricate costumer issues while maintaining a professional attitude towards the costumer
+\item Provided costumers with technical knowledge of various products in intuitive ways
+\end{itemize}
+\item \textbf{Roger's Farms}, Sales Associate, May 2015 - May 2016
+\begin{itemize}
+\item Kept up with costumer orders while maintaining produce display
+\end{itemize}
+\end{itemize}
+\section*{\textbf{Availability}}
+\label{sec:org3c49730}
+\begin{itemize}
+\item Monday-Friday: Available all day
+\item Saturday: Available after 4pm
+\item Sunday: Available all day
+\end{itemize}
+\end{document}

@@ -1,0 +1,42 @@
+import {Panel} from 'rsuite';
+import { Col } from 'rsuite';
+import { FlexboxGrid } from 'rsuite';
+import { ButtonGroup } from 'rsuite';
+import { Button } from 'rsuite';
+import { Dropdown } from 'rsuite';
+import { Popover } from 'rsuite';
+import { Icon } from 'rsuite';
+
+import ProductButtons from './product_buttons.js';
+import '../style/less/product_card.less';
+
+function ProductCard(props) {
+    return(
+        <Col lg={4}
+             md={4}
+             sm={12}          
+             xs={24}>             
+	  <Panel className="product-panel">
+            <img src="http://clicknsnip.bassed.ca/img/shirt.jpg"
+                 height="200" />
+            <Panel className="product-panel-inner">
+              <div className="product-info">
+                <h4>Insignia 58-inch 4K UHD HDR LED Smart TV - Fire TV Edition </h4>
+                <p><span>CDN $999.99</span><br />CDN $789.99</p>
+              </div>
+              <ButtonGroup block justified>
+                <Button className="product-btn">
+                  <Icon icon="shopping-cart" shopping-cart/>
+                </Button>
+                <Button className="product-btn">
+                  <Icon icon="share" share/>
+                </Button>
+                <ProductButtons/>
+              </ButtonGroup>
+            </Panel>
+          </Panel>
+        </Col>                
+    );
+}
+
+export default ProductCard;

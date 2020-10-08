@@ -1,0 +1,53 @@
+% Created 2020-02-12 Wed 11:36
+% Intended LaTeX compiler: pdflatex
+\documentclass[a4paper,openany,oneside,12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{graphicx}
+\usepackage{grffile}
+\usepackage{longtable}
+\usepackage{wrapfig}
+\usepackage{rotating}
+\usepackage[normalem]{ulem}
+\usepackage{amsmath}
+\usepackage{textcomp}
+\usepackage{amssymb}
+\usepackage{capt-of}
+\usepackage{hyperref}
+\usepackage{fullpage} \usepackage{fancyhdr}
+\usepackage{setspace}
+\doublespacing
+\newcommand{\bibent}{\noindent \hangindent 40pt}
+\newenvironment{workscited}{\begin{center} Works Cited \end{center}}{\newpage }
+\date{\today}
+\title{}
+\hypersetup{
+ pdfauthor={},
+ pdftitle={},
+ pdfkeywords={},
+ pdfsubject={},
+ pdfcreator={Emacs 26.3 (Org mode 9.1.9)}, 
+ pdflang={English}}
+\begin{document}
+
+Juan Pablo Lozano Sarmiento \\
+30022579 \\
+English 303/01 \\
+Review Essay, Psychoanalytic Theory \\
+\begin{center}
+Psychoanalytic Theory, A Brief Introduction
+\end{center}
+Psychoanalysis is the study of the mind, built on observations made by Sigmund Freud, who theorizes that humans are motivated by fears, desires, and needs known only to the unconscious which consists of unresolved conflicts, such as fear of intimacy, fear of abandonment, or low self-esteem resulting from repressed trauma. These conflicts hide from the conscious mind with the use of defenses like selective perception, selective memory, denial, avoidance, displacement, and projection. The interpretation of the unconscious mind is produced by analyzing dreams, interpersonal relationships, creativity, and anxiety. The mind, which is made up of the id--instinctive unconscious self--, the superego--societal values and beliefs imposed upon the self--, and the ego--interaction between the id and the superego--, is driven by the need to satisfy pleasures by use of the body such as eating to satisfy hunger, drinking to satisfy thirst, or seeking to satisfy curiosity; It is this behavior that Freud places at the core of psychoanalysis. 
+
+The unconscious mind plays a significant role in the conscious interpretation of dreams. The meaning of the dream, as intended by the unconscious, is distorted by condensation and displacement. Dream condensation occurs when a group of threatening elements are replaced by a single safe element in the dream. Dream displacement occurs when a threatening element is replaced by a safe element. Upon conscious recollection of the dream the unconscious mind may distort the dream in order to prevent unmanageable trauma from being discovered by the conscious mind. One can also come to understand their unresolved conflicts by analyzing behavior within relationships, especially romantic ones. Many conflicts are results of early family dynamics, such as a drunk parent, that often drive individuals into finding romantic partners that will allow them to relive traumatic moments of their life hoping that it will resolve their conflicts, however those conflicts may be resolved only by reflecting the core issues.
+
+One concerning conflict depicted by Freud is the Oedipal Complex, which is the idea that a boy despises his father for taking ownership of the mother. The boy then realizes that the Father is the power figure of the house and thus the child desires to be a man like his father. Freud depicted this as a normal developmental stage of a child, however such a statement implies universality and thus it is important to note that such observations are limited by the bias of the cultural time, as well as his limited scope of reference. Rather it is the method of arriving at such conclusion that carries the weight to this day, that is understanding the mind by observing behavioral patterns among individuals.
+
+Following Freud, psychoanalyst Jaques Lacan expanded on the development of the mind by analyzing infant behavior. When a child is born the world appears as random and fragmented until a point between the ages of 6 and 18 months when the child recognizes their existence. Lacan establishes this by observing recognition within the mirror and calls this stage of development the Mirror Stage which is the starting point of the Imaginary Order, a blissful realm of existence consisting of images. Lacan suggests that in this ideal realm the child is under the illusion that their self and their environment are one and the same. This illusory stage of life is busted when the child learns language, specifically when the child learns to distinguish themselves from their environment. Desire to return to that enchanted state is permanently impregnated onto the child. It is that desire that drives all of human desire, forever striving to return to the fantasy. 
+
+Lacan named the domain of language the Symbolic Order, noting that the need to label implies a loss or lack of that false unity with that which is being represented. No label can encapsulate the element which it represents, rather it conveys the idea of such element. This ideas are a futile attempt to represent "the Real", an existence beyond any means of representation manifesting a glimpse of itself through miniscule perceptions that traumatize us. The Symbolic Order is inflicted upon the self, shaping desires on a par with societal values. 
+
+Lacan's assumption that a child is in a state of unison in the Imaginary Order and thus possess no desire is questionable. Furthermore Lacan assumes that upon entering the Symbolic Order the child is traumatized. However one can argue the opposite, that upon entering a world of recognition a child is filled with joy as they begin to learn the Symbolic Order. Lacan also assumes that the recognition of the Real is a traumatic moment, however one can also argue against it by saying that recognizing such a reality, sufficient without description, brings peace to the mind.
+
+Ultimately psychoanalytic theory, as the study of the mind through the analysis of human behavior, is a field filled with opportunity. Since it's introduction by Freud it has evolved with the help of a diverse set of psychologists. Its uses in literary criticism are extensive and a relatively small knowledge of the theory allows for an extensive toolkit into the analyzing of cultural works. 
+\end{document}

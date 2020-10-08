@@ -1,0 +1,11 @@
+/*
+ * util.c - commonly used utility functions.
+ */
+#include "util.h"
+
+void copy_string(char *src, char* dst, int len) {
+  int i;
+  for(i = 0; i < len; i++) {
+    dst[i] = src[i];
+  }
+}

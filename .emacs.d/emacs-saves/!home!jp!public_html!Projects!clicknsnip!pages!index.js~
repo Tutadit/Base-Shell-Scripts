@@ -1,0 +1,24 @@
+import React, { setState } from 'react';
+
+import Departments from '../components/departments';
+import Shelf from '../components/shelf';
+import ProductCarousel from '../components/product_carousel';
+
+import data from '../data/data.json';
+
+class ProductList extends React.Component {
+        
+    render() {
+        return (
+            <div className="main-content">              
+              <Departments isList={false} />              
+              <Shelf title="Computer Products">
+                <ProductCarousel
+                  products={data.products}/>
+              </Shelf>
+            </div>
+        );
+    }
+}
+
+export default ProductList;

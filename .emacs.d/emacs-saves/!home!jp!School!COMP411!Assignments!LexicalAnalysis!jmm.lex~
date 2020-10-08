@@ -1,0 +1,99 @@
+/* A scanner for a J-- Language*/
+%{
+#include <stdlib.h>
+#include <string.h>
+#include "util.h"
+#include "tokens.h"
+#include "errormsg.h"
+
+int charPos=1;
+ 
+int yywrap(void) {
+  charPos=1;
+  return 1;
+}
+
+void adjust(void) {
+  EM_tokPos=charPos;
+  charPos+=yyleng;
+  if ( should_I_quit() ) {
+    exit(1);
+  }
+}
+
+%}
+/* Lex Definitions */
+newline [\r\n]
+delim   [ \t]
+ws      {delim}+
+letter  [A-Za-z_]
+digit   [0-9]
+id      {letter}({letter}|{digit})*
+number  {digit}+
+comment \/\/.*
+literal \"(\\.|[^\"\\])*\"
+
+%%
+	
+{ws}	 	{adjust(); continue;}
+{newline}	{adjust(); EM_newline(); continue;}
+{comment}	{adjust(); continue;}
+
+int	 	{adjust(); return INT;}
+boolean	 	{adjust(); return BOOLEAN;}
+void	 	{adjust(); return VOID;}
+
+"+"	 	{adjust(); return PLUS;}
+"-"	 	{adjust(); return MINUS;}
+"*"	 	{adjust(); return TIMES;}
+"/"	 	{adjust(); return DIVIDE;}
+"%"	 	{adjust(); return MODULUS;}
+"<"	 	{adjust(); return LT;}
+">"	 	{adjust(); return GT;}
+"<="	 	{adjust(); return LE;}
+">="	 	{adjust(); return GE;}
+"=="	 	{adjust(); return EQ;}
+"!="	 	{adjust(); return NEQ;}
+"&&"	 	{adjust(); return AND;}
+"||"	 	{adjust(); return OR;}
+"="	 	{adjust(); return ASSIGN;}
+"!"	 	{adjust(); return BANG;}
+
+break		{adjust(); return BREAK;}
+return		{adjust(); return RETURN;}
+if		{adjust(); return IF;}
+else		{adjust(); return ELSE;}
+while	 	{adjust(); return WHILE;}
+
+"("	 	{adjust(); return LPAREN;}
+")"	 	{adjust(); return RPAREN;}
+"{"	 	{adjust(); return LBRACE;}
+"}"	 	{adjust(); return RBRACE;}
+";"	 	{adjust(); return SEMICOLON;}
+","	 	{adjust(); return COMMA;}
+
+true		{adjust(); return TRUE;}
+false		{adjust(); return FALSE;}
+
+{literal}	{
+  		 adjust();
+		 yylval.sval=(char *)malloc((yyleng+1)*(sizeof(char)));
+		 strncpy(yylval.sval, yytext, yyleng + 1);
+		 return LITERAL;
+		}
+{number}	{
+  		 adjust();
+		 yylval.ival=atoi(yytext);
+		 return NUMBER;
+		}
+{id}		{
+  		 adjust();
+		 yylval.sval=(char *)malloc((yyleng+1)*(sizeof(char)));
+		 strncpy(yylval.sval, yytext, yyleng + 1);
+		 return ID;
+		}
+
+.	 	{
+  		 adjust();
+		 EM_error(EM_tokPos,yytext);
+		}

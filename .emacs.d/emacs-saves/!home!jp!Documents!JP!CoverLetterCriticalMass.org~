@@ -1,0 +1,12 @@
+:LATEX:
+#+LATEX_CLASS: article
+#+LATEX_HEADER:\usepackage{fullpage} \usepackage{fancyhdr}
+:END:
+:OPTIONS:
+#+OPTIONS: H:7 num:7
+#+OPTIONS: num:nil
+#+OPTIONS: toc:nil
+:END:
+Hello Hiring Manager,
+
+I can imagine how much fun it must be to go through piles of letters and resumes looking for those candidates worthy of meeting. I can picture the joy in your eyes as you read for the billionth time 'hard working' or 'good at problem solving', oh and you can't forget the good ol' 'team player'. Sadly for you I must break that exhilarating streak of creativity. You see, I was scrolling through the job listings, most of which had no 

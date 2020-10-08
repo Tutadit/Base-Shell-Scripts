@@ -1,0 +1,49 @@
+:LATEX:
+#+LATEX_CLASS: article
+#+LATEX_HEADER:\usepackage{fullpage} \usepackage{fancyhdr}
+#+LATEX_HEADER:\usepackage{enumitem}
+#+LATEX_HEADER:\setlist[itemize]{label={-}}
+#+latex_class_options: [10pt]
+:END:
+:OPTIONS:
+#+OPTIONS: H:7 num:7
+#+OPTIONS: num:nil
+#+OPTIONS: toc:nil
+:END:
+#+BEGIN_CENTER
+\begin{LARGE}
+\textbf{Juan Pablo Lozano Sarmiento}
+\end{LARGE}
+\\
+     jp.lozano.sa@gmail.com |
+     403.404.8360 |
+     Calgary, Alberta T3G-5N3
+#+END_CENTER
+**** *Skills*
+   - *Communication:* Developed through various personal and professional interactions
+   - *Organization:* Plan ahead to meet deadlines and prioritize tasks to balance academics 
+   - *Problem Solving:* Creative problem-solver who works hard and loves a challenge
+**** *Education*
+   - *Bachelor of Science.* Sep 2019 - /present/
+     - Computer Science
+     - University of Calgary, Alberta
+   - *Bachelor of Science.* Sep 2016 - April 2019
+     - Completed years one and two
+     - Transfer to University of Calgary
+     - Mount Royal University, Calgary, Alberta
+**** *Work Experience*
+   - *Woodridge Ford and Lincoln*, Shipper/Receiver. April 2017 - /present/
+     - Organized and maintained one of Alberta's largest parts inventories
+     - Incorporated the use of a scanner and coded bin locations resulting in a substantial increase in inventory management efficiency
+   - *The Hub Cafe and Wine*, Assistant Manager. March 2016 - July 2020
+     - Aided in the creation and up-keep of the menu by keeping up with various trends
+     - Participated in planning and organizing various concerts with 70+ guests each
+   - *Best Buy Canada*, Sales Associate. September 2016 - April 2018
+     - Resolved intricate costumer issues while maintaining a professional attitude towards the costumer
+     - Provided costumers with technical knowledge of various products in intuitive ways
+   - *Roger's Farms*, Sales Associate, May 2015 - May 2016
+     - Kept up with costumer orders while maintaining produce display
+**** *Availability*
+     - Monday-Friday: Available all day
+     - Saturday: Available after 4pm
+     - Sunday: Available all day

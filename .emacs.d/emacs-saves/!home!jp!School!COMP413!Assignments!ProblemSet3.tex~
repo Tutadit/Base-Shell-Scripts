@@ -1,0 +1,113 @@
+\documentclass{cpsc413Solutions}
+\usepackage{amsmath}
+\usepackage{algorithm}
+
+\usepackage[noend]{algpseudocode}
+
+\coursetitle{Design and Analysis of Algorithms}
+\courselabel{CPSC 413}
+\exercisesheet{Problem Set \#[3]}{}
+\student{Juan Pablo Lozano Sarmiento - 30022579}
+\semester{Winter 2020}
+
+\begin{document}
+
+\team{    Juan Pablo Lozano Sarmiento,
+    Rakheem Dewji,
+    Daniel Artuso,
+Victor Mendoza}
+\sources{}
+
+\begin{problemlist}
+  \pbitem [1st problem]
+  \begin{problem}
+    \begin{answer}
+      (a) i. $DFS=\{1,2,3,4,6,5,7,8\}$ \\
+      ii. $BFS=\{1,2,3,4,6,5,7,8\}$ \\
+      iii. Yes, edge $(4,6)$ \\
+      iv. Yes, $(1,2),(2,3),(3,1)$ \\
+      v. No, because $G$ contains a cycle.
+    \end{answer}
+    \begin{answer}
+      (b) i. It would be a line of all vertices \\
+      ii. It would be a node with the rest of the nodes as its direct children
+    \end{answer}
+    \begin{answer}
+      (c) A 2-Dimensional array of size $n*n$. Where an edge bewteen nodes $n$ and $m$ where $n\ne m$ is represented as a flag in position $[n][m]$ and $[m][n]$. The lookup time for an array is $O(1)\in O(lg n)$
+    \end{answer}
+    \begin{answer}
+      (d) A graph of size $n$ where $n$ is an even number is connected so long as each node has a degree of at least $n/2$. Proof: \\
+      The set of all vertices can be given as $S={1,2,3,...,n}$ \\
+      Let $S'$ be the set of nodes adjacent to $p$ \\
+      
+    \end{answer}
+  \end{problem}
+  \begin{problem}
+    \begin{answer}
+      (a) \\
+      Pre-Conditions: \\
+      * $G = (V,E)$, is an undirected graph and $s \in V$ \\
+      Post-Conditions: \\
+      * Set $C$ contains pairs of vertices corresponding to a cycle \\
+      * The graph $G$ has not been changed
+    \end{answer}
+    \begin{answer}
+      (b)
+      \begin{algorithm}
+        \caption{Find A Cycle within a graph}
+        \begin{algorithmic}[1]
+          \Function{FindCycle}{$G=(V,E)$}
+          \For{$\texttt{each vertex } u \in V$}
+          \State $\texttt{colour[u]} = \texttt{white}$
+          \State $\texttt{p[u]} = \texttt{NIL}$
+          \EndFor
+          \State \texttt{cycleRoot=NIL}
+          \State \texttt{cycleFound=false}
+          \For{$\texttt{each unvisited node }s\in V \texttt{ and !cyclefound}$}
+          \If{\Call{IsCycle}{s,nill}}
+          \State \texttt{i = cycleRoot}
+          \State \texttt{cycleFound=true}
+          \While{$\texttt{p[i] != cycleRoot}$}
+          \State \texttt{print (i,p[i])}
+          \State \texttt{i = p[i]}
+          \EndWhile
+          \State \texttt{print (i,p[i])}
+          \Else
+          \State \texttt{print "no cycle found"}
+          \EndIf
+          \EndFor
+          \EndFunction
+          \Function{IsCycle}{u,parent}
+          \State \texttt{colout[u]=grey}
+          \For {\texttt{each }$v\in $\texttt{Adj[u]}}
+          \If{\texttt{colour[v]==white}}
+          \State \texttt{p[v]=u}
+          \If{\Call{IsCycle}{v,u}}
+          \State \Return \texttt{true}
+          \EndIf
+          \ElsIf{\texttt{v!=parent}}
+          \State \texttt{p[v] = u}
+          \State \texttt{cycleRoot=u}
+          \State \Return \texttt{true}
+          \EndIf
+          \EndFor
+          \State \Return \texttt{false}
+          \EndFunction
+        \end{algorithmic}
+      \end{algorithm}      
+    \end{answer}
+    \begin{answer}
+      Termination: \\
+      IsCycle called at most once for each $u\in V$ \\
+      * Only called if a vertex is white \\
+      * Vertex $u$ is coloured grey when \texttt{IsCycle(u,parent)} is executed, and never coloured white again \\
+      Correctness: \\
+      \texttt{IsCycle(u,parent)} returns true if an adjacent node $n$ of $u$ which is not it's parent has been coloured grey, indicating  cyle following: $(n,p[n]),(p[n],p[p[n]]),...(u,n)$
+    \end{answer}
+    \begin{answer}
+      Total cost of \texttt{IsCycle}, minus recursive calls, is linear in \texttt{1 + deg u} \\
+      $\sum_{u\in V} (\texttt{deg } u + 1 = 2|E| + |V|$
+    \end{answer}
+  \end{problem}
+\end{problemlist}
+\end{document}

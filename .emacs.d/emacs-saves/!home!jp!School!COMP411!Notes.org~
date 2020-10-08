@@ -1,0 +1,517 @@
+:METADATA:
+#+TITLE:        CompSci 411
+#+AUTHOR:       JP Lozano
+#+EMAIL:        jp@bassed.ca
+#+DESCRIPTION:  Notes on Comp
+#+KEYWORDS:     Philosophy,Notes
+#+SUBTITLE:     Read at your own risk
+#+DATE:         \today
+:END:
+:LATEX:
+#+LATEX_CLASS: book
+#+LATEX_CLASS_OPTIONS: [a4paper,titlepage,openany,oneside]
+#+LATEX_HEADER:\usepackage{fullpage} \usepackage{fancyhdr}
+#+LATEX:\makeatletter
+#+LATEX:\renewcommand{\@chapapp}{Section}
+#+LATEX:\makeatother
+#+LATEX:\maketitle
+:END:
+:OPTIONS:
+#+OPTIONS: H:5 num:5
+#+OPTIONS: num:nil toc:nil
+:END:
+* COMP411
+** Introduction
+*** What is a compiler?
+    A compiler is a program that translates a program in one language into another language.
+    #+BEGIN_VERSE
+    Source Program > | Translator | > Translated program                 		
+    Examples:
+    C -> assembly
+    C -> machine code
+    assembly -> machine code (assembler)
+    C++ -> C
+    Java -> JVM ...-> Interpreted
+    #+END_VERSE
+
+    Generically compilers are all the same, there is an implication that translation takes the program closer to execution. There is sometimes intermediate stages, like Java.
+*** Why care?    
+    Understand what compiler is doing, what interpreter is doing. And also craft your own tools. Excellent understanding in how to handle input. 
+    ---------------------
+    Ultimately, to increase efficiency it is better to write in assembly directly. But it's hard to do over a lot of code.
+*** Terms to know
+    * *Compile time* -> between translation (ex C -> assembly)
+    * *Run-time* -> running
+    * *Link time* -> When linking assembly files
+    * *load time* -> when you start a process 
+    * *compiler build time* -> 
+
+      | *compile time*   | *run-time*        |
+      | x is local       | offset -4         |
+      | var inside foo() | off stack pointer |
+      | w/ type int      |                   |
+      | ---------------  | ----------------  |
+      | while loop read  | loop executed     |
+      | once             | N times           |
+      |                  |                   |
+*** Compiler Structure
+    #+BEGIN_VERSE
+    Compiler = analysis + synthesis
+    #+END_VERSE
+    
+    Analysis:
+    * Syntax analysis (parsing) and semantic analysis
+    * Front-end (analysis) model
+    
+    Loosely termed /front-end/ for analysis, and /back-end/ for synthesis. 
+*** Web Assembly
+**** S-expressions
+    The fundamental unit of code is a *module*. Represented as one big *S-expression*. Looks like a tree. Each node in the tree goes inside a pair of parenthesis ~( ... )~. A *Web Assembly* S-expression:
+    #+BEGIN_SRC 
+    (module (memory 1) (func))
+    #+END_SRC
+    Represents a tree with the root node "module" and two child nodes, a "memory" ode with the attribute "1" and a "func" node.
+   
+    All code is grouped into functions:
+    #+BEGIN_SRC 
+    ( func <signature> <locals> <body> )
+    #+END_SRC
+    * *signature* defines the parameters and return values
+    * *locals* are explicit variables
+    * *body* linear list of low level instructions 
+**** Signatures and parameters
+     Each parameter has a type explicitly declared:
+     * ~i32~: 32 bit integer
+     * ~i64~: 64 bit integer
+     * ~f32~: 32 bit float
+     * ~f64~: 64 bit float
+     A single parameter is written ~(param i32)~ and the return type is written ~(result i32)~. Example
+     #+BEGIN_SRC 
+     (func (param i32) (param i32) (result i64))
+     #+END_SRC
+     After the signature locals are listed with their type: ~(local i32)~
+**** Getting and Setting locals 
+     Locals and parameters can be set/get with the function ~local.set~ and ~local.get~. Example:
+     #+BEGIN_SRC 
+     (func (param i32) (param f32) (local f64)
+       local.get 0 
+       local.get 1
+       local.get 2)
+     #+END_SRC
+     This gets confusing, naming parameters is possible:
+     #+BEGIN_SRC 
+     (func (param $p1 i32) (param $p2 f32) (local $loc f64)
+       local.get $p1
+       local.get $p2
+       local.get $p3)
+     #+END_SRC
+**** Stack machines
+     The way instructions work are by pushing and pulling from a stack. For example ~local.get~ pushes the desired parameter onto the stack. ~i32.add~ pulls the last two values from the stack and pushes the result of the addition. *The return value of a function is the final value left on the stack*
+**** Building and calling functions
+     Functions must be exported within a module with the ~export~ statement. They are indexed but are able to be named, the same way as parameters. Example:
+     #+BEGIN_SRC 
+     (module
+         (func $add (param $lhs i32) (param $rhs i32) (result i32)
+	      local.get $lhs
+	      local.get $rhs
+	      i32.add)
+	 (export "add" (func $add))
+     )
+     #+END_SRC
+     Note ~(export "add" (func $add))~ the ~"add"~ is the name of the JavaScript functions, whereas ~$add~ is the name of the function within the module.
+**** Deeper Please
+     The ~call~ statement can be used to call a single function. Example:
+     #+BEGIN_SRC 
+     (module
+       (func $getAnswer (result i32)
+          i32.const 42)
+       (func (export "getAnswerPlus1") (result i32)
+          call $getAnswer
+	  i32.const 1
+	  i32.add)
+     )
+     #+END_SRC
+     To declare global variables:
+     #+BEGIN_SRC 
+     (module 
+	(global $g (import "js" "global") (mut i32))
+	(func (export "getGlobal") (result i32)
+            (global.get $g))
+	(func (export "incGlobal")
+            (global.set $g
+                   (i32.add (global.get $g) (i32.const 1))))
+     #+END_SRC
+        
+*** Dragon Book
+**** Language Processors
+    *compilers* translate from high level programming language into a lower level programming language. The skills required to build a compiler are reusable in problems besides compilers. It touches upon *programming languages*, *machine architecture*, *language theory*, *algorithms*, and *software engineering*.
+    
+    #+BEGIN_EXAMPLE
+     source program
+           |
+    +--------------+
+    |              |
+    |   Compiler   |
+    |              |
+    +--------------+
+           |
+     target program
+    #+END_EXAMPLE
+    An *interpreter* is similar to a compiler, however it executes the source program directly. Sometimes a source program is divided into separate files, a *preprocessor* collects all the files. Most compilers translate into assembly, which is then turned into machine language by an *assembler*. Often times each object file (machine language) will be assembled separately and then linked via the *linker*. Once ready to run it is loader by the *loader*.
+    #+BEGIN_EXAMPLE
+     source program
+           |
+    +--------------+
+    | Preprocessor |
+    +--------------+
+           |
+    modified source program
+           |
+    +--------------+
+    |   Compiler   |
+    +--------------+
+           |
+    target assembly program
+           |
+    +--------------+
+    |  Assembler   |
+    +--------------+
+           |
+    relocatable machine code
+           |
+    +--------------+
+    | Linker/Loader| <-- library files, relocatable object files
+    +--------------+
+           |
+    target machine code
+    #+END_EXAMPLE
+    
+**** Structure of a Compiler
+     A compiler is broken up into 2 parts: *analysis* and *synthesis*.
+***** Analysis - /font end/
+      Breaks up the source program into *components*, imposes a *grammatical structure* on them. It breaks it up by the language's syntax and rules. With this information it creates an intermediate representation of the source program. It detects semantic and syntactic error (meaning and arrangement) by providing *informative messages*. It collects information about the source program and places it in a data structure called the *symbol table*, this table and the intermediate representation are then passed to the synthesis. 
+***** Synthesis - /back end/
+      Uses the *symbol table* and the intermediate representation of the target program to construct the final target program.
+
+      ------------------------------------
+      
+      Compiling operates in a sequence of phases, some phases may be grouped together, the intermediate representation between each phase may not need be constructed explicitly.
+      
+      #+BEGIN_EXAMPLE
+      character stream 
+      |
+      [ Lexical Analysis ]
+      |
+      token stream
+      |
+      [ Syntax Analyzer ]
+      |
+      syntax tree
+      |
+      [ Semantic Analyzer ]
+      |
+      syntax tree
+      |
+      [ Intermidiate Code Generator ]
+      |
+      intermidiate representation
+      |
+      [ Machine-Independent Code Optimizer ]
+      |
+      intermidiate representation
+      |
+      [ Code Generator ]
+      |
+      target-machine code
+      |
+      [ Machine Dependent Code Optimizer ]
+      |
+      target machine code
+      #+END_EXAMPLE
+      
+      The *symbol table* stores information about the source program and is used by all phases of the compiler.
+***** Lexical Analysis
+      First stage of the Analysis, also called *scanning*. Reads the source program and groups the characters into meaningful sequences called *lexemes*. For each *lexeme* the lexical analyzer produces a *token*
+      #+BEGIN_EXAMPLE
+      <token-name,attribute-value>
+      #+END_EXAMPLE
+      it then passes this to the next phase: *syntax analysis*. The *token-name* is an abstract symbol used during syntax analysis, the *attribute-value* points to an entry in the symbol table for the token. Example:
+      #+BEGIN_EXAMPLE
+      position = initial + rate * 60
+      <id,1> <=> <id,2> <+> <id,3> <*> <60>
+      #+END_EXAMPLE
+      *id* is an abstract symbol standing for /identifier/, the *attribute-value* points to the symbol-table entry for the identifier. Blank space would be discarder by the lexical analyzer.
+***** Syntax Analysis
+      The second phase of the analysis, also called *parsing*. Uses the first components of the tokens to create a tree -like intermediate representation depicting the grammatical structure of the token stream. Typically represented by a *syntax tree*, each interior node represents an operation, the children the arguments of the operation. Example page 7.
+***** Semantic Analysis
+      Uses the syntax tree and the symbol table to check for semantic consistency. Gathers type information saving it in either the syntax tree or the symbol table. Important part is *type-checking*. 
+***** Intermediate code generator
+      May look like a syntax tree although Many compilers generate a machine-like intermediate interpretation, as if for an abstract machine. It should be easy to produce and easy to translate into machine language. Example:
+      #+BEGIN_EXAMPLE
+      position = initial + rate * 60
+      <id,1> <=> <id,2> <+> <id,3> <*> <60>
+      Syntax tree
+      Revised syntax tree
+      t1 = inttofloat(60)
+      t2 = id3 * t1
+      t3 = id2 + t2
+      id1 = t3
+      #+END_EXAMPLE
+***** Code Optimization
+      Attempts to improve the intermediate code. Example:
+      #+BEGIN_EXAMPLE
+      position = initial + rate * 60
+      <id,1> <=> <id,2> <+> <id,3> <*> <60>
+      Syntax tree
+      Revised syntax tree
+      t1 = inttofloat(60)
+      t2 = id3 * t1
+      t3 = id2 + t2
+      id1 = t3
+      
+      t1 = id3 * 60
+      id1 = id2 + t1
+      #+END_EXAMPLE
+***** Code Generation
+      This translates the intermediate code into machine dependent language, taking care of registers for data. Example
+      #+BEGIN_EXAMPLE
+      position = initial + rate * 60
+      <id,1> <=> <id,2> <+> <id,3> <*> <60>
+      Syntax tree
+      Revised syntax tree
+      t1 = inttofloat(60)
+      t2 = id3 * t1
+      t3 = id2 + t2
+      id1 = t3
+      
+      t1 = id3 * 60.0
+      id1 = id2 + t1
+
+      LDF  R2,  id3
+      MULF R2,  R2, #60.0
+      LDF  R1,  id2
+      ADDF R1,  R1, R2
+      STF  id1, R1
+      #+END_EXAMPLE
+***** Symbol-Table Management
+      A data structure containing a record for each variable name, with fields for the attributes of the name. Designed to allow the compiler to find records quickly.
+***** The Grouping of Phases into Passes
+      Some phases made be grouped together into what is called passes, this generate output files that are then passed on to the next passes. Useful to create one back end and multiple front ends for different languages.
+***** Compile-Construction tools
+      1. Parser Generators - produce syntax analyzers from a grammatical description
+      2. Scanner Generators - produce lexical analyzers from a regular-expression description of the tokens of the language.
+      3. Syntax-directed translation engines - produce collection of routines for walking a parse tree and generating intermediate code.
+      4. Code-generator generator - produce a code generator from a collection of rules for translating each operation of the intermediate language into machine language for a target machine.
+      5. Data flow -analysis engines - facilitate the gathering of information about how values are transmitted from one part of a program to each other part. Key in optimization.
+      6. Compiler Construction toolkits - that provide an integrated set of routines for constructing various phases of a compiler     
+      	 
+*** Jan 16 **** Analysis
+     Does the input comfort to syntax? to semantic? Whats the difference:
+     #+BEGIN_EXAMPLE
+     int i;
+     struct {
+         char c;
+	 float f;
+     }S;
+     i = S
+     #+END_EXAMPLE
+     /In this case it is syntactically correct but semantically incorrect/.
+
+     Source Program goes to the *Syntax Analyzer*, also called the *parser*. Followed by the *semantic analyzer*. This might look like this:
+     #+BEGIN_VERSE
+     /Assign integer to variable:/
+     $S \to I = N$
+     $I \to A \{ A \}$
+     $A \to a | b | ... | y | z$
+     $N \to D \{ D \}$
+     $D \to 0 | 1 | ... | 8 | 9$
+     #+END_VERSE
+**** Theory
+***** Language & Grammars
+      Formally a *set of strings*, example: $\{a,b\}, \{ \lambda, a, aa, aaa, ...\}$. $\lambda$ is the empty string. Equally valid language is a set of strings comprised of *all syntactically valid Java programs.* 
+      *Grammar* is a set of *rules*. There is an infinite number of grammars that define the same language. Example:
+
+      /Language/ $L = \{a,b\} G = \{A \to a, A \to b\}$ Upper case letters early in the alphabet are *nonterminals (NTs)*. Thinks of NTs as variables. Lower case letters are *terminals* occur only on the right hand side. Notationally &\to$ separates NTs on the left and terminals on the right. 
+
+      Another Example:
+
+      $L = \{ac, abc\} G=$\{A \to aA'c, A' \to b, A' \to \lambda\}$. The start symbol can be explicitly stated, otherwise it would be the first rule of the grammar. So how to use the grammar?
+
+      Start with the start symbol $A$ in the case above. $A \mapsto aA'c \mapsto ac; or abc$. 
+
+      Normally there are multiple non-terminals. /Dig later/.
+
+      One more Example:
+
+      $L=\{ac,abc,abbc,abbbc,...\} G=\{A \to aA'c, A' \to bA', A' \to \lambda$. 
+
+      The grammar we'll deal with are *context-free grammars*, meaning on the left hand side of the grammar contains one *non-terminal*. This grammars are presented in *BNF notation.* The problem is that with large grammars BNF /sucks/. *EBNF (Extended BNF) is much better. Separate alternatives with a /|/. $A \to a | b$. Optionality is also provided. $A \to a[b]c$. And also express repetition: $A \to a{b}c$.
+
+      Parser can do it character by character, yet it is a mess. So what now? Most rule checking will be passed on to the *scanner* or *lexical analyzer*. 
+***** Scanner
+      It will abstract certain things so the parser doesn't have to worry about it. /Whitespace/ will be removed by the scanner. /Comments/ will also be dumped. Then build up into chunks /identifiers and keywords/. It will also deal with /Literals (numbers, strings)/.
+***** Parser and Scanner 
+      The parser receives data in chunks called /tokens/. Tokens will have a token name and if need be an attribute(s). The scanner reads a token until it decides the token is complete. Certain tokens will have no attributes associated with them, such as /=/. 
+*** Jan 21
+    Expression grammar:
+    $$ E \to E + T $$
+    $$ E \to T $$
+    $$ T \to T * F $$
+    $$ T \to F $$
+    $$ F \to n $$
+    $$ F \to (E) $$
+** Lexical Analysis
+*** The Role of the Lexical Analysis
+    The main task of the /scanner/ is to read the input characters of the source program, group them into /lexemes/, and produce as output a sequence of tokens for each lexeme in the source program.
+*** Tokens, Patterns, and Lexemes    
+    * A *token* is a pair consisting of a token name and an optional attribute value. 
+    * A *pattern* is a description of the form tht the lexemes of a token may take. 
+    * A *lexeme* is a sequence of characters in the source program that matches the pattern for a token. 
+*** Attributes for tokens
+** Lexical Analysis or /Scanner/ - according to Aycock
+   Purpose: To convert source text into a series of tokens for the parser. Between the Scanner and the Parser is a Producer/Consumer relationship. Able to be built in a number of ways:
+   * Produce all in advance
+   * Coroutines/generators
+   * Separate threads
+   * Lex / unlex - An interface as with ~getchar()~ vs ~ungetchar()~
+   * Peek / match - Related to lex/unlex, except instead of consuming and throwing back, with peek / match the token is peeked at rather than consumed. 
+*** Why a scanner?
+    Simplifying the grammar therefore the parser. Using more efficient algorithms. Deal with oddities of input and language, character sets, concrete vs reference syntax. And do preprocessing and macro processing.
+*** Definitions
+    * *Token* - Representation of a class of different things seen on the input
+    * *Pattern* 
+      * Informal specification
+      * Formal specification
+    * *Lexeme* - Concrete instance of a token
+    * *Attribute* - The value of the Lexeme, the space time coordinates of the token. Possibly one can add a pointer to the symbol table entry.
+*** Context
+    * Context problems
+      * Record or record? Read or read?
+      * PL/L
+	* ~IF THEN THEN THEN = ELSE; ELSE ELSE = THEN;
+      * Modern examples	
+    * Ideally, scanner and parser have low degree of coupling
+    * Lexical feedback
+      * The parser will know semantic structure, and will be able to provide context. The parser would have a back channel to the scanner in order to provide context. 
+    * Shifting work to later parts of compiler
+      * Let something later in the compiler sort it out. 
+*** Lexical errors
+    * Don't bother parser
+    * Error recovery method
+      * Delete char(s)
+      * Insert missing char(s)
+      * Replacing char
+      * Transposing adjacent chars
+    * Context for recovery
+    * Investment into error recovery
+
+      
+    In the case of error recoveries, the scanner may issue warnings. A problem with this is that there might be a huge amount of warnings and errors. To prevent this one must have a limit of errors found. 
+*** Scanner I/O
+    * Dependent on implementation choice:
+      * Compiler tool - /flex/, /jflex/, etc. Use provided I/O.
+      * HLL
+      * Memory mapping
+    * Should entire input be read at once?
+    * When do you optimize I/O?
+      * Probably never, but it can be done. 
+*** Building Scanners: /ad hoc/
+    * Running example: scanner to
+      * Skip whitespace 
+      * Recognize =, >, >=, EOF
+      * Omit attributes
+    * Example /ad hoc/ scanner
+    * Pros & cons
+    * Mapping from RE to code
+
+      
+    Certain scanner generator tools, like /flex/, are useful. However programming a simple scanner is a joke.
+
+    #+BEGIN_SRC C
+    while ( ( ch = getchar() ) != EOF && isspace(ch) ) 
+    	;
+    switch(ch) {
+    	case EOF:
+		return "EOF"
+	case '=':
+		return '='
+	case '>':
+		ch = getchar()
+		if(ch == '=') return ">="
+		else {
+			unget(ch)
+			return '>'
+		}
+	default:
+		if ( isalpha(ch) {
+			do ch = getchar()
+			while(isalphanum(ch))
+			unget(ch)
+			return "ID"
+		} else {
+			error
+		}
+    }	
+    #+END_SRC
+    
+    There is a correspondence between regular expressions and certain ad hoc modes.
+    * $a | b\to$ ~if~ or ~switch~
+    * $a*\to$ ~while~
+    * $a+$ ~do-while~
+    * $a?$ ~if~
+*** Building Scanners: /finite automata/
+    * Final State Machines are a good technique to solve complex problems in general. It captures all you need to know about where a program is supposed to be. 
+**** How to build them?      
+     Regular Expressions can be transformed into final automata. Use ~switch~ and ~goto~ and that is it.
+**** Table driven fashion
+     Think of it as having a 2D array, one dimension indexed by input character (256 entries), the other dimension is indexed by the state number. This makes the able thicc, so you would want to compress it a bit. 
+***** Graph Coloring
+      Make table look sparse by factoring out error entries. 
+      |   | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 |
+      | a | 1 | 3 | 1 |   |   | 1 |   |   |
+      | b | 2 |   |   | 2 |   |   | 7 |   |
+      | c |   | 4 |   |   |   | 4 |   |   |
+      | d |   |   | 6 |   | 5 |   |   |   |
+
+      Empty slots are errors, replace them with 1, and other with 0. The error matrix is much smaller as each slot is one bit. The error matrix is used as a filter.
+
+      |   | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 |
+      | a | 0 | 0 | 0 | 1 | 1 | 0 | 1 | 1 |
+      | b | 0 | 1 | 1 | 0 | 1 | 1 | 0 | 1 |
+      | c | 1 | 0 | 1 | 1 | 1 | 0 | 1 | 1 |
+      | d | 1 | 1 | 0 | 1 | 0 | 1 | 1 | 1 |
+
+      Now we build an interface graph. Treat each column in table as node interference graph, each column corresponds to a node. An edge from a column to another is drawn if they interfere. But we can do better. How? Hold on, you'll see. We haven't taken into account what those values are, if they are the same they can be merged together. Color them so no node is connected to it's same color. in the above case we can combine [0,2,5,3] and [1,6,4,7]
+      |   | 0 | 1 |
+      | a | 1 | 3 |
+      | b | 2 | 7 |
+      | c | 4 | 4 |
+      | d | 6 | 5 |
+      Then we need to index our original table to our new table, [0,2,5,3] = 0 and [1,6,4,7] = 1. 
+      
+*** Formalities
+**** Deterministic finite automata
+     Start in initial state, transitions to next state is uniquely determined by current state and input symbol.
+**** Non-deterministic finite automata
+     Like DFAs, except transitions on the empty string. Multiple transitions from state on the same input symbol.
+**** Conversion
+     ~RE~ \to ~NFA~ \to ~DFA~ \to ~minimized DFA~ \\
+     Thompson construction \to Subset construction.
+**** Couple of gotchas 
+     In your head you might think you want to make a DFA. But turns out that by accident you end up creating an NFA, oh oh. We could sort this out, but who wants to do that? no no. 
+
+     Use a perfect hash table, do a look up and there is no collision, is either there or nah. For finite sets of things, such as reserved words, one can hash it out quickly and efficiently.
+
+     You can use Thompson's construction to change a RE to NFA. Reflections on trusting trust. 
+** Parsing
+*** Top-down parsing
+**** Parsing method overview
+     * $L$s and $R$s, and lookahead
+     * Top-down vs bottom up
+     * Tools for tabled
+     * Chomsky hierarchy
+
+       
+     Parsing is a very well studied field. Parsing algorithm has a bunch of terminology: LL parsers are top-down. LL: First L is reading input from Left to Right, second L refers to the type of derivation produced, in this case Left most derivation. In some case a number will be present. LL(2) would mean 2 lookahead symbols. In this course will be dealing with 1 token lookahead. We'll be looking at two types: *Recursive descent* (predictive). In this case recursion is quite easy to reason about. The other one is non-recursive predictive (uses tables). In the bottom up: LR(left to right, right most derivations). Full blown LR: Large Tables, detect errors very quickly, LL superset. SLR is simple LR. LALR Lookahead LR. Is a nice tradeoff between table size and what we can handle. All of the above will require a tool, requiring tables. Except for the recursive descent.
+     
+     

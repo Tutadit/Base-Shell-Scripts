@@ -1,0 +1,20 @@
+import Product from './product';
+
+function Products(props) {
+    return(
+        <div className="products">
+          {props.products.map((product)=>{
+              return(
+                  <Product
+                    key={product.id}
+                    img={product.img}
+                    title={product.title}
+                    price={product.price}
+                    oldPrice={product.old_price}/>
+              );
+          })}              
+        </div>
+    );
+}
+
+export default Products;

@@ -1,0 +1,13 @@
+#ifndef SEMANTIC_PASS_1
+#define SEMANTIC_PASS_1
+/* 
+ * Pass 1 - Check for:
+ *   * No main declaration found
+ *   * Multiple main declarations found
+ *
+ *   As well as populate the symbol table with
+ *   global declarations
+ */
+void SEM_pass_1(S_table env, A_global_declarations dec);
+
+#endif

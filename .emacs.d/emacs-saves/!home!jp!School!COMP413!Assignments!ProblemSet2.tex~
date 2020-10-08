@@ -1,0 +1,351 @@
+\documentclass{cpsc413Solutions}
+\usepackage{amsmath}
+
+\coursetitle{Design and Analysis of Algorithms}
+\courselabel{CPSC 413}
+\exercisesheet{Problem Set \#[2]}{}
+\student{Juan Pablo Lozano Sarmiento - 30022579}
+\semester{Winter 2020}
+
+\begin{document}
+
+\team{}
+\sources{}
+
+\begin{problemlist}
+  \pbitem [1st problem]
+  \begin{problem}
+    \begin{answer}
+      (a) How much slower does $n^2$ get when input is doubled?
+      \begin{equation}
+        \begin{aligned}
+          (2n)^2 - n^2 &= 4n^2 - n^2 \\
+          &= 3n^2
+        \end{aligned}
+      \end{equation}
+      $n^2$ is slowed down by $3n^2$ when $n$ is doubled.
+
+      (b) How much slower does $n^2$ get when its input increases by $1$?
+      \begin{equation}
+        \begin{aligned}
+          (n + 1)^2 - n^2 &= (n+1)(n+1)-n^2 \\
+          &= n^2 + 2n + 1 - n^2 \\
+          &= 2n + 1
+        \end{aligned}
+      \end{equation}
+      $n^2$ is slowed down by $2n+1$ when its input increases by $1$
+    \end{answer}
+    \begin{answer}
+      (a) How much slower does $n^3$ get when input is doubled?
+      \begin{equation}
+        \begin{aligned}
+          (2n)^3 - n^3 &= 8n^3 - n^3 \\
+          &= 7n^3
+        \end{aligned}
+      \end{equation}
+      $n^3$ is slowed down by $7n^3$ when $n$ is doubled.
+
+      (b) How much slower does $n^3$ get when its input increases by $1$?
+      \begin{equation}
+        \begin{aligned}
+          (n + 1)^3 - n^3 &= (n+1)(n+1)(n+1)-n^3 \\
+          &= n^3 + 3n^2 + 3n + 1 - n^3 \\
+          &= 3n^2 + 3n + 1
+        \end{aligned}
+      \end{equation}
+      $n^3$ is slowed down by $3n^2 + 3n + 1$ when its input increases by $1$
+    \end{answer}
+    \begin{answer}
+      (a) How much slower does $100n^2$ get when input is doubled?
+      \begin{equation}
+        \begin{aligned}
+          100(2n)^2 - 100n^2 &= 100(4)n^2 - 100n^2 \\
+          &= 400n^2 - 100n^2 \\
+          &= 300n^2
+        \end{aligned}
+      \end{equation}
+      $100n^2$ is slowed down by $300n^2$ when $n$ is doubled.
+
+      (b) How much slower does $100n^2$ get when its input increases by $1$?
+      \begin{equation}
+        \begin{aligned}
+          100(n + 1)^2 - 100n^2 &= 100(n^2 +2n +1) - 100n^2 \\
+          &= 100n^2 + 200n + 1 - 100n^2 \\
+          &= 200n + 1
+        \end{aligned}
+      \end{equation}
+      $100n^2$ is slowed down by $200n + 1$ when its input increases by $1$
+    \end{answer}
+    \begin{answer}
+      (a) How much slower does $n \log n$ get when input is doubled?
+      \begin{equation}
+        \begin{aligned}
+          (2n) \log (2n) - n \log n &= n (2 \log 2n - \log n) \\
+          &= n(\log (2n)^2 - \log n) \\
+          &= n(\log 4n^2 - \log n) \\
+          &= n\log \frac{4n^2}{n} \\
+          &= n \log 4n
+        \end{aligned}
+      \end{equation}
+      $n \log n$ is slowed down by $n \log 4n$ when $n$ is doubled.
+
+      (b) How much slower does $n \log n$ get when its input increases by $1$?
+      \begin{equation}
+        \begin{aligned}
+          (n + 1) \log (n + 1) - n \log n
+          &= n \log (n + 1) + \log (n+1) - n \log n \\
+          &= n \log \frac{(n + 1)}{n} + \log (n+1)
+          &= n \log 
+        \end{aligned}
+      \end{equation}
+      $100n^2$ is slowed down by $200n + 1$ when its input increases by $1$
+    \end{answer}
+    \begin{answer}
+      (a) How much slower does $2^n$ get when input is doubled?
+      \begin{equation}
+        \begin{aligned}
+          2^{2n} - 2^n
+          &= (2^2)^n - 2^n \\
+          &= 
+        \end{aligned}
+      \end{equation}
+      (b) How much slower does $2^n$ get when its input increases by $1$?
+      \begin{equation}
+        \begin{aligned}
+            2^{n+1} - 2^n
+            &=2^n * 2^1 - 2^n \\
+            &=2^n ( 2 - 1) \\
+            &=2^n * 1 \\
+            &=2^n
+        \end{aligned}
+      \end{equation}
+      $2^n$ slows down by $2^n$ when $n$ increases by $1$
+    \end{answer}
+  \end{problem}
+
+  \pbitem [2nd problem]
+  \begin{problem}
+    \begin{answer}
+      \begin{equation}
+        \begin{aligned}
+          f_1(n) &= n^2.5 \\
+          &= n^{5/2} \\
+          f_2(2) &= \sqrt{2n} \\
+          &= (2n)^{1/2} \\
+          f_3(n) &= n + 10 \\
+          f_4(n) &= 10^n \\
+          f_5(n) &= 100^n \\
+          f_6(n) &= n^2 \log n \\
+          f_1(n) &\in O(n^{2/5}) \\
+          f_2(n) &\in O(n^{1/2}) \\
+          f_3(n) &\in O(n) \\
+          f_4(n) &\in O(10^n) \\
+          f_5(n) &\in O(100^n) \\
+          f_6(n) &\in O(n^2 \log n) \\
+          &\mbox{In ascending order:} \\
+          &f_3(n),f_2(n),f_6(n),f_1(n),f_4(n),f_5(n)
+        \end{aligned}
+      \end{equation}
+    \end{answer}
+  \end{problem}
+
+  \pbitem [3nd problem]
+  \begin{problem}
+    \begin{answer}
+      (a) $2n^2 + \sqrt{n} = \Omega(n$)
+      \begin{equation}
+        \begin{aligned}
+          \lim_{n\to \infty} \frac{2n^2 + \sqrt{n}}{n}
+          &= \lim_{n\to\infty}\frac{4n + \frac{1}{2}x^{-{1/2}}}{1} \\
+          &= \lim_{n\to\infty}4n + \frac{1}{2}x^{-{1/2}} \\
+          &=\infty
+        \end{aligned}
+      \end{equation}
+      Given the limit $2n^2 + \sqrt{n} \in \Omega(n)$
+    \end{answer}
+    \begin{answer}
+      (b) $5n^3 + 3.5n^2 - 7n + 19 \in O(n^3)$
+      \begin{equation}
+        \begin{aligned}
+          \lim_{n\to\infty} \frac{5n^3 + 3.5n^2 - 7n + 19}{n^3}
+          &=\lim_{n\to\infty} \frac{15n^2+7n-7}{3n^2} \\
+          &=\lim_{n\to\infty} \frac{30n+7}{6n} \\
+          &=\lim_{n\to\infty} \frac{30}{6} \\
+          &=\lim_{n\to\infty} 5 \\
+          &= 5
+        \end{aligned}
+      \end{equation}
+      Given the limit $5n^3 + 3.5n^2 - 7n + 19 \in \Theta(n^3) \in O(n^3)$
+    \end{answer}
+    \begin{answer}
+      (c) $n^4 \in O(2^n)$
+      \begin{equation}
+        \begin{aligned}
+          \lim_{n\to\infty}\frac{n^4}{2^n}
+          &=\lim_{n\to\infty}\frac{4n^3}{2^n \ln{2}} \\
+          &=\lim_{n\to\infty}\frac{12n^2}{\ln^2{2} * 2^n} \\
+          &=\lim_{n\to\infty}\frac{24n}{\ln^3{2} * 2^n} \\
+          &=\lim_{n\to\infty}\frac{24}{\ln^4{2} * 2^n} \\
+          &= 0
+        \end{aligned}
+      \end{equation}
+      Given the limit $n^4 \in O(2^n)$
+    \end{answer}
+    \begin{answer}
+      (d) $20n^2 + n \lg n \in \Theta(n^2)$
+      \begin{equation}
+        \begin{aligned}
+          \lim_{n\to\infty}\frac{20n^2 + n \lg n}{n^2}
+          &= \lim_{n\to\infty}(\frac{\lg n}{x}+20) \\
+          &= 20
+        \end{aligned}
+      \end{equation}
+      Given the limit $20n^2 + n \lg n \in \Theta(n^2)$
+    \end{answer}
+  \end{problem}
+  \pbitem [4th problem]
+  \begin{problem}
+    \begin{answer}
+      (a) The input: \\
+      * Set of free men, implemented as a linked list, with an \texttt{int i} for the $i^{th}$ man, and a pointer to the nex man \\
+      * A 2D array, \texttt{ManPref[m][i]} to indicate the $i^{th}$ woman on $m$'s preference list. \\
+      * A 2D array \texttt{Ranking[w][m]} contains the rank of man $m$ in the sorted order of $w$'s preference\\
+      * An array \texttt{Next[i]} of size $n$, where the index $i$ represents the next woman in $m_i$'s preference list. \\
+      * An array \texttt{Current} of size $n$, where \texttt{Current[w]} is the womans $w$ current partner, initialized to null.
+    \end{answer}
+    \begin{answer}
+      (b) Line 1: \\
+      Initially all men and woman are free. \\
+      LinkedList free\_men; //Populated list of all free men, at the start all $n$ men are free \\
+      Array Current[n] = null; //Null initiated array, where the index $i$ represents the $i^{th}$'s woman current partner \\
+      Array ManPref[m][i]; //Populated preference lists for all men \\
+      Array Ranking[w][m]; //Populated ranking value of $m$ man, according to $w$'s preference list \\
+      Array Next[m] = 1; //Initialized to 1 for all men
+      Line one is in $\Theta(1)$
+    \end{answer}
+    \begin{answer}
+      (c) Line 2: \\
+      while(free\_men != null \&\& Next[free\_men->men] != n) \\
+      Cost of this: $\Theta(1)$
+    \end{answer}
+    \begin{answer}
+      (d) Line 3: \\
+      man = free\_men->man; \\
+      Cost: $\Theta(1)$
+    \end{answer}
+    \begin{answer}
+      (e) Line 4: \\
+      w = Next[man]; \\
+      Cost $\Theta(1)$
+    \end{answer}
+    \begin{answer}
+      (f) Line 5: \\
+      if Current[w] == null //She be free \\
+      Cost $\Theta(1)$
+    \end{answer}
+    \begin{answer}
+      (g) Line 6: \\
+      Current[w] = man;  \\
+      remove men from free\_men; \\
+      Cost $\Theta(1)$
+    \end{answer}
+    \begin{answer}
+      (h) Line 7: \\
+      else \\
+      her\_man=Current[w] \\
+      Cost $\Theta(1)$
+    \end{answer}
+    \begin{answer}
+      (i) Line 9: \\
+      Nada \\
+    \end{answer}
+    \begin{answer}
+      (j) Line 11: \\
+      Current[w] = man; \\
+      remove men from free\_men; \\
+      Cost $\Theta(1)$
+    \end{answer}
+    \begin{answer}
+      (k) Line 12: \\
+      insert her\_man to free\_men; \\
+      Cost $\Theta(1)$      
+    \end{answer}
+    \begin{answer}
+      (l) Line 16: \\
+      return Current; \\
+      cost $\Theta(1)$
+    \end{answer}
+    \begin{answer}
+      (m) Do math \\
+      Lines 2-12 are all $\Theta(1)$ \\
+      Lines 1 and 16 are all in $\Theta(1)$ \\
+      The loop executes at the very least $n$ times, this will be if all men prefer different woman. If all men prefer the same woman then this loop will execute $n$ times for every man, and $n$ times for every woman. Or $n^2$.
+    \end{answer}
+    \begin{answer}
+      (n) No can do baby doll \\
+      The lower bound and upper bound of this algorithm ain't the same, so no tight asymptotic runtime for you.
+    \end{answer}
+  \end{problem}
+  \pbitem [5th problem]
+  \begin{problem}
+    \begin{answer}
+      (a) Ordered Array(x) \\
+      1 A[0] = X[0] \\
+      2 for i = 1 to n - 1 \\
+      3 k = Binary Search(A,i,X[i]) \\
+      4 for j = i downto k + 1 \\
+      5 	A[j] = A[j-1] \\
+      6 A[k] = X[i] \\
+      7 return A \\
+
+      Inner loop: $\sum_{m=k+1}^{j}(j+1)-(k+1) = j - k$ \\
+      Outer loop: $\sum_{i=1}^{n-1}(j - k + c \lg i + 1)$ 
+      \begin{equation}
+        \begin{aligned}
+            \sum_{i=1}^{n-1}(j - k + c \lg i + 1)
+            &=\sum_{i=1}^{n-1} j - \sum_{i=1}^{n-1} k + \sum_{i=1}^{n-1} c \lg i +  \sum_{i=1}^{n-1} 1 \\
+            \end{aligned}
+      \end{equation}
+
+      
+    \end{answer}
+    \begin{answer}
+      (b) Upper bound, $k = n - 1$           
+      \begin{equation}
+        \begin{aligned}
+            \sum_{i=1}^{n-1}(j - k + c \lg i + 1)
+            &=\sum_{i=1}^{n-1} j - \sum_{i=1}^{n-1} k + \sum_{i=1}^{n-1} c \lg i +  \sum_{i=1}^{n-1} 1 \\
+            &=\sum_{i=1}^{n-1} i - \sum_{i=1}^{n-1} (n - 1) + c\sum_{i=1}^{n-1} \lg i +  n - 1 \\
+            &=\frac{n(n-1)}{2} - \sum_{i=1}^{n-1} n - \sum_{i=1}^{n-1} 1 + c \lg{(n-1)!} +  n - 1 \\
+            &=\frac{n(n-1)}{2} - n(n-1) - (n - 1) + c \lg{(n-1)!} +  n - 1 \\
+            &=\frac{n(n-1)}{2} - \frac{2n(n-1)}{2} - \frac{2(n - 1)}{2} + \frac{2c \lg{(n-1)!}}{2} +  \frac{2n}{2} - \frac{2}{2} \\
+            &=\frac{n(n-1) - 2n(n-1) - 2(n-1) + 2c \lg{(n-1)!} + 2n - 1}{2} \\
+            &=\frac{n^2 - n - 2n^2 - 2n - 2n - 2 + 2c \lg{(n-1)!} + 2n - 1}{2} \\
+            &=\frac{-n^2 - 3n - 3 + 2c \lg{(n-1)!}}{2} \\
+            &=-\frac{1}{2}n^2 - \frac{1}{2}3n - \frac{3}{2} + c \lg{(n-1)!} \\
+            &\in O(n^2 + \lg{n!})
+        \end{aligned}
+      \end{equation}
+    \end{answer}
+    \begin{answer}
+      (b) Lower bound, $k = 0$           
+      \begin{equation}
+        \begin{aligned}
+            \sum_{i=1}^{n-1}(j - k + c \lg i + 1)
+            &=\sum_{i=1}^{n-1} j + \sum_{i=1}^{n-1} c \lg i +  \sum_{i=1}^{n-1} 1 \\
+            &=\sum_{i=1}^{n-1} i + c\sum_{i=1}^{n-1} \lg i +  n - 1 \\
+            &=\frac{n(n-1)}{2} + c \lg{(n-1)!} +  n - 1 \\
+            &=\frac{n(n-1) + 2c \lg{(n-1)!} +  2n - 2}{2} \\
+            &=\frac{n^2 - n + 2c \lg{(n-1)!} +  2n - 2}{2} \\
+            &=\frac{n^2 + n + 2c \lg{(n-1)!} - 2}{2} \\
+            &\in \Omega(n^2 + \lg{n!})
+        \end{aligned}
+      \end{equation}
+    \end{answer}
+    \begin{answer}
+      (b) Tight bound, $\in\Theta(n^2 + \lg{n!})$
+    \end{answer}
+
+  \end{problem}
+\end{problemlist}
+\end{document}

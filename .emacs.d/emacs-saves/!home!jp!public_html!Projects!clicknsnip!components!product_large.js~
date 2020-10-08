@@ -1,0 +1,30 @@
+import ReviewStars from './review_stars';
+
+function ProductLarge(props) {
+    return(
+	<div className="product-view">
+          <div className="product-image">
+            <img src="http://clicknsnip.bassed.ca/img/shoe.jpg"/>
+          </div>
+          <div className="product-info">
+            <div className="product-title">
+              <h4>Shoe made form 100% sourced material founf in garabage bins near you! Get this sock now! Shoelace not included</h4>
+            </div>
+            <ReviewStars
+              stars={3.1} />
+            <div className="product-price">
+              <p>$5.99</p>
+            </div>
+            <div className="product-description">
+              here and there is where you'll take this sock
+            </div>
+            <div className="product-actions">
+              <a className="btn-white">Buy</a>
+              <a className="btn-white">View</a>
+            </div>
+          </div>
+        </div>
+    );
+}
+
+export default ProductLarge;

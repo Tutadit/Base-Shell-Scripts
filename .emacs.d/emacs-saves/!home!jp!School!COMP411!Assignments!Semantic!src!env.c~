@@ -1,0 +1,62 @@
+/**/
+#include <stdio.h>
+#include "util.h"
+#include "symbol.h"
+#include "types.h"
+#include "env.h"
+
+S_table E_base_env(void) {
+  S_table t = S_empty();
+  S_enter(
+	  t,
+	  S_Symbol("getchar"),
+	  E_FunEntry(NULL, Ty_Int())
+	  );
+  S_enter(
+	  t,
+	  S_Symbol("halt"),
+	  E_FunEntry(Ty_TyList(Ty_Void(),NULL), Ty_Void())
+	  );
+  S_enter(
+	  t,
+	  S_Symbol("printb"),
+	  E_FunEntry(Ty_TyList(Ty_Bool(),NULL), Ty_Void())
+	  );
+    S_enter(
+	  t,
+	  S_Symbol("printc"),
+	  E_FunEntry(Ty_TyList(Ty_Int(),NULL), Ty_Void())
+	  );
+    S_enter(
+	  t,
+	  S_Symbol("printi"),
+	  E_FunEntry(Ty_TyList(Ty_Int(),NULL), Ty_Void())
+	  );
+    S_enter(
+	  t,
+	  S_Symbol("prints"),
+	  E_FunEntry(Ty_TyList(Ty_String(),NULL), Ty_Void())
+	  );
+  return t;
+}
+
+E_enventry E_VarEntry(Ty_ty ty) {
+  E_enventry final;
+  final = checked_malloc(sizeof(*final));
+  final->kind = E_varEntry;
+  final->u.var.ty = ty;
+  return final;
+}
+
+E_enventry E_FunEntry(Ty_tyList fms, Ty_ty resl) {
+  E_enventry final = checked_malloc(sizeof(*final));
+  final->kind = E_funEntry;
+  final->u.fun.formals = fms;
+  final->u.fun.result  = resl;
+  return final;
+}
+
+E_enventry E_MainEntry() {
+  E_enventry final = checked_malloc(sizeof(*final));
+  final->kind = E_mainEntry;
+}

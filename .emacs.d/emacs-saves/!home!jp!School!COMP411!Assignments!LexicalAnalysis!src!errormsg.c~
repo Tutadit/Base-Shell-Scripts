@@ -1,0 +1,51 @@
+/*
+ * errormsg.c - functions used in all phases of the compiler to give
+ *              error messages about the Tiger program.
+ *
+ */
+#include <stdio.h>
+#include <stdlib.h>
+#include <stdarg.h>
+#include "util.h"
+#include "errormsg.h"
+
+string file_name = "";
+int line_num = 1;
+bool any_errors = false;
+int col_num = 0;
+
+extern FILE *yyin;
+
+bool should_I_quit() {
+  return any_errors;
+}
+
+void new_line(void) {
+  line_num++;
+}
+
+int get_line() {
+  return line_num;
+}
+
+int get_column() {
+  return col_num;
+}
+
+void error(int pos, char *message) {
+  any_errors=true;
+  if (file_name) fprintf(stderr,"%s:",file_name);
+  fprintf(stderr,"%d.%d: ", get_line(), get_column());
+  fprintf(stderr,"Error, unidentified token: %s\n", message );
+  fprintf(stderr,"Fix it, I'm out\n");
+}
+
+void reset(string fname) {
+  any_errors=false;
+  file_name=fname;
+  line_num=1;
+  yyin = fopen(fname,"r");
+  if (!yyin) {
+    error(0,"cannot open"); exit(1);
+  }
+}

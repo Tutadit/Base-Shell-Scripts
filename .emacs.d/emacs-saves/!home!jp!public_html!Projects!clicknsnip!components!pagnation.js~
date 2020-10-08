@@ -1,0 +1,34 @@
+import data from '../data/data.json';
+
+function Pagnation(props) {
+
+    let length = props.length;
+    let start = props.start;
+    let increments = props.increments;
+    let pages = Math.ceil(length / increments);
+    const pagnation = [];
+
+    for(let i = 0; i < pages; i++) {
+        let active = start == (i * increments);
+        let pr_start = i * increments;
+        pagnation.push(
+            <a className={
+                'pag-btn btn-white-red ' +
+                (active && 'active')
+            }
+               onClick={(e)=>{
+                   props.onClick(pr_start);
+               }}>
+              
+            </a>            
+        );
+    }        
+    
+    return(
+	<div className="pagnation">
+          {pagnation}          
+        </div>
+    );
+}
+
+export default Pagnation;

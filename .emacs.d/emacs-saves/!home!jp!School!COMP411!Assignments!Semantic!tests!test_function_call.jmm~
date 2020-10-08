@@ -1,0 +1,7 @@
+int foo(int a, boolean b) {
+    return 6;
+}
+
+main() {
+       int a = foo();
+}

@@ -1,0 +1,14 @@
+import Categories from './categories';
+
+function Filter() {
+    return(
+        <div className="filter">
+          <a className="filter-handle">Departments</a>
+          <div className="filter-holder">
+            <Categories />
+          </div>
+        </div>
+    );
+}
+
+export default Filter;

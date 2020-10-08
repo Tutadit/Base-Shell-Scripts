@@ -1,0 +1,17 @@
+#ifndef LEX_ERROR
+#define LEX_ERROR
+
+#define MAX_ERRORS_PER_LINE 5
+
+extern bool any_errors;
+extern int col_num;
+extern int line_num;
+
+int get_line();
+int get_column();
+bool should_I_quit();
+void new_line(void);
+void error(A_pos, string);
+string str_cat(string, string);
+void reset(string filename);
+#endif

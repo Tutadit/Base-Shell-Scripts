@@ -1,0 +1,33 @@
+.element-hover {
+    border:1px solid #000;
+}
+
+div.element-hover {
+    border:1px solid #ccc;
+}
+
+div#content {
+    width:100%;
+    height:100%;
+}
+
+.add_block {
+    background-color:#CCC;
+    border:none;
+    padding:10px;
+}
+
+div {
+    width:100px;
+    height:100px;
+}
+
+div.select {
+    border:1px solid #000;
+}
+
+.header {
+    width:100%;
+    height:40px;
+    background-color:#ccc;
+}

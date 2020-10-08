@@ -1,0 +1,92 @@
+import React, {useState} from 'react';
+import { MdPlaylistAdd } from "react-icons/md";
+import { BsFillGridFill, BsList, BsSearch } from "react-icons/bs";
+
+import SearchFilters from './search_filters';
+import Departments from './departments';
+import Menu from './menu';
+
+function Options(props) {
+
+    const [isList,setIsList] = useState(false);
+    
+    function changeDisplay() {
+        setIsList(!isList);
+    }
+    
+    return (
+        <Menu
+          active={props.isOpen}
+          closeMenu={props.onRequestClose}
+          closeTimeoutMS={300}
+          contentLabel="Example Modal"
+          className="options">
+
+          <div className='options-items'>
+            <div className="item">
+              <div className="item_handle_wrapper">
+                <div className="item_handle">
+                  <a href="">
+                    My lists
+                  </a>
+                </div>
+                <div className="item_extra">
+                  <a href="">
+                    <MdPlaylistAdd />
+                  </a>
+                </div>
+              </div>
+              <ul className="list">
+                <li>
+                  <a href="">Watched</a>
+                </li>
+                <li>
+                  <a href="">Tech</a>
+                </li>
+                <li>
+                  <a href="">Fashion</a>
+                </li>
+              </ul>
+            </div>
+            <div className="item">
+              <div className="item_handle_wrapper">
+                <div className="item_handle">
+                  <a >
+                    Shop by: <span id="shop_by_handle">All</span>
+                  </a>
+                </div>
+                <div className="item_extra">
+                  <a onClick={changeDisplay}>
+                    { isList ?
+                      <BsFillGridFill />:
+                      <BsList />}                  
+                  </a>
+                </div>
+              </div>
+              <Departments
+                isList={isList}/>              
+            </div>
+            <div className="item">
+              <div className="item_handle_wrapper">
+                <div className="item_handle">
+                  <input className="search"
+                         type="text"
+                         placeholder="Search"/>
+                </div>
+                <div className="item_extra" >
+                  <a onClick={changeDisplay}>
+                    <BsSearch />
+                    
+                  </a>
+                </div>
+              </div>
+              <div className="search_filters">
+                <SearchFilters />
+              </div>
+            </div>
+          </div>
+        </Menu>
+    );
+}
+
+export default Options;

@@ -1,0 +1,59 @@
+typedef union  {
+	int pos;
+	int ival;
+	string sval;
+} YYSTYPE;
+extern YYSTYPE yylval;
+
+# define ID 1
+# define STRING 2
+# define NUMBER 3
+# define COMMA 4
+# define COLON 5
+# define SEMICOLON 6
+# define LPAREN 7
+# define RPAREN 8
+# define LBRACK 9
+# define RBRACK 10
+# define LBRACE 11
+# define RBRACE 12
+# define DOT 13
+# define PLUS 14
+# define MINUS 15
+# define TIMES 16
+# define DIVIDE 17
+# define EQ 18
+# define NEQ 19
+# define LT 20
+# define LE 21
+# define GT 22
+# define GE 23
+# define AND 24
+# define OR 25
+# define ASSIGN 26
+# define ARRAY 27
+# define IF 28
+# define THEN 29
+# define ELSE 30
+# define WHILE 31
+# define FOR 32
+# define TO 33
+# define DO 34
+# define LET 35
+# define IN 36
+# define END 37
+# define OF 38
+# define BREAK 39
+# define NIL 40
+# define FUNCTION 41
+# define VAR 42
+# define TYPE 43
+# define INT 44
+# define BOOLEAN 45
+# define VOID 46
+# define RETURN 47
+# define LITERAL 48
+# define TRUE 49
+# define FALSE 50
+# define MODULUS 51
+# define BANG 52

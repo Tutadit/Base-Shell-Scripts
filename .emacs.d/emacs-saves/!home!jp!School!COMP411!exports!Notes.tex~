@@ -1,0 +1,627 @@
+% Created 2020-01-30 Thu 10:20
+% Intended LaTeX compiler: pdflatex
+\documentclass[a4paper,titlepage,openany,oneside]{book}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{graphicx}
+\usepackage{grffile}
+\usepackage{longtable}
+\usepackage{wrapfig}
+\usepackage{rotating}
+\usepackage[normalem]{ulem}
+\usepackage{amsmath}
+\usepackage{textcomp}
+\usepackage{amssymb}
+\usepackage{capt-of}
+\usepackage{hyperref}
+\usepackage{fullpage} \usepackage{fancyhdr}
+\author{JP Lozano}
+\date{\today}
+\title{CompSci 411\\\medskip
+\large Read at your own risk}
+\hypersetup{
+ pdfauthor={JP Lozano},
+ pdftitle={CompSci 411},
+ pdfkeywords={Philosophy,Notes},
+ pdfsubject={Notes on Comp},
+ pdfcreator={Emacs 26.3 (Org mode 9.1.9)}, 
+ pdflang={English}}
+\begin{document}
+
+\maketitle
+\makeatletter
+\renewcommand{\@chapapp}{Section}
+\makeatother
+\maketitle
+\part*{COMP411}
+\label{sec:orgb0f2df7}
+\chapter*{Introduction}
+\label{sec:orgfc8cfc3}
+\section*{What is a compiler?}
+\label{sec:orgb494607}
+A compiler is a program that translates a program in one language into another language.
+\begin{verse}
+Source Program > | Translator | > Translated program\\
+Examples:\\
+C -> assembly\\
+C -> machine code\\
+assembly -> machine code (assembler)\\
+C++ -> C\\
+Java -> JVM \ldots{}-> Interpreted\\
+\end{verse}
+
+Generically compilers are all the same, there is an implication that translation takes the program closer to execution. There is sometimes intermediate stages, like Java.
+\section*{Why care?}
+\label{sec:org096a3b6}
+Understand what compiler is doing, what interpreter is doing. And also craft your own tools. Excellent understanding in how to handle input. 
+
+\noindent\rule{\textwidth}{0.5pt}
+Ultimately, to increase efficiency it is better to write in assembly directly. But it's hard to do over a lot of code.
+\section*{Terms to know}
+\label{sec:orgbec099c}
+\begin{itemize}
+\item \textbf{Compile time} -> between translation (ex C -> assembly)
+\item \textbf{Run-time} -> running
+\item \textbf{Link time} -> When linking assembly files
+\item \textbf{load time} -> when you start a process
+\item \textbf{compiler build time} -> 
+
+\begin{center}
+\begin{tabular}{ll}
+\textbf{compile time} & \textbf{run-time}\\
+x is local & offset -4\\
+var inside foo() & off stack pointer\\
+w/ type int & \\
+--------------- & ----------------\\
+while loop read & loop executed\\
+once & N times\\
+ & \\
+\end{tabular}
+\end{center}
+\end{itemize}
+\section*{Compiler Structure}
+\label{sec:org05859cb}
+\begin{verse}
+Compiler = analysis + synthesis\\
+\end{verse}
+
+Analysis:
+\begin{itemize}
+\item Syntax analysis (parsing) and semantic analysis
+\item Front-end (analysis) model
+\end{itemize}
+
+Loosely termed \emph{front-end} for analysis, and \emph{back-end} for synthesis. 
+\section*{Web Assembly}
+\label{sec:org357f245}
+\subsection*{S-expressions}
+\label{sec:org2a19de8}
+The fundamental unit of code is a \textbf{module}. Represented as one big \textbf{S-expression}. Looks like a tree. Each node in the tree goes inside a pair of parenthesis \texttt{( ... )}. A \textbf{Web Assembly} S-expression:
+\begin{verbatim}
+(module (memory 1) (func))
+\end{verbatim}
+Represents a tree with the root node "module" and two child nodes, a "memory" ode with the attribute "1" and a "func" node.
+
+All code is grouped into functions:
+\begin{verbatim}
+( func <signature> <locals> <body> )
+\end{verbatim}
+\begin{itemize}
+\item \textbf{signature} defines the parameters and return values
+\item \textbf{locals} are explicit variables
+\item \textbf{body} linear list of low level instructions
+\end{itemize}
+\subsection*{Signatures and parameters}
+\label{sec:orgf5f05ce}
+Each parameter has a type explicitly declared:
+\begin{itemize}
+\item \texttt{i32}: 32 bit integer
+\item \texttt{i64}: 64 bit integer
+\item \texttt{f32}: 32 bit float
+\item \texttt{f64}: 64 bit float
+\end{itemize}
+A single parameter is written \texttt{(param i32)} and the return type is written \texttt{(result i32)}. Example
+\begin{verbatim}
+(func (param i32) (param i32) (result i64))
+\end{verbatim}
+After the signature locals are listed with their type: \texttt{(local i32)}
+\subsection*{Getting and Setting locals}
+\label{sec:org4ba9bd9}
+Locals and parameters can be set/get with the function \texttt{local.set} and \texttt{local.get}. Example:
+\begin{verbatim}
+(func (param i32) (param f32) (local f64)
+  local.get 0 
+  local.get 1
+  local.get 2)
+\end{verbatim}
+This gets confusing, naming parameters is possible:
+\begin{verbatim}
+(func (param $p1 i32) (param $p2 f32) (local $loc f64)
+  local.get $p1
+  local.get $p2
+  local.get $p3)
+\end{verbatim}
+\subsection*{Stack machines}
+\label{sec:org37f74ff}
+The way instructions work are by pushing and pulling from a stack. For example \texttt{local.get} pushes the desired parameter onto the stack. \texttt{i32.add} pulls the last two values from the stack and pushes the result of the addition. \textbf{The return value of a function is the final value left on the stack}
+\subsection*{Building and calling functions}
+\label{sec:orgde06b9d}
+Functions must be exported within a module with the \texttt{export} statement. They are indexed but are able to be named, the same way as parameters. Example:
+\begin{verbatim}
+(module
+    (func $add (param $lhs i32) (param $rhs i32) (result i32)
+	 local.get $lhs
+	 local.get $rhs
+	 i32.add)
+    (export "add" (func $add))
+)
+\end{verbatim}
+Note \texttt{(export "add" (func \$add))} the \texttt{"add"} is the name of the JavaScript functions, whereas \texttt{\$add} is the name of the function within the module.
+\subsection*{Deeper Please}
+\label{sec:orgadc2db3}
+The \texttt{call} statement can be used to call a single function. Example:
+\begin{verbatim}
+(module
+  (func $getAnswer (result i32)
+     i32.const 42)
+  (func (export "getAnswerPlus1") (result i32)
+     call $getAnswer
+     i32.const 1
+     i32.add)
+)
+\end{verbatim}
+To declare global variables:
+\begin{verbatim}
+(module 
+   (global $g (import "js" "global") (mut i32))
+   (func (export "getGlobal") (result i32)
+       (global.get $g))
+   (func (export "incGlobal")
+       (global.set $g
+	      (i32.add (global.get $g) (i32.const 1))))
+\end{verbatim}
+
+\section*{Dragon Book}
+\label{sec:org77b350a}
+\subsection*{Language Processors}
+\label{sec:org9776763}
+\textbf{compilers} translate from high level programming language into a lower level programming language. The skills required to build a compiler are reusable in problems besides compilers. It touches upon \textbf{programming languages}, \textbf{machine architecture}, \textbf{language theory}, \textbf{algorithms}, and \textbf{software engineering}.
+
+\begin{verbatim}
+ source program
+       |
++--------------+
+|              |
+|   Compiler   |
+|              |
++--------------+
+       |
+ target program
+\end{verbatim}
+An \textbf{interpreter} is similar to a compiler, however it executes the source program directly. Sometimes a source program is divided into separate files, a \textbf{preprocessor} collects all the files. Most compilers translate into assembly, which is then turned into machine language by an \textbf{assembler}. Often times each object file (machine language) will be assembled separately and then linked via the \textbf{linker}. Once ready to run it is loader by the \textbf{loader}.
+\begin{verbatim}
+ source program
+       |
++--------------+
+| Preprocessor |
++--------------+
+       |
+modified source program
+       |
++--------------+
+|   Compiler   |
++--------------+
+       |
+target assembly program
+       |
++--------------+
+|  Assembler   |
++--------------+
+       |
+relocatable machine code
+       |
++--------------+
+| Linker/Loader| <-- library files, relocatable object files
++--------------+
+       |
+target machine code
+\end{verbatim}
+
+\subsection*{Structure of a Compiler}
+\label{sec:org7335a16}
+A compiler is broken up into 2 parts: \textbf{analysis} and \textbf{synthesis}.
+\subsubsection*{Analysis - \emph{font end}}
+\label{sec:org9762c8b}
+Breaks up the source program into \textbf{components}, imposes a \textbf{grammatical structure} on them. It breaks it up by the language's syntax and rules. With this information it creates an intermediate representation of the source program. It detects semantic and syntactic error (meaning and arrangement) by providing \textbf{informative messages}. It collects information about the source program and places it in a data structure called the \textbf{symbol table}, this table and the intermediate representation are then passed to the synthesis. 
+\subsubsection*{Synthesis - \emph{back end}}
+\label{sec:org01d2852}
+Uses the \textbf{symbol table} and the intermediate representation of the target program to construct the final target program.
+
+\noindent\rule{\textwidth}{0.5pt}
+
+Compiling operates in a sequence of phases, some phases may be grouped together, the intermediate representation between each phase may not need be constructed explicitly.
+
+\begin{verbatim}
+character stream 
+|
+[ Lexical Analysis ]
+|
+token stream
+|
+[ Syntax Analyzer ]
+|
+syntax tree
+|
+[ Semantic Analyzer ]
+|
+syntax tree
+|
+[ Intermidiate Code Generator ]
+|
+intermidiate representation
+|
+[ Machine-Independent Code Optimizer ]
+|
+intermidiate representation
+|
+[ Code Generator ]
+|
+target-machine code
+|
+[ Machine Dependent Code Optimizer ]
+|
+target machine code
+\end{verbatim}
+
+The \textbf{symbol table} stores information about the source program and is used by all phases of the compiler.
+\subsubsection*{Lexical Analysis}
+\label{sec:org8b4b6de}
+First stage of the Analysis, also called \textbf{scanning}. Reads the source program and groups the characters into meaningful sequences called \textbf{lexemes}. For each \textbf{lexeme} the lexical analyzer produces a \textbf{token}
+\begin{verbatim}
+<token-name,attribute-value>
+\end{verbatim}
+it then passes this to the next phase: \textbf{syntax analysis}. The \textbf{token-name} is an abstract symbol used during syntax analysis, the \textbf{attribute-value} points to an entry in the symbol table for the token. Example:
+\begin{verbatim}
+position = initial + rate * 60
+<id,1> <=> <id,2> <+> <id,3> <*> <60>
+\end{verbatim}
+\textbf{id} is an abstract symbol standing for \emph{identifier}, the \textbf{attribute-value} points to the symbol-table entry for the identifier. Blank space would be discarder by the lexical analyzer.
+\subsubsection*{Syntax Analysis}
+\label{sec:orge72463e}
+The second phase of the analysis, also called \textbf{parsing}. Uses the first components of the tokens to create a tree -like intermediate representation depicting the grammatical structure of the token stream. Typically represented by a \textbf{syntax tree}, each interior node represents an operation, the children the arguments of the operation. Example page 7.
+\subsubsection*{Semantic Analysis}
+\label{sec:org41db29a}
+Uses the syntax tree and the symbol table to check for semantic consistency. Gathers type information saving it in either the syntax tree or the symbol table. Important part is \textbf{type-checking}. 
+\subsubsection*{Intermediate code generator}
+\label{sec:org34dfd59}
+May look like a syntax tree although Many compilers generate a machine-like intermediate interpretation, as if for an abstract machine. It should be easy to produce and easy to translate into machine language. Example:
+\begin{verbatim}
+position = initial + rate * 60
+<id,1> <=> <id,2> <+> <id,3> <*> <60>
+Syntax tree
+Revised syntax tree
+t1 = inttofloat(60)
+t2 = id3 * t1
+t3 = id2 + t2
+id1 = t3
+\end{verbatim}
+\subsubsection*{Code Optimization}
+\label{sec:orgd1eded0}
+Attempts to improve the intermediate code. Example:
+\begin{verbatim}
+position = initial + rate * 60
+<id,1> <=> <id,2> <+> <id,3> <*> <60>
+Syntax tree
+Revised syntax tree
+t1 = inttofloat(60)
+t2 = id3 * t1
+t3 = id2 + t2
+id1 = t3
+
+t1 = id3 * 60
+id1 = id2 + t1
+\end{verbatim}
+\subsubsection*{Code Generation}
+\label{sec:org5bae880}
+This translates the intermediate code into machine dependent language, taking care of registers for data. Example
+\begin{verbatim}
+position = initial + rate * 60
+<id,1> <=> <id,2> <+> <id,3> <*> <60>
+Syntax tree
+Revised syntax tree
+t1 = inttofloat(60)
+t2 = id3 * t1
+t3 = id2 + t2
+id1 = t3
+
+t1 = id3 * 60.0
+id1 = id2 + t1
+
+LDF  R2,  id3
+MULF R2,  R2, #60.0
+LDF  R1,  id2
+ADDF R1,  R1, R2
+STF  id1, R1
+\end{verbatim}
+\subsubsection*{Symbol-Table Management}
+\label{sec:orgd04e22c}
+A data structure containing a record for each variable name, with fields for the attributes of the name. Designed to allow the compiler to find records quickly.
+\subsubsection*{The Grouping of Phases into Passes}
+\label{sec:org41d544f}
+Some phases made be grouped together into what is called passes, this generate output files that are then passed on to the next passes. Useful to create one back end and multiple front ends for different languages.
+\subsubsection*{Compile-Construction tools}
+\label{sec:orgbb5248a}
+\begin{enumerate}
+\item Parser Generators - produce syntax analyzers from a grammatical description
+\item Scanner Generators - produce lexical analyzers from a regular-expression description of the tokens of the language.
+\item Syntax-directed translation engines - produce collection of routines for walking a parse tree and generating intermediate code.
+\item Code-generator generator - produce a code generator from a collection of rules for translating each operation of the intermediate language into machine language for a target machine.
+\item Data flow -analysis engines - facilitate the gathering of information about how values are transmitted from one part of a program to each other part. Key in optimization.
+\item Compiler Construction toolkits - that provide an integrated set of routines for constructing various phases of a compiler
+\end{enumerate}
+
+\section*{Jan 16 \textbf{**} Analysis}
+\label{sec:org3c45e92}
+Does the input comfort to syntax? to semantic? Whats the difference:
+\begin{verbatim}
+int i;
+struct {
+    char c;
+    float f;
+}S;
+i = S
+\end{verbatim}
+\emph{In this case it is syntactically correct but semantically incorrect}.
+
+Source Program goes to the \textbf{Syntax Analyzer}, also called the \textbf{parser}. Followed by the \textbf{semantic analyzer}. This might look like this:
+\begin{verse}
+\emph{Assign integer to variable:}\\
+\(S \to I = N\)\\
+\(I \to A \{ A \}\)\\
+\(A \to a | b | ... | y | z\)\\
+\(N \to D \{ D \}\)\\
+\(D \to 0 | 1 | ... | 8 | 9\)\\
+\end{verse}
+\subsection*{Theory}
+\label{sec:orgdda2653}
+\subsubsection*{Language \& Grammars}
+\label{sec:orga56bc25}
+Formally a \textbf{set of strings}, example: \(\{a,b\}, \{ \lambda, a, aa, aaa, ...\}\). \(\lambda\) is the empty string. Equally valid language is a set of strings comprised of \textbf{all syntactically valid Java programs.} 
+\textbf{Grammar} is a set of \textbf{rules}. There is an infinite number of grammars that define the same language. Example:
+
+\emph{Language} \(L = \{a,b\} G = \{A \to a, A \to b\}\) Upper case letters early in the alphabet are \textbf{nonterminals (NTs)}. Thinks of NTs as variables. Lower case letters are \textbf{terminals} occur only on the right hand side. Notationally \&\(\to\)\$ separates NTs on the left and terminals on the right. 
+
+Another Example:
+
+\$L = $\backslash${ac, abc$\backslash$} G=\(\{A \to aA'c, A' \to b, A' \to \lambda\}\). The start symbol can be explicitly stated, otherwise it would be the first rule of the grammar. So how to use the grammar?
+
+Start with the start symbol \(A\) in the case above. \(A \mapsto aA'c \mapsto ac; or abc\). 
+
+Normally there are multiple non-terminals. \emph{Dig later}.
+
+One more Example:
+
+\(L=\{ac,abc,abbc,abbbc,...\} G=\{A \to aA'c, A' \to bA', A' \to \lambda\). 
+
+The grammar we'll deal with are \textbf{context-free grammars}, meaning on the left hand side of the grammar contains one \textbf{non-terminal}. This grammars are presented in \textbf{BNF notation.} The problem is that with large grammars BNF \emph{sucks}. *EBNF (Extended BNF) is much better. Separate alternatives with a \emph{|}. \(A \to a | b\). Optionality is also provided. \(A \to a[b]c\). And also express repetition: \(A \to a{b}c\).
+
+Parser can do it character by character, yet it is a mess. So what now? Most rule checking will be passed on to the \textbf{scanner} or \textbf{lexical analyzer}. 
+\subsubsection*{Scanner}
+\label{sec:org67e49c7}
+It will abstract certain things so the parser doesn't have to worry about it. \emph{Whitespace} will be removed by the scanner. \emph{Comments} will also be dumped. Then build up into chunks \emph{identifiers and keywords}. It will also deal with \emph{Literals (numbers, strings)}.
+\subsubsection*{Parser and Scanner}
+\label{sec:orgb37ba93}
+The parser receives data in chunks called \emph{tokens}. Tokens will have a token name and if need be an attribute(s). The scanner reads a token until it decides the token is complete. Certain tokens will have no attributes associated with them, such as \emph{=}. 
+\section*{Jan 21}
+\label{sec:orged3949c}
+Expression grammar:
+$$ E \to E + T $$
+$$ E \to T $$
+$$ T \to T * F $$
+$$ T \to F $$
+$$ F \to n $$
+$$ F \to (E) $$
+\chapter*{Lexical Analysis}
+\label{sec:org72a51bb}
+\section*{The Role of the Lexical Analysis}
+\label{sec:orgfb7c134}
+The main task of the \emph{scanner} is to read the input characters of the source program, group them into \emph{lexemes}, and produce as output a sequence of tokens for each lexeme in the source program.
+\section*{Tokens, Patterns, and Lexemes}
+\label{sec:orgb088f07}
+\begin{itemize}
+\item A \textbf{token} is a pair consisting of a token name and an optional attribute value.
+\item A \textbf{pattern} is a description of the form tht the lexemes of a token may take.
+\item A \textbf{lexeme} is a sequence of characters in the source program that matches the pattern for a token.
+\end{itemize}
+\section*{Attributes for tokens}
+\label{sec:org4396f4c}
+\chapter*{Lexical Analysis or \emph{Scanner} - according to Aycock}
+\label{sec:org224280c}
+Purpose: To convert source text into a series of tokens for the parser. Between the Scanner and the Parser is a Producer/Consumer relationship. Able to be built in a number of ways:
+\begin{itemize}
+\item Produce all in advance
+\item Coroutines/generators
+\item Separate threads
+\item Lex / unlex - An interface as with \texttt{getchar()} vs \texttt{ungetchar()}
+\item Peek / match - Related to lex/unlex, except instead of consuming and throwing back, with peek / match the token is peeked at rather than consumed.
+\end{itemize}
+\section*{Why a scanner?}
+\label{sec:orgf22e749}
+Simplifying the grammar therefore the parser. Using more efficient algorithms. Deal with oddities of input and language, character sets, concrete vs reference syntax. And do preprocessing and macro processing.
+\section*{Definitions}
+\label{sec:org2aa26e6}
+\begin{itemize}
+\item \textbf{Token} - Representation of a class of different things seen on the input
+\item \textbf{Pattern} 
+\begin{itemize}
+\item Informal specification
+\item Formal specification
+\end{itemize}
+\item \textbf{Lexeme} - Concrete instance of a token
+\item \textbf{Attribute} - The value of the Lexeme, the space time coordinates of the token. Possibly one can add a pointer to the symbol table entry.
+\end{itemize}
+\section*{Context}
+\label{sec:org816bbd9}
+\begin{itemize}
+\item Context problems
+\begin{itemize}
+\item Record or record? Read or read?
+\item PL/L
+\begin{itemize}
+\item \textasciitilde{}IF THEN THEN THEN = ELSE; ELSE ELSE = THEN;
+\end{itemize}
+\item Modern examples
+\end{itemize}
+\item Ideally, scanner and parser have low degree of coupling
+\item Lexical feedback
+\begin{itemize}
+\item The parser will know semantic structure, and will be able to provide context. The parser would have a back channel to the scanner in order to provide context.
+\end{itemize}
+\item Shifting work to later parts of compiler
+\begin{itemize}
+\item Let something later in the compiler sort it out.
+\end{itemize}
+\end{itemize}
+\section*{Lexical errors}
+\label{sec:orgaa8f9c7}
+\begin{itemize}
+\item Don't bother parser
+\item Error recovery method
+\begin{itemize}
+\item Delete char(s)
+\item Insert missing char(s)
+\item Replacing char
+\item Transposing adjacent chars
+\end{itemize}
+\item Context for recovery
+\item Investment into error recovery
+\end{itemize}
+
+
+In the case of error recoveries, the scanner may issue warnings. A problem with this is that there might be a huge amount of warnings and errors. To prevent this one must have a limit of errors found. 
+\section*{Scanner I/O}
+\label{sec:orgd302fac}
+\begin{itemize}
+\item Dependent on implementation choice:
+\begin{itemize}
+\item Compiler tool - \emph{flex}, \emph{jflex}, etc. Use provided I/O.
+\item HLL
+\item Memory mapping
+\end{itemize}
+\item Should entire input be read at once?
+\item When do you optimize I/O?
+\begin{itemize}
+\item Probably never, but it can be done.
+\end{itemize}
+\end{itemize}
+\section*{Building Scanners: \emph{ad hoc}}
+\label{sec:org7372e17}
+\begin{itemize}
+\item Running example: scanner to
+\begin{itemize}
+\item Skip whitespace
+\item Recognize \texttt{, >, >}, EOF
+\item Omit attributes
+\end{itemize}
+\item Example \emph{ad hoc} scanner
+\item Pros \& cons
+\item Mapping from RE to code
+\end{itemize}
+
+
+Certain scanner generator tools, like \emph{flex}, are useful. However programming a simple scanner is a joke.
+
+\begin{verbatim}
+while ( ( ch = getchar() ) != EOF && isspace(ch) ) 
+    ;
+switch(ch) {
+    case EOF:
+	    return "EOF"
+    case '=':
+	    return '='
+    case '>':
+	    ch = getchar()
+	    if(ch == '=') return ">="
+	    else {
+		    unget(ch)
+		    return '>'
+	    }
+    default:
+	    if ( isalpha(ch) {
+		    do ch = getchar()
+		    while(isalphanum(ch))
+		    unget(ch)
+		    return "ID"
+	    } else {
+		    error
+	    }
+}	
+\end{verbatim}
+
+There is a correspondence between regular expressions and certain ad hoc modes.
+\begin{itemize}
+\item \(a | b\to\) \texttt{if} or \texttt{switch}
+\item \(a*\to\) \texttt{while}
+\item \(a+\) \texttt{do-while}
+\item \(a?\) \texttt{if}
+\end{itemize}
+\section*{Building Scanners: \emph{finite automata}}
+\label{sec:orgfc922d0}
+\begin{itemize}
+\item Final State Machines are a good technique to solve complex problems in general. It captures all you need to know about where a program is supposed to be.
+\end{itemize}
+\subsection*{How to build them?}
+\label{sec:org372f0b7}
+Regular Expressions can be transformed into final automata. Use \texttt{switch} and \texttt{goto} and that is it.
+\subsection*{Table driven fashion}
+\label{sec:orgf057923}
+Think of it as having a 2D array, one dimension indexed by input character (256 entries), the other dimension is indexed by the state number. This makes the able thicc, so you would want to compress it a bit. 
+\subsubsection*{Graph Coloring}
+\label{sec:orgbd693e1}
+Make table look sparse by factoring out error entries. 
+\begin{center}
+\begin{tabular}{lrrrrrrrr}
+ & 0 & 1 & 2 & 3 & 4 & 5 & 6 & 7\\
+a & 1 & 3 & 1 &  &  & 1 &  & \\
+b & 2 &  &  & 2 &  &  & 7 & \\
+c &  & 4 &  &  &  & 4 &  & \\
+d &  &  & 6 &  & 5 &  &  & \\
+\end{tabular}
+\end{center}
+
+Empty slots are errors, replace them with 1, and other with 0. The error matrix is much smaller as each slot is one bit. The error matrix is used as a filter.
+
+\begin{center}
+\begin{tabular}{lrrrrrrrr}
+ & 0 & 1 & 2 & 3 & 4 & 5 & 6 & 7\\
+a & 0 & 0 & 0 & 1 & 1 & 0 & 1 & 1\\
+b & 0 & 1 & 1 & 0 & 1 & 1 & 0 & 1\\
+c & 1 & 0 & 1 & 1 & 1 & 0 & 1 & 1\\
+d & 1 & 1 & 0 & 1 & 0 & 1 & 1 & 1\\
+\end{tabular}
+\end{center}
+
+Now we build an interface graph. Treat each column in table as node interference graph, each column corresponds to a node. An edge from a column to another is drawn if they interfere. But we can do better. How? Hold on, you'll see. We haven't taken into account what those values are, if they are the same they can be merged together. Color them so no node is connected to it's same color. in the above case we can combine [0,2,5,3] and [1,6,4,7]
+\begin{center}
+\begin{tabular}{lrr}
+ & 0 & 1\\
+a & 1 & 3\\
+b & 2 & 7\\
+c & 4 & 4\\
+d & 6 & 5\\
+\end{tabular}
+\end{center}
+Then we need to index our original table to our new table, [0,2,5,3] = 0 and [1,6,4,7] = 1. 
+
+\section*{Formalities}
+\label{sec:org9dba123}
+\subsection*{Deterministic finite automata}
+\label{sec:orgbede369}
+Start in initial state, transitions to next state is uniquely determined by current state and input symbol.
+\subsection*{Non-deterministic finite automata}
+\label{sec:orge8fe287}
+Like DFAs, except transitions on the empty string. Multiple transitions from state on the same input symbol.
+\subsection*{Conversion}
+\label{sec:org41e0569}
+\texttt{RE} \(\to\) \texttt{NFA} \(\to\) \texttt{DFA} \(\to\) \texttt{minimized DFA}
+\end{document}

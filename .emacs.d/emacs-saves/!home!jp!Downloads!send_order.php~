@@ -1,0 +1,58 @@
+<?php
+
+if( isset($_POST['name']) &&
+    isset($_POST['email']) &&
+    isset($_POST['address']) &&
+    isset($_POST['postal_code']) &&
+    isset($_POST['phone_number']) &&
+    isset($_POST['contact_method']) &&
+    isset($_POST['payment_method']) &&
+    isset($_POST['list']) &&
+    isset($_POST['notes'])){
+	// the message
+    $msg = "New Order \n";
+    
+    $msg .= "Name:";
+    $msg .= $_POST['name'];
+    $msg .= "\n";
+
+    $msg .= "Email:";
+    $msg .= $_POST['email'];
+    $msg .= "\n";
+
+    $msg .= "Address:";
+    $msg .= $_POST['address'];
+    $msg .= "\n";
+
+    $msg .= "Postal Code:";
+    $msg .= $_POST['postal_code'];
+    $msg .= "\n";
+
+    $msg .= "Phone Number:";
+    $msg .= $_POST['phone_number'];
+    $msg .= "\n";
+
+    $msg .= "Contact Method:";
+    $msg .= $_POST['contact_method'];
+    $msg .= "\n";
+
+    $msg .= "Payment_Method:";
+    $msg .= $_POST['payment_method'];
+    $msg .= "\n";
+
+    $msg .= "List:";
+    $msg .= $_POST['list'];
+    $msg .= "\n";
+
+    $msg .= "Notes:";
+    $msg .= $_POST['notes'];
+    $msg .= "\n";
+        
+	// use wordwrap() if lines are longer than 70 characters
+	$msg = wordwrap($msg,70);
+
+	$headers = "From: ".$_POST['name']."<".$_POST['email'].">";
+	
+	// send email
+	mail("info@hubcafe.ca","New Order",$msg, $headers);
+}

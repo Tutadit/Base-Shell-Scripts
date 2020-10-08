@@ -1,0 +1,64 @@
+% Created 2020-04-17 Fri 21:55
+% Intended LaTeX compiler: pdflatex
+\documentclass[a4paper,titlepage,openany,oneside]{book}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{graphicx}
+\usepackage{grffile}
+\usepackage{longtable}
+\usepackage{wrapfig}
+\usepackage{rotating}
+\usepackage[normalem]{ulem}
+\usepackage{amsmath}
+\usepackage{textcomp}
+\usepackage{amssymb}
+\usepackage{capt-of}
+\usepackage{hyperref}
+\usepackage{fullpage} \usepackage{fancyhdr}
+\author{Juan Pablo Lozano Sarmiento}
+\date{\today}
+\title{English 303\\\medskip
+\large 30022579}
+\hypersetup{
+ pdfauthor={Juan Pablo Lozano Sarmiento},
+ pdftitle={English 303},
+ pdfkeywords={},
+ pdfsubject={},
+ pdfcreator={Emacs 26.3 (Org mode 9.1.9)}, 
+ pdflang={English}}
+\begin{document}
+
+\maketitle
+\makeatletter
+\renewcommand{\@chapapp}{Section}
+\makeatother
+\maketitle
+\part*{Final Exam}
+\label{sec:org1a4573a}
+\chapter*{Part One}
+\label{sec:orgf38a72c}
+\section*{Passage 2}
+\label{sec:org3ea65c1}
+This passage is taken from "The Mirror Stage as Formative of the Function of the I as Revealed in Psychoanalytic Experience" by Jaques Lacan. The "Ideal-I" Lacan speaks of is the self before introduction to the world of language. Lacan believes this "Ideal-I" to be the "source of secondary identifications", meaning those moments of identification following the initial identification encountered by the introduction to the Symbolic Order. Lacan places "Libidinal normalization" under "secondary identifications", meaning that sexual desires, a self-discovering ritual, are made as part of the self through identification. Lacan observes how this "ideal-I" holds a pure form of self before its "social determination", meaning before it is made into a socially acceptable human. Lacan notes that within this "Ideal-I", the child is heading towards an unreachable point, a point which must be "resolved as his discordance with his own reality", meaning that the reality of the Ideal-I is not that of the social reality, and thus the child will need to deal with such differences in reality.
+\section*{Passage 4}
+\label{sec:org02a7c67}
+This passage is taken from "Structure, Sign and Play in the Discourse of the Human Sciences" by Jaques Derrida. Within this complex passage Derrida argues that the "center is at the center of the totality", meaning that this center is the root of the structure and allows for play within the structure. Yet he observes that because this center is unplayable then it is outside of the totality, "elsewhere", where it cannot be touched. Derrida suggests that the "center of centered structure\ldots{}is contradictorily coherent" meaning that it makes sense within the structure but fails to make sense without it. Derrida finishes this passage by observing that "coherence in contradiction expresses the force of desire", taken to mean that the push of desire is to make sense of what doesn't.
+\section*{Passage 5}
+\label{sec:orge2ed45e}
+This passage, taken from "The Order of Discourse" by Michel Foucault. In the passage he talks about a "principle of rarefaction of a discourse", a rule, in a way, of the way in which discourse is diminished into "the author". by the author he does not mean the speaker of the text, but rather "a principle of grouping discourses", the set of all subjects that made the author. The author gives the language of fiction its nodes of "coherence", its anchors to the real.
+\section*{Passage 6}
+\label{sec:org7c7ac3a}
+In this passage, taken from "Towards a Feminist Poetics",  Elaine Showalter explains how "women's literature must go beyond these scenarios of compromise, madness and death", meaning that although those are real issues of feminist movement, the goal is to move past them to move to a new world. Showalter says that "reclamation of suffering", which means to take control over that which makes one suffer, is necessary but not the final step. By "new world" Showalter means a world in which feminist literature is sourced from the pain suffered and extended to a method of solution. She quotes Rich's poem "If I'm lonely", in which Rich writes "it must be the loneliness/ of waking first", the first of the feminist to move away from those scenarios, exploring "the will to change" or the push to move farther.
+\chapter*{Part Two}
+\label{sec:orgded1528}
+\section*{Epilogue}
+\label{sec:orgf428be8}
+
+How do I demystify and negotiate into the social processes of production of meaning? What a loaded question, and one to which I can't come up with a direct answer. But I shall try. The truth is, I don't, and I reckon I never will, for I see that as I learn this different theories I uncover enormous dungeons carved by thousands of people all looking for answers and the more answers one finds the more questions rise.  I do not feel as if I have the knowledge to completely demystify social processes, yet I begin to develop the ability to think critically and question, with respect, the ideologies imposed upon me. I find myself analyzing my day to day, the conversations I hear, the movies I watch, the games I play, and I wonder how they came to be, the ways in which they might be problematic, the way they proclaim nature as permanent and necessary. It is with the knowledge provided to me by this course that I manage to do that, and I find myself enjoying it.
+
+One of the most impacting moments of the course was when I learned how Marxist theory warns against ideologies that claim to be natures way and use that as an excuse for the mistreatment of others. I, like many others, used to think Marxism was Communism and that it went against the wonderful world of capitalism we live in. But now I see that there are certain ideas that run throughout the world which hold true because of the belief that they are inescapable. I took this method of thinking and decided to add it to my core values, that is I now look for wholes or misdirection when presented to me. Giving that tho, I've yet to come across anything that spikes this thinking. But nevertheless I maintain a high alert. Another aspect of Marxism which I find interesting is the notion of inequality. And such a concept has taken me into a thought that I haven't quite reached yet. After consulting sources, from friends to web sources, I see that many people believe that the current economical system provides equal opportunity, however the results are not necessarily equal. When diving deeper into it I realized that such was true, anyone could achieve greatness if they set their mind to it. But not many have the opportunity to set their mind to it, some due to financial struggles, struggles to feed their families, struggles to feed themselves. Yet as much as I see such inequalities I fail to see their source, and a way to fix them. But that can't be expected of me as I am entirely new to the ideas, but with time and analysis I reckon we'll find a way to crawl through the complex ways in which the world works.
+
+Yet another theory that brought me joy was Deconstruction theory, mainly because its makes no sense, but yet it does. And with deconstruction theory I was able to see how the world of discourse, which is the world of minds, is vastly complex and uncertain. By seeing how language is broken, and how it itself is what created and feed ideologies I am able to think in separate ways. Lucky for me my mother tongue is Spanish, and with it I can also see ways in which deconstruction shows me the way of the Spanish world. Interestingly, in Spanish words are either feminine or masculine. A very rare way to separate objects which have no gender at all. But I find that with such division comes a great unison. Words which are feminine and masculine range in all orders and one is not inherently better than the other. Deconstruction is also wild as it shows how ideologies are burnt into language, and by using such language they are refurbished. And the most challenging part of the theory for me was the concept of words having no meaning other than words. A word is not the thing it claims to be but rather the idea of the thing it claims to be. Such a nice idea, as I now see that language is quite fluid and with it infinite pieces of art can be created. I do not posses the skill to bring into to life but I do aspire to do so. 
+
+It is a funny thing that I found myself taking an English course, I've never been a fan of English as it's ambiguity and needed creativity was and somewhat is still beyond me. Being a student of computer science my mind works in very logical and mathematical ways, but to use my mind in different ways feels liberating. This class has ignited a passion within me that will burn forever. I look forward to understanding more the structures within language and ideologies, the way in which they interact with people and the way in which people interact with them. 
+\end{document}

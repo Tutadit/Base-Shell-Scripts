@@ -1,0 +1,29 @@
+:LATEX:
+#+LATEX_CLASS: article
+#+LATEX_CLASS_OPTIONS: [a4paper,openany,oneside,12pt]
+#+LATEX_HEADER:\usepackage{fullpage} \usepackage{fancyhdr}
+#+LATEX_HEADER: \usepackage{setspace}
+#+LATEX_HEADER: \doublespacing
+#+LATEX_HEADER: \newcommand{\bibent}{\noindent \hangindent 40pt}
+#+LATEX_HEADER:\newenvironment{workscited}{\begin{center} Works Cited \end{center}}{\newpage }
+:END:
+:OPTIONS:
+#+OPTIONS: H:5 num:2
+#+OPTIONS: num:nil
+#+OPTIONS: toc:nil
+:END:
+Juan Pablo Lozano Sarmiento \\
+30022579 \\
+English 303/01 \\
+Topic # 1 \\
+#+LATEX:\begin{center}
+Critical Essay Proposal
+#+LATEX:\end{center}
+For the critical essay I will be applying psychoanalytic and feminist criticism to the novel "Disgrace" by J.M. Coetzee.
+
+sex used as a method of domination.
+a way of filling in a void
+as a source of shame
+fear of intimacy 
+ 
+In his novel "Disgrace" J.M. Coetzee contrasts the 

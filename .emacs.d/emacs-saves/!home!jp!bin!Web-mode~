@@ -1,0 +1,3 @@
+#!/usr/bin/bash
+termite --class wm-console -d $(pwd) -e "npm run dev" &
+

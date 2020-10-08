@@ -1,0 +1,80 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include "util.h"
+#include "errormsg.h"
+#include "tokens.h"
+
+YYSTYPE yylval;
+
+int yylex(void); /* prototype for the lexing function */
+
+string toknames[] = {
+		     "INT",
+		     "BOOLEAN",
+		     "VOID",	    
+		     "PLUS",
+		     "MINUS",
+		     "TIMES",
+		     "DIVIDE",
+		     "MODULUS",
+		     "LT",
+		     "GT",
+		     "LE",
+		     "GE",
+		     "EQ",
+		     "NEQ",
+		     "AND",
+		     "OR",
+		     "ASSIGN",
+		     "BANG",
+		     "BREAK",
+		     "RETURN",
+		     "IF",
+		     "ELSE",
+		     "WHILE",
+		     "LPAREN",
+		     "RPAREN",
+		     "LBRACE",
+		     "RBRACE",
+		     "SEMICOLON",
+		     "COMMA",
+		     "ID",
+		     "LITERAL",
+		     "NUMBER",
+		     "TRUE",
+		     "FALSE"
+};
+
+
+string tokname(int tok) {
+    return tok<1 || tok>TOTAL_TOKENS ? "BAD_TOKEN" : toknames[tok-1];
+}
+
+int main(int argc, char **argv) {
+  string fname;
+  int tok;
+  if (argc!=2) {
+    fprintf(stderr,"usage: a.out filename\n");
+    exit(1);
+  }
+  fname=argv[1];
+  EM_reset(fname);
+  for(;;) {
+    tok=yylex();
+    if (tok==0) break;
+    switch(tok) {
+    case ID:
+    case LITERAL:
+      printf("%10s %4d %s\n",tokname(tok),EM_tokPos,yylval.sval);
+      break;
+    case NUMBER:
+      printf("%10s %4d %d\n",tokname(tok),EM_tokPos,yylval.ival);
+      break;
+    default:
+      printf("%10s %4d\n",tokname(tok),EM_tokPos);
+    }
+  }
+  return 0;
+}
+
+

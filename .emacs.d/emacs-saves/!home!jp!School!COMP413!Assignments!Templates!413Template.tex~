@@ -1,0 +1,41 @@
+\documentclass{cpsc413Solutions}
+\usepackage{amsmath}
+
+\coursetitle{Design and Analysis of Algorithms}
+\courselabel{CPSC 413}
+\exercisesheet{Problem Set \#[1]}{}
+\student{Name - ID}
+\semester{Winter 2020}
+
+\begin{document}
+
+\team{1st name,
+2nd name}
+\sources{1st source,
+2nd source}
+
+\begin{problemlist}
+\pbitem [1st problem]
+\begin{problem}
+\begin{answer}
+Your answer here to Part a here!
+\end{answer}
+
+\begin{answer}
+Your answer here to Part b here!
+\end{answer}
+\end{problem}
+
+
+\pbitem [2nd problem]
+\begin{problem}
+\begin{answer}
+Your answer here!
+\end{answer}
+\end{problem}
+
+\end{problemlist}
+
+
+
+\end{document}

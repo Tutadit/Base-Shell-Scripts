@@ -1,0 +1,5 @@
+function DepartmentsPopover(props) {
+    return();
+}
+
+export default DepartmentsPopover;

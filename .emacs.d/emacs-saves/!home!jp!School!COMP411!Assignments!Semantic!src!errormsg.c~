@@ -1,0 +1,62 @@
+/*
+ * Error Messegas Utilty
+ */
+#include <stdio.h>
+#include <stdlib.h>
+#include <stdarg.h>
+#include <string.h> 
+#include "util.h"
+#include "absyn.h"
+#include "errormsg.h"
+
+string file_name = "";
+int line_num = 1;
+bool any_errors = false;
+int col_num = 0;
+
+extern FILE *yyin;
+
+bool should_I_quit() {
+  return any_errors;
+}
+
+void new_line(void) {
+  line_num++;
+}
+
+int get_line() {
+  return line_num;
+}
+
+int get_column() {
+  return col_num;
+}
+
+void error(A_pos pos, char *message) {
+  any_errors=true;
+  if (file_name) fprintf(stderr,"%s:",file_name);
+  fprintf(stderr,"%d.%d: ", pos->col,pos->line);
+  fprintf(stderr,"Error: %s\n", message );
+}
+
+string str_cat(string str1, string str2) {
+  char * new_str;
+  if((new_str = malloc(strlen(str1)+strlen(str2)+1)) != NULL){
+    new_str[0] = '\0';   // ensures the memory is an empty string
+    strcat(new_str,str1);
+    strcat(new_str,str2);
+  } else {
+    
+  }
+  return new_str;
+}
+void reset(string fname) {
+  any_errors=false;
+  file_name=fname;
+  line_num=1;
+  yyin = fopen(fname,"r");
+  if (!yyin) {
+    error(0,"cannot open");
+    exit(1);
+  }
+}

@@ -1,0 +1,9 @@
+function SearchFilters() {
+    return (
+	<div className="search_filters">
+
+	</div>
+    );
+}
+
+export default SearchFilters;

@@ -1,0 +1,8 @@
+typedef char *string;
+typedef char bool;
+
+#define true 1
+#define false 0
+
+void *checked_malloc(int);
+string String(char *);

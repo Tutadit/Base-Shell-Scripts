@@ -1,0 +1,398 @@
+/*
+ * Abstract Syntax Tree Structure for the J-- Language
+ * By: Juan Pablo Lozano Sarmiento
+ * ID: 30022579
+ *
+ * Each rule of the J-- grammar is given a specific type with
+ * global_declarations as the root of the program. 
+ *
+ * Sources:
+ * Andrew W. Appel and Maia Ginsburg. 2004. "Modern Compiler Implementation in C".
+ * 	Cambridge University Press, USA.
+ * 
+ */
+#ifndef LEX_ABSYN
+#define LEX_ABSYN
+
+typedef int A_pos;
+
+typedef enum {A_int, A_bool, A_void} A_type;
+typedef string A_id;
+
+typedef struct A_global_declarations_ *A_global_declarations;
+typedef struct A_global_declaration_ *A_global_declaration;
+
+typedef struct A_var_dec_ *A_var_dec;
+typedef struct A_func_dec_ *A_func_dec;
+typedef struct A_main_dec_ *A_main_dec;
+
+typedef struct A_func_head_ *A_func_head;
+typedef struct A_block_ *A_block;
+
+typedef struct A_func_decor_ *A_func_decor;
+typedef struct A_formal_param_list_ *A_formal_param_list;
+typedef struct A_formal_param_ *A_formal_param;
+
+typedef struct A_main_func_dec_ *A_main_func_dec;
+typedef struct A_block_statements_ *A_block_statements;
+typedef struct A_block_statement_ *A_block_statement;
+
+typedef struct A_statement_ *A_statement;
+typedef struct A_state_exp_ *A_state_exp;
+
+typedef struct A_exp_ *A_exp;
+typedef struct A_assignment_ *A_assignment;
+typedef struct A_functioninvocation_ *A_functioninvocation;
+
+typedef struct A_literal_ *A_literal;
+typedef struct A_argumentlist_ *A_argumentlist;
+typedef struct A_primary_ *A_primary;
+
+typedef struct A_unaryexpression_ *A_unaryexpression;
+typedef struct A_postfixexpression_ *A_postfixexpression;
+typedef struct A_multiplicativeexpression_ *A_multiplicativeexpression;
+typedef struct A_additiveexpression_ *A_additiveexpression;
+typedef struct A_relationalexpression_ *A_relationalexpression;
+typedef struct A_equalityexpression_ *A_equalityexpression;
+typedef struct A_conditionalandexpression_ *A_conditionalandexpression;
+typedef struct A_conditionalorexpression_ *A_conditionalorexpression;
+
+typedef struct A_assignmentexpression_ *A_assignmentexpression;
+
+
+/* Here */
+struct A_global_declarations_ {
+  A_pos pos;
+  A_global_declaration head;
+  A_global_declarations tail;
+};
+
+struct A_global_declaration_ {
+  A_pos pos;
+  enum {A_varDec, A_funDec, A_mainDec }kind;
+  union {
+    A_var_dec varDec;
+    A_func_dec funDec;
+    A_main_dec mainDec;
+  } u;
+};
+
+struct A_var_dec_ {
+  A_pos pos;
+  A_type type;
+  A_id id;
+};
+struct A_func_dec_ {
+  A_pos pos;
+  A_func_head head;
+  A_block block;
+};
+struct A_main_dec_ {
+  A_pos pos;
+  A_main_func_dec dec;
+  A_block block;
+};
+
+struct A_func_head_ {
+  A_pos pos;
+  A_type type;
+  A_func_decor dec;
+};
+struct A_block_ {
+  A_pos pos;
+  A_block_statements statements;
+};
+
+struct A_func_decor_ {
+  A_pos pos;
+  A_id id;
+  A_type type;
+  A_formal_param_list params;
+};
+struct A_formal_param_list_ {
+  A_pos pos;
+  A_formal_param param;
+  A_formal_param_list tail;
+};
+struct A_formal_param_ {
+  A_pos pos;
+  A_type type;
+  A_id id;
+};
+
+struct A_main_func_dec_ {
+  A_pos pos;
+  A_id id;
+};
+struct A_block_statements_{
+  A_pos pos;
+  A_block_statement statement;
+  A_block_statements tail;
+};
+struct A_block_statement_ {
+  A_pos pos;
+  enum {A_varState, A_StateState }kind;
+  union {
+    A_var_dec var_dec;
+    A_statement statement;
+  } u;
+};
+
+struct A_statement_ {
+  A_pos pos;
+  enum {A_BlockSt, A_NilSt, A_St,A_BreakSt,
+	A_ReturnSt, A_EmptyReturnSt, A_IfSt,
+	A_IfElseSt, A_WhileSt} kind;
+  union {
+    A_block block;
+    A_state_exp state_exp;
+    A_exp exp;
+    struct {A_exp exp; A_statement statement;} iff;
+    struct {A_exp exp; A_statement if_body; A_statement else_body;} ife;
+    struct {A_exp exp; A_statement body;} whilee;
+  } u;
+};
+struct A_state_exp_ {
+  A_pos pos;
+  enum {A_AssSt, A_FunInSt} kind;
+  union {
+    A_assignment assignment;
+    A_functioninvocation invocation;
+  } u;
+};
+
+struct A_exp_ {
+  A_pos pos;
+  A_assignmentexpression exp;
+};
+struct A_assignment_ {
+  A_pos pos;
+  A_id id;
+  A_assignmentexpression exp;
+};
+struct A_functioninvocation_ {
+  A_pos pos;
+  A_id id;
+  A_argumentlist list;
+};
+
+struct A_literal_ {
+  A_pos pos;
+  enum {A_NumL, A_LitL, A_TrueL, A_FalseL} kind;
+  union {
+    int num_value;
+    string string_value;
+  } u;
+};
+struct A_argumentlist_ {
+  A_pos pos;
+  A_exp exp;
+  A_argumentlist tail;
+};
+struct A_primary_ {
+  A_pos pos;
+  enum {A_LitP, A_ExpP, A_FunInP} kind;
+  union {
+    A_literal literal;
+    A_exp exp;
+    A_functioninvocation func_inv;
+  } u;
+};
+
+struct A_unaryexpression_ {
+  A_pos pos;
+  enum {A_MinUn, A_BangUn, A_PosUn} kind;
+  union {
+    A_unaryexpression un_exp;
+    A_postfixexpression pos_exp;
+  } u;
+};
+struct A_postfixexpression_ {
+  A_pos pos;
+  enum {A_PrimPo, A_IdPo} kind;
+  union {
+    A_primary primary;
+    A_id id;
+  }u;
+};
+struct A_multiplicativeexpression_ {
+  A_pos pos;
+  enum {A_UnMu, A_MulMu, A_DivMu, A_ModMu} kind;
+  union {
+    A_unaryexpression un_exp;
+    struct {A_multiplicativeexpression exp1;
+      A_unaryexpression exp2;} ops;
+  } u;
+};
+struct A_additiveexpression_ {
+  A_pos pos;
+  enum {A_MuAd, A_AdAd,A_MinAd} kind;
+  union {
+    A_multiplicativeexpression un_exp;
+    struct {
+      A_multiplicativeexpression op1;
+      A_additiveexpression op2;
+    } ops;
+  } u;
+};
+struct A_relationalexpression_ {
+  A_pos pos;
+  enum {A_AdRe, A_LTRe, A_GTRe, A_LERe, A_GERe} kind;
+  union {
+    A_additiveexpression un_exp;
+    struct {
+      A_additiveexpression op1;
+      A_relationalexpression op2;
+    } ops;
+  } u;
+};
+struct A_equalityexpression_ {
+  A_pos pos;
+  enum {A_RaEq, A_EqEq, A_NeEq} kind;
+  union {
+    A_relationalexpression un_exp;
+    struct {
+      A_equalityexpression op1;
+      A_relationalexpression op2;
+    } ops;
+  } u;
+};
+struct A_conditionalandexpression_ {
+  A_pos pos;
+  enum {A_EqCoA, A_AnCoA} kind;
+  union {
+    A_equalityexpression un_exp;
+    struct {
+      A_conditionalandexpression op1;
+      A_equalityexpression op2;
+    } ops;
+  } u;
+};
+struct A_conditionalorexpression_ {
+  A_pos pos;
+  enum {A_AnCoO, A_OrCoO} kind;
+  union {
+    A_conditionalandexpression un_exp;
+    struct {
+      A_conditionalorexpression op1;
+      A_conditionalandexpression op2;
+    } ops;
+  } u;
+};
+
+struct A_assignmentexpression_ {
+  A_pos pos;
+  enum {A_ConAs, A_AsAs} kind;
+  union {
+    A_conditionalorexpression con_exp;
+    A_assignment ass_exp;
+  } u;
+};
+
+A_literal A_NumLit(A_pos pos, int value);
+A_literal A_LitLit(A_pos pos, string value);
+A_literal A_TrueLit(A_pos pos);
+A_literal A_FalseLit(A_pos pos);
+
+A_type A_BoolType(A_pos pos);
+A_type A_IntType(A_pos pos);
+
+A_global_declarations A_GloGloDecs(A_pos pos, A_global_declaration dec);
+A_global_declarations A_GlosGloDecs(A_pos pos, A_global_declarations decs, A_global_declaration dec);
+
+A_global_declaration A_VarGloDec(A_pos pos, A_var_dec dec);
+A_global_declaration A_FunGloDec(A_pos pos, A_func_dec dec);
+A_global_declaration A_MainGloDec(A_pos pos, A_main_dec dec);
+
+A_var_dec A_VarDec(A_pos pos, A_type type, A_id id);
+
+A_id A_Id(A_pos pos, string id);
+
+A_func_dec A_FuncDec(A_pos pos, A_func_head head, A_block block);
+
+A_func_head A_TypeFuncHead(A_pos pos, A_type type, A_func_decor dec);
+A_func_head A_VoidFuncHead(A_pos pos, A_func_decor dec);
+
+A_func_decor A_FuncDecor(A_pos pos, A_id id, A_formal_param_list list);
+A_func_decor A_EmptyFuncDecor(A_pos pos, A_id id);
+
+A_formal_param_list A_SingleFormParamList(A_pos pos, A_formal_param param);
+A_formal_param_list A_FormParamList(A_pos pos, A_formal_param_list list, A_formal_param param);
+
+A_formal_param A_FormParam(A_pos pos, A_type type, A_id id);
+
+A_main_dec A_MainFuncDec(A_pos pos, A_main_func_dec dec, A_block block);
+
+A_main_func_dec A_MainFunDecor(A_pos pos, A_id id);
+
+A_block A_Block(A_pos pos, A_block_statements statements);
+A_block A_EmptyBlock(A_pos pos);
+
+A_block_statements A_SingleBlockStmnts(A_pos pos, A_block_statement statement);
+A_block_statements A_BlockStmnts(A_pos pos, A_block_statements statements, A_block_statement statement);
+
+A_block_statement A_VarBlockState(A_pos pos, A_var_dec dec);
+A_block_statement A_StateBlockState(A_pos pos, A_statement statement);
+
+A_statement A_BlockState(A_pos pos, A_block block);
+A_statement A_NilState(A_pos pos);
+A_statement A_State(A_pos pos, A_state_exp exp);
+A_statement A_BreakState(A_pos pos);
+A_statement A_ReturnState(A_pos pos, A_exp exp);
+A_statement A_EmptyReturnState(A_pos pos);
+A_statement A_IfState(A_pos pos, A_exp exp, A_statement statement);
+A_statement A_IfElseState(A_pos pos, A_exp exp, A_statement iff, A_statement then);
+A_statement A_WhileState(A_pos pos, A_exp exp, A_statement statement);
+
+A_state_exp A_AssignStateExp(A_pos pos, A_assignment assignment);
+A_state_exp A_FunInStateExp(A_pos pos, A_functioninvocation function);
+
+A_primary A_LitPrim(A_pos pos, A_literal literal);
+A_primary A_ExpPrim(A_pos pos, A_exp exp);
+A_primary A_FunInPrim(A_pos pos, A_functioninvocation function);
+
+A_argumentlist A_SingleArgList(A_pos pos, A_exp exp);
+A_argumentlist A_ArgList(A_pos pos, A_argumentlist list, A_exp exp);
+
+A_functioninvocation A_FuncIn(A_pos pos, A_id id, A_argumentlist list);
+A_functioninvocation A_EmptyFuncIn(A_pos pos, A_id id);
+
+A_postfixexpression A_PrimPostFixExp(A_pos pos, A_primary primary);
+A_postfixexpression A_IdPostFixExp(A_pos pos, A_id id);
+
+A_unaryexpression A_MinUnExp(A_pos pos, A_unaryexpression expression);
+A_unaryexpression A_BangUnExp(A_pos pos, A_unaryexpression expression);
+A_unaryexpression A_PosUnExp(A_pos pos, A_postfixexpression expression);
+
+A_multiplicativeexpression A_UnMulExp(A_pos pos, A_unaryexpression expression);
+A_multiplicativeexpression A_MulMulExp(A_pos pos, A_multiplicativeexpression exp1, A_unaryexpression exp2);
+A_multiplicativeexpression A_DivMulExp(A_pos pos, A_multiplicativeexpression exp1, A_unaryexpression exp2);
+A_multiplicativeexpression A_ModMulExp(A_pos pos, A_multiplicativeexpression exp1, A_unaryexpression exp2);
+
+A_additiveexpression A_MulAddExp(A_pos pos, A_multiplicativeexpression);
+A_additiveexpression A_AddAddExp(A_pos pos, A_additiveexpression exp1, A_multiplicativeexpression exp2);
+A_additiveexpression A_MinAddExp(A_pos pos, A_additiveexpression exp1, A_multiplicativeexpression exp2);
+
+A_relationalexpression A_AddRelExp(A_pos pos, A_additiveexpression exp);
+A_relationalexpression A_LTRelExp(A_pos pos, A_relationalexpression exp1, A_additiveexpression exp2);
+A_relationalexpression A_GTRelExp(A_pos pos, A_relationalexpression exp1, A_additiveexpression exp2);
+A_relationalexpression A_LERelExp(A_pos pos, A_relationalexpression exp1, A_additiveexpression exp2);
+A_relationalexpression A_GERelExp(A_pos pos, A_relationalexpression exp1, A_additiveexpression exp2);
+
+A_equalityexpression A_RatEqExp(A_pos pos, A_relationalexpression exp);
+A_equalityexpression A_EqEqExp(A_pos pos, A_equalityexpression exp1, A_relationalexpression exp2);
+A_equalityexpression A_NEqEqExp(A_pos pos, A_equalityexpression exp1, A_relationalexpression exp2);
+
+A_conditionalandexpression A_EqConAndExp(A_pos pos, A_equalityexpression exp);
+A_conditionalandexpression A_AndCondAndExp(A_pos pos, A_conditionalandexpression exp1, A_equalityexpression exp2);
+
+A_conditionalorexpression A_AndCondOrExp(A_pos pos, A_conditionalandexpression exp);
+A_conditionalorexpression A_OrCondOrExp(A_pos pos, A_conditionalorexpression exp1, A_conditionalandexpression exp2);
+
+A_assignmentexpression A_CondAssExp(A_pos pos, A_conditionalorexpression exp);
+A_assignmentexpression A_AssAssExp(A_pos pos, A_assignment ass);
+
+A_assignment A_Ass(A_pos pos, A_id id, A_assignmentexpression exp);
+A_exp A_AssExp(A_pos pos, A_assignmentexpression exp);
+
+#endif

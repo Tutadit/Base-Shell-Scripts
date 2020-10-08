@@ -1,0 +1,110 @@
+{
+    "products":[
+	{
+	    "id":324563,
+	    "title":"This sock - biggest one yet, for reals you gotta check it out",
+	    "img":"http://clicknsnip.bassed.ca/img/shoe.jpg",
+	    "price":"$3.99",
+	    "old_price":"$4.33"
+	},
+	{
+	    "id":3245342,
+	    "title":"This sock - biggest one yet, for reals you gotta check it out",
+	    "img":"http://clicknsnip.bassed.ca/img/shoe.jpg",
+	    "price":"$3.99",
+	    "old_price":"$4.33"
+	},
+	{
+	    "id":363,
+	    "title":"This sock - biggest one yet, for reals you gotta check it out",
+	    "img":"http://clicknsnip.bassed.ca/img/shoe.jpg",
+	    "price":"$3.99",
+	    "old_price":"$4.33"
+	},
+	{
+	    "id":32463222,
+	    "title":"This sock - biggest one yet, for reals you gotta check it out",
+	    "img":"http://clicknsnip.bassed.ca/img/shoe.jpg",
+	    "price":"$3.99",
+	    "old_price":"$4.33"
+	},
+	{
+	    "id":32232222563,
+	    "title":"This sock - biggest one yet, for reals you gotta check it out",
+	    "img":"http://clicknsnip.bassed.ca/img/shoe.jpg",
+	    "price":"$3.99",
+	    "old_price":"$4.33"
+	},
+	{
+	    "id":3242300,
+	    "title":"This sock - biggest one yet, for reals you gotta check it out",
+	    "img":"http://clicknsnip.bassed.ca/img/shoe.jpg",
+	    "price":"$3.99",
+	    "old_price":"$4.33"
+	},
+	{
+	    "id":3245223,
+	    "title":"This sock - biggest one yet, for reals you gotta check it out",
+	    "img":"http://clicknsnip.bassed.ca/img/shoe.jpg",
+	    "price":"$3.99",
+	    "old_price":"$4.33"
+	}
+    ],
+    
+    "filters":[
+	{
+	    "label":"Store",
+	    "id":"store",
+	    "show":true,
+	    "items":[
+		{
+		    "id":"amazon",
+		    "label":"Amazon",
+		    "key":"/store/amazon"
+		},
+		{
+		    "id":"gap",
+		    "label":"Gap",
+		    "key":"/store/gap"
+		},
+		{
+		    "id":"garmin",
+		    "label":"Garmin",
+		    "key":"/store/garmin"
+		},
+		{
+		    "id":"baspro",
+		    "label":"BassProshop",
+		    "key":"/store/baspro"
+		},
+		{
+		    "id":"walmart",
+		    "label":"Walmart",
+		    "key":"/store/walmart"
+		}
+	    ]
+	},
+	{
+	    "id":"price",
+	    "label":"Price",
+	    "show":true,
+	    "items":[
+		{
+		    "id":"up",
+		    "label":"up to $50",
+		    "key:":"/price/0to50"
+		},
+		{
+		    "id":"upmore",
+		    "label":"$50 to $200",
+		    "key":"/price/50to200"
+		},
+		{
+		    "id":"up_even_more",
+		    "label":"$200 to $500",
+		    "key":"/price/200to500"
+		}
+	    ]
+	}
+    ]
+}

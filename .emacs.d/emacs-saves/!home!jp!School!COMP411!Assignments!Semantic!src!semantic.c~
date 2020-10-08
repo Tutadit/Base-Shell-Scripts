@@ -1,0 +1,18 @@
+#include <stdio.h>
+#include "util.h"
+#include "symbol.h"
+#include "absyn.h"
+#include "errormsg.h"
+#include "types.h"
+#include "env.h"
+#include "semantic.h"
+#include "semantic_pass_1.h"
+#include "semantic_pass_2.h"
+#include "prabsyn.h"
+
+void SEM_pass(A_global_declarations decs) {
+  S_table env = E_base_env();
+  SEM_pass_1(env,decs);
+  SEM_pass_2(env,decs);
+  pr_global_decs(stderr,env,decs,0);
+}

@@ -1,0 +1,13 @@
+import {TiStarFullOutline,
+        TiStarHalfOutline,
+        TiStarOutline} from 'react-icons/ti';
+
+function Reviewstars(props) {
+    return(
+	<div className="review-stars">
+          <TiStarOutline/>
+        </div>
+    );
+}
+
+export default Reviewstars;

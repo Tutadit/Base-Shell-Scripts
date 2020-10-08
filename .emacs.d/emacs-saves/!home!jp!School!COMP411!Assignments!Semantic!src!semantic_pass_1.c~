@@ -1,0 +1,124 @@
+#include <stddef.h>
+#include <stdlib.h>
+#include "util.h"
+#include "absyn.h"
+#include "errormsg.h"
+#include "symbol.h"
+#include "types.h"
+#include "env.h"
+#include "semantic_pass_1.h"
+/*--------*/
+int main_found = 0;
+/* local function prototypes */
+static void trans_global_decs(S_table env, A_global_declarations v);
+static void trans_global_dec(S_table env, A_global_declaration v);
+
+static void trans_var(S_table env, A_var_dec  v);
+static void trans_func_dec(S_table env, A_func_dec v);
+static void trans_main_dec (S_table env, A_main_dec  v);
+
+static void trans_func_head(S_table env, A_func_head v);
+static void trans_main_func_dec (S_table env, A_main_func_dec v);
+static void trans_func_decor(S_table env, A_func_decor v);
+
+Ty_ty trans_type (A_type v);
+Ty_tyList trans_formal_param_list (A_formal_param_list  v);
+
+Ty_ty trans_type (A_type v) {
+  Ty_ty ty;
+  switch (v) {
+  case A_int:
+    ty = Ty_Int();
+    break;
+  case A_bool:
+    ty = Ty_Bool();
+    break;
+  case A_void:
+    ty = Ty_Void();
+    break;
+  default:
+    assert(0); 
+  }
+  return ty;
+}
+void trans_global_decs(S_table env, A_global_declarations v) {
+  if ( v != NULL ) {
+    trans_global_decs(env, v->tail);
+    trans_global_dec(env, v->head);
+  }
+}	
+static void trans_global_dec(S_table env, A_global_declaration v) {
+  switch (v->kind) {
+  case A_varDec:
+    trans_var(env, v->u.varDec);
+    break;
+  case A_funDec:
+    trans_func_dec(env, v->u.funDec);
+    break;
+  case A_mainDec:
+    trans_main_dec(env,v->u.mainDec);
+    break;
+  default:
+    assert(0); 
+ }
+}
+static void trans_var(S_table env, A_var_dec  v) {
+  Ty_ty ty = trans_type(v->type);
+  E_enventry entry = S_look(env, S_Symbol(v->id));
+  if(entry == NULL) {
+    S_enter(env, S_Symbol(v->id),E_VarEntry(ty));
+  } else {
+    error(v->pos,str_cat("Redeclared variable: ", v->id ));
+  }
+}
+static void trans_func_dec(S_table env, A_func_dec v) {
+  trans_func_head(env,v->head);
+}
+static void trans_func_head(S_table env, A_func_head v) {
+  trans_func_decor(env,v->dec);
+}		
+static void trans_func_decor(S_table env, A_func_decor v) {
+  Ty_ty ty = trans_type(v->type);
+  Ty_tyList params = NULL;
+  E_enventry entry;
+  if(v->params != NULL) {
+    params = trans_formal_param_list(v->params);    
+  }
+  entry = S_look(env, S_Symbol(v->id));
+  if(entry == NULL) {
+    S_enter(env, S_Symbol(v->id), E_FunEntry(params,ty));
+  } else {
+    error(v->pos, "Redeclared function");
+  }
+}
+
+Ty_tyList trans_formal_param_list (A_formal_param_list  v) {
+  Ty_tyList params = NULL;
+  A_formal_param_list list = v;
+  while (list != NULL) {
+    params = Ty_TyList(trans_type(list->param->type),params);
+    list = list->tail;
+  }
+  return params;
+}
+
+static void trans_main_dec (S_table env, A_main_dec  v) {
+  if(main_found == 0) {
+    trans_main_func_dec(env, v->dec);
+    main_found = 1;
+  } else {
+    error(v->pos, "Error, main declaration redeclared");
+  }
+}
+
+static void trans_main_func_dec (S_table env, A_main_func_dec v) {
+  S_enter(env, S_Symbol(v->id), E_MainEntry());
+}
+/* ------ */
+
+void SEM_pass_1(S_table env, A_global_declarations decs) {
+  trans_global_decs(env, decs);
+  if(main_found == 0 ) {
+    error(0, "No main declaration found");
+  }
+}

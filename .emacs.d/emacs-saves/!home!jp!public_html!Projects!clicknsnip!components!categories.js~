@@ -1,0 +1,28 @@
+import categories from '../data/categories.json';
+import Categorie from './categorie.js';
+
+
+function Categories() {
+
+    function renderCategories() {
+        const categorys = [];
+        Object.keys(categories).forEach(function(key) {
+            categorys.push(
+                <Categorie
+                  data={categories[key]} />
+            );
+        });
+        
+        return categorys;
+    }
+
+    const cats = [];
+    cats.push(
+        <ul className="categories">
+          {renderCategories()}
+        </ul> 
+    );   
+    return cats;
+}
+
+export default Categories;

@@ -1,0 +1,240 @@
+:METADATA:
+#+TITLE:        English 303
+#+AUTHOR:       JP Lozano
+#+EMAIL:        jp@bassed.ca
+#+DESCRIPTION:  Notes on English
+#+KEYWORDS:     
+#+SUBTITLE:     Read at your own risk
+#+DATE:         \today
+:END:
+:LATEX:
+#+LATEX_CLASS: book
+#+LATEX_CLASS_OPTIONS: [a4paper,titlepage,openany,oneside]
+#+LATEX_HEADER:\usepackage{fullpage} \usepackage{fancyhdr}
+#+LATEX:\makeatletter
+#+LATEX:\renewcommand{\@chapapp}{Section}
+#+LATEX:\makeatother
+#+LATEX:\maketitle
+:END:
+:OPTIONS:
+#+OPTIONS: H:5 num:5
+#+OPTIONS: num:nil toc:nil
+:END:
+* ENGL303
+** Introduction
+*** Intro to class
+   *Infinite oneness and respect for otherness*, big time. *Liberation Pedagogy*, becoming free from the standard education and teaching structure. Being liberated by education. *open ended process*. No one has the final say. *truth is partial*. 
+**** Objectives
+     Learning about contemporary theory practices. And gain experience applying. Reading the same text through different theoretical lenses. Learning to frame ideas differently. We'll writ an essay, gotta be a *clear arguable* thesis.
+     
+     *NO MULTIPLE CHOICE :c*
+
+     Two parts: Short Answer by passages, Analyze phrases or terms. And a short essay writing.
+*** Critical Theory - Tyson
+    Theory is used by pricks to feel better bout themselves, but don't let them destroy it's beauty. Theory is fun and engaging. 
+
+    *the death of the author:* The change in attitude toward the role of the author in our interpretation of literary works. Early 20th century, people studied the author to get to the meaning of the work, this is called *authorial intention*, now we don't do that. Instead of worrying about the authors life and their ideologies and beliefs and all that bullshit, we now focus on the reader on the ideological, rhetorical, or aesthetic structure of the text itself. The culture when the text was written is also important. 
+**** In what way can we benefit from Critical Theory?
+     Aight listen, theory helps us see ourselves and our world in a whole different way, a way that will change our whole perspective of the world. With theoretical knowledge you'll watch The Simpsons through so many lenses that you'll grow no problem. It'll help you be chill when someone who disagrees with ya presents themselves. And all human productions, reflecting human experience will be valuable tools of learning.
+**** How to go about it
+     Basically each theory is a different lens, in order to understand work through each lens we must ignore the other lenses. Although there is overlap between theories. Each methodology is a different way to see the world. Things can get *political* because each theory offers a different interpretation of history and current events, like government policies. And also the most popular theories of the day receive the most attention and funding. 
+**** It works because it doesn't
+     All theories are flawed and there is constant debate within the advocates of each theory as well as between theories. All theories have assumptions, and often this assumptions are stupid. 
+**** Other shit
+     /Critic/ and /Literary Criticism/ don't mean to find flaws with texts but rather to find explanations of the production, the meaning, the design, the beauty. Critics critique one another more than text. 
+
+     *Critical Theory* attempts to teach the assumptions and values upon which various ways of literary criticism rest.
+
+     *When interpret a literary text, we are doing literary criticism; when we examine the criteria upon which our interpretation rests, we are doing critical theory*
+     
+**** The Grain
+     *reading "with the grain" or "against the grain"* - With the grain reading is an interpretation invited by the text, against the grain is an interpretation that goes against the text, not in a way to attack the text but in a way that goes against the obvious. With the grain would be something the author wanted to portray, against it would be seething the author might have been unaware of.
+*** Modern Literary Theory - Rice & Waugh
+    Theory suggests that what are often taken to be 'natural' and 'commonsensical' ways of studying literature actually rest upon a set of theoretical injunctions which have been neutralized to the point at which they no longer have to justify their own practices.
+    
+    All theories accept a broadly mimetic view of the text where literature, in various ways, reflects upon and delivers up truths about life and the human condition.
+
+    One of the most important challenged assumptions is the idea of language as a transparent medium, a medium through which reality can be transcribed and re-presented in aesthetic form, and of reality as self-contained and coherent, always transcending its formulation in words.
+
+    COOL SHIT
+*** Intro to theory - Xie
+    As Jonathan Culler defines: "an unbounded group of writings about everything under the sun, from the most technical problems of academic philosophy to the changing ways in which people have talked about and thought about the body...". He is the first person to introduce New French theory to Anglo-America. Excellent writing. The 20th century as we started, begins with socioloty. In the 1960s everyone applied with the linguistic theory is done through the lens of structuralist. Theory is translatable, from fields to fields. *Theory is inter-disciplinary and cross-disciplinary.* It offers a useful *metalanguage* for analysize the world, the text, and the self. 
+
+    There is nothing natural or permanent; everything is *socio-historically* specific. Time, place, time, individually specific. _Ideology transforms history into nature._ /Ronald Barthes/.
+    
+    Pre 20th century theory:
+    * The mimetic. Plato, Sidney, Arnold: Imitation; copy of ideal or real. 
+    * The pragmatic: Plato Sidney, Arnold: Didactic, Moral, special effect
+    * The expressive: Romantic, Shelley: Expression of authors creative imagination.
+    * The Objective: Marllame, Kant, Eliot, Brooks: Object, formal qualities, internal.
+
+      
+    Ideology is with you, but you not aware. /Louis Althusser/ leading Marxism. "Ideology is like air" which means it is everywhere, it informs your thinking, your writing, your being.
+
+    M. H. Abraham's diagram:
+
+    Work at the center of a triangular structure: universe, artist, and audience the points. _Mimetic_ theory accentuates the relations between work and universe. _expressive_ between work and artist. _didactic_ work and audience. _Formalism_ theory focuses on the work itself. Formal qualities, prioritizes form, which is content. When we talk about it we have two schools: Russian and New Criticism (Anglo-American). New Criticism cuts text from history and society. But formalism still emphazises historical events.
+
+    /Digression/ \ 
+    Ronald Barthes, manifestorial piece titled "Death of Author". The author has no control over the meaning of the text. Readers have as much right to the interpretation of the text as the author. 
+    /Done/ \ 
+
+    Structiuralism, 1960s to early 80s. It's focus to discuss functions and relations instead of meanings. The problem of _inderteminacy._ 
+    
+    Decontructionist theory foregrounds the crisis of referentiality.
+
+    Reading is both objective and subjective. Language is thoroughly divorced from reality.
+
+    In Plato's view two world: apparent world of objects grasped by senses. And the unchanging and unseen world of _Form_. Everything seen in concrete world is the copy of the ideal world, the world of form. _Poetry is a copy of a copy, twice remove from the world of ideas_. Poetry cannot capture truth and teach morality on the grounds that poetic representation "threatens social stability by offering false images and unsuitable role models". Aristotle thinks poetry reveals truth, it is a more creative version of reality. _The poet is both an immitator and a creator. It speaks to universal truth._.
+
+    Friedrich Whilmen Nietszhe is the beggining point of 20th cetury theory. Rethinking western tradition. Whatever you say, think, write, percieved through the lens of human perception. We can never know anything outside human perception. _truth is a useful illusion_: an oxymoron, or a paradox. We need the illusions to survive. The outer world impinges on the human perceiver. The first metaphor, intrudeces an unbridigable gap leading to "subject and obeejct" are absolutely different spheres. Substitution of one "concept" in the place of multiple experiences, the second metaphor. "Whenever you use a word, two meaning: dictionary and specific social encounters". "Concept erases difference". "Making equal that which is not equal". Which raises a question: Are concepts useless? No no. Always be critical. 
+
+**** Twentieth century literary theory
+     * Formalism: Form is content; defamiliarization - to present familiar things in unfamiliar ways. Victor Shiklovosky "Art as Technique". What is art? Art is creative and novel (new). Art presents familiar in unfamiliar, offering new perspectives. 
+     * New Criticism: test is aesthetic object for contemplation, ironies and paradoxes; contradictions resolvable into organic pattern. 
+     * Archetypal Criticism. self-contained literary universe; archetypes of culture and literature; recurrent images.
+     * Structuralism: self-sufficient or determining structure; implicit rules of underlying system. Paradimatic/syntagmatic, langue/parole, phoneme, signifier/signified.
+     * Reader-response: experience, consciousness, gaps, interaction between text and reader produces meaning. (Stanley fish; Wolfgang Iser)
+     * Psychoanalytic: unconscious, repressed desire, Oedipus complex, allegory of the unconscious. 
+     * Deconstruction: restless reversal of irony; the play of language/difference. _differance_: menaing is a matter of difference and diferant. 
+     * Marxism: Literature and socio-historical life; class structure, and class confrontation inscribed in text. 
+     * Feminism: Anglo-American feminism, gender inequality and so on. Anglo-american politicizes critical methods and French.   
+     * New Historicism - No objective truth
+     * Post-colonialism: designates a gesture of anxiety to move beyond eurocentric ideology, beyond colonialist binary of imperialism. A radical critique of colonial structures of attitudes and references (Edward Said, Gayatri Spivak, Homi Bihabha)
+     * Ecocriticism: Study of relationship between literature and environment. It examines the various ways literature treats the subject of nature. 
+** Psychoanalytic Criticism 
+   Psychoanalytic language is used in every day conversations, sort of. Psychoanalysis helps understand human behavior, applying it to literature, which is reflective of human behavior. Theory discussed is of the /classical psychoanalysis/ established by Sigmund Freud. 
+*** The origins of the unconscious
+    Each human has a psychological history that starts as a child, throughout the life of the dude they experience /adolescent/ and /adult/ behavior being a direct result from those early experiences.
+    
+    The focus is of behavioral patterns that are somewhat destructive. This problems are unknown to us, the *unconscious*.
+    
+    Humans are motivated by desires, fears, needs, and conflicts known only to the unconscious mind. /The unconscious is a dynamic entity that engages us at the deepest level of out being/. The unconscious mind is filled with repressed emotions. Shaped by the role given in the family-complex. The /oedipal/ conflict: competing against your parent of the same gender for the love of your parent of the opposite gender.
+
+    This conflicts are natural developmental stages, failing to outgrow them leads to issues. Recognizing the problems is the only way to fix behavior.
+*** The defenses, anxiety, and core issues
+    Defenses are the gate-keepers of the  unconscious. Avoiding dealing with them due to fear of breaking. This defenses include /Selective Perception/, /selective Memory/, /Denial/, /Avoidance/, /Displacement/, and /Projection/. A more complex defense is /Regression/, meaning coming back to a psychological state previous to trauma or t the trauma itself. Regression allow one to relive the trauma and work through it with better perspective.
+
+    When defenses fail to keep them gates anxiety gets out, anxiety is helpful as it reveals the core issues of the dude:
+    * /Fear of Intimacy/ - Chronic and overpowering feeling, emotional closeness will hurt or destroy. Safe only at an emotional distance. This /defense/ turns into a /core issue/ if it occurs frequently  or continually
+    * /Fear of abandonment/ - Unshakable belief that our loved ones will physically abandon us or that they don't care about us
+    * /Fear of betrayal/ - A nagging feeling that our loved ones are not to be trusted. 
+    * /Low self esteem/ - Belief that we are worth less than others and therefore undeserving of their love, deserving of punishment.
+    * /Insecure or unstable sense of self/ - The inability to sustain a personal identity, not knowing ourselves. Makes one vulnerable to the influence of others.
+    * /Oedipal fixation (or oedipal complex)/ - Dysfunctional bond with a parent of the opposite sex that seeps through our ability to make mature connections with peers.
+
+      
+    Core issues are interconnected, one issue can lead to the development of other core issues. Core issues define out being in a fundamental way. Core issues stay with the individual until they are properly addressed. *Anxiety always involves the return of the repressed.* The goal of psychoanalysis isn't to strengthen the defenses, rather to break them down in order to inflict basic changes in the foundation of our personalities.
+
+    Even though /anxiety/ comes from a break in our /defenses/ it is hard to peep into our unconscious mind through it. To access and learn about the unconscious mind one must analyze their own behavior, as this provides clues, especially in the area of interpersonal relationships and within them especially in the romantic and sexual relationships. It is in this the relationships that the core unresolved issues generated in the family seep through. We can also access our unconscious through our dreams and creative activities, this draw directly from the unconscious.
+
+*** Dreams and dream symbols
+    It is believed that our defenses do not operate in the same way in our dreams. The unconscious operates through our dreams, however there is some censorship called /dream distortion/. A dream's "message", or meaning, called the /latent content/. This /latent content/ is altered so as to not be recognized through precesses called /displacement/ and /condensation/. *Dream displacement* occurs whenever a "safe" person, event, or object is used in place of a more threatening person, event, or object.*Dream condensation* occurs when we use a single dream image or event to represent more than one unconscious wound or conflict. Dream displacement and dream condensation are referred as /primary revision/. Once primary revision disguises the latent content it becomes the /manifest content/. The meaning of the manifest content is the latent content. This latent content is recognized through the interpretation of the manifest content. Interpretation of dreams is a conscious action that can be affected by the unconscious so that the manifest content may not be remembered as it happened, this is the /secondary revision./
+
+    The dreams manifest content is a kind of /dream symbolism/ and as with other symbolism there is no one-to-one correspondence of its meaning. Although often times a symbol will carry the same meaning within the same culture, it's meaning is still relative to the individual. In order to interpret symbols properly one must observe how a certain image makes them feel. Within the dream context is important.
+
+**** There are some general principles of dream interpretation
+     Dreamers create all the "characters", each "character" is a part of our own psychological experience projected during the dream onto a stand-in.
+
+     Our dreams about our gender roles or about our attitude towards our selves and other sexual beings are also revealing of our psychological being. In order to interpret properly we must be aware of the male and female imagery. Male imagery or *phallic symbols*, can include towers, rockets, guns, arrows, pens, swords. If it stands upright or goes off it might be phallic. /Female imagery/ includes caves, rooms, walled-in gardens, cups, or enclosures and containers of any kind. Food and the containers they are in, womb imagery, breasts imagery is also female imagery.   
+
+     Dreaming about water - a fluid, changeable, sometimes soothing, sometimes dangerous, often deeper than it looks - the dream could be about sexuality, or the realm of the emotions, or the realm of the unconscious. Water is also related to our experience in the womb.
+
+     Dreams about buildings may refer to our relationship with ourselves, with the attic or basement being the unconscious. The building may represent an institution.
+
+     Re occurring dreams and dream imagery are flags of unresolved issues.
+*** The meaning of death      
+     *Crisis* brings into th spotlight wounds, fears, guilty desires, or unresolved conflicts. *Trauma* is also used to refer to painful experience that scars us psychologically. Our relationship with death is a principal organizer of our psychological experience. Often theorist distance themselves from the meaning of death. Death is a biological drive called the /death drive/ or /thanatos/.
+
+     
+     Freud saw an alarming degree of self-destructive behavior in individuals and nations that he called the /death work/. The /thenatos/ is that biological drive that lead to the death work. Death, and specifically fear of death, is intimately connected to a number of other psychological realities.
+
+     For many this fear keys into the fear of abandonment, of being alone. Death being the ultimate abandonment. Thus why some religions assure that in death one won't be alone. Fear of abandonment plays a role on the death of loved ones. This fear often drives the fear of intimacy, holding back as to not be hurt when death comes. Fear of death results in fear of life or risk. Often resulting in suicide. Fear of death translates into a fear of emotional death. The greater the fear the greater the fascination.
+
+*** The meaning of sexuality
+     Fred places the sexual drive of humans opposite to thenatos, and called it /eros/. Our sexuality is part and parcel of our identity and relates to our capacity to feel pleasure in ways not considered sexual. The origin of our sexual being is in the nature of the affirmation or disruption of our sense of self occurring in childhood. Our sexuality is a matter of meanings. 
+
+     The /superego/ is in direct opposition to the /id/ and our /libido/, or sexual energy. The /ego/ is the product of conflicts between what society says we can't have and what we want. The relationship between the /ego/ the /id/ and the /superego/ tells us as much about our culture as ourselves.
+
+     Freud said that girls, upon learning that boys had penises, suffered from /penis envy/ and boys suffered from /castration anxiety/. In analyzing the Victorian's culturally rigidly defined gender roles, being used to oppress woman of all ages, and to elevate men to positions of dominance, It is no wonder that girls will suffer from /penis envy/,-power envy- by wanting the privilege boys where giving and even feeling guilty of possessing such desires. And it is no wonder boys would suffer from /castration anxiety/ due to the fear of loosing their power. 
+
+*** Lacanian Psychoanalysis
+     Of the French Psychoanalytic Jaques Lacan(1901-1981). His wroks on the unconscious was ambiguous and difficult to understand, this is because he believed that because the unconscious is difficult to understand then the so should the explanation. 
+**** The psychological development of the infant
+      In the early stages of development an infant experiences themselves and their environment as a random, fragmented formless mass. The infant is unable to distinguish themselves from their environment. They have no sense of self. At some point between the ages of six to eight months the /Mirror Stage/ occurs. In this stage the child starts to develop a sense of self. The Mirror Stage initiates the /Imaginary Order/, the world of images. 
+
+      The /Imaginary Order/ is *not* the world of imagination, but the world of perception. The child perceives the world as themselves, and thus feels as if they have control over their environment, this is an satisfying and enjoyable illusion. 
+
+      Lacan describes the illusion of the union between the child and the mother as being of mutual satisfaction as the /Desire of the Mother/. This feeling of connection with the mother is their first and most important experience. This dyad continues until the child learns language.
+
+      A child's acquisition of language is their initiation into the /Symbolic Order/, language is first and foremost a symbolic system of signification. of meaning-making. Among the first meaning a child makes is the separation of the self from the others, and the separation of gender. This journey into the symbolic order requires the separation from others, and the separation from that perfect union between the mother and the child. This separation constitutes out most important experience of loss, haunting us for the rest of our lives. Forever looking for a replacement of that perfect union in the Symbolic Order. We will never be able to sustain that feeling of complete fulfillment. That complete union disappeared as we entered the Symbolic Order. This lost object of desire is the /objet petit a/, or "object small a" with /a/ standing for /autre/ the french word for /other/. /objet petit a/ also refers to anything that puts one in tough with the repressed desire for that lost object. 
+
+      The importance of loss and lack in Lacanian psychoanalysis is vital. The use of language implies a loss, a lack, because we wouldn't need words as stand-ins for things if I still felt that I was an inseparable part of those things. The /Symbolic Order/ marks the split into conscious and unconscious mind. The unconscious is created by the repression of our desire for the union. "the unconscious is structured like a language", the unconscious desire is always seeking the union. The operations of the unconscious resemble two very common processes of language that imply loss or lack: metaphor and metonymy. Both involve an absence, both being stand-ins for something being pushed aside. 
+
+      Metaphor is akin to the unconscious process called /condensation/, both bring dissimilar things together. Metonymy is akin to /displacement/ because both processes substitute a person or object for another person or object with which the first is somewhat associated. The key ingredient in the relation between language and the unconscious is lack and loss. 
+
+      The rule that *Mother Belongs to Father and not to me*, this initiation into the Symbolic order is what Freud called the oedipal prohibition. Junior must find substitute for mother. 
+
+      Our desires, beliefs, biases, and so forth are constructed for us as a result of our immersion in the Symbolic Order, especially as the immersion is carried out by our parents and influenced by their own responses to the Symbolic Order. "desire is always the desire of the Other". We desire what we are taught to desire. The Symbolic Order consists of societies ideologies: its beliefs, values, and biases; its system of government, laws, educational practices, religious tenets, and the like. /Other/ refers to anything that contributes to the creation of our subjectivity, our "selfhood".
+
+      The Imaginary Order continues to exist in the background of consciousness even as the Symbolic Order holds sway in the foreground. The Symbolic Order dominates society. Both the Symbolic and Imaginary order attempt to control or avoid the /Real/.
+
+**** The concept of /Real/ 
+     One way to think of the /Real/ is that which is beyond all our meaning-making systems, that which lies outside the world created by ideologies society uses to explain existence. The uninterpretable dimension of existence. The Real is that experience when there is no meaning. We can know nothing of the Real except that it is there. The /trauma of the Real/.
+**** Lacanian literary analysis 
+     Do any characters, events, or episodes in the narrative seem to embody the Imaginary Order? What parts of the text seem informed by the Symbolic Order? Where do we see ideology and social norms in control of characters' behavior and narrative events? How is the relationship between this two orders portrayed? 
+*** Classical Psychoanalysis and literature
+    There is many disagreements among psychoanalytic theories of the development of personalities and the best way to treat dysfunctional behavior. And lots of disagreement in how psychoanalytic concepts can be applied to literature. 
+
+    Our job, is to see which concepts appear in the text in such ways as to enrich our understanding of the work. 
+**** Some questions about literary text
+     It is important to note that the psychoanalytic dimension of the text helps drive the narrative.
+     
+     1. How do the operations of repression structure or inform the work? What unconscious motives are operating in the main character(s); what core issues are thereby illustrated; and how do these core issues structure or inform the piece?
+     2. Are there any oedipal dynamics--or any other family dynamics-- at work? Is it possible to relate a character's patterns of adult behavior to early experiences in the family represented in the story? How do these patterns of behavior and family dynamics operate and what do they reveal?
+     3. How can characters' behaviour, narrative events, and/or images be explained in terms of psychoanalytic concepts of any kind (ex: regression, crisis, projection, fear of or fascination with death, sexuality--which includes love and romance as well as sexual behavior- as primary indicator of psychological identity, or the operations of ego-id-superego)?
+     4. In what ways can we view a literary work as analogous to a dream? How might recurrent or striking dream symbols reveal the ways in which the narrator or speaker is projecting his or her unconscious desires, fears, wounds, or unresolved conflicts onto other characters, onto the setting, or onto the events portrayed? Symbols relevant to death, sexuality, and the unconscious are especially helpful. Indeed, the use of dream symbols can be very useful in interpreting literary works, or passages, that seem unrealistic or fantastic.
+     5. What doe the work suggest about the psychological being of the author? The literary text is interpreted much as if it were the authors dream.
+     6. What might a given interpretation of a literary work suggest about the psychological motives of the reader? Or what might a critical trend suggest about the psychological motives of a group of readers
+     7. In what ways does the text seem to reveal characters' emotional investments in the Symbolic Order, the Imaginary Order, the Mirror Stage, or what Lacan calls /objet petit a/? Does any part of the text seem to represent Lacan's notion of the Real? Do any Lacaninan concepts account for so much of the text that we might say the text is structured by one or more of this concepts?
+
+** Psychoanalytic Criticism according to Xie
+*** Keywords
+    /The Oedipal complex/ or /triangle/; /The unconscious/; /id, ego, and superego/; /desire/; *objet petit a* - That very thing that motivates us and disappoint us. /mirror stage/, /mirror image/, /Imaginary Order/, /Symbolic Order/, the /Real/, the subject /enunciation/, the subject of the /enunciated/.
+
+    /Slavoj Zizek/ - "The Sublime Object of Ideology", in which he departed from traditional Marxist theory to develop a materialist conception of ideology that drew heavily on *Lacanian* psychoanalysis and Hegelian idealism
+        
+*** Real vs reality
+    According to Lacan the Real is that which is unobtainable. /See above/
+*** Mirror Stage
+    Lacan. A sense of blurred distinction between the self and the environment. /See above/
+*** The unconscious
+    Repressed feelings. *Through the repression, the expunging from consciousness of the unhappy psychological events* We unconsciously behave in ways that allow us to play out without admittance. 
+
+    According to Lacan the unconscious is "structured like a language". Both language and the unconscious are made thorough signifier but no signified.
+
+    Language is always pursuing meaning-making, language involves loss or lack. To come into Language, into the Symbolic Order, is to experience loss. Language is there before we emerge in the world, it is out of our control. The world is always beyond us. *Metaphor and Metonymy*. Metaphor is comparable to "dream displacement", metonymy to "dream condensation". Loss (metaphor) and Lack(metonymy). 
+** Jaques Lacan - The Mirror Stage
+*** Quotes
+   "[Recognizing one self in the mirror] is indicated in the illuminative mimicry of the /Aha-Erlebnis/, which Kohler sees as the expression of situational apperception, an essential stage of the act of intelligence"
+
+   "...once the image has been mastered and found empty"
+
+   "This meaning disclosed a libidinal dynamism, which has hitherto remained problematic, as well as an ontological structure of the human world that accords with my reflections on paranoiac knowledge"
+
+   "The mirror stage /as an identification/,...,namely the transformation that takes place in the subject when he assumes an image- whose predestination to this phase-effect is sufficiently indicated by the use, in analytic theory, of the ancient term /imago/".
+
+   "[The child] would seem to exhibit in an exemplary situation the symbolic matrix in which the /I/ is precipitated in a primordial form, before it is objectified in the dialectic of identification with the other, and before language restores to it, in he universal, its function as subject"
+
+   "This form situates the agency of the ego, before its social determination, in a fictional direction, which will always remain irreducible for the individual alone, or rather, which will only rejoin the coming-into-being (/le devenir/) of the subject asymptotically, whatever the success of the dialectical syntheses by which he must resolve as /I/ his discordance with his own reality."
+
+
+   "in which this form is certainly more constituent than constitute"
+
+   "Morphological mimicry as an obsession with space in its derealizing effect"
+*** Notes
+    The ego is an object rather than a subject. The ego, despite conscious senses to the contrary, is not a locus of autonomous agency, the seat of a free, true "I" determining its own fate.
+
+    Lacan views the ego as thoroughly compromised and inherently neurotic to its very core, as a passionate defense of a constitutive ignorance of the unconscious. 
+
+    The ego is an inert fixed bundle of objectified coordinates, a libidinally invested and reified entity. According to Lacan, individuals spend their lives chasing in vain after an unattainable state of harmony and mastery first falsely promised by the mirror.

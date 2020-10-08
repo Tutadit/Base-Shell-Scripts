@@ -1,0 +1,115 @@
+/*
+ * Scanner for the J-- Language
+ * By: Juan Pablo Lozano Sarmiento
+ * ID: 30022579
+ *
+ * Sources:
+ * Andrew W. Appel and Maia Ginsburg. 2004. "Modern Compiler Implementation in C".
+ * 	Cambridge University Press, USA.
+ * 
+ */
+%{
+#include <stdlib.h>
+#include <string.h>
+#include "util.h"
+#include "y.tab.h"
+#include "errormsg.h"
+
+int char_col=1;
+ 
+int yywrap(void) {
+  char_col=1;
+  return 1;
+}
+
+void adjust(void) {
+  col_num=char_col;
+  char_col+=yyleng;
+  if ( should_I_quit() ) {
+    exit(1);
+  }
+}
+
+void do_new_line() {
+  char_col=1;
+  new_line(); //errormsj.c handle
+}
+
+%}
+/* Lex Definitions */
+newline (\r\n)|\n
+delim   [ \t]
+ws      {delim}+
+letter  [A-Za-z_]
+digit   [0-9]
+id      {letter}({letter}|{digit})*
+number  {digit}+
+comment \/\/.*
+literal \"(?:[^\"\\]|\\.)*\"
+
+%%
+	
+{ws}	 	{adjust(); continue;}
+{newline}	{adjust(); do_new_line(); continue;}
+{comment}	{adjust(); continue;}
+
+int	 	{adjust(); return INT;}
+boolean	 	{adjust(); return BOOLEAN;}
+void	 	{adjust(); return VOID;}
+
+"+"	 	{adjust(); return PLUS;}
+"-"	 	{adjust(); return MINUS;}
+"*"	 	{adjust(); return TIMES;}
+"/"	 	{adjust(); return DIVIDE;}
+"%"	 	{adjust(); return MODULUS;}
+"<"	 	{adjust(); return LT;}
+">"	 	{adjust(); return GT;}
+"<="	 	{adjust(); return LE;}
+">="	 	{adjust(); return GE;}
+"=="	 	{adjust(); return EQ;}
+"!="	 	{adjust(); return NEQ;}
+"&&"	 	{adjust(); return AND;}
+"||"	 	{adjust(); return OR;}
+"="	 	{adjust(); return ASSIGN;}
+"!"	 	{adjust(); return BANG;}
+
+break		{adjust(); return BREAK;}
+return		{adjust(); return RETURN;}
+if		{adjust(); return IF;}
+else		{adjust(); return ELSE;}
+while	 	{adjust(); return WHILE;}
+
+"("	 	{adjust(); return LPAREN;}
+")"	 	{adjust(); return RPAREN;}
+"{"	 	{adjust(); return LBRACE;}
+"}"	 	{adjust(); return RBRACE;}
+";"	 	{adjust(); return SEMICOLON;}
+","	 	{adjust(); return COMMA;}
+
+true		{adjust(); return TRUE;}
+false		{adjust(); return FALSE;}
+
+{literal}	{
+  		 adjust();
+		 yylval.ival=yyleng;
+		 yylval.sval=(char *)malloc((yyleng)*(sizeof(char)));
+		 copy_string(yytext, yylval.sval, yyleng);
+		 return LITERAL;
+		}
+{number}	{
+  		 adjust();
+		 yylval.ival=atoi(yytext);
+		 return NUMBER;
+		}
+{id}		{
+  		 adjust();
+		 yylval.ival=yyleng;
+		 yylval.sval=(char *)malloc((yyleng)*(sizeof(char)));
+		 copy_string(yytext, yylval.sval, yyleng);
+		 return ID;
+		}
+
+.	 	{
+  		 adjust();
+		 error(col_num,yytext);
+		}

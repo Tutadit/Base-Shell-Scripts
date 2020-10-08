@@ -1,0 +1,25 @@
+import ProductLarge from '../components/product_large';
+import Breadcrumb from '../components/breadcrumb';
+
+function ProductView() {
+    return(
+	<div className="main-content">
+          <Breadcrumb
+            crumbs={[
+                {title:"Home",href:"what"},
+                {title:"Apparel",href:"apaa"},
+                {title:"Footware",href:"ddd", children:[                    
+                        {title:"Apparel",href:"apaa"},
+                        {title:"This of course",href:"apaa"},
+                        {title:"Other places",href:"apaa"},
+                        {title:"Places",href:"apaa"},
+                        {title:"Books",href:"apaa"}
+                ]},
+                {title:"Here",href:"aa", current:true}
+            ]}/>
+          <ProductLarge />
+        </div>
+    );
+}
+
+export default ProductView;

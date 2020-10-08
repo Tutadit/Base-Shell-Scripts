@@ -1,0 +1,16 @@
+, ,Lock in a specific class section to the schedule,2020-09-17 19:09:22 UTC,New,2.5,1.5,1.5
+,, Hide course for which requirements are not met,2020-09-17 19:09:22 UTC,New,2.0,1.0,1.0
+,,Add courses directly from the list to the schedule builder,2020-09-17 19:09:22 UTC,New,12.0,5.0,4.0
+,,Shift through all iterations that match your specified availability and course selection,2020-09-17 19:09:22 UTC,New,24.0,12.0,6.0
+,,In the case of failure to register for a specific section the builder will detect if there are other sections or if it is offered in another term,2020-09-17 19:09:22 UTC,New,8.0,4.0,3.0
+, ,Remove course from schedule,2020-09-17 19:09:22 UTC,New,3.0,2.0,1.0
+,,Select a specific section and lock it into your schedule,2020-09-17 19:09:22 UTC,New,1.0,0.5,0.5
+,,"Indicate preferences for your availability, able to specify days and times that work for your
+schedule.",2020-09-17 19:09:22 UTC,New,4.0,3.0,2.0
+,,,2020-09-17 19:09:22 UTC,New,6.0,4.0,3.0
+,,"Attempts to register for the selected courses, displays success / failure information",2020-09-17 19:09:22 UTC,New,5.0,3.0,2.0
+,,Search for a specific course within the displayed course list,2020-09-21 02:37:23 UTC,New,6.0,4.0,2.0
+,,Show only courses with a specific level,2020-09-17 19:09:22 UTC,New,2.0,1.0,1.0
+,,Show only courses from a specific department,2020-09-17 19:09:22 UTC,New,2.0,1.0,1.0
+,, Filter the course list to show courses within a specified range,2020-09-17 19:09:22 UTC,New,2.0,1.0,1.0
+, ,All changes to the schedule builder are automatically saved,2020-09-21 02:36:34 UTC,New,3.0,1.5,2.0

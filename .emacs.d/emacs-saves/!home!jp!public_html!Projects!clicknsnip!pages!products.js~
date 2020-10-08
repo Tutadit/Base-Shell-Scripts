@@ -1,0 +1,11 @@
+import Sidebar from '../components/sidebar';
+
+function Produts() {
+    return(
+	<div className="main-content">
+          <Sidebar />
+	</div>
+    );
+}
+
+export default Produts;

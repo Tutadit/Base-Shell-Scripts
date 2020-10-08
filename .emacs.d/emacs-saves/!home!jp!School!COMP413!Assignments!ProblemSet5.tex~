@@ -1,0 +1,361 @@
+\documentclass{cpsc413Solutions}
+\usepackage{amsmath}
+\usepackage{qtree}
+\usepackage{mathtools}
+\usepackage{algorithm}
+\usepackage[noend]{algpseudocode}
+
+\DeclarePairedDelimiter\ceil{\lceil}{\rceil}
+\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
+
+\coursetitle{Design and Analysis of Algorithms}
+\courselabel{CPSC 413}
+\exercisesheet{Problem Set \#[5]}{}
+\student{Juan Pablo Lozano Sarmiento - 30022579}
+\semester{Winter 2020}
+
+\begin{document}
+
+\team{    Juan Pablo Lozano Sarmiento,
+  Rakheem Dewji,
+  Daniel Artuso,
+  Victor Mendoza}
+\sources{
+https://www.geeksforgeeks.org/median-of-two-sorted-arrays/ Accessed March 20 2020
+}
+
+\begin{problemlist}
+  
+  \pbitem [1st problem]
+  \begin{problem}
+    \begin{answer}
+      Consider the following recurrence relation:
+      \begin{equation}
+        \begin{aligned}
+          T(n) = T(\floor{\frac{n}{2}}) + T(\floor{\frac{n}{4}}) + T(\floor{\frac{n}{8}}) + n
+        \end{aligned}
+      \end{equation}
+      (a) Use the iteration method to come up with a good guess for a tight asymptoticbound for the recurrence. \\
+
+      Using the tree method \\
+      \resizebox{1.0\textwidth}{!}{%
+        \Tree [ .$n$
+          [
+            .$\frac{n}{2}$
+            [
+              .$\frac{n}{4}$
+              $\frac{n}{8}$
+              $\frac{n}{16}$
+              $\frac{n}{32}$
+            ]
+            [
+              .$\frac{n}{8}$
+              $\frac{n}{16}$
+              $\frac{n}{32}$
+              $\frac{n}{64}$
+            ]
+            [
+              .$\frac{n}{16}$
+              $\frac{n}{32}$
+              $\frac{n}{64}$
+              $\frac{n}{128}$
+            ]
+          ]
+          [
+            .$\frac{n}{4}$
+            [
+              .$\frac{n}{8}$
+              $\frac{n}{16}$
+              $\frac{n}{32}$
+              $\frac{n}{64}$
+            ]
+            [
+              .$\frac{n}{16}$
+              $\frac{n}{32}$
+              $\frac{n}{64}$
+              $\frac{n}{128}$
+            ]
+            [
+              .$\frac{n}{32}$
+              $\frac{n}{64}$
+              $\frac{n}{128}$
+              $\frac{n}{256}$
+            ]
+          ]
+          [
+            .$\frac{n}{8}$
+            [
+              .$\frac{n}{16}$
+              $\frac{n}{32}$
+              $\frac{n}{64}$
+              $\frac{n}{128}$
+            ]
+            [
+              .$\frac{n}{32}$
+              $\frac{n}{64}$
+              $\frac{n}{128}$
+              $\frac{n}{256}$
+            ]
+            [
+              .$\frac{n}{64}$
+              $\frac{n}{128}$
+              $\frac{n}{256}$
+              $\frac{n}{512}$
+            ]
+          ]
+        ]
+      }
+      Cost of each level:
+      \begin{equation}
+        \begin{aligned}
+          \texttt{level } 0 &= n \\
+          \texttt{level } 1 &= \frac{n}{2} + \frac{n}{4} + \frac{n}{8} = \frac{7n}{8} \\
+          \texttt{level } 2 &= \frac{n}{4} + \frac{n}{8} + \cdots + \frac{n}{64} = \frac{49n}{64} \\
+          \texttt{level } 3 &= \frac{n}{8} + \frac{n}{16} + \cdots + \frac{n}{512} = \frac{343n}{512} \\
+          \texttt{level } i &= \frac{7^in}{8^i}
+        \end{aligned}
+      \end{equation}
+
+      The height of the tree $h$ is given when $$\frac{n}{2^{h + 2}} = 1$$ as that is the base case
+
+      So $$h = \log_{2}(n-2)$$
+
+      The total cost of the function can be given by:
+      \begin{equation}
+        \begin{aligned}
+          \sum_{i=0}^{\log_{2}(n-2)} \frac{7^in}{8^i} &= \sum_{i=0}^{\log_{2}(n-2)} n (\frac{7}{8})^i \\
+          &= n * \frac{(\frac{7}{8})^0 - (\frac{7}{8})^{\log_{2}(n -2+1)}}{1 - \frac{7}{8}} \\
+          &= n * \frac{1 - (\frac{7}{8})^{\log_{2}(n -2+1)}}{\frac{1}{8}} \\
+          &= 8n [1 - (\frac{7}{8})^{\log_{2}n} * (\frac{7}{8})^{-1} ] \\
+          &= 8n [1 - \frac{7^{\log_{2}n}}{8^{\log_{2}n}} * \frac{8}{7}] \\
+          &= 8n [1 - \frac{n^{\log_{2}7}}{n^3} * \frac{8}{7}] \\
+          &= 8n [1 - \frac{n^{\log_{2}(4*1.75)}}{n^3} * \frac{8}{7} ] \\
+          &= 8n [1 - \frac{n^{\log_{2}4}n^{\log_{2}1.75}}{n^3} * \frac{8}{7}] \\
+          &= 8n [1 - \frac{n^2 * n^{\log_{2}1.75}}{n^3} * \frac{8}{7}] \\
+          &= 8n [1 - \frac{8n^{\log_{2}1.75}}{7n}] \\
+          &= 8n - 8n\frac{8n^{\log_{2}1.75}}{7n} \\
+          &= 8n - \frac{64n^{\log_{2}1.75}}{7} \\
+          &\in \Theta(n)
+        \end{aligned}
+      \end{equation}
+      Our guess is that $T(n) \in \Theta(n)$ \\
+      \\
+      \\
+      (b) Prove that your guess is correct. \\
+      \\
+      Guess $T(n) \in O(n)$ \\
+      \\
+      Theorem: there exists constants $a$ and $n_0$ such that
+      $$T(n) \le an \texttt{ for all } n \ge n_0$$
+
+      Base Case: ($n \le 8$) \\
+      For any $n \le 8$, $T(n)$ is bounded by some constant, call it $d$. \\
+      As long as $a>d$, we have that
+      $$n_0 \le n \le 8 \implies T(n) \le d \le a \le an$$
+
+      Induction Hypothesis: ($n > 8$) \\
+      assume $$T(k) < ak \texttt{ for all } k < n$$
+
+      \begin{equation}
+        \begin{aligned}
+          T(n) &= T(\floor{\frac{n}{2}}) + T(\floor{\frac{n}{4}}) + T(\floor{\frac{n}{8}}) + n \\
+          &\le a* \floor{\frac{n}{2}} + a * \floor{\frac{n}{4}} + a*\floor{\frac{n}{8}} + n \\
+          &\le a* \frac{n}{2} + a * \frac{n}{4} + a*\frac{n}{8} + n \\
+          &= n(\frac{a}{2} + \frac{a}{4} + \frac{a}{8} + 1) \\
+          &= n(\frac{7a}{8} + 1) \\
+          &= n(\frac{7a + 8}{8}) \\
+        \end{aligned}
+      \end{equation}
+      As long as $a$ meets the critirea to satisfy the inequality, which it can. Then $T(n) \in O(n)$.
+    \end{answer}
+  \end{problem}
+  
+  \pbitem [2nd problem]
+  \begin{problem}
+    \begin{answer}
+      Use the Master Theorem to obtain tight asymptotic bounds on the following recurrences: \\
+      (a) $T(n) = 2T(\frac{n}{2}) + n^3$ \\
+      $a = 2, b= 2, f(n)=n^3$ \\
+      Case 1:
+      $$f(n) = n^3 \in O(n^{\log_2 (2 - \epsilon)})$$
+      Fails. \\
+      Case 2:
+      $$f(n) = n^3 \in \Theta(n^{\log_2 (2)})$$
+      $$f(n) = n^3 \in \Theta(n^1)$$
+      Fails. \\
+      Case 3:
+      $$f(n) = n^3 \in \Omega(n^{\log_2 (2 + \epsilon)})$$
+      $$f(n) = n^3 \in \Omega(n^1)$$
+      Satisfied
+      $$2*f(\frac{n}{2}) \le cf(n)$$
+      $$2*\frac{n}{2}^3 \le cn^3$$
+      $$2*\frac{n^3}{8} \le cn^3$$
+      $$\frac{n^3}{4} \le cn^3$$
+      $$c \le \frac{1}{4}$$
+      Satisfied \\
+      $$T(n) \in \Theta(n^3)$$
+      (b) $T(n) = 2T(\frac{n}{2}) + n$ \\
+      $a = 2, b= 2, f(n)=n$ \\
+      Case 1:
+      $$f(n) = n \in O(n^{\log_2 (2 - \epsilon)})$$
+      Failed \\
+      Case 2:
+      $$f(n) = n \in \Theta(n^{\log_2 (2)})$$
+      $$f(n) = n \in \Theta(n)$$
+      Satisfied
+      $$T(n) \in \Theta(n^{\log_2 2} \lg n)$$
+      $$T(n) \in \Theta(n \lg n)$$
+      
+      (c) $T(n) = 2T(\frac{n}{2}) + \sqrt{n}$ \\
+      $a = 2, b= 2, f(n)=n^{\frac{1}{2}}$ \\
+      Case 1:
+      $$f(n) = n^{\frac{1}{2}} \in O(n^{\log_2 (2 - \epsilon)})$$
+      $$f(n) = n^{\frac{1}{2}} \in O(n^{\log_2 1.5})$$
+      Satisfied \\
+      $$T(n) \in \Theta(n^{\log_2{2}})$$
+      $$T(n) \in \Theta(n)$$
+
+      (d) $T(n) = 4T(\frac{n}{8}) + \sqrt{n} \lg^2 n$ \\
+      Fuck if I know
+
+      (e) $T(n) = 16T$
+      
+    \end{answer}
+  \end{problem}
+  \begin{problem}
+    \begin{answer}
+      \\
+      Let X and Y be two arrays,  each containing $n$ distinct integers in ascending order. The problem is to compute the median of all $2n$ elements in time $\Theta(\lg n)$. \\
+      \\
+      (a) Formal Parameters: \\
+      Pre-conditions: \\
+      \begin{itemize}
+      \item Arrays $X$ and $Y$ each containing $n$ distinct integers in ascending order \\
+      \end{itemize}
+      Post-Conditions: \\
+      \begin{itemize}
+      \item Return the median of all $2n$ integers
+      \end{itemize}
+      
+      (b) Algortithm:
+      \begin{algorithm}
+        \caption{Get Median of 2 arrays}
+        \begin{algorithmic}[1]
+          \Function{GetMedian}{$X,Y,n$}
+          \State{$mX=\Call{median}{X}$}\Comment{median is a simple function in $\Theta(1)$}
+          \State{$mY=\Call{median}{Y}$}
+          \If{$n == 1$}
+          \State{\Return{$\frac{X[0]+Y[0]}{2}$}}
+          \ElsIf{$n == 2$}
+          \State{\Return{$\frac{\Call{max}{X[0],Y[0]} + \Call{min}{X[1],Y[1]}}{2}$}}
+          \EndIf
+          \If{$mX == mY$}
+          \State{\Return{mY}}
+          \ElsIf{$mX < mY$}
+          \If{$n \bmod 2 == 0$}
+          \State{\Return{\Call{GetMedian}{$X + \frac{n}{2} - 1, Y, n - \frac{n}{2} +1$}}}
+          \Else
+          \State{\Return{\Call{GetMedian}{$X + \frac{n}{2}, Y, n - \frac{n}{2}$}}}
+          \EndIf
+          \Else
+          \If{$n \bmod 2 == 0$}
+          \State{\Return{\Call{GetMedian}{$Y + \frac{n}{2} - 1, X, n - \frac{n}{2} +1$}}}
+          \Else
+          \State{\Return{\Call{GetMedian}{$Y + \frac{n}{2}, X, n - \frac{n}{2}$}}}
+          \EndIf
+          \EndIf
+          \EndFunction
+        \end{algorithmic}
+      \end{algorithm}
+      \\
+      (c) Proof of corretness: \\
+      \\
+      Base Cases: \\
+      \\
+      $n = 1$ \\
+      $X = [a_0]$ $Y = [b_0]$ \\
+      Median  $=\frac{a_0+b_0}{2}$ \\
+      \\
+      $n = 2$ \\
+      $X=[a_0,a_1]$ $Y=[b_0,b_1]$ \\
+      When combined: \\
+      $[c_0,c_1,c_2,c_3]$ \\
+      The median of which $=\frac{c_1+c_2}{2}$ \\
+      $c_0 = \texttt{min}(a_0,b_0)$ \\
+      $c_3 = \texttt{max}(a_1,b_1)$ \\
+      Therefore: \\
+      $c_1 = \texttt{min}(a_0,b_0) \texttt{or} \texttt{max}(a_1,b_1)$ \\
+      $c_2 = \texttt{min}(a_0,b_0) \texttt{or} \texttt{max}(a_1,b_1)$ \\
+      Since the order of $c_1,c_2$ does not matter in the computation of the median \\
+      Median $=\frac{\texttt{min}(a_0,b_0) + \texttt{max}(a_1,b_1)}{2}$ \\
+      \\
+      For $n > 2$ \\
+      $X = [a_0,...,a_n]$ $Y=[b_0,...,b_n]$ \\
+
+      Median of $X$: \\
+      If $n \bmod 2 = 0$ there is an even number of integers and therefore no direct middle \\
+      Median $=\frac{X[\frac{n}{2}] + X[\frac{n}{2}-1]}{2}$ \\
+      the median of the two middle numbers. \\
+      \\
+      If $n \bmod 2 \ne 0$ then the array contains an exact middle integer with equal number of integers
+      in each of its sides \\
+      Median = $X[\floor{\frac{n}{2}}]$ \\
+      \\
+      Same goes for $Y$ \\
+      
+      If the median of $X$ equals the median of $Y$: \\
+      Then the median of $X\cup Y = \texttt{median of } X = \texttt{median of } Y$ \\
+
+      If the median of $X < $ the median of $Y$ \\
+      Then the median exists in \\
+      $X[mX,...]$ and $Y[...,mY]$ where $mX$ is the median of $X$, and $mY$ is the median of $Y$. \\
+      \\
+      If the median of $X > $ the median of $Y$ \\
+      Then the median exists in \\
+      $X[...,mX]$ and $Y[mY,...]$ where $mX$ is the median of $X$, and $mY$ is the median of $Y$. \\
+
+      
+      (d) Recurrance relation: \\
+      \begin{equation}
+        T(n)=\begin{cases}
+        T(\frac{n}{2}) + c, & \text{if $n>2$}.\\
+        c, & \text{if $n\le 2$}.
+        \end{cases}
+      \end{equation}
+
+      (e)
+
+      Our guess is that $T(n) \in \Theta(\lg n)$ \\
+      \\
+      \\
+      (b) Prove that your guess is correct. \\
+      \\
+      Guess $T(n) \in O(\lg n)$ \\
+      \\
+      Theorem: there exists constants $a$ and $n_0$ such that
+      $$T(n) \le a\lg n \texttt{ for all } n \ge n_0$$
+
+      Base Case: ($n \le 2$) \\
+      For any $n \le 2$, $T(n)$ is bounded by some constant, call it $d$. \\
+      As long as $a>d$, we have that
+      $$n_0 \le n \le 8 \implies T(n) \le d \le a \le a\lg n$$
+
+      Induction Hypothesis: ($n > 2$) \\
+      assume $$T(k) < a\lg k \texttt{ for all } k < n$$
+
+      \begin{equation}
+        \begin{aligned}
+          T(n) &= T(\frac{n}{2}) + c \\
+          &\le a* \lg \frac{n}{2} + c 
+        \end{aligned}
+      \end{equation}
+      As long as $a$ meets the critirea to satisfy the inequality, which it can. Then $T(n) \in O(n)$.
+
+    \end{answer}
+  \end{problem}
+
+\end{problemlist}
+
+
+
+\end{document}

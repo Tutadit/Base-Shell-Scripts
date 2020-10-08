@@ -1,0 +1,31 @@
+:METADATA:
+#+TITLE:        Opportunity and Outcome
+#+AUTHOR:       JP Lozano
+#+EMAIL:        jp@bassed.ca
+#+DESCRIPTION:  An argument
+#+KEYWORDS:     
+#+SUBTITLE:     Read at your own risk
+#+DATE:         \today
+:END:
+:LATEX:
+#+LATEX_CLASS: book
+#+LATEX_CLASS_OPTIONS: [a4paper,titlepage,openany,oneside]
+#+LATEX_HEADER:\usepackage{fullpage} \usepackage{fancyhdr}
+#+LATEX:\makeatletter
+#+LATEX:\renewcommand{\@chapapp}{Section}
+#+LATEX:\makeatother
+#+LATEX:\maketitle
+:END:
+:OPTIONS:
+#+OPTIONS: H:5 num:5
+#+OPTIONS: num:nil toc:nil
+:END:
+* Opportunity and Outcome
+** What is opportunity?
+   Defined as "a set of circumstances that makes it possible to do something"
+** What is outcome?
+   Defined as "the way a thing turns out; a consequence"
+** How does outcome follow opportunity?
+   Equal opportunity is achieved when everyone has the same set of circumstances that would allow them to reach the same outcome.
+** How do opportunities vary?
+   

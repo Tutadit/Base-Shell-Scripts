@@ -1,0 +1,52 @@
+import React, {useState, setState } from 'react';
+import { motion } from "framer-motion";
+
+import {AiOutlineMinus} from 'react-icons/ai';
+
+import FilterHandle from './filter_handle';
+
+function SidebarItem(props) {
+
+    const [show, setShow] = useState(true);
+    
+    const variants = {
+        hidden: {
+            height:0
+        },
+        visible: {
+            height:`auto`
+        },
+    };
+
+    const item = props.item;
+    
+    return(
+	<div className="sidebar-item">
+          <div className="sidebar-item-title">
+            <a className="sidebar-item-handle"
+               onClick={(e) => {
+                   setShow(!show);
+               }}>
+              {item.label} <AiOutlineMinus/>
+            </a>
+          </div>
+          <motion.div
+            initial="hidden"
+            animate={show ? 'visible' : 'hidden'} 
+            variants={variants}
+            className="sidebar-item-content">
+            <ul className="filter-list">
+              {item.items.map((it,i)=>{
+                  return (
+                      <FilterHandle
+                        label={it.label}
+                        key={it.id} />
+                  );
+              })}
+            </ul>              
+          </motion.div>
+        </div>
+    );
+}
+
+export default SidebarItem;

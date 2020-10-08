@@ -1,0 +1,4 @@
+#!/usr/bin/bash
+
+termite --class wm-console -d $(pwd) -e "npm run dev" &
+termite --class wm-on-screen -d $(pwd) -e "emacs -nw" -c $HOME/.config/termite/wm-on-screen&

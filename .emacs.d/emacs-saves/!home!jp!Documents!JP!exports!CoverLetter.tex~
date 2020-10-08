@@ -1,0 +1,41 @@
+% Created 2020-04-20 Mon 11:39
+% Intended LaTeX compiler: pdflatex
+\documentclass[11pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{graphicx}
+\usepackage{grffile}
+\usepackage{longtable}
+\usepackage{wrapfig}
+\usepackage{rotating}
+\usepackage[normalem]{ulem}
+\usepackage{amsmath}
+\usepackage{textcomp}
+\usepackage{amssymb}
+\usepackage{capt-of}
+\usepackage{hyperref}
+\usepackage{fullpage} \usepackage{fancyhdr}
+\date{\today}
+\title{}
+\hypersetup{
+ pdfauthor={},
+ pdftitle={},
+ pdfkeywords={},
+ pdfsubject={},
+ pdfcreator={Emacs 26.3 (Org mode 9.1.9)}, 
+ pdflang={English}}
+\begin{document}
+
+\maketitle
+Hello Hiring Manager, \\
+
+
+
+I would like to express my interest in joining your team for the Administrative Support III position, I believe the skill-set and experience I posses will render me a great asset. I have worked in various industries raging from costumer service to logistic designs both with teams and solo. I am going on my third year of Computer Science at the University of Calgary, within them three years I have learned to manage my time in order to fit school and work, without compromising the quality of my work. My parents taught me the value of work from a young age, allowing me to build a skill set worthy of a job. I would appreciate the opportunity of an interview and the chance to prove a worthy team member
+
+Thank you.
+
+Juan Pablo, \\
+
+call me JP \\
+\end{document}

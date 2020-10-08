@@ -1,0 +1,512 @@
+% Created 2020-01-28 Tue 13:27
+% Intended LaTeX compiler: pdflatex
+\documentclass[a4paper,titlepage,openany,oneside]{book}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{graphicx}
+\usepackage{grffile}
+\usepackage{longtable}
+\usepackage{wrapfig}
+\usepackage{rotating}
+\usepackage[normalem]{ulem}
+\usepackage{amsmath}
+\usepackage{textcomp}
+\usepackage{amssymb}
+\usepackage{capt-of}
+\usepackage{hyperref}
+\usepackage{fullpage} \usepackage{fancyhdr} \usepackage{mathtools}
+\author{JP Lozano}
+\date{\today}
+\title{CompSci 413\\\medskip
+\large Read at your own risk}
+\hypersetup{
+ pdfauthor={JP Lozano},
+ pdftitle={CompSci 413},
+ pdfkeywords={Philosophy,Notes},
+ pdfsubject={Notes on Comp},
+ pdfcreator={Emacs 26.3 (Org mode 9.1.9)}, 
+ pdflang={English}}
+\begin{document}
+
+\maketitle
+\makeatletter
+\renewcommand{\@chapapp}{Section}
+\makeatother
+\maketitle
+\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
+\part*{COMP413}
+\label{sec:orgd5d03dd}
+\chapter*{Intro}
+\label{sec:orgcd3f416}
+\section*{Introduction}
+\label{sec:orgdb9f912}
+We gonna learn to (1) Formulate precise, accurate problem definitions. (2) Design  efficient, correct algorithms. (3) Analyze algorithms.
+\section*{Formal Specifications of Problems}
+\label{sec:orge07c2f9}
+\subsection*{Pre-conditions and Post-conditions}
+\label{sec:org403742b}
+Each problem is specified by Pre-conditions: formal description of \emph{acceptable} inputs to the problem; Post-conditions: formal description of correct output and conditions it satisfies. 
+\begin{verse}
+Example:\\
+Pre-conditions:\\
+\hspace*{3em}* \emph{A}: array of length \emph{n} >= 1\\
+\hspace*{3em}* objects in \emph{A} are of some ordered type\\
+Post-conditions:\\
+\hspace*{3em}* output integer \emph{i} such that\\
+\hspace*{7em}0 <= \emph{i} < \emph{n}\\
+\hspace*{7em}\emph{A}[i] >= \emph{A}[j] for every integer \emph{j} such that 0 <= \emph{j} <= \emph{n}\\
+\hspace*{3em}* Non-invasive algorithm\\
+\end{verse}
+\subsection*{Sorting an Array}
+\label{sec:orgf1599e2}
+\begin{verse}
+Pre-conditions:\\
+\hspace*{3em}* \emph{A}: array of length \emph{n} \(\ge\) 1\\
+\hspace*{3em}* objects in \emph{A} are of some ordered type\\
+Post-condition:\\
+\hspace*{3em}* elements of A have been reordered not replaced\\
+\hspace*{3em}* \emph{A}[i] \(\le\) \emph{A}[i+1] for 0 \(\le\) i < \emph{n}-1\\
+\end{verse}
+\subsection*{Graph Search}
+\label{sec:org1699776}
+Take a graph and traverse all possible vertices
+\begin{verse}
+Pre-conditions:\\
+\hspace*{4em}* \(G = (V,E)\), an undirected graph\\
+\hspace*{4em}* Source vertex \(S \in V\)\\
+Post-condition\\
+\hspace*{4em}* representation of \(\pi : V \to V \cup \{NIL\}\) such that the predecessor subgraph corresponding to \(\pi\) is a spanning tree for the connected component of \(G\) containing \(S\)\\
+\end{verse}
+
+\section*{Stable Matching}
+\label{sec:org96fde80}
+Originated by David Gale and Lloyd Shapley, the problem arose when they asked "Could one design a college admission process, or a job recruiting process, that was \textbf{self-enforcing}?"
+\subsection*{Describe it}
+\label{sec:org135baeb}
+Given a set of preferences among employers and applicants, can we assign applicants to employers so that for every employer \emph{E}, and every applicant \emph{A} who is not scheduled to work for \emph{E}, at least one of the following two things is the case?
+
+\begin{enumerate}
+\item \emph{E} prefers every one of its accepted applicant to \emph{A}; or
+\item \emph{A} prefers their current situation over working for employer \emph{E}.
+\end{enumerate}
+\subsection*{Formulating the Problem}
+\label{sec:orgc5a264f}
+Each of the \emph{n} applicants applies to each of the \emph{n} companies, and each company wants to accept a \emph{single} applicant. Which is the same problem as each of \emph{n} men and \emph{n} women ending up married.
+
+Consider a set \(M = {m_1,...,m_n}\) of \emph{n} men, and a set \(W = {w_1,...,w_n}\) of \emph{n} women. Let \(M \times W\) denote the set of all possible ordered pairs of the form \((m, w)\), where \(m \in M\) and \(w \in W\). A \emph{matching} \(S\) is a \emph{set} of ordered pairs, each from \(M \times W\), with the property that each member of \(M\) and each member of \(W\) appears in at most one pair in \(S\). A \emph{perfect matching} \(S'\) is a matching with the property that each member of \(M\) and each member of \(W\) appears in \emph{exactly} one pair in \(S'\).
+
+Add \emph{preference}. Each man \(m \in M\) \emph{ranks} all the women; \(m\) prefers \(w\) to \(w'\) if \(m\) ranks \(w\) higher than \(w'\). This ordered ranking of \(m\) is his \emph{preference list}. No ties. Same for women.
+
+A matching \(S\) is \emph{stable} if (i) i is perfect and (ii) there is no instability with respect to \(S\). Rising two questions:
+
+\begin{enumerate}
+\item Does there exist a matching for every set of preference list?
+\item Given a set of preference lists, can we efficiently construct a stable matching if there is one?
+\end{enumerate}
+
+
+\begin{verse}
+Initially all \(m \in M\) and all \(w \in W\) are free\\
+\vspace*{1em}
+While there is a man \(m\) who is free and hasn't proposed to every woman\\
+\hspace*{4em}Chose such a man \(m\)\\
+\hspace*{4em}Let \(w\) be the highest-ranked woman in \(m\)'s preference list to whom \(m\) has not yet proposed\\
+\hspace*{4em}If \(w\) is free then\\
+\hspace*{1em}\((m, w)\) become engaged\\
+\hspace*{4em}Else \(w\) is currently engaged to \(m'\)\\
+\hspace*{1em}If \(w\) prefers \(m'\) to \(m\) then\\
+\hspace*{5em}\(m\) remains free\\
+\hspace*{1em}Else \(w\) prefers \(m\) to \(m'\)\\
+\hspace*{5em}\((m,w)\) become engaged\\
+\hspace*{5em}\(m'\) becomes free\\
+\hspace*{1em}Endif\\
+\hspace*{4em}Endif\\
+Endwhile\\
+Return the set \(S\) of engaged pairs\\
+\end{verse}
+
+The G-S algorithm terminates after at most \(n^2\) iterations of the While loop. 
+\section*{Jan 16}
+\label{sec:org2f65e9e}
+\subsection*{Stable Matching}
+\label{sec:org986b7bf}
+Idea: given sets of \(n\) men and \(n\) women, find man/woman pairs so that everyone has a "best possible" match based on individual preference. What does the "best possible" mean?
+\subsubsection*{Pre-conditions}
+\label{sec:org59a131b}
+\begin{itemize}
+\item set \(M = \{m_1,...,m_n\}\) of men
+\item set \(W = \{w_1,...,w_n\}\) of women
+\item for each man, ranking (ordered list) of all women in \(W\)
+\item for each woman, ranking (ordered list) of all men in \(M\)
+\end{itemize}
+
+
+Example:
+\begin{verse}
+\(n=2\)\\
+\(M=\{Albert,Bob\}\)\\
+\(W=\{Alice,Bess\}\)\\
+\vspace*{1em}
+\uline{Preference List:}\\
+\(Albert: \{Alice,Bess\}\)\\
+\(Bob:    \{Alice,Bess\}\)\\
+\(Alice:  \{Albert,Bob\}\)\\
+\(Bess:   \{Albert,Bob\}\)\\
+\vspace*{1em}
+\uline{Perfect Matchings}\\
+\(S_1 = \{ (Albert,Alice), (Bob,Bess) \}\)\\
+\(S_2 = \{ (Albert,Bess), (Bob,Alice) \}\)\\
+\vspace*{1em}
+\uline{Stable Matching}\\
+\(S_1 = \{ (Albert,Alice), (Bob,Bess) \}\)\\
+\vspace*{1em}
+In this stable matching \(Albert\) is with his top choice. \(Alice\) is also matched with her top choice. Should \(Bob\) run to \(Alice\) wanting to be paired up with her, she would deny the request as she is with her top choice.\\
+\vspace*{1em}
+\uline{Unstable Matching}\\
+\(S_2 = \{ (Albert,Bess), (Bob,Alice) \}\)\\
+\vspace*{1em}
+In this case \(Albert\) would want \(Alice\), \(Alice\) will agree to leaving \(Bob\) because \(Albert\) is highest ranked than \(Bob\).\\
+\end{verse}
+
+A \textbf{Matching} is a set \(S\) of ordered pairs \((M,W) \in M  \times W\) such that each \(m \in M\) and \(w \in W\) appears in \emph{at most one} pair of \(S\).
+
+A \textbf{Perfect Matching} is the same exactly each \(m\) and \(w\) appear in exactly one pair. The number of stable matches is equal to \(n!\).
+
+A \textbf{Stable Matching} is a perfect matching where no instability exists. \textbf{Instability} \((m,w) \in M \times W\) such that \(m\) and \(w\) prefer each other to their assigned partners in \(S\).
+\begin{itemize}
+\item \((m,w'),(m',w) \in S\), but \(m\) prefers \(w\) over \(w'\) and \(w\) prefers \(m\) over \(m'\)
+\end{itemize}
+
+
+\begin{verse}
+Another Example:\\
+\vspace*{1em}
+\(n = 2, M = \{ m_1, m_2\} W = \{ w_1, w_2\}\)\\
+\uline{Preference List}\\
+\vspace*{1em}
+\(m_1: \{ w_1, w_2\}\)\\
+\(m_2: \{ w_2, w_1\}\)\\
+\(w_1: \{ m_2, m_1\}\)\\
+\(w_2: \{ m_1, m_2\}\)\\
+\vspace*{1em}
+\uline{Perfect Matchings}\\
+\(S_1 = \{ (m_1,w_1),(m_2,w_2) \}\)\\
+\(S_2 = \{ (m_1,w_2),(m_2,w_1) \}\)\\
+\vspace*{1em}
+\uline{Stable Matchings}\\
+\(S_1 = \{ (m_1,w_1),(m_2,w_2) \}\)\\
+\(S_2 = \{ (m_1,w_2),(m_2,w_1) \}\)\\
+\vspace*{1em}
+\(S_1\) and \(S_2\) are both stable, \(S_1\) pairs both men to their preferred partners, \(S_2\) pairs the women with their top choice.\\
+\end{verse}
+
+
+
+\section*{Five Representative Problems}
+\label{sec:orgaf2d7e2}
+Graph \(G=(V,E)\) is \emph{bipartite} if its node set \(V\) can be partitioned into sets \(X\) and \(Y\) in such a way that every edge has one end in \(X\) and the other end in \(Y\)
+
+Given an arbitrary bipartite graph \(G\), find a matching of maximum size. if \(|X| = |Y| = n\), then there is a perfect matching if and only if the maximum matching has size \(n\) 
+\chapter*{Basic of Algorithm Analysis}
+\label{sec:orgc349d1b}
+\section*{Computational Tractability}
+\label{sec:orgb1e3547}
+An algorithm is \emph{efficient} if it has a polynomial running time. A \emph{polynomial running time} - There are absolute constants \(c > 0\) and \(d > 0\) so that on every input instance of size \(N\), its running time is bounded by \(cN^d\) primitive computational steps. If this running time holds, for some \(c\) and \(d\) the algorithm has a polynomial running time.
+\section*{Asymptotic Order of Growth}
+\label{sec:org676d05e}
+\subsection*{O, \(\Omega\), and \(\Theta\)}
+\label{sec:org4d1b1c0}
+\textbf{Asymptotic Upper Bounds.} Let \(T(n)\) be a function--say, the worst case running time of a certain algorithm on an input size \(n\). Given another function \(f(n)\), we say that \(T(n)\) is \(O(f(n))\) (Read as "T(n) is order f(n)") if, for sufficiently large \(n\), the function \(T(n)\) is bounded above by a constant multiple of \(f(n)\). 
+
+More precisely, \(T(n)\) is \(O(f(n))\) if there exists some constants \(c > 0\) and \(n_0 \geq 0\) so that for all \(n \geq n_0\) we have \(T(n) \leq c * f(n)\) In this case we say that \(T\) is asymptotically upper bounded by \(f\).
+
+\textbf{Asymptotic Lower Bounds} We want to express the notion that for arbitrary large input sizes \(n\), the function \(T(n)\) is \emph{at least} a constant multiple of some specific function \(f(n)\). We say that \(T(n)\) is \(\Omega (f(n))\) if there exists constants \(\epsilon > 0\) and \(n_0 \geq 0\) so that for all \(n \geq n_0\) we have \(T(n) \geq \epsilon * f(n)\) We refer to \(T\) as being asymptotically lower bounded by \(f\)
+
+\textbf{Asymptotically tight bounds}. If we can show a running time \(T(n)\) is both \(O(f(n)\) and also \(\Omega (f(n))\) then in a natural sense we've found the "right" bound. We say that \(T(n)\) is \(\Theta (f(n))\)
+\subsection*{Properties of Asymptotic Growth Rates}
+\label{sec:org91c2cb6}
+\textbf{Transitivity} If a function \(f\) is asymptotically upper bounded by a function \(g\), and if \(g\) in turn is asymptotically upper bounded by a function \(h\), then \(f\) is asymptotically upper bounded by \(h\). Similarly for lower bounds.
+
+\begin{itemize}
+\item If \(f = O(g)\) and \(g = O(h)\), then \(f = O(h)\)
+\item If \(f = \Omega(g)\) and \(g = \Omega(h)\), then \(f = \Omega(h)\)
+\item If \(f = \Theta(g)\) and \(g = \Theta(h)\), then \(f = \Theta(g)\)
+\end{itemize}
+
+
+\textbf{Sums of Functions}, adding them both
+
+\begin{itemize}
+\item Suppose that \(f\) and \(g\) are two functions such that for some other function \(h\), we have \(f = O(h) and g = O(h)\) Then \(f+g = O(h)\)
+\item Let \(k\) be a fixed constant, and let \(f_1,f_2,...,f_k\) and \(h\) be functions such that \(f_i=O(h)\) for all \(i\). Then \(f_1+f_2+...+f_k = O(h)\)
+\end{itemize}
+\subsection*{Asymptotic Bounds for Some Common Functions}
+\label{sec:orgfd35de6}
+\textbf{\emph{Polynomials}} A polynomial function can be written in the form \(f(n)=a_0+a_1n+a_2n^2+...+a_dn^d\) for some integer constant \(d>0\), where the final coefficient \(a_d\) is nonzero. The value \(d\) is the \emph{degree} of the polynomial. 
+\begin{itemize}
+\item Let \(f\) be a polynomial of degree \(d\), in which the coefficient \(a_d\) is positive. Then \(f = O(n^d)\)
+\begin{itemize}
+\item From this it follows \(f = \Omega(n^d)\) and hence \(f = \Theta(n^d)\)
+\end{itemize}
+\end{itemize}
+
+
+A \textbf{polynomial-time algorithm} is one whose running time \(T(n)\) is \(O(n^d)\) for some constant \(d\), where \(d\) is independent of input size.
+
+\(O(n \log n)\) is also polynomial time. \(\log n \leq n\) for all \(n \geq 1\). Hence \(n \log n \leq n^2\)
+
+\textbf{\emph{Logarithms}} Recall \(\log_bn\) is the number \(x\) such that \(b^x=n\)
+
+\begin{itemize}
+\item For every \(b>1\) and every \(x>0\), we have \(\log_bn=O(n^x)\)
+\end{itemize}
+
+
+\textbf{\emph{Exponentials}} Exponential functions are of the form \(f(n)=r^n\) for some constant base \(r\)
+
+\begin{itemize}
+\item For every \(r>1\) and every \(d>0\) we have \(n^d=O(r^n)\)
+\end{itemize}
+
+
+
+
+
+
+
+
+
+
+\section*{Implementing the Stable Matching Algorithm Using Lists and Arrays}
+\label{sec:org09dd4f3}
+\subsection*{Arrays and Lists}
+\label{sec:org8083193}
+A list of \(n\) elements can be kept in an array \(A\) of size \(n\), where \(A[i]\) holds the \(i^{th}\) element of the list.
+\begin{itemize}
+\item We can answer a query of the form "What is the \(i^{th}\) element on the list?" in \(O(1)\) time, by direct access to the value \(A[i]\)
+\item If we want t determine weather a particular element \(e\) belongs to the list, we need to check the elements one by one in \(O(n)\). Assuming no order is known.
+\item If the array elements are sorted in some way, then we can determine weather element \(e\) belongs to the list in \(O(\log n)\)
+\end{itemize}
+
+
+It is hard to change a list implemented as an array. An alternate, preferable, way to mantain such a dynamic set of elements is via a \emph{linked list}. In a \emph{linked list}, the elements are sequenced together by having each element point to the next in the list. Thus, for each element \(v\) on the list, we need to maintain a pointer to the next element; we set this pointer to \texttt{null} if \(i\) is the last element. We also have a pointer \texttt{First} that points to the first element. We can traverse the list by starting at \texttt{First} and following until reaching \texttt{null}. A dobly linked list can be modified as follows:
+\begin{itemize}
+\item \emph{Deletion}
+\item \emph{Insertion}
+\end{itemize}
+
+
+Unlike Arrays one cannot find the \(i^{th}\) element on a list in \(O(1)\) time, rather one must traverse the list to the \(i^{th}\) element, taking a total of \(O(i)\) time.
+\section*{A Survey of Common Running Times}
+\label{sec:org1ae1af7}
+\subsection*{Linear Time}
+\label{sec:org66e5e86}
+An algorithm that runs in \(O(n)\), called linear time, has a very natural property: its running time is at most a constant factor times the size of the input. 
+\subsection*{O(n \(\log\) n) Time}
+\label{sec:orgcceeb27}
+It is the running time of any algorithm that splits its input into two equal-sized pieces, solves each piece recursively, and then combines the two solutions in linear time. 
+\subsection*{Quadratic Time}
+\label{sec:org6c54d9e}
+Performing a search over all pairs of input items, spending constant time per pair. It also arises naturally from a pair of \emph{nested loops}.
+\subsection*{Cubic Time}
+\label{sec:orgf3088a0}
+Algorithms running in \(O(n^3)\) time. 
+\subsection*{O(n\(^{\text{k}}\)) Time}
+\label{sec:orge092b27}
+We obtain a running time of \(O(n^k)\) for any constant \(k\) when we search over all subsets of size \(k\)
+\subsection*{Sub-Linear Time}
+\label{sec:org1babc7a}
+In general \(O(\log n)\) arises as a time bound whenever we are dealing with an algorithm that does a constant amount of work in order to throw away a constant \emph{function} of the input. 
+\section*{A more Complex Data Structure: Priority Queues}
+\label{sec:org9dba033}
+\chapter*{Algorithm Analysis - According to Jacobson}
+\label{sec:org39be042}
+\section*{Asymptotic Analysis}
+\label{sec:org1656607}
+Associated with any algorithm is a function \(f : N \to N\) describing that algorithm's running time. most our analysis will be worst case, \emph{upper bound}. 
+
+\begin{itemize}
+\item The algorithm requires \(f(n)\) steps in the \textbf{worst case} over all inputs of size \(n\)
+\end{itemize}
+
+
+Unless otherwise stated, in one step we can perform:
+\begin{itemize}
+\item Any arithmetic operation
+\item Data movement
+\item Control operation
+\item Any similar operation
+\end{itemize}
+
+
+Sometimes we do make other assumptions. For example, when discussing algorithms for arithmetic operations, we count \emph{bit operations}. 
+
+What does it mean for a function to has input of size \(n\)? Depends on the problem, the size could be:
+\begin{itemize}
+\item The dimensions of a matrix, or a pair of matrices
+\item Numbers of vertices of a graph
+\item The number of entries on a list
+\item The number of bits needed to encode input using some particular encoding scheme
+\end{itemize}
+
+
+We will be capturing the \textbf{dominant term} of the function to describe the asymptotic growth rate. 
+\subsection*{\(\Theta\) - Notation}
+\label{sec:org0fcf27f}
+For a given function \(g(n)\), define \(\Theta(g(n))\) to be the set of functions. $$ \Theta(g(n)) = \{ f(n) | \exists c_1,c_2,n_0 \in R^+ s.t. 0 \leq c_1 g(n) \leq f(n) \leq c_2 g(n) \forall n \geq n_0  \} $$
+
+\begin{itemize}
+\item \(f(n) \in O(g(n))\) means that \(f(n)\) grows \textbf{no faster} than \(cg(n)\)
+\item \(f(n) \in \Omega(g(n))\) means that \(f(n)\) grows \textbf{at least as fast} as \(cg(n)\)
+\end{itemize}
+
+
+Example, show that \(n \ln n \in o(n^2)\)
+
+$$\lim_{n \to \infty} (n \ln n ) / n^2 = 0$$
+$$\lim_{n \to \infty} (\ln n ) / n = 0$$
+$$\lim_{n \to \infty} 1 / n = 0$$     
+\subsection*{Helpful Facts}
+\label{sec:org3347e9d}
+\begin{enumerate}
+\item Let \(f(n)\) and \(g(n)\) be functions
+\begin{itemize}
+\item \(f(n) \in \Theta(g(n)) \iff g(n) \Theta(f(n))\)
+\item \(f(n) \in O(g(n)) \iff g(n) \in \Omega(f(n))\)
+\item \(f(n) \in o(g(n)) \iff g(n) \in \omega(f(n))\)
+\end{itemize}
+\item Transitivity holds for all five.
+\begin{itemize}
+\item \(f(n) \in \Omega(g(n)), g(n) \in \Omega(h(n)) \to f(n) \in \Omega(h(n))\)
+\end{itemize}
+\item Let \(f(n)\) and \(g(n)\) be functions
+\begin{itemize}
+\item \(f(n) \in o(g(n)) \to f(n) \in O(g(n))\)
+\item \(f(n) \in \omega(g(n)) \to f(n) \in \Omega(g(n))\)
+\end{itemize}
+\end{enumerate}
+\subsection*{Polynomials}
+\label{sec:orge4ef1d8}
+A polynomial of degree \(d\) is a constant function of the form
+$$p(n) = \sum_{n=0}^{d} a_in^i$$
+where \(a_0,a_1,...,a_d\) are constants and \(a_d\) \(\ne\) 0. If \(p(n)\) is a polynomial of degree \(d\), then \(p(n) \in \Theta(n^d)\). This also holds for \emph{real} degrees.
+\subsection*{Exponentials}
+\label{sec:orgdbfdedf}
+\(f(n) = c^n\), this functions grow very quickly and it should be fixed. You should know rules for manipulating exponentials, like telling them they are ugly so they don't leave you. Let's see some examples
+\begin{itemize}
+\item Let \(c, e > 0\) be constants. Prove that \(n^c = o((1 + e)^n)\)
+$$ Prove this shit; \lim_{n \to \infty} (n^k / (1 + e) ) = 0 \forall k \in N$$
+\end{itemize}
+$$ Base case: (k = 0): \lim_{n \to \infty} (n^0 / (1+e)^n ) $$
+$$  \lim_{n \to \infty} (1 / (1+e)^n ) = 0 $$
+$$ Induction hypothesis: Assume \lim_{n \to  \infty} (n^{k-1}/(1+e)^n)$$
+$$ Then  \lim_{n \to \infty} (n^k / (1+e)^n ) = \lim_{n \to \infty} ((kn^{k-1})/(ln(1+e)*(1+e)^n))$$
+$$ Then  \lim_{n \to \infty} (n^k / (1+e)^n ) = k / (ln(1+e) \lim_{n \to \infty} ((kn^{k-1})/((1+e)^n))$$
+$$ = 0 by induction hypothesis$$
+\subsection*{Logarithms}
+\label{sec:orgae416eb}
+Notations:
+\begin{itemize}
+\item \(\lg n = \log_2n\)
+\item \(\ln n = \log_en\)
+\item \(lg^kn = (\lg n)^k\)
+\item \(\lg \lg n = \lg(\lg n)\)
+\end{itemize}
+
+
+\(\lg n\)  grows very slowly. \(\lg^kn = o(n^e)\) for any constants \(k,e>0\)
+\subsection*{Factorials}
+\label{sec:org7c81d2b}
+$$ n! = \sqrt{2\pi n} (n/e)^n(1+\Theta(1/n))$$
+Examples: Let \(f(n) = n^2\lg^3n,g(n)=(\sqrt{n})^4.5\) and find the faster one. To do this compute their limits, easy peasea. here we go:
+$$g(n)=(\sqrt{n})^{4.5}$$
+$$g(n)=(n^{0.5})^{4.5}$$
+$$g(n)=(n^{2.25})$$
+$$\lim_{n \to \infty} (f(n)/ g(n))$$
+$$\lim_{n \to \infty} (n^2 \lg^3n)/(n^{2.25}))$$
+$$\lim_{n \to \infty} (\lg^3n)/(n^{1/4})) = 0$$
+
+Another one:
+
+$$(\lg n)^{\lg n} or n$$
+$$n = 2^{\lg n}$$
+$$(\lg n)^{\lg n} = (2^{\lg \lg n})^{\lg n}$$
+$$(\lg n)^{\lg n} = (2^{(\lg \lg n)(\lg n)}$$
+$$(\lg n)^{\lg n} = (2^{(\lg n)})^{\lg \lg n}$$
+$$\lim_{n \to \infty} \frac{n}{(\lg n)^{\lg n}}$$
+\subsection*{Bubble Sort}
+\label{sec:org5a79756}
+\begin{verbatim}
+for i = 1 to length (A) do
+   for j = length (A) downto i+1 do
+	   if A[j] < A[j-1] then
+		   exchange A[j] and A[j-1]
+	   endif
+   end for
+end for
+\end{verbatim}
+Number of steps:
+\(n^2\) is an upper bound of this algorithm \(O(n^2)\) but we want a more precise definition of the growth rate. We are counting the number of steps it takes for the algorithm to finish. 
+\begin{verse}
+We start with the first loop, which will go from \texttt{i=1} to \texttt{n}\\
+When \texttt{i=1} how many steps will it take?\\
+In the inner loop, t is constant number of steps\\
+How many times will the inner loop iterate for \texttt{i=1}?\\
+Total steps in the inner is \(c(n-1)\)\\
+When \texttt{i=2} it will be \(c(n-2)\)\\
+When \texttt{i = (n-1)}  \(c(n - (n-1))\)\\
+When \texttt{i=n} \((n-n)\)\\
+\vspace*{1em}
+Total steps in the inner loop s the sum of this steps.\\
+\(f(n) = c(n-1) + c(n-2) + ... + c(n - (n-1))\)\\
+$$\sum_{i=1}^{n} c(n-i)$$\\
+$$(\sum_{i=1}^{n} cn ) - ( \sum_{i=1}^{n} ci )$$\\
+$$cn^2 - c( \sum_{i=1}^{n} i )$$\\
+$$cn^2 - c(\frac{n+1}{2})$$\\
+$$\frac{c}{2}n^2-\frac{c}{2}n$$\\
+$$\in\Theta(n^2)$$\\
+\end{verse}
+\subsection*{Loops and Summations}
+\label{sec:org77aa04c}
+Loops generally result in \emph{summations}. For example:
+\begin{verse}
+\hspace*{5em}for i = 1 to n do\\
+\hspace*{6em}[something]\\
+end for\\
+\end{verse}
+Suppose [something] takes \(ci^2\) steps:
+$$\sum_{i=1}^{n}ci^2$$
+Next up we have to do the algebra, so we can figure it out
+\subsubsection*{Common sum}
+\label{sec:orgae007be}
+\begin{enumerate}
+\item Sum of squares and cubes
+$$\sum_{k=1}^{n}k^2=\frac{n(n+1)(2n+1)}{6}\in\Theta(n^3)$$
+$$\sum_{k=1}^{n}k^3=\frac{n^2(n+1)^2}{4}\in\Theta(n^4)$$
+$$\sum_{k=1}{n}k^d\in\Theta(n^{d+1})$$
+\item Geometric series
+$$\sum_{k=0}^{n}=1+\alpha+\alpha^2+...+\alpha^n=\frac{a^{n+1}-1}{\alpha-1}$$
+\item Harmonic series
+$$H_n=\sum_{k=1}^{n}\frac{1}{k}=1+\frac{1}{2}+...+\frac{1}{n}$$
+$$ln n + O(1)$$
+\end{enumerate}
+\subsection*{Exmple of common sums}
+\label{sec:org336a983}
+What is the running time of:
+\begin{verbatim}
+for(i=0;i<n;i++){
+   something
+}
+\end{verbatim}
+something takes \(\floor{\frac{n^2}{i}}\)
+$$\sum_{i=0}^{n}\floor{\frac{n^2}{i}}$$
+$$n^2\sum_{i=1}^{n}\frac{1}{i}$$
+$$n^2(\ln+O(1))$$
+$$n^2\ln n + n^2O(1)$$
+$$\in O(n^2\ln n)$$
+\subsection*{Example with no can do}
+\label{sec:org2d3989d}
+$$\sum_{i=1}^{n}\floor{i \lg i}$$
+We need to find a lower bound and an upper bound. Split the sum in two: \emph{This is gonna be nuts}
+$$\sum_{i=i}^{n}\floor{i \lg i} \ge \sum_{i=i}^{n}i \lg i - 1$$
+\end{document}

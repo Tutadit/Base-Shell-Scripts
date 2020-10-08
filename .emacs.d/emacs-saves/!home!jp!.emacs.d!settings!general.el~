@@ -1,0 +1,12 @@
+;; No clutter
+(setq backup-directory-alist
+      `((".*" . ,"~/.emacs.d/emacs-saves/")))
+(setq auto-save-file-name-transforms
+      `((".*" ,"~/.emacs.d/emacs-saves/" t)))
+
+;; Wat Mode
+(add-to-list 'load-path "/home/jp/.emacs.d/plugins/wat-mode-master")
+(require 'wat-mode)
+
+;; Mutt support.
+(setq auto-mode-alist (append '(("/tmp/mutt.*" . mail-mode)) auto-mode-alist))

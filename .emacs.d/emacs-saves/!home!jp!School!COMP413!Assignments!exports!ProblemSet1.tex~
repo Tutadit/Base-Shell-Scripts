@@ -1,0 +1,59 @@
+% Created 2020-01-16 Thu 15:47
+% Intended LaTeX compiler: pdflatex
+\documentclass[11pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{graphicx}
+\usepackage{grffile}
+\usepackage{longtable}
+\usepackage{wrapfig}
+\usepackage{rotating}
+\usepackage[normalem]{ulem}
+\usepackage{amsmath}
+\usepackage{textcomp}
+\usepackage{amssymb}
+\usepackage{capt-of}
+\usepackage{hyperref}
+\date{\today}
+\title{}
+\hypersetup{
+ pdfauthor={},
+ pdftitle={},
+ pdfkeywords={},
+ pdfsubject={},
+ pdfcreator={Emacs 26.3 (Org mode 9.1.9)}, 
+ pdflang={English}}
+\begin{document}
+
+\tableofcontents
+
+\documentclass{cpsc413Solutions}
+\usepackage{amsmath}
+
+\coursetitle{Design and Analysis of Algorithms}
+\courselabel{CPSC 413}
+\exercisesheet{Problem Set \#[1]}{}
+\student{Juan Pablo Lozano Sarmiento - 30022579}
+\semester{Winter 2020}
+
+
+
+\team{}
+\sources{}
+
+\begin{problemlist}
+\pbitem [1st problem]
+\begin{problem}
+\begin{answer}
+Consider a set $M = {m_1,...,m_n}$ of /n/ men, and a set $W = {w_1,...,w_n}$ of /n/ women. Let $M \times W$ denote the set of all possible ordered pairs of the form $(m, w)$, where $m \in M$ and $w \in W$. A /matching/ $S$ is a /set/ of ordered pairs, each from $M \times W$, with the property that each member of $M$ and each member of $W$ appears in at most one pair in $S$. A /perfect matching/ $S'$ is a matching with the property that each member of $M$ and each member of $W$ appears in /exactly/ one pair in $S'$.
+     
+     Add /preference/. Each man $m \in M$ /ranks/ all the women; $m$ prefers $w$ to $w'$ if $m$ ranks $w$ higher than $w'$. This ordered ranking of $m$ is his /preference list/. No ties. Same for women.
+
+     A matching $S$ is /stable/ if (i) i is perfect and (ii) there is no instability with respect to $S$.
+
+\end{answer}
+
+\end{problem}
+
+\end{problemlist}
+\end{document}

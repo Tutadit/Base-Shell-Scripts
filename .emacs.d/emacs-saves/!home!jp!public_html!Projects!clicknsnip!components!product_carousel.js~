@@ -1,0 +1,43 @@
+import {Divider} from 'rsuite';
+import {Radio} from 'rsuite';
+import {RadioGroup} from 'rsuite';
+import { Carousel } from 'rsuite';
+import {Col} from 'rsuite';
+import {Row} from 'rsuite';
+import {Grid} from 'rsuite';
+import { Container, Button, Panel, Header, Content, Footer, Sidebar } from 'rsuite';
+import ProductCard from '../components/product_card.js';
+
+function ProductCarousel(props) {
+    const pc_style = {
+        backgroundColor:props.color
+    };
+
+    return (
+        <Content>
+          <Panel className="product-provider">
+            <img src={props.img} height="20"/>
+            <Button className="product-btn">See All</Button>
+          </Panel>
+          <Container className="product-container"
+                     style={pc_style}>
+            <Carousel placement='bottom'
+                      shape='bar'
+                      className="product-slider">
+              <Grid fluid>
+                <Row>
+                  <ProductCard />
+                  <ProductCard />
+                  <ProductCard />
+                  <ProductCard />
+                  <ProductCard />
+                  <ProductCard />
+                </Row>
+              </Grid>
+            </Carousel>
+          </Container>
+        </Content>
+    );
+}
+
+export default ProductCarousel;

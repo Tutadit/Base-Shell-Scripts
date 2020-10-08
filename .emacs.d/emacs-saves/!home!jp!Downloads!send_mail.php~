@@ -1,0 +1,14 @@
+<?php
+
+if( isset($_POST['name']) && isset($_POST['email'])  && isset($_POST['subject'])  && isset($_POST['message']) ){
+	// the message
+	$msg = $_POST['message'];
+
+	// use wordwrap() if lines are longer than 70 characters
+	$msg = wordwrap($msg,70);
+
+	$headers = "From: ".$_POST['name']."<".$_POST['email'].">";
+	
+	// send email
+	mail("info@hubcafe.ca",$_POST['subject'],$msg, $headers);
+}

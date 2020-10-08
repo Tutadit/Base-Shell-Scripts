@@ -1,0 +1,52 @@
+typedef union  {
+	int pos;
+	int ival;
+	string sval;
+} YYSTYPE;
+extern YYSTYPE yylval;
+
+/* DATA TYPES */
+#define INT 1	    
+#define BOOLEAN 2   
+#define VOID 3	    
+/* EXPRESSIONS */   
+#define PLUS 4	    
+#define MINUS 5	    
+#define TIMES 6	    
+#define DIVIDE 7    
+#define MODULUS 8   
+#define LT 9	    
+#define GT 10	    
+#define LE 11	    
+#define GE 12	    
+#define EQ 13	    
+#define NEQ 14	    
+#define AND 15	    
+#define OR 16	    
+#define ASSIGN 17   
+#define BANG 18	    
+/* STATEMENTS */    
+#define BREAK 19    
+#define RETURN 20   
+#define IF 21	    
+#define ELSE 22
+#define WHILE 23    
+/* SYMBOLS */	    
+#define LPAREN 24   
+#define RPAREN 25   
+#define LBRACE 26   
+#define RBRACE 27   
+#define SEMICOLON 28
+#define COMMA 29    
+/* VALUES */	    
+#define ID 30	    
+#define LITERAL 31  
+#define NUMBER 32   
+#define TRUE 33
+#define FALSE 34
+
+#define TOTAL_TOKENS 34
+
+
+
+

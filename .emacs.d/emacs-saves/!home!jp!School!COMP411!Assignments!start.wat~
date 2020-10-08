@@ -1,0 +1,45 @@
+(module
+ (import "host" "exit" (func $exit))
+ (import "host" "getchar" (func $getChar (result i32)))
+ (import "host" "putchar" (func $putChar (param i32)))
+ (memory (export "memory") 1)
+ ;; int getChar()
+ ;; halt void halt(void)
+ ;; void printb(boolean b)
+ (func $printB (param $bool i32) 
+       local.get $bool
+       i32.const 0
+       i32.eq
+       if (result i32)
+           i32.const 70 ;; 'F'
+       else
+           i32.const 84 ;; 'T'
+       end
+       call $putChar
+       )
+ ;; void printc(int c) - print int as ASCII
+ ;; void printi(int i) - print integer
+ ;; void prints(string s) - prints a string
+ (func $printS (local $ch i32)
+       set_local $ch (i32.const 0)
+       loop $L_string
+       i32.load (get_local $ch)
+       i32.const 0
+       i32.ne
+       if 
+           call $putChar
+           br $L_string
+       else
+       i32.const 13
+       call $putChar
+       end
+       end
+       )
+ (func $main
+       i32.store (i32.const 70)
+       i32.store (i32.const 73)
+       i32.store (i32.const 63)
+       call $printS
+       )
+ (start $main)
+ )

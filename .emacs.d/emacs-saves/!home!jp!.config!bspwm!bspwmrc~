@@ -1,0 +1,44 @@
+#! /bin/bash
+
+COLOR_FOCUS="#623d53"
+COLOR_NORMAL="#0e0e0e"
+RES_WIDTH=1920
+
+sxhkd &
+
+bspc monitor -d I II III IV V VI VII VIII IX X
+
+bspc config window_gap          15
+
+bspc config border_width 0
+bspc config focused_border_color $COLOR_FOCUS
+bspc config active_border_color $COLOR_FOCUS
+bspc config normal_border_color $COLOR_NORMAL
+
+bspc config top_padding 45
+bspc config bottom_padding 25
+bspc config right_padding 15
+bspc config left_padding 15
+
+bspc config split_ratio          0.50
+bspc config borderless_monocle   false
+bspc config gapless_monocle      true
+bspc config focus_follows_pointer  false
+
+bspc rule -a firefox desktop=^2
+bspc rule -a discord desktop=^3
+bspc rule -a panel floating=on state=floating
+bspc rule -a dmenu_run state=floating
+bspc rule -a Termite:Writting desktop=^1 state=floating rectangle=1230x930+345+75 
+bspc rule -a Termite:Mail desktop=^3 state=floating rectangle=1200x930+360+75
+bspc rule -a dropdown sticky=on state=floating hidden=on rectangle=1920x400+0+0
+bspc rule -a wm-console sticky=on state=floating hidden=on rectangle=${RES_WIDTH}x400+0+680
+bspc rule -a wm-on-screen sticky=on state=floating hidden=on rectangle=800x1080+1120+0
+## Web-Mode
+
+
+## AutoStart
+termite --class dropdown&
+setBackground &
+Writting &
+compton&

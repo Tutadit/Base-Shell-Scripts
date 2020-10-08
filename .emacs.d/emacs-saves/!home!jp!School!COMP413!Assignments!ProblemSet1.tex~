@@ -1,0 +1,131 @@
+\documentclass{cpsc413Solutions}
+\usepackage{amsmath}
+
+\coursetitle{Design and Analysis of Algorithms}
+\courselabel{CPSC 413}
+\exercisesheet{Problem Set \#[1]}{}
+\student{Juan Pablo Lozano Sarmiento - 30022579}
+\semester{Winter 2020}
+
+\begin{document}
+
+\team{}
+\sources{Kleinberg. Jon and Tardos. Éva. Algorithm Design. : Addison Wesley. 2006. }
+
+\begin{problemlist}
+  \pbitem [1st problem]
+  \begin{problem}
+    \begin{answer}
+
+      Paraphrasing from text:
+      
+      Consider a set $M = {m_1,...,m_n}$ of $n$ men, and a set $W = {w_1,...,w_n}$ of $n$ women. Let $M \times W$ denote the set of all possible ordered pairs of the form $(m, w)$, where $m \in M$ and $w \in W$. A matching $S$ is a set of ordered pairs, each from $M \times W$, with the property that each member of $M$ and each member of $W$ appears in at most one pair in $S$. A perfect matching $S'$ is a matching with the property that each member of $M$ and each member of $W$ appears in exactly one pair in $S'$.
+      
+      Add preference. Each man $m \in M$ ranks all the women; $m$ prefers $w$ to $w'$ if $m$ ranks $w$ higher than $w'$. This ordered ranking of $m$ is his preference list. No ties. Same for women.
+
+      A matching $S$ is stable if (i) i is perfect and (ii) there is no instability with respect to $S$.
+    \end{answer}
+  \end{problem}
+
+  \pbitem [2nd problem]
+  \begin{problem}
+    \begin{answer}
+      The statement is false, counter-example:
+
+      $n = 2, M = \{ m_1, m_2\} W = \{ w_1, w_2\}$
+      
+      Preference List
+      
+      $m_1: \{ w_1, w_2\}$
+      
+      $m_2: \{ w_2, w_1\}$
+      
+      $w_1: \{ m_2, m_1\}$
+      
+      $w_2: \{ m_1, m_2\}$
+
+      Perfect Matchings
+      
+      $S_1 = \{ (m_1,w_1),(m_2,w_2) \}$
+      
+      $S_2 = \{ (m_1,w_2),(m_2,w_1) \}$
+      
+
+      Stable Matchings
+      
+      $S_1 = \{ (m_1,w_1),(m_2,w_2) \}$
+      
+      $S_2 = \{ (m_1,w_2),(m_2,w_1) \}$
+
+    \end{answer}
+  \end{problem}
+
+  \pbitem [3rd problem]
+  \begin{problem}
+    \begin{answer}
+      True. Proof by contradiction:
+
+      Suppose a Stable Matching $S$ is obtained in which:
+
+      $(m',w) \in S$
+
+      $(m,w') \in S$
+
+      $m \ne m'$
+
+      $w \ne w'$
+
+      Since $w$ is the top choice for $m$ and $m$ is the top choice for $w$, $m$ and $w$ will leave their partners and become a match. But this can't be if $S$ is a Stable Matching.
+
+      Therefore the statement is true
+    \end{answer}
+  \end{problem}
+
+    \pbitem [4th problem]
+  \begin{problem}
+    \begin{answer}
+      Each iteration of the algorithm consists of a man proposing to a woman that he has never proposed to before.
+
+      Let $P(t)$ denote the set of pairs $(m,w)$ so that $m$ has proposed to $w$ by the end of iteration $t$
+
+      The size of $P(t+1)$ is greater than $P(t)$
+
+      The algorithm makes progress each time a man proposes to a woman, since there are $n$ woman in every mans preference list the algorithm has an upper bound of $n^2$.
+
+      There is also the possibility in which a man $m$ will propose to a woman $w$ who is already engaged, in such a case the set $P(t)$ will be equal to $P(t+1)$
+
+      In the case that each man $m$, such that $m \in M$, lists a different woman $w$, such that $w \in W$, as their top match then the algorithm will run $n$ times, as each man must propose to their respective top match. Lower bound is $n$ times.
+    \end{answer}
+  \end{problem}
+
+  \pbitem [5th problem]
+  \begin{problem}
+  \end{problem}
+
+  \begin{answer}
+      Suppose Network $A$ consists of the set of shows ${a_1,a_2,a_3,a_4}$
+
+      Suppose Network $B$ consists of the set of shows ${b_1,b_2,b_3,b_4}$
+
+      Suppose $R$ is the set of pairs of all shows with their respective ratings
+
+      $R = { (a_1,1),(a_2,4),(a_3,5),(a_4,7),(b_1,2),(b_2,3),(b_3,6),(b_4,8) }$
+
+      $A$ has a schedule $S = {a_1,a_2,a_3,a_4}$
+
+      $B$ then uses the schedule $T = {b_1,b_2,b_3,b_4}$ and wins 3 slots
+
+      $A$ sees this schedule and changes their schedule to $S = {a_3,a_2,a_4,a_1}$ and wins 3 slots
+
+      $B$ sees this schedule and changes their schedule to $T = {b_3,b_2,b_4,b_1}$ and wins 3 slots
+
+      and they keep on switching, unable to reach a stable pair of schedules maximizing both $A$ and $B$
+      
+      
+      
+      
+    \end{answer}
+  \end{problem}
+
+\end{problemlist}
+\end{document}

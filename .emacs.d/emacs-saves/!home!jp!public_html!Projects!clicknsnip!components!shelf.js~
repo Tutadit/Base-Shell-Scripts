@@ -1,0 +1,16 @@
+function Shelf(props) {
+    return (
+        <div className="shelf bc-grey-2">
+          <div className="shelf-header bc-red-1">
+            <h4>{props.title}</h4>
+            <a className="shelf-handle btn-white"
+               href={props.link}>
+              See All
+            </a>
+          </div>
+          {props.children}          
+        </div>
+    );
+}
+
+export default Shelf;

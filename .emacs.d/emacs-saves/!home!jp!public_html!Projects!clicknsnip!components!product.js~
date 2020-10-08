@@ -1,0 +1,41 @@
+import React, {setState} from 'react';
+import { motion } from "framer-motion";
+
+class Product extends React.Component {    
+
+    render() {
+        const variants = {
+            hidden: {
+                opacity:0.,
+                transform:'scale(0.8)'                
+            },
+            visible: {
+                opacity:1,
+                transform:'scale(1)'
+            },
+        };
+        return (
+	    <motion.div
+              variants={variants}
+              initial='hidden'
+              animate={this.props.show ? 'visible' : 'hidden'} 
+              className="product bc-white">
+              <div className="product-image">
+                <img src={this.props.img}/>
+              </div>
+              <div className="product-info">
+                <h4>{this.props.title}</h4>
+                <p>{this.props.price}
+                  <span className="old-price">{this.props.oldPrice}</span></p>
+              </div>
+              <div className="product-actions">
+                <a className="product-action btn-red">Buy</a>
+                <a className="product-action btn-red">Save</a>
+              </div>
+            </motion.div>
+        );
+    } 
+}
+
+
+export default Product;

@@ -1,0 +1,41 @@
+;; MELPA 
+(require 'package)
+(let* ((no-ssl (and (memq system-type '(windows-nt ms-dos))
+                    (not (gnutls-available-p))))
+       (proto (if no-ssl "http" "https")))
+  (when no-ssl
+    (warn "\
+Your version of Emacs does not support SSL connections,
+which is unsafe because it allows man-in-the-middle attacks.
+There are two things you can do about this warning:
+1. Install an Emacs version that does support SSL and be safe.
+2. Remove this warning from your init file so you won't see it again."))
+  ;; Comment/uncomment these two lines to enable/disable MELPA and MELPA Stable as desired
+  (add-to-list 'package-archives (cons "melpa" (concat proto "://melpa.org/packages/")) t)
+  ;; (add-to-list 'package-archives (cons "melpa-stable" (concat proto "://stable.melpa.org/packages/")) t)
+  (when (< emacs-major-version 24)
+    ;; For important compatibility libraries like cl-lib
+    (add-to-list 'package-archives (cons "gnu" (concat proto "://elpa.gnu.org/packages/")))))
+(package-initialize)
+
+
+;; Load Custom settings
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(custom-safe-themes
+   (quote
+    ("2e0ed51df4c3be3c89ad1cd9954c4c9ac3a2776da852e2b3cf3ae345f6c899dd" "2a6a917b72dd41ca405d515a4eae957575cdd16bb99032c537b1beb3aa8fc695" "92539a60d67679feec2ecd49a682caf66c4b9d6c1493e13ec2948b675098f6ef" "8e888f22815a3cb19d59df65b2164fdf4d102fa82cb3dafd6db7fa445bbd8190" "1ba6cab5e8c57f9ec65ef55e3466c9f2c83ef6764a5c82646917def1ff7fbb44" "ee61d9bef9a1f4e49198f2693606ec38ffe79ec6891b0e049784cd3e0f3181ab" "97e8d35191a280f3141e9f15ed6b03149b137cb2fde5f17d27e70695ed480f7a" "837f2d1e6038d05f29bbcc0dc39dbbc51e5c9a079e8ecd3b6ef09fc0b149ceb1" "c74e83f8aa4c78a121b52146eadb792c9facc5b1f02c917e3dbb454fca931223" default))))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
+
+(load "~/.emacs.d/settings/general.el")
+(load "~/.emacs.d/settings/eye_candy.el")
+(load "~/.emacs.d/settings/org_mode.el")
+

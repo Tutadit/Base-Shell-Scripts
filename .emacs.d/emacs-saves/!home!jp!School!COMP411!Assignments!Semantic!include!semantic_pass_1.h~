@@ -1,0 +1,6 @@
+#ifndef SEMANTIC
+#define SEMANTIC
+
+void SEM_transProg(A_global_declarations dec);
+
+#endif

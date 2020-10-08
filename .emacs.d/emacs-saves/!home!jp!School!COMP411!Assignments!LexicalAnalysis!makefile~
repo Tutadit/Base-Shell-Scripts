@@ -1,0 +1,56 @@
+PROGRAM_NAME=lextest
+
+
+SRC_DIR=src
+OBJ_DIR=obj
+BIN_DIR=bin
+
+SRC_FILES=$(wildcard $(SRC_DIR)/*.c)
+OBJ_FILES=$(patsubst $(SRC_DIR)/%.c,$(OBJ_DIR)/%.o,$(SRC_FILES))
+LEX_DRIVER=$(SRC_DIR)/lex.yy.c
+LEX_OBJ=$(OBJ_DIR)/lex.yy.o
+LEX_FILES=$(wildcard $(SRC_DIR)/*.lex)
+
+TARGET=$(BIN_DIR)/$(PROGRAM_NAME)
+
+CC=cc
+LEX=lex
+C_FLAGS=-Wall
+INC=-Iinclude
+
+$(TARGET): $(OBJ_FILES) $(LEX_OBJ)
+	$(CC) $(C_FLAGS) $(INC) -o $@ $^
+
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c $(LEX_DRIVER)
+	$(CC) $(C_FLAGS) $(INC) -c -o $@ $<
+
+$(LEX_DRIVER): $(LEX_FILES)
+	$(LEX) $<
+
+all: clean $(TARGET)
+clean:
+	@echo Cleaning...
+	@rm -f $(TARGET)
+	@rm -f $(OBJ_DIR)/*.o
+
+
+#lextest: driver.o lex.yy.o errormsg.o util.o
+#	cc -Wall -g -o lextest driver.o lex.yy.o errormsg.o util.o
+
+#driver.o: driver.c tokens.h errormsg.h util.h
+#	cc -Wall -g -c driver.c
+
+#errormsg.o: errormsg.c errormsg.h util.h
+#	cc -Wall -g -c errormsg.c
+
+#lex.yy.o: lex.yy.c tokens.h errormsg.h util.h
+#	cc -Wall -g -c lex.yy.c
+
+#lex.yy.c: jmm.lex
+#	lex jmm.lex
+
+#util.o: util.c util.h
+#	cc -Wall -g -c util.c
+
+#clean: 
+#	rm -f a.out util.o driver.o lex.yy.o lex.yy.c errormsg.o

@@ -1,0 +1,89 @@
+import React, { setSate } from 'react';
+
+import {BsChevronLeft, BsChevronRight} from 'react-icons/bs';
+
+
+import Sidebar from '../components/sidebar';
+import Products from '../components/products';
+import Pagnation from '../components/pagnation';
+
+import data from '../data/data.json';
+
+class ProductList extends React.Component {
+
+    constructor(props) {
+        super(props);
+        this.increments = 5;
+        this.getSomeProducts = this.getSomeProducts.bind(this);
+        this.handlePrev = this.handlePrev.bind(this);
+        this.handleNext = this.handleNext.bind(this);
+        this.state = {
+            start:0,
+            products:data.products.slice(0,5)
+        };        
+    }
+
+    
+    getSomeProducts(start) {        
+        this.setState({
+            products:data.products.slice(start,start+this.increments),
+            start:start
+        });
+    }
+
+    handlePrev() {
+        let start = this.state.start;
+        let increments = this.increments;
+        console.log(start);
+        (start >= increments ) &&
+            this.getSomeProducts(start-increments,
+                                 start);       
+    }
+
+    handleNext() {
+        let start = this.state.start;
+        let increments = this.increments;
+        console.log(start);
+        if(start < data.products.length - increments ) {
+            this.getSomeProducts(start + increments,
+                                 start + (increments * 2));
+        }
+    }
+    
+    render() {
+        return (
+            <div className="main-content">
+              <Sidebar />
+              <div className="shelf">
+                <div className="shelf-header">
+                  <h4>Product of this</h4>
+                </div>
+                <div className="product-carousel">
+                  <div className="products-nav">
+                    <a className="products-nav-handler"
+                       onClick={this.handlePrev}>
+                      <BsChevronLeft />
+                    </a>
+                  </div>
+                  <Products
+                    products={this.state.products}
+                  />
+                  <div className="products-nav">
+                    <a className="products-nav-handler"
+                       onClick={this.handleNext}>
+                      <BsChevronRight />
+                    </a>                
+                  </div>
+                </div>
+                <Pagnation
+                  start={this.state.start}
+                  increments={this.increments}
+                  length={data.products.length}
+                  onClick={this.getSomeProducts} />
+              </div>
+            </div>
+        );
+    }
+}
+
+export default ProductList;

@@ -1,0 +1,116 @@
+:METADATA:
+#+TITLE:        CPSC 457
+#+AUTHOR:       Juan Pablo Lozano Sarmiento
+#+EMAIL:        jp@bassed.ca
+#+DATE:         \today
+:END:
+:LATEX:
+#+LATEX_CLASS: article
+#+LATEX_CLASS_OPTIONS: [a4paper,oneside]
+#+LATEX_HEADER:\usepackage{fullpage} \usepackage{fancyhdr} \usepackage{graphicx} \usepackage[a4paper,left=1.3cm,right=2cm,top=1.0cm,bottom=2.5cm]{geometry} 
+#+LATEX_HEADER:\usepackage{xcolor}
+#+LATEX:\makeatletter
+#+LATEX:\makeatother
+:END:
+:OPTIONS:
+#+OPTIONS: H:5 num:5
+#+OPTIONS: num:nil toc:nil
+:END:
+* Assignment 1 - Report
+** Written question
+*** Q1
+**** a
+/python pali/
+#+BEGIN_SRC
+$ time python3 palindrome.py < t4.txt
+Longest palindrome: redder
+
+real	0m0.298s
+user	0m0.287s
+sys	0m0.009s
+
+
+$ time python3 palindrome.py < t3.txt
+Longest palindrome: ___o.O.o___
+
+real	0m0.034s
+user	0m0.018s
+sys	0m0.006s
+#+END_SRC
+/slow pali/
+#+BEGIN_SRC
+$ time ./slow-pali < t4.txt
+Longest palindrome: redder
+real	0m2.846s
+user	0m1.460s
+sys	0m1.384s
+
+$ time ./slow-pali < t3.txt
+Longest palindrome: ___o.O.o___
+
+real	0m0.003s
+user	0m0.001s
+sys	0m0.002s
+#+END_SRC
+**** b
+/Table 1/
++---------------+-----------------+-----------------+
+|               | kernel mode     | user mode       |
++---------------+--------+--------+--------+--------+
+|               | t3.txt | t4.txt | t3.txt | t4.txt |
++---------------+--------+--------+--------+--------+
+| palindrome.py | 0.006s | 0.009s | 0.018s | 0.287s |
++---------------+--------+--------+--------+--------+
+| slow-pali.cpp | 0.002s | 1.384s | 0.001s | 1.384s |
++---------------+--------+--------+--------+--------+
+**** c
+     On smaller inputs the python program is slower because of the overhead of the python interpreter. On larger inputs the python program is faster because the design of the C++ program utilizes the ~read~ system call (/wrapper really/) once for every character of the input. Calling system calls is expensive as it requires the OS to create a copy of the state of the current process, then switch to kernel mode and execute the ~trap~ for the ~read~ system call, then once the character is read the previously saved state of the process is then restored and control is given back to the process. This switch is not bad when done a few times through the life of the process, but doing it once for every character gets expensive quickly.
+*** Q2
+/Programming Question/
+*** Q3
+#+BEGIN_SRC
+$ time ./fast-pali < t4.txt
+Longest palindrome: redder
+
+real	0m0.098s
+user	0m0.090s
+sys	0m0.005s
+
+$ time ./fast-pali < t3.txt
+Longest palindrome: ___o.O.o___
+
+real	0m0.006s
+user	0m0.003s
+sys	0m0.002s
+
+#+END_SRC
+/Table 2/
++---------------+--------------------------+--------------------------+
+|               | kernel mode              | user mode                |
++---------------+--------+--------+--------+--------+--------+--------+
+|               | t3.txt | t4.txt |  2GB   | t3.txt | t4.txt |  2GB   |
++---------------+--------+--------+--------+--------+--------+--------+
+| palindrome.py | 0.006s | 0.009s |  0.51s | 0.018s | 0.287s | 92.18s |
++---------------+--------+--------+--------+--------+--------+--------+
+| slow-pali.cpp | 0.002s | 1.384s | nope   | 0.001s | 1.460s | nope   |
++---------------+--------+--------+--------+--------+--------+--------+
+| fast-pali.cpp | 0.002s | 0.005s |  0.28s | 0.003s | 0.090s | 29.75s |
++---------------+--------+--------+--------+--------+--------+--------+
+
+/Table 3/
++---------------+-----------------+
+|               | # of read calls |
++---------------+--------+--------+
+|               | t3.txt | t4.txt |
++---------------+--------+--------+
+| palindrome.py |   84   |  788   |
++---------------+--------+--------+
+| slow-pali.cpp |   50   |5767205 |
++---------------+--------+--------+
+| fast-pali.cpp |   13   |   18   |
++---------------+--------+--------+
+
+**** a
+     Yes, ~fast-pali.cpp~ is faster than ~slow-pali.cpp~, and it is so because ~fast-pali.cpp~ uses a buffer to limit the number of ~read~ system calls. As noted in ~table 3~, ~slow-pali.cpp~ made 5767205 read system calls! Where as ~fast-pali.cpp~ made only 18! As noted in m answer to question 1.c reducing the amount of system calls from 5767205 to 18 dramatically speeds up the process. This is further revealed by looking at the time spent in ~kernel mode~. For larger input ~t4.txt~,  ~slow-pali.cpp~ spent 1.384s in ~kernel mode~ where as ~fas-pali.cpp~ only spend 0.005s! 
+**** b
+     Yes, ~fast-pali.cpp~ is faster than ~palindrome.py~, and it is so because ~fast-pali.cpp~ limits the number of system calls and it is written in ~C++~, not much overhead. Where as the ~palindrome.py~ runs with the overhead of the python environment, and it also calls ~read~ 770 more times than ~fast-pali.cpp~. 

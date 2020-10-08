@@ -1,0 +1,766 @@
+#include <stdio.h>
+#include "util.h"
+#include "absyn.h"
+
+A_literal A_NumLit(int col, int line, int value) {
+  A_literal literal = checked_malloc(sizeof(*literal));
+  A_pos pos = A_Pos(col,line); 
+  literal->pos = pos;
+  literal->kind = A_NumL;
+  literal->u.num_value = value;
+  return literal;
+}
+
+A_literal A_LitLit(int col, int line, string value) {
+  A_literal literal = checked_malloc(sizeof(*literal));
+  A_pos pos = A_Pos(col,line); 
+  literal->pos = pos;
+  literal->kind = A_LitL;
+  literal->u.string_value = value;
+  return literal;
+}
+
+A_literal A_TrueLit(int col, int line) {
+  A_literal literal = checked_malloc(sizeof(*literal));
+  A_pos pos = A_Pos(col,line); 
+  literal->pos = pos;
+  literal->kind = A_TrueL;
+  literal->u.string_value = "true";
+  return literal;
+}
+
+A_literal A_FalseLit(int col, int line) {
+  A_literal literal = checked_malloc(sizeof(*literal));
+  A_pos pos = A_Pos(col,line); 
+  literal->pos = pos;
+  literal->kind = A_FalseL;
+  literal->u.string_value = "false";
+  return literal;
+}
+
+A_type A_BoolType(int col, int line) {
+  A_type type = A_bool;
+  return type;
+}
+A_type A_IntType(int col, int line) {
+  A_type type = A_int;
+  return type;
+}
+
+A_global_declarations A_GloGloDecs(int col, int line,
+				   A_global_declaration dec) {
+  A_global_declarations declarations
+    = checked_malloc(sizeof(*declarations));
+  A_pos pos = A_Pos(col,line); 
+  declarations->pos = pos;
+  declarations->head = dec;
+  declarations->tail = NULL;
+  return declarations;
+}
+A_global_declarations A_GlosGloDecs(int col, int line,
+				    A_global_declarations decs,
+				    A_global_declaration dec) {
+  A_global_declarations declarations
+    = checked_malloc(sizeof(*declarations));
+  A_pos pos = A_Pos(col,line); 
+  declarations->pos = pos;
+  declarations->head = dec;
+  declarations->tail = decs;
+  return declarations;
+}
+
+A_global_declaration A_VarGloDec(int col, int line, A_var_dec dec) {
+  A_global_declaration declaration
+    = checked_malloc(sizeof(*declaration));
+  A_pos pos = A_Pos(col,line); 
+  declaration->pos = pos;
+  declaration->kind = A_varDec;
+  declaration->u.varDec = dec;
+  return declaration;
+}
+
+A_global_declaration A_FunGloDec(int col, int line, A_func_dec dec) {
+  A_global_declaration declaration
+    = checked_malloc(sizeof(*declaration));
+  A_pos pos = A_Pos(col,line); 
+  declaration->pos = pos;
+  declaration->kind = A_funDec;
+  declaration->u.funDec = dec;
+  return declaration;
+}
+
+A_global_declaration A_MainGloDec(int col, int line, A_main_dec dec) {
+  A_global_declaration declaration
+    = checked_malloc(sizeof(*declaration));
+  A_pos pos = A_Pos(col,line); 
+  declaration->pos = pos;
+  declaration->kind = A_mainDec;
+  declaration->u.mainDec = dec;
+  return declaration;
+}
+
+A_var_dec A_VarDec(int col, int line, A_type type, A_id id) {
+  A_var_dec declaration
+    = checked_malloc(sizeof(*declaration));
+  A_pos pos = A_Pos(col,line); 
+  declaration->pos = pos;
+  declaration->type = type;
+  declaration->id = id;
+  return declaration;
+}
+
+A_id A_Id(int col, int line, string id) {
+  A_id identifier = id;
+  return identifier;
+}
+
+A_func_dec A_FuncDec(int col, int line, A_func_head head, A_block block) {
+  A_func_dec declaration
+    = checked_malloc(sizeof(*declaration));
+  A_pos pos = A_Pos(col,line); 
+  declaration->pos = pos;
+  declaration->head = head;
+  declaration->block = block;
+  return declaration;
+}
+
+A_func_head A_TypeFuncHead(int col, int line, A_type type, A_func_decor dec) {
+  A_func_head head
+    = checked_malloc(sizeof(*head));
+  A_pos pos = A_Pos(col,line); 
+  head->pos = pos;
+  head->type = type;
+  head->dec = dec;
+  return head;
+}
+A_func_head A_VoidFuncHead(int col, int line, A_func_decor dec) {
+  A_func_head head
+    = checked_malloc(sizeof(*head));
+  A_pos pos = A_Pos(col,line); 
+  head->pos = pos;
+  head->type = A_void;
+  head->dec = dec;
+  return head;
+}
+
+A_func_decor A_FuncDecor(int col, int line, A_id id,
+			 A_formal_param_list list) {
+  A_func_decor decor
+    = checked_malloc(sizeof(*decor));
+  A_pos pos = A_Pos(col,line); 
+  decor->pos = pos;
+  decor->id = id;
+  decor->params = list;
+  return decor;
+}
+
+A_func_decor A_EmptyFuncDecor(int col, int line, A_id id) {
+  A_func_decor decor
+    = checked_malloc(sizeof(*decor));
+  A_pos pos = A_Pos(col,line); 
+  decor->pos = pos;
+  decor->id = id;
+  decor->params = NULL;
+  return decor;
+}
+
+A_formal_param_list A_SingleFormParamList(int col, int line,
+					  A_formal_param param) {
+  A_formal_param_list list
+        = checked_malloc(sizeof(*list));
+  A_pos pos = A_Pos(col,line); 
+  list->pos = pos;
+  list->param = param;
+  list->tail = NULL;
+  return list;
+}
+A_formal_param_list A_FormParamList(int col, int line,
+				    A_formal_param_list param_list,
+				    A_formal_param param) {
+  A_formal_param_list list
+        = checked_malloc(sizeof(*list));
+  A_pos pos = A_Pos(col,line); 
+  list->pos = pos;
+  list->param = param;
+  list->tail = param_list;
+  return list;
+}
+
+A_formal_param A_FormParam(int col, int line, A_type type, A_id id) {
+  A_formal_param param
+    = checked_malloc(sizeof(*param));
+  A_pos pos = A_Pos(col,line); 
+  param->pos = pos;
+  param->type = type;
+  param->id = id;
+  return param;
+}
+
+A_main_dec A_MainFuncDec(int col, int line,
+			 A_main_func_dec dec, A_block block) {
+  A_main_dec main
+    = checked_malloc(sizeof(*main));
+  A_pos pos = A_Pos(col,line); 
+  main->pos = pos;
+  main->dec = dec;
+  main->block = block;
+  return main;
+}
+
+A_main_func_dec A_MainFunDecor(int col, int line, A_id id) {
+  A_main_func_dec main
+    = checked_malloc(sizeof(*main));
+  A_pos pos = A_Pos(col,line); 
+  main->pos = pos;
+  main->id = id;
+  return main;
+}
+
+A_block A_Block(int col, int line, A_block_statements statements) {
+  A_block block
+    = checked_malloc(sizeof(*block));
+  A_pos pos = A_Pos(col,line); 
+  block->pos = pos;
+  block->statements = statements;
+  return block;
+}
+A_block A_EmptyBlock(int col, int line) {
+  A_block block
+    = checked_malloc(sizeof(*block));
+  A_pos pos = A_Pos(col,line); 
+  block->pos = pos;
+  block->statements = NULL;
+  return block;
+}
+
+A_block_statements A_SingleBlockStmnts(int col, int line,
+				       A_block_statement statement) {
+  A_block_statements statements
+    = checked_malloc(sizeof(*statements));
+  A_pos pos = A_Pos(col,line); 
+  statements->pos = pos;
+  statements->statement = statement;
+  statements->tail = NULL;
+  return statements;
+}
+A_block_statements A_BlockStmnts(int col, int line,
+				 A_block_statements block_statements,
+				 A_block_statement statement) {
+  A_block_statements statements
+    = checked_malloc(sizeof(*statements));
+  A_pos pos = A_Pos(col,line); 
+  statements->pos = pos;
+  statements->statement = statement;
+  statements->tail = block_statements;
+  return statements;
+}
+
+A_block_statement A_VarBlockState(int col, int line, A_var_dec dec) {
+  A_block_statement statement 
+    = checked_malloc(sizeof(*statement));
+  A_pos pos = A_Pos(col,line); 
+  statement->pos = pos;
+  statement->kind = A_varState;
+  statement->u.var_dec = dec;
+  return statement;
+}
+A_block_statement A_StateBlockState(int col, int line,
+				    A_statement state){
+  A_block_statement statement
+    = checked_malloc(sizeof(*statement));
+  A_pos pos = A_Pos(col,line); 
+  statement->pos = pos;
+  statement->kind = A_StateState;
+  statement->u.statement = state;
+  return statement;
+}
+
+A_statement A_BlockState(int col, int line, A_block block) {
+  A_statement statement
+    = checked_malloc(sizeof(*statement));
+  A_pos pos = A_Pos(col,line); 
+  statement->pos = pos;
+  statement->kind = A_BlockSt;
+  statement->u.block = block;
+  return statement;
+}
+A_statement A_NilState(int col, int line) {
+  A_statement statement
+    = checked_malloc(sizeof(*statement));
+  A_pos pos = A_Pos(col,line); 
+  statement->pos = pos;
+  statement->kind = A_NilSt;
+  return statement;
+}
+A_statement A_State(int col, int line, A_state_exp exp) {
+  A_statement statement
+    = checked_malloc(sizeof(*statement));
+  A_pos pos = A_Pos(col,line); 
+  statement->pos = pos;
+  statement->kind = A_St;
+  statement->u.state_exp = exp;
+  return statement;
+}
+A_statement A_BreakState(int col, int line) {
+  A_statement statement
+    = checked_malloc(sizeof(*statement));
+  A_pos pos = A_Pos(col,line); 
+  statement->pos = pos;
+  statement->kind = A_BreakSt;
+  return statement;
+}
+A_statement A_ReturnState(int col, int line, A_exp exp) {
+  A_statement statement
+    = checked_malloc(sizeof(*statement));
+  A_pos pos = A_Pos(col,line); 
+  statement->pos = pos;
+  statement->kind = A_ReturnSt;
+  statement->u.exp = exp;
+  return statement;
+}
+A_statement A_EmptyReturnState(int col, int line) {
+  A_statement statement
+    = checked_malloc(sizeof(*statement));
+  A_pos pos = A_Pos(col,line); 
+  statement->pos = pos;
+  statement->kind = A_EmptyReturnSt;
+  return statement;
+}
+A_statement A_IfState(int col, int line, A_exp exp, A_statement body) {
+  A_statement statement
+    = checked_malloc(sizeof(*statement));
+  A_pos pos = A_Pos(col,line); 
+  statement->pos = pos;
+  statement->kind = A_IfSt;
+  statement->u.iff.exp = exp;
+  statement->u.iff.statement = body;
+  return statement;
+}
+A_statement A_IfElseState(int col, int line, A_exp exp,
+			  A_statement iff, A_statement then) {
+  A_statement statement
+    = checked_malloc(sizeof(*statement));
+  A_pos pos = A_Pos(col,line); 
+  statement->pos = pos;
+  statement->kind = A_IfElseSt;
+  statement->u.ife.exp = exp;
+  statement->u.ife.if_body = iff;
+  statement->u.ife.else_body = then;
+  return statement;
+}
+A_statement A_WhileState(int col, int line, A_exp exp,
+			 A_statement body) {
+  A_statement statement
+    = checked_malloc(sizeof(*statement));
+  A_pos pos = A_Pos(col,line); 
+  statement->pos = pos;
+  statement->kind = A_WhileSt;
+  statement->u.whilee.exp = exp;
+  statement->u.whilee.body = body;
+  return statement;
+}
+
+A_state_exp A_AssignStateExp(int col, int line, A_assignment assignment) {
+  A_state_exp state
+    = checked_malloc(sizeof(*state));
+  A_pos pos = A_Pos(col,line); 
+  state->pos = pos;
+  state->kind = A_AssSt;
+  state->u.assignment = assignment;
+  return state;
+}
+A_state_exp A_FunInStateExp(int col, int line,
+			    A_functioninvocation function) {
+  A_state_exp state
+    = checked_malloc(sizeof(*state));
+  A_pos pos = A_Pos(col,line); 
+  state->pos = pos;
+  state->kind = A_FunInSt;
+  state->u.invocation = function;
+  return state;
+}
+
+A_primary A_LitPrim(int col, int line, A_literal literal) {
+  A_primary primary
+    = checked_malloc(sizeof(*primary));
+  A_pos pos = A_Pos(col,line); 
+  primary->pos = pos;
+  primary->kind = A_LitP;
+  primary->u.literal = literal;
+  return primary;
+}
+A_primary A_ExpPrim(int col, int line, A_exp exp) {
+  A_primary primary
+    = checked_malloc(sizeof(*primary));
+  A_pos pos = A_Pos(col,line); 
+  primary->pos = pos;
+  primary->kind = A_ExpP;
+  primary->u.exp = exp;
+  return primary;
+}
+A_primary A_FunInPrim(int col, int line, A_functioninvocation function) {
+  A_primary primary
+    = checked_malloc(sizeof(*primary));
+  A_pos pos = A_Pos(col,line); 
+  primary->pos = pos;
+  primary->kind = A_FunInP;
+  primary->u.func_inv = function;
+  return primary;
+}
+
+A_argumentlist A_SingleArgList(int col, int line, A_exp exp) {
+  A_argumentlist argument_list 
+    = checked_malloc(sizeof(*argument_list));
+  A_pos pos = A_Pos(col,line); 
+  argument_list->pos = pos;
+  argument_list->exp = exp;
+  argument_list->tail = NULL;
+  return argument_list;
+}
+A_argumentlist A_ArgList(int col, int line, A_argumentlist list, A_exp exp) {
+  A_argumentlist argument_list 
+    = checked_malloc(sizeof(*argument_list));
+  A_pos pos = A_Pos(col,line); 
+  argument_list->pos = pos;
+  argument_list->exp = exp;
+  argument_list->tail = list;
+  return argument_list;
+}
+
+A_functioninvocation A_FuncIn(int col, int line, A_id id,
+			      A_argumentlist list) {
+  A_functioninvocation invocation
+    = checked_malloc(sizeof(*invocation));
+  A_pos pos = A_Pos(col,line); 
+  invocation->pos = pos;
+  invocation->id = id;
+  invocation->list = list;
+  return invocation;
+}
+A_functioninvocation A_EmptyFuncIn(int col, int line, A_id id) {
+  A_functioninvocation invocation
+    = checked_malloc(sizeof(*invocation));
+  A_pos pos = A_Pos(col,line); 
+  invocation->pos = pos;
+  invocation->id = id;
+  invocation->list = NULL;
+  return invocation;
+}
+
+A_postfixexpression A_PrimPostFixExp(int col, int line, A_primary primary) {
+  A_postfixexpression exp
+    = checked_malloc(sizeof(*exp));
+  A_pos pos = A_Pos(col,line); 
+  exp->pos = pos;
+  exp->kind = A_PrimPo;
+  exp->u.primary = primary;
+  return exp;
+}
+A_postfixexpression A_IdPostFixExp(int col, int line, A_id id) {
+  A_postfixexpression exp
+    = checked_malloc(sizeof(*exp));
+  A_pos pos = A_Pos(col,line); 
+  exp->pos = pos;
+  exp->kind = A_IdPo;
+  exp->u.id = id;
+  return exp;
+}
+
+A_unaryexpression A_MinUnExp(int col, int line,
+			     A_unaryexpression expression) {
+  A_unaryexpression exp
+    = checked_malloc(sizeof(*exp));
+  A_pos pos = A_Pos(col,line); 
+  exp->pos = pos;
+  exp->kind = A_MinUn;
+  exp->u.un_exp = expression;
+  return exp;
+}
+A_unaryexpression A_BangUnExp(int col, int line,
+			      A_unaryexpression expression) {
+  A_unaryexpression exp
+    = checked_malloc(sizeof(*exp));
+  A_pos pos = A_Pos(col,line); 
+  exp->pos = pos;
+  exp->kind = A_BangUn;
+  exp->u.un_exp = expression;
+  return exp;
+}
+A_unaryexpression A_PosUnExp(int col, int line,
+			     A_postfixexpression expression) {
+  A_unaryexpression exp
+    = checked_malloc(sizeof(*exp));
+  A_pos pos = A_Pos(col,line); 
+  exp->pos = pos;
+  exp->kind = A_PosUn;
+  exp->u.pos_exp = expression;
+  return exp;
+}
+
+A_multiplicativeexpression A_UnMulExp(int col, int line,
+				      A_unaryexpression expression) {
+  A_multiplicativeexpression exp
+    = checked_malloc(sizeof(*exp));
+  A_pos pos = A_Pos(col,line); 
+  exp->pos = pos;
+  exp->kind = A_UnMu;
+  exp->u.un_exp = expression;
+  return exp;
+}
+A_multiplicativeexpression A_MulMulExp(int col, int line,
+				      A_multiplicativeexpression exp1,
+				      A_unaryexpression exp2) {
+  A_multiplicativeexpression exp
+    = checked_malloc(sizeof(*exp));
+  A_pos pos = A_Pos(col,line); 
+  exp->pos = pos;
+  exp->kind = A_MulMu;
+  exp->u.ops.exp1 = exp1;
+  exp->u.ops.exp2 = exp2;
+  return exp;
+}
+A_multiplicativeexpression A_DivMulExp(int col, int line,
+				      A_multiplicativeexpression exp1,
+				       A_unaryexpression exp2) {
+  A_multiplicativeexpression exp
+    = checked_malloc(sizeof(*exp));
+  A_pos pos = A_Pos(col,line); 
+  exp->pos = pos;
+  exp->kind = A_DivMu;
+  exp->u.ops.exp1 = exp1;
+  exp->u.ops.exp2 = exp2;
+  return exp;
+}
+A_multiplicativeexpression A_ModMulExp(int col, int line,
+				      A_multiplicativeexpression exp1,
+				       A_unaryexpression exp2) {
+  A_multiplicativeexpression exp
+    = checked_malloc(sizeof(*exp));
+  A_pos pos = A_Pos(col,line); 
+  exp->pos = pos;
+  exp->kind = A_ModMu;
+  exp->u.ops.exp1 = exp1;
+  exp->u.ops.exp2 = exp2;
+  return exp;
+}
+
+A_additiveexpression A_MulAddExp(int col, int line,
+				 A_multiplicativeexpression expr) {
+  A_additiveexpression exp
+    = checked_malloc(sizeof(*exp));
+  A_pos pos = A_Pos(col,line); 
+  exp->pos = pos;
+  exp->kind = A_MuAd;
+  exp->u.un_exp = expr;
+  return exp;
+}
+A_additiveexpression A_AddAddExp(int col, int line,
+				 A_additiveexpression exp1,
+				 A_multiplicativeexpression exp2) {
+  A_additiveexpression exp
+    = checked_malloc(sizeof(*exp));
+  A_pos pos = A_Pos(col,line); 
+  exp->pos = pos;
+  exp->kind = A_AdAd;
+  exp->u.ops.op1 = exp2;
+  exp->u.ops.op2 = exp1;
+  return exp;
+}
+A_additiveexpression A_MinAddExp(int col, int line,
+				 A_additiveexpression exp1,
+				 A_multiplicativeexpression exp2) {
+  A_additiveexpression exp
+    = checked_malloc(sizeof(*exp));
+  A_pos pos = A_Pos(col,line); 
+  exp->pos = pos;
+  exp->kind = A_MinAd;
+  exp->u.ops.op1 = exp2;
+  exp->u.ops.op2 = exp1;
+  return exp;
+}
+
+A_relationalexpression A_AddRelExp(int col, int line,
+				   A_additiveexpression exp) {
+  A_relationalexpression expression
+    = checked_malloc(sizeof(*expression));
+  A_pos pos = A_Pos(col,line); 
+  expression->pos = pos;
+  expression->kind = A_AdRe;
+  expression->u.un_exp = exp;
+  return expression;
+}
+A_relationalexpression A_LTRelExp(int col, int line,
+				  A_relationalexpression exp1,
+				  A_additiveexpression exp2) {
+  A_relationalexpression expression
+    = checked_malloc(sizeof(*expression));
+  A_pos pos = A_Pos(col,line); 
+  expression->pos = pos;
+  expression->kind = A_LTRe;
+  expression->u.ops.op1 = exp2;
+  expression->u.ops.op2 = exp1;
+  return expression;
+}
+A_relationalexpression A_GTRelExp(int col, int line,
+				  A_relationalexpression exp1,
+				  A_additiveexpression exp2) {
+  A_relationalexpression expression
+    = checked_malloc(sizeof(*expression));
+  A_pos pos = A_Pos(col,line); 
+  expression->pos = pos;
+  expression->kind = A_GTRe;
+  expression->u.ops.op1 = exp2;
+  expression->u.ops.op2 = exp1;
+  return expression;
+}
+A_relationalexpression A_LERelExp(int col, int line,
+				  A_relationalexpression exp1,
+				  A_additiveexpression exp2) {
+  A_relationalexpression expression
+    = checked_malloc(sizeof(*expression));
+  A_pos pos = A_Pos(col,line); 
+  expression->pos = pos;
+  expression->kind = A_LERe;
+  expression->u.ops.op1 = exp2;
+  expression->u.ops.op2 = exp1;
+  return expression;
+
+}
+A_relationalexpression A_GERelExp(int col, int line,
+				  A_relationalexpression exp1,
+				  A_additiveexpression exp2) {
+  A_relationalexpression expression
+    = checked_malloc(sizeof(*expression));
+  A_pos pos = A_Pos(col,line); 
+  expression->pos = pos;
+  expression->kind = A_GERe;
+  expression->u.ops.op1 = exp2;
+  expression->u.ops.op2 = exp1;
+  return expression;
+}
+
+A_equalityexpression A_RatEqExp(int col, int line,
+				A_relationalexpression exp) {
+  A_equalityexpression expression
+    = checked_malloc(sizeof(*expression));
+  A_pos pos = A_Pos(col,line); 
+  expression->pos = pos;
+  expression->kind = A_RaEq;
+  expression->u.un_exp = exp;
+  return expression;
+}
+A_equalityexpression A_EqEqExp(int col, int line,
+			       A_equalityexpression exp1,
+			       A_relationalexpression exp2) {
+  A_equalityexpression expression
+    = checked_malloc(sizeof(*expression));
+  A_pos pos = A_Pos(col,line); 
+  expression->pos = pos;
+  expression->kind = A_EqEq;
+  expression->u.ops.op1 = exp1;
+  expression->u.ops.op2 = exp2;
+  return expression;
+}
+A_equalityexpression A_NEqEqExp(int col, int line,
+				A_equalityexpression exp1,
+				A_relationalexpression exp2) {
+  A_equalityexpression expression
+    = checked_malloc(sizeof(*expression));
+  A_pos pos = A_Pos(col,line); 
+  expression->pos = pos;
+  expression->kind = A_NeEq;
+  expression->u.ops.op1 = exp1;
+  expression->u.ops.op2 = exp2;
+  return expression;
+}
+
+A_conditionalandexpression A_EqConAndExp(int col, int line,
+					 A_equalityexpression exp) {
+  A_conditionalandexpression expression
+    = checked_malloc(sizeof(*expression));
+  A_pos pos = A_Pos(col,line); 
+  expression->pos = pos;
+  expression->kind = A_EqCoA;
+  expression->u.un_exp = exp;
+  return expression;
+}
+A_conditionalandexpression A_AndCondAndExp(int col, int line,
+				     A_conditionalandexpression exp1,
+				     A_equalityexpression exp2) {
+  A_conditionalandexpression expression
+    = checked_malloc(sizeof(*expression));
+  A_pos pos = A_Pos(col,line); 
+  expression->pos = pos;
+  expression->kind = A_AnCoA;
+  expression->u.ops.op1 = exp1;
+  expression->u.ops.op2 = exp2;
+  return expression;
+}
+
+A_conditionalorexpression A_AndCondOrExp(int col, int line,
+				    A_conditionalandexpression exp) {
+  A_conditionalorexpression expression
+    = checked_malloc(sizeof(*expression));
+  A_pos pos = A_Pos(col,line); 
+  expression->pos = pos;
+  expression->kind = A_AnCoO;
+  expression->u.un_exp = exp;
+  return expression;
+}
+A_conditionalorexpression A_OrCondOrExp(int col, int line,
+			     A_conditionalorexpression exp1,
+			     A_conditionalandexpression exp2) {
+  A_conditionalorexpression expression
+    = checked_malloc(sizeof(*expression));
+  A_pos pos = A_Pos(col,line); 
+  expression->pos = pos;
+  expression->kind = A_OrCoO;
+  expression->u.ops.op1 = exp1;
+  expression->u.ops.op2 = exp2;
+  return expression;
+}
+
+A_assignmentexpression A_CondAssExp(int col, int line,
+				    A_conditionalorexpression exp) {
+  A_assignmentexpression expression
+    = checked_malloc(sizeof(*expression));
+  A_pos pos = A_Pos(col,line); 
+  expression->pos = pos;
+  expression->kind = A_ConAs;
+  expression->u.con_exp = exp;
+  return expression;
+}
+A_assignmentexpression A_AssAssExp(int col, int line, A_assignment ass) {
+  A_assignmentexpression expression
+    = checked_malloc(sizeof(*expression));
+  A_pos pos = A_Pos(col,line); 
+  expression->pos = pos;
+  expression->kind = A_AsAs;
+  expression->u.ass_exp = ass;
+  return expression;
+}
+
+A_assignment A_Ass(int col, int line, A_id id, A_assignmentexpression exp) {
+  A_assignment assignment
+    = checked_malloc(sizeof(*assignment));
+  A_pos pos = A_Pos(col,line); 
+  assignment->pos = pos;
+  assignment->id = id;
+  assignment->exp = exp;
+  return assignment;
+}
+A_exp A_AssExp(int col, int line, A_assignmentexpression exp) {
+  A_exp expression
+    = checked_malloc(sizeof(*expression));
+  A_pos pos = A_Pos(col,line); 
+  expression->pos = pos;
+  expression->exp = exp;
+  return expression;
+}
+
+A_pos A_Pos(int col, int line) {
+  A_pos pos = checked_malloc(sizeof(*pos));
+  pos->col = col;
+  pos->line = line;
+  return pos;
+}

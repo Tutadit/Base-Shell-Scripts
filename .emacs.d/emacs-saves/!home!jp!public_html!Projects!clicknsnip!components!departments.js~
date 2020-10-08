@@ -1,0 +1,98 @@
+import React, {useState, setState} from 'react';
+
+import { motion } from "framer-motion";
+
+import data from '../data/departments.json';
+
+export default class Departments extends React.Component {
+
+    constructor(props) {
+        super(props);
+        this.handleDepartment = this.handleDepartment.bind(this);
+        this.state = {
+            show:true,
+            path: `data.departments`,
+            departments: [data.departments],
+            label:[]
+        };        
+    }
+
+    
+    handleDepartment(id) {
+        const department = this.state.departments[0][id];
+        const departments = [...this.state.departments];
+        const label = [...this.state.label];
+        const shop_by = document.getElementById("shop_by_handle");
+        if(department.children) {           
+            !department.children[0].isBack &&
+                department.children.unshift({
+                    label:"...",
+                    isBack:true,
+                    id:"back-"+department.label
+                });
+            label.unshift(shop_by.innerHTML);
+            label.unshift(department.label);
+            departments.unshift(department.children);
+        } else {
+            if(department.isBack) {
+                departments.shift();
+            }
+        }
+        this.setState(state => ({
+            label:label,
+            departments:departments
+        }));
+        shop_by.innerHTML = label.shift();
+    }
+
+    render() {
+        const variants = {
+            hidden: {
+                opacity:0.,
+                transform:'scale(0.8)'                
+            },
+            visible: {
+                opacity:1,
+                transform:'scale(1)'
+            },
+        };
+        const departments = this.state.departments[0];
+        const show = this.state.show;
+        const duration = {
+            appear: 300,
+            enter: 300,
+            exit: 300,
+        };
+
+        return (            
+            <div className="departments-container bg-primary">
+              <div className="departments-header">
+                <h3 id="shop_by_handle"
+                    className="color-white">
+                  Departments
+                </h3>
+              </div>
+              <div className="departments bg-tertiary">
+                {departments.map((department, i) => {
+                    return (                        
+                        <motion.div
+                          variants={variants}
+                          initial='hidden'
+                          animate={this.state.show ? 'visible' : 'hidden'} 
+                          key={department.id}>
+                          <div className="department">
+                            <a className="department_handle btn-white-primary"
+                               onClick={(e)=> {
+                                   this.handleDepartment(i);
+                               }}>
+                              {department.label}
+                            </a>                      
+                          </div>
+                        </motion.div>
+                    );
+                })}
+              </div>
+              </div>
+            );
+    }
+}

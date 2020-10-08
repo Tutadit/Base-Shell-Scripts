@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=0.8, shrink-to-fit=no">
+    <title>Builder</title>
+    <link href="css/jquery.atwho.css" rel="stylesheet">
+    <link href="css/custom.css" rel="stylesheet">
+  </head>
+  <body>
+    <div id="content">
+      <div class="header">
+	<h1>Header</h1>
+      </div>
+    </div>
+    <div id="builder">
+      <button type="button" id="builder-insert">Insert</button>
+      <div class="insert">
+	<button type="button" id="block">Block</button>
+	<button type="button" id="text">Text</button>
+      </div>
+      <div id="options">
+	
+      </div>
+    </div>
+    <script src="http://code.jquery.com/jquery.js"></script>
+    <script src="js/jquery.caret.js"></script>
+    <script src="js/jquery.atwho.js"></script>
+    <script src="builder.js"></script>
+  </body>  
+<html>

@@ -1,0 +1,509 @@
+/*
+ * prabsyn.c - Print Abstract Syntax data structures. Most functions 
+ *           handle an instance of an abstract syntax rule.
+ */
+
+#include <stdio.h>
+#include "util.h"
+#include "absyn.h"  /* abstract syntax data structures */
+#include "prabsyn.h" /* function prototype */
+
+/* local function prototypes */
+static void pr_literal(FILE *out, A_literal v, int d);
+
+static void pr_type (FILE *out, A_type v, int d);
+static void pr_global_dec(FILE *out, A_global_declaration v, int d);
+static void pr_var(FILE *out, A_var_dec  v, int d);
+static void pr_id(FILE *out, A_id v, int d);
+static void pr_func_dec(FILE *out, A_func_dec v, int d);
+static void pr_func_head(FILE *out, A_func_head v, int d);			
+static void pr_func_decor(FILE *out, A_func_decor v, int d);
+static void pr_formal_param_list (FILE *out, A_formal_param_list  v, int d);
+static void pr_formal_param (FILE *out, A_formal_param   v, int d);
+static void pr_main_dec (FILE *out, A_main_dec  v, int d);
+static void pr_main_func_dec (FILE *out, A_main_func_dec v, int d);
+static void pr_block (FILE *out, A_block  v, int d);
+static void pr_block_statements (FILE *out, A_block_statements v, int d);
+static void pr_block_statement (FILE *out, A_block_statement v, int d);
+static void pr_statement (FILE *out, A_statement  v, int d);
+static void pr_state_exp (FILE *out, A_state_exp  v, int d);
+static void pr_primary (FILE *out, A_primary v, int d);
+static void pr_argumentlist (FILE *out, A_argumentlist v, int d);
+static void pr_functioninvocation (FILE *out, A_functioninvocation v, int d);
+static void pr_postficexpression (FILE *out, A_postfixexpression v, int d);
+static void pr_unaryexpression (FILE *out, A_unaryexpression v, int d);
+static void pr_multiplicativeexpression (FILE *out, A_multiplicativeexpression v, int d);
+static void pr_additiveexpression (FILE *out, A_additiveexpression v, int d);
+static void pr_reationalexpression (FILE *out, A_relationalexpression v, int d);
+static void pr_equalityexpression (FILE *out, A_equalityexpression v, int d);
+static void pr_conditionalandexpression (FILE *out, A_conditionalandexpression v, int d);
+static void pr_conditionalorexpression (FILE *out, A_conditionalorexpression v, int d);
+static void pr_assignmentexpression (FILE *out, A_assignmentexpression v, int d);
+static void pr_assignment (FILE *out, A_assignment v, int d);
+static void pr_exp (FILE *out, A_exp v, int d);
+
+
+static void indent(FILE *out, int d) {
+ int i;
+ for (i = 0; i <= d; i++) fprintf(out, " ");
+}
+
+static void pr_literal(FILE *out, A_literal v, int d) {
+  fprintf(out,"\n");
+  indent(out,d);
+  fprintf(out,"LITERAL:");
+  switch (v->kind) {
+  case A_NumL:
+    fprintf(out, "%d", v->u.num_value); 
+    break;
+  case A_LitL:
+    fprintf(out, "%s", v->u.string_value); 
+    break;
+  case A_TrueL:
+    fprintf(out, "true"); 
+    break;
+  case A_FalseL:
+    fprintf(out, "false"); 
+    break;
+  default:
+    assert(0); 
+  }
+}
+static void pr_type (FILE *out, A_type v, int d) {
+  fprintf(out,"\n");
+  indent(out,d);
+  fprintf(out,"TYPE:");
+  switch (v) {
+  case A_int:
+    fprintf(out, "%s", "int");
+    break;
+  case A_bool:
+    fprintf(out, "%s", "bool");
+    break;
+  case A_void:
+    fprintf(out, "%s", "void");
+    break;
+  default:
+    assert(0); 
+  }
+}
+void pr_global_decs(FILE *out, A_global_declarations v,int d) {
+  if ( v != NULL ) {
+    pr_global_decs(out, v->tail, d);
+    pr_global_dec(out, v->head, d);
+  }
+}	
+static void pr_global_dec(FILE *out, A_global_declaration v, int d) {
+  switch (v->kind) {
+  case A_varDec:
+    fprintf(out,"\n");
+    fprintf(out,"VAR_DEC:");
+    pr_var(out, v->u.varDec, d+1);
+    break;
+  case A_funDec:
+    fprintf(out,"\n");
+    fprintf(out,"FUN_DEC:");
+    pr_func_dec(out, v->u.funDec,d+1);
+    break;
+  case A_mainDec:
+    fprintf(out,"\n");
+    fprintf(out,"MAIN_DEC:");
+    pr_main_dec(out,v->u.mainDec,d+1);
+    break;
+  default:
+    assert(0); 
+ }
+}
+static void pr_var(FILE *out, A_var_dec  v, int d) {
+  pr_type(out,v->type,d);
+  pr_id(out,v->id,d);
+}
+static void pr_id(FILE *out, A_id v, int d) {
+  fprintf(out,"\n");
+  indent(out,d);
+  fprintf(out,"ID:");
+  fprintf(out, "%s", v);
+}
+static void pr_func_dec(FILE *out, A_func_dec v, int d) {
+  fprintf(out,"\n");
+  indent(out,d);
+  fprintf(out,"FUNC_HEAD:");
+  pr_func_head(out,v->head,d+1);
+  fprintf(out,"\n");
+  indent(out,d);
+  fprintf(out,"FUNC_BODY:");
+  pr_block(out,v->block,d+1);
+}
+static void pr_func_head(FILE *out, A_func_head v, int d) {
+  pr_func_decor(out,v->dec,d);
+}		
+static void pr_func_decor(FILE *out, A_func_decor v, int d) {
+  pr_type(out,v->type,d);
+  pr_id(out,v->id,d);
+  if(v->params != NULL) {
+    fprintf(out,"\n");
+    indent(out,d);
+    fprintf(out,"PARAMS:");
+    pr_formal_param_list(out,v->params,d+1);
+  }
+}
+static void pr_formal_param_list (FILE *out, A_formal_param_list  v, int d) {
+  if(v != NULL) {
+    pr_formal_param_list(out,v->tail,d); 
+    pr_formal_param(out,v->param,d);
+  }
+}
+static void pr_formal_param (FILE *out, A_formal_param   v, int d) {
+  fprintf(out,"\n");
+  indent(out,d);
+  fprintf(out,"PARAM:");
+  pr_type(out, v->type, d+1);
+  pr_id(out,v->id,d+1);
+}
+static void pr_main_dec (FILE *out, A_main_dec  v, int d) {
+  pr_main_func_dec(out, v->dec, d);
+  fprintf(out,"\n");
+  indent(out,d);
+  fprintf(out,"BODY:");
+  pr_block(out,v->block,d+1);
+}
+static void pr_main_func_dec (FILE *out, A_main_func_dec v, int d) {
+  pr_id(out,v->id,d);
+}
+static void pr_block (FILE *out, A_block  v, int d) {
+  if (v->statements != NULL) {
+    pr_block_statements(out,v->statements,d);
+  }
+}
+static void pr_block_statements (FILE *out, A_block_statements v, int d) {
+  if(v != NULL) {
+    pr_block_statements(out,v->tail,d);
+    pr_block_statement(out,v->statement,d);
+  }
+}
+static void pr_block_statement (FILE *out, A_block_statement v, int d) {
+  switch (v->kind) {
+  case A_varState:
+    fprintf(out,"\n");
+    indent(out,d);
+    fprintf(out,"VAR_DEC:");
+    pr_var(out, v->u.var_dec, d+1);
+    break;
+  case A_StateState:
+    pr_statement(out,v->u.statement,d);
+    break;
+  default:
+    assert(0); 
+ }
+}
+static void pr_statement (FILE *out, A_statement  v, int d) {
+  switch (v->kind) {
+  case A_NilSt:
+    break;
+  case A_BlockSt:
+    pr_block(out,v->u.block,d);
+    break;
+  case A_St:
+    pr_state_exp(out,v->u.state_exp,d);
+    break;
+  case A_BreakSt:
+    fprintf(out,"\n");
+    indent(out,d);
+    fprintf(out, "BREAK");
+    break;
+  case A_ReturnSt:
+    fprintf(out,"\n");
+    indent(out,d);
+    fprintf(out, "RETURN:");
+    pr_exp(out,v->u.exp,d+1);
+    break;
+  case A_EmptyReturnSt:
+    fprintf(out,"\n");
+    indent(out,d);
+    fprintf(out, "RETURN");
+    break;
+  case A_IfSt:
+    fprintf(out,"\n");
+    indent(out,d);
+    fprintf(out, "IF:");
+    pr_exp(out,v->u.iff.exp,d+1);
+    fprintf(out,"\n");
+    indent(out,d);
+    fprintf(out, "THEN:");
+    pr_statement(out,v->u.iff.statement,d+1);
+    break;
+  case A_IfElseSt:
+    fprintf(out,"\n");
+    indent(out,d);
+    fprintf(out, "IF:");
+    pr_exp(out,v->u.ife.exp,d+1);
+    fprintf(out,"\n");
+    indent(out,d);
+    fprintf(out, "THEN:");
+    pr_statement(out,v->u.ife.if_body,d+1);
+    fprintf(out,"\n");
+    indent(out,d);
+    fprintf(out, "ELSE:");
+    pr_statement(out,v->u.ife.else_body,d+1);
+    break;
+  case A_WhileSt:
+    fprintf(out,"\n");
+    indent(out,d);
+    fprintf(out, "WHILE:");
+    pr_exp(out,v->u.whilee.exp,d+1);
+    fprintf(out,"\n");
+    indent(out,d);
+    fprintf(out, "DO:");    
+    pr_statement(out,v->u.whilee.body,d+1);
+    break;
+  default:
+    assert(0); 
+ }
+}
+static void pr_state_exp (FILE *out, A_state_exp  v, int d) {
+  switch(v->kind) {
+  case A_AssSt:
+    pr_assignment(out,v->u.assignment, d);
+    break;
+  case A_FunInSt:
+    pr_functioninvocation(out,v->u.invocation, d);
+    break;
+  default:
+    assert(0);
+  }
+}
+static void pr_primary (FILE *out, A_primary v, int d) {
+  switch(v->kind) {
+  case A_LitP:
+    pr_literal(out,v->u.literal,d);
+    break;
+  case A_ExpP:
+    pr_exp(out,v->u.exp,d);
+    break;
+  case A_FunInP:
+    pr_functioninvocation(out,v->u.func_inv,d);
+    break;
+  default:
+    assert(0);
+  }
+}
+static void pr_argumentlist (FILE *out, A_argumentlist v, int d) {
+  if(v != NULL) {
+    pr_exp(out,v->exp,d);
+    pr_argumentlist(out,v->tail,d);
+  }
+}
+static void pr_functioninvocation (FILE *out, A_functioninvocation v, int d) {
+  fprintf(out,"\n");
+  indent(out,d);
+  fprintf(out,"CALL:");
+  pr_id(out,v->id,d+1);
+  pr_argumentlist(out,v->list,d+1);
+}
+static void pr_postficexpression (FILE *out, A_postfixexpression v, int d) {
+  switch(v->kind) {
+  case A_PrimPo:
+    pr_primary(out,v->u.primary,d);
+    break;
+  case A_IdPo:
+    pr_id(out,v->u.id,d);
+    break;
+  default:
+    assert(0);
+  }
+}
+static void pr_unaryexpression (FILE *out, A_unaryexpression v, int d) {
+
+  switch(v->kind){
+  case A_MinUn:
+    fprintf(out,"\n");
+    indent(out,d);
+    fprintf(out, "-:");
+    pr_unaryexpression(out,v->u.un_exp,d+1);
+    break;
+  case A_BangUn:
+    fprintf(out,"\n");
+    indent(out,d);
+    fprintf(out, "!:");
+    pr_unaryexpression(out,v->u.un_exp,d+1);
+    break;
+  case A_PosUn:
+    pr_postficexpression(out,v->u.pos_exp,d);
+    break;
+  default:
+    assert(0);
+  }
+}
+static void pr_multiplicativeexpression (FILE *out, A_multiplicativeexpression v, int d) {
+
+  switch(v->kind){
+  case A_UnMu:
+    pr_unaryexpression(out,v->u.un_exp,d);
+    break;
+  case A_MulMu:
+    fprintf(out,"\n");
+    indent(out,d);
+    fprintf(out, "*:");
+    pr_multiplicativeexpression(out,v->u.ops.exp1,d+1);
+    pr_unaryexpression(out,v->u.ops.exp2,d+1);
+    break;
+  case A_DivMu:
+    fprintf(out,"\n");
+    indent(out,d);
+    fprintf(out, "/:");
+    pr_multiplicativeexpression(out,v->u.ops.exp1,d+1);
+    pr_unaryexpression(out,v->u.ops.exp2,d+1);
+  case A_ModMu:
+    fprintf(out,"\n");
+    indent(out,d);
+    fprintf(out, "%%:");
+    pr_multiplicativeexpression(out,v->u.ops.exp1,d+1);
+    pr_unaryexpression(out,v->u.ops.exp2,d+1);
+    break;
+  default:
+    assert(0);
+  }
+}
+static void pr_additiveexpression (FILE *out, A_additiveexpression v, int d) {
+
+  switch(v->kind){
+  case A_MuAd:
+    pr_multiplicativeexpression(out,v->u.un_exp,d);
+    break;
+  case A_AdAd:
+    fprintf(out,"\n");
+    indent(out,d);
+    fprintf(out, "+:");
+    pr_additiveexpression(out,v->u.ops.op2,d+1);
+    pr_multiplicativeexpression(out,v->u.ops.op1,d+1);
+    break;
+  case A_MinAd:
+    fprintf(out,"\n");
+    indent(out,d);
+    fprintf(out, "-:");
+    pr_additiveexpression(out,v->u.ops.op2,d+1);
+    pr_multiplicativeexpression(out,v->u.ops.op1,d+1);
+    break;
+  default:
+    assert(0);
+  }
+}
+static void pr_reationalexpression (FILE *out, A_relationalexpression v, int d) {
+
+  switch(v->kind){
+  case A_AdRe:
+    pr_additiveexpression(out,v->u.un_exp,d);
+    break;
+  case A_LTRe:
+    fprintf(out,"\n");
+    indent(out,d);
+    fprintf(out, "<:");
+    pr_reationalexpression(out,v->u.ops.op2,d+1);
+    pr_additiveexpression(out,v->u.ops.op1,d+1);
+    break;
+  case A_GTRe:
+    fprintf(out,"\n");
+    indent(out,d);
+    fprintf(out, ">:");
+    pr_reationalexpression(out,v->u.ops.op2,d+1);
+    pr_additiveexpression(out,v->u.ops.op1,d+1);    
+    break;
+  case A_LERe:
+    fprintf(out,"\n");
+    indent(out,d);
+    fprintf(out, "<=:");
+    pr_reationalexpression(out,v->u.ops.op2,d+1);
+    pr_additiveexpression(out,v->u.ops.op1,d+1);
+    break;
+  case A_GERe:
+    fprintf(out,"\n");
+    indent(out,d);
+    fprintf(out, ">=:");
+    pr_reationalexpression(out,v->u.ops.op2,d+1);
+    pr_additiveexpression(out,v->u.ops.op1,d+1);    
+    break;
+  default:
+    assert(0);
+  }
+}
+static void pr_equalityexpression (FILE *out, A_equalityexpression v, int d) {
+
+  switch(v->kind){
+  case A_RaEq:
+    pr_reationalexpression(out,v->u.un_exp,d);
+    break;
+  case A_EqEq:
+    fprintf(out,"\n");
+    indent(out,d);
+    fprintf(out, "==:");
+    pr_equalityexpression(out,v->u.ops.op1,d+1);
+    pr_reationalexpression(out,v->u.ops.op2,d+1);
+    break;
+  case A_NeEq:
+    fprintf(out,"\n");
+    indent(out,d);
+    fprintf(out, "==:");
+    pr_equalityexpression(out,v->u.ops.op1,d+1);
+    pr_reationalexpression(out,v->u.ops.op2,d+1);
+    break;
+  default:
+    assert(0);
+  }
+}
+static void pr_conditionalandexpression (FILE *out, A_conditionalandexpression v, int d) {
+  indent(out,d);
+  switch(v->kind) {
+  case A_EqCoA:
+    pr_equalityexpression(out,v->u.un_exp,d);
+    break;
+  case A_AnCoA:
+    fprintf(out,"\n");
+    indent(out,d);
+    fprintf(out, "AND:");
+    pr_conditionalandexpression(out,v->u.ops.op1,d+1);
+    pr_equalityexpression(out,v->u.ops.op2,d+1);
+    break;
+  default:
+    assert(0);
+  }
+}
+static void pr_conditionalorexpression (FILE *out, A_conditionalorexpression v, int d) {
+
+  switch(v->kind) {
+  case A_AnCoO:
+    pr_conditionalandexpression(out,v->u.un_exp,d);
+    break;
+  case A_OrCoO:
+    fprintf(out,"\n");
+    indent(out,d);
+    fprintf(out, "OR:");
+    pr_conditionalorexpression(out,v->u.ops.op1,d+1);
+    pr_conditionalandexpression(out,v->u.ops.op2,d+1);
+    break;
+  default:
+    assert(0);
+  }
+}
+static void pr_assignmentexpression (FILE *out, A_assignmentexpression v, int d) {
+  indent(out,d);
+  switch(v->kind) {
+  case A_ConAs:
+    pr_conditionalorexpression(out,v->u.con_exp,d);
+    break;
+  case A_AsAs:
+    pr_assignment(out,v->u.ass_exp,d);
+    break;
+  default:
+    assert(0);
+  }
+}
+static void pr_assignment (FILE *out, A_assignment v, int d) {
+  fprintf(out,"\n");
+  indent(out,d);
+  fprintf(out,"ASSIGN:");
+  pr_id(out,v->id,d+1);
+  pr_assignmentexpression(out,v->exp,d+1);
+}
+static void pr_exp (FILE *out, A_exp v, int d) {
+  pr_assignmentexpression(out,v->exp,d);
+}

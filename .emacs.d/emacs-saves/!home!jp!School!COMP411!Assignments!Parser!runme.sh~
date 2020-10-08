@@ -1,0 +1,9 @@
+#!/bin/bash
+make
+TEST_FILES=tests/*
+for test in $TEST_FILES
+do
+  echo "Testing with $test file..."
+  # take action on each file. $f store current file name
+  ./bin/lextest $test
+done

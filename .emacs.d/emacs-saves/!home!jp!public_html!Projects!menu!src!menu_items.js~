@@ -1,0 +1,69 @@
+
+class  menuItems extends React.Component {
+    render() {
+        return(
+            <div className='options '>
+              <div className="item">
+                <div className="item_handle_wrapper">
+                  <div className="item_handle">
+                    <a href="">
+                      My lists
+                    </a>
+                  </div>
+                  <div className="item_extra">
+                    <a href="">
+                      <MdPlaylistAdd />
+                    </a>
+                  </div>
+                </div>
+                <ul className="list">
+                  <li>
+                    <a href="">Watched</a>
+                  </li>
+                  <li>
+                    <a href="">Tech</a>
+                  </li>
+                  <li>
+                    <a href="">Fashion</a>
+                  </li>
+                </ul>
+              </div>
+              <div className="item">
+                <div className="item_handle_wrapper">
+                  <div className="item_handle">
+                    <a >
+                      Shop by: <span id="shop_by_handle">All</span>
+                    </a>
+                  </div>
+                  <div className="item_extra">
+                    <a onClick={changeDisplay}>
+                      { isList ?
+                        <BsFillGridFill />:
+                        <BsList />}                  
+                    </a>
+                  </div>
+                </div>
+                <Departments
+                  isList={isList}/>              
+              </div>
+              <div className="item">
+                <div className="item_handle_wrapper">
+                  <div className="item_handle">
+                    <input className="search"
+                           type="text"
+                           placeholder="Search"/>
+                  </div>
+                  <div className="item_extra" >
+                    <a onClick={changeDisplay}>
+                      <BsSearch />
+                      
+                    </a>
+                  </div>
+                </div>
+                <div className="search_filters">
+                  <SearchFilters />
+                </div>
+              </div>
+            </div>);
+    }        
+}

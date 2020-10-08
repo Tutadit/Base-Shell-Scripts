@@ -1,0 +1,28 @@
+:METADATA:
+#+TITLE:        English 303
+#+AUTHOR:       Juan Pablo Lozano Sarmiento
+#+KEYWORDS:     
+#+SUBTITLE:     30022579
+#+DATE:         \today
+:END:
+:LATEX:
+#+LATEX_CLASS: book
+#+LATEX_CLASS_OPTIONS: [a4paper,titlepage,openany,oneside]
+#+LATEX_HEADER:\usepackage{fullpage} \usepackage{fancyhdr}
+#+LATEX:\makeatletter
+#+LATEX:\renewcommand{\@chapapp}{Section}
+#+LATEX:\makeatother
+#+LATEX:\maketitle
+:END:
+:OPTIONS:
+#+OPTIONS: H:5 num:5
+#+OPTIONS: num:nil toc:nil
+:END:
+* Final Exam
+** Part One
+*** Passage 2
+    This passage is taken from "The Mirror Stage as Formative of the Function of the I as Revealed in Psychoanalytic Experience" by Jaques Lacan. The "Ideal-I" Lacan speaks of is the self before introduction to the world of language. Lacan believes this "Ideal-I" to be the "source of secondary identifications", meaning those moments of identification following the initial identification encountered by the introduction to the Symbolic Order. Lacan places "Libidinal normalization" under "secondary identifications", meaning that sexual desires, a self-discovering ritual, are made as part of the self through identification. Lacan observes how this "ideal-I" holds a pure form of self before its "social determination", meaning before it is made into a socially acceptable human. Lacan notes that within this "Ideal-I", the child is heading towards an unreachable point, a point which must be "resolved as his discordance with his own reality", meaning that the reality of the Ideal-I is not that of the social reality, and thus the child will need to deal with such differences in reality.
+*** Passage 4
+    This passage is taken from "Structure, Sign and Play in the Discourse of the Human Sciences" by Jaques Derrida. Within this complex passage Derrida argues that the "center is at the center of the totality", meaning that this center is the root of the structure and allows for play within the structure. Yet he observes that because this center is unplayable then it is outside of the totality, "elsewhere", where it cannot be touched. Derrida suggests that the "center of centered structure...is contradictorily coherent" meaning that it makes sense within the structure but fails to make sense without it. Derrida finishes this passage by observing that "coherence in contradiction expresses the force of desire", taken to mean that the push of desire is to make sense of what doesn't.
+*** Passage 5
+    This passage, taken from "The Order of Discourse" by Michel Foucault, 

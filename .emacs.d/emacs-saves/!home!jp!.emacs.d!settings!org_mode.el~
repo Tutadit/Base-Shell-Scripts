@@ -1,0 +1,56 @@
+;; Setting for Org-Mode
+
+;; Capture Templates
+(setq org-capture-templates
+      '(("t" "Todo" entry (file+headline "~/Notes/tasks.org" "Tasks")
+         "* TODO %?\n  %i\n  %a")
+        ("j" "Journal" entry (file+datetree "~/Notes/journal.org")
+         "* %?\nEntered on %U\n  %i\n  %a")))
+
+;; Set Capture on same window
+(defvar my-org-capture-before-config nil
+  "Window configuration before `org-capture'.")
+
+(defadvice org-capture (before save-config activate)
+  "Save the window configuration before `org-capture'."
+  (setq my-org-capture-before-config (current-window-configuration)))
+
+(add-hook 'org-capture-mode-hook 'delete-other-windows)
+
+(defun my-org-capture-cleanup ()
+  "Clean up the frame created while capturing via org-protocol."
+  ;; In case we run capture from emacs itself and not an external app,
+  ;; we want to restore the old window config
+  (when my-org-capture-before-config
+    (set-window-configuration my-org-capture-before-config))
+  (-when-let ((&alist 'name name) (frame-parameters))
+    (when (equal name "org-protocol-capture")
+      (delete-frame))))
+
+(add-hook 'org-capture-after-finalize-hook 'my-org-capture-cleanup)
+
+;; Set Capture shortcut globally
+(global-set-key (kbd "C-c c") 'org-capture)
+
+
+;; Export directory
+(defun org-export-output-file-name-modified (orig-fun extension &optional subtreep pub-dir)
+  (unless pub-dir
+    (setq pub-dir "exports")
+    (unless (file-directory-p pub-dir)
+      (make-directory pub-dir)))
+  (apply orig-fun extension subtreep pub-dir nil))
+(advice-add 'org-export-output-file-name :around #'org-export-output-file-name-modified)
+
+
+;;
+;; Hooks
+;;
+(defun nolinum ()
+  (global-linum-mode 0)
+  (linum-mode 0)
+)
+;; Enable visual line mode
+(add-hook 'org-mode-hook 'visual-line-mode)
+(add-hook 'org-mode-hook 'flyspell-mode)
+(add-hook 'org-mode-hook 'nolinum)

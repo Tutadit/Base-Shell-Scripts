@@ -1,0 +1,44 @@
+import React, {useState} from 'react';
+import {FaPepperHot} from 'react-icons/fa';
+import {RiMenu5Line} from 'react-icons/ri';
+import Options from './options';
+
+function Navigation(props) {
+
+    const [menuIsOpen,setIsOpen] = useState(false);
+
+    function openMenu() {
+        setIsOpen(!menuIsOpen);
+    }    
+    
+    function afterOpenMenu() {
+        // references are now sync'd and can be accessed.
+        
+    }
+    
+    function closeMenu(){
+        setIsOpen(false);
+    }
+
+    return (
+        <div className="navbar">
+          <div className="navbar-item">
+            <img className="logo" src="/logo.png"/>
+          </div>
+          
+          <div className="navbar-item">
+            <input type="text"
+                   placeholder="Search"
+                   className="navbar-search"/>
+          </div>
+          <div className="navbar-item">
+            <a className="deals">
+              <FaPepperHot />
+              Deals
+            </a>
+          </div>
+        </div>
+    );
+}
+
+export default Navigation;

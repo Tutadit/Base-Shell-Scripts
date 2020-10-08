@@ -1,0 +1,12 @@
+#!/usr/bin/bash
+
+REC_WIDTH=$(bspc query -T -n | jq '.rectangle.width')
+REC_HEIGHT=$(bspc query -T -n | jq '.rectangle.height')
+
+REC_X=$(bspc query -T -n | jq '.rectangle.x')
+REC_Y=$(bspc query -T -n | jq '.rectangle.y')
+
+DX=$(expr 0 - $REC_X)
+DY=$(expr 0 - $REC_Y)
+
+bspc node -v $DX $DY

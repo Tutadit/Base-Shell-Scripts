@@ -1,0 +1,55 @@
+% Created 2020-03-17 Tue 10:52
+% Intended LaTeX compiler: pdflatex
+\documentclass[a4paper,openany,oneside,12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{graphicx}
+\usepackage{grffile}
+\usepackage{longtable}
+\usepackage{wrapfig}
+\usepackage{rotating}
+\usepackage[normalem]{ulem}
+\usepackage{amsmath}
+\usepackage{textcomp}
+\usepackage{amssymb}
+\usepackage{capt-of}
+\usepackage{hyperref}
+\usepackage{fullpage} \usepackage{fancyhdr}
+\usepackage{setspace}
+\doublespacing
+\newcommand{\bibent}{\noindent \hangindent 40pt}
+\newenvironment{workscited}{\begin{center} Works Cited \end{center}}{\newpage }
+\date{\today}
+\title{}
+\hypersetup{
+ pdfauthor={},
+ pdftitle={},
+ pdfkeywords={},
+ pdfsubject={},
+ pdfcreator={Emacs 26.3 (Org mode 9.1.9)}, 
+ pdflang={English}}
+\begin{document}
+
+Juan Pablo Lozano Sarmiento \\
+30022579 \\
+English 303/01 \\
+Topic \# 1 \\
+\begin{center}
+Critical Essay Proposal
+\end{center}
+For the critical essay I will be applying psychoanalytic and feminist criticism to the novel "Disgrace" by J.M. Coetzee. The thesis of the essay will roughly be: In the novel Disgrace by J.M. Coetzee, David Lurie, a stubborn misogynistic man who's "temperament is not going to change, [as] he is too old for that", is taken through a series of events which help him overcome his fear of intimacy as well as develop a respect for woman. I will argue this by establishing the ways in which David's fear of intimacy is implied, such as his obsession with sex and it's passionless form. From then I will show he's misogynistic ways, such as the rape of Melanie. I will then show the ways in which the both are interconnected and finish by showing how David is able to overcome his fear of intimacy by gaining a perspective of woman he lacked.
+
+
+sex used as a method of domination.
+a way of filling in a void
+as a source of shame
+fear of intimacy 
+
+In his novel "Disgrace" J.M. Coetzee paints a world where sex and a patriarchal mentality intertwine. Despite 
+
+how do these two men use women to gain their power?And how do they deal with women?
+
+The mistreatment of woman 
+
+Looking at Disgrace from a feminist perspective reveals a mistreatment of woman tone towards patriarchal ideology,
+\end{document}

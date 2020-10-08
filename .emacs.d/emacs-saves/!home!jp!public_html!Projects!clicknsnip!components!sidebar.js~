@@ -1,0 +1,19 @@
+import React, {useState} from 'react';
+import data from '../data/data.json';
+import SidebarItem from './sidebar_item';
+
+function Sidebar(props) {    
+    
+    return(
+	<div className="sidebar">
+            {data.filters.map((item,i) => {
+                return(
+                    <SidebarItem item={item}
+                                 key={item.id}/>
+                );
+            })}            
+	</div>
+    );
+}
+
+export default Sidebar;

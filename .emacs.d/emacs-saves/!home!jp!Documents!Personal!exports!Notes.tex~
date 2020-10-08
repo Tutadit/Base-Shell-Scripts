@@ -1,0 +1,172 @@
+% Created 2019-12-26 Thu 13:31
+% Intended LaTeX compiler: pdflatex
+\documentclass[a4paper,titlepage,openany,oneside]{book}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{graphicx}
+\usepackage{grffile}
+\usepackage{longtable}
+\usepackage{wrapfig}
+\usepackage{rotating}
+\usepackage[normalem]{ulem}
+\usepackage{amsmath}
+\usepackage{textcomp}
+\usepackage{amssymb}
+\usepackage{capt-of}
+\usepackage{hyperref}
+\usepackage{fullpage} \usepackage{fancyhdr}
+\author{Juanpa}
+\date{\today}
+\title{Some notes\\\medskip
+\large Read at your own risk}
+\hypersetup{
+ pdfauthor={Juanpa},
+ pdftitle={Some notes},
+ pdfkeywords={Notes, Thoughts},
+ pdfsubject={Feel the cringe},
+ pdfcreator={Emacs 26.3 (Org mode 9.1.9)}, 
+ pdflang={English}}
+\begin{document}
+
+\maketitle
+\makeatletter
+\renewcommand{\@chapapp}{Section}
+\makeatother
+\maketitle
+\part*{2019}
+\label{sec:orgb7a824b}
+\chapter*{November}
+\label{sec:orge36f9db}
+\section*{Kianah Banana}
+\label{sec:org97012cf}
+\begin{verse}
+I sit alone, in a crowded place\\
+My mind a brick, swallowed by darkness\\
+The warmest hug by the cold unknown\\
+Comfort blooming through my absence\\
+\vspace*{1em}
+I see life fly by, without a trace\\
+Memory, a thought that fades away\\
+My broken soul an empty place\\
+Numbly isolated, I decay\\
+\vspace*{1em}
+Decisions made by someone else\\
+A brute, disguised by peace\\
+My world rots and falls apart\\
+The audience, only me\\
+\vspace*{1em}
+Here I am, a bleak existence\\
+Pleasure running through my veins\\
+From them, I need assistance\\
+A way to break out of this chains\\
+\vspace*{1em}
+---\\
+\vspace*{1em}
+Pay attention, you sad chump\\
+You're so desperate to find a way\\
+Yet you quit on the first bump\\
+\vspace*{1em}
+You keep asking for assistance\\
+For some way to make repairs\\
+But you never make the distance\\
+Between here and in there\\
+\vspace*{1em}
+I don't think you get it kid\\
+I can tell you what to think\\
+I can tell you what to do\\
+I can give you opportunity\\
+But there is nothing without you\\
+\end{verse}
+\section*{A poem}
+\label{sec:org7237c3a}
+\begin{verse}
+This is a line of my poem\\
+This second one follows it\\
+Make it flow with low hum\\
+Das it now is lit\\
+\end{verse}
+\section*{I'm tired}
+\label{sec:orgc4f6f27}
+\begin{verse}
+I sit here by myself\\
+Wondering what's next\\
+Have to write some papers\\
+But I ain't about the text\\
+\end{verse}
+\chapter*{December}
+\label{sec:org3bd5695}
+\section*{Here is me}
+\label{sec:orgc828794}
+You is you
+Nobody else 
+
+Why you
+who knows
+
+You in control
+
+It's doable 
+It's worth it.
+
+Grow up
+\section*{There is why}
+\label{sec:orgf8d61b2}
+Do you exist in the same way that a rock exists
+Or are you just a fluke of time.
+Are you physical? 
+who knows
+\section*{Me}
+\label{sec:org1188995}
+\begin{verse}
+\emph{\textbf{I}} exist\\
+What am I?\\
+\vspace*{1em}
+My thoughts me?\\
+My body me?\\
+My feelings me?\\
+My memories me?\\
+My knowledge me?\\
+\vspace*{1em}
+Here is the thing\\
+I was born not too long ago\\
+When this happened I had\\
+None of the memories\\
+None of the knowledge\\
+None of the feelings\\
+None of the thoughts\\
+None of the body\\
+That make up my existence today\\
+\vspace*{1em}
+Ok cool\\
+So what did I have?\\
+Me\\
+\vspace*{1em}
+Consciousness\\
+\end{verse}
+\section*{All of it}
+\label{sec:org4ee5f40}
+\begin{verse}
+Everything is made up of the same essence\\
+Everything is energy\\
+\vspace*{1em}
+Suppose we have a box that contains everything\\
+There is no thing outside of the box\\
+At this point the box cannot change\\
+If there is no change then there is no time\\
+There is no place there is no thing\\
+There is nothing\\
+\vspace*{1em}
+Everything leads to nothing\\
+\vspace*{1em}
+Now \emph{nothing} is impossible\\
+It cannot be, for if it could\\
+it would stop being nothing\\
+it would be something that is\\
+\vspace*{1em}
+So nothing is impossible, yet everything is nothing\\
+So everything is impossible. It cannot be.\\
+\vspace*{1em}
+So this means that no thing is everything. Because as soon\\
+as something becomes everything then it ceases to exist.\\
+\end{verse}
+\end{document}

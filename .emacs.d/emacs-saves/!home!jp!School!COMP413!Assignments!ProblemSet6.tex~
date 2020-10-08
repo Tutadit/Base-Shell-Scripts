@@ -1,0 +1,207 @@
+\documentclass{cpsc413Solutions}
+\usepackage{amsmath}
+\usepackage{qtree}
+\usepackage{mathtools}
+\usepackage{algorithm}
+\usepackage[noend]{algpseudocode}
+
+\MakeRobust{\Call}
+
+\coursetitle{Design and Analysis of Algorithms}
+\courselabel{CPSC 413}
+\exercisesheet{Problem Set \#[6]}{}
+\student{Juan Pablo Lozano Sarmiento - 30022579}
+\semester{Winter 2020}
+
+\begin{document}
+
+\team{}
+\sources{}
+
+\begin{problemlist}
+  \pbitem [2nd problem]
+  \begin{problem}
+    \begin{answer}
+      (a) \\
+      Pre-Conditions:
+      \begin{itemize}
+      \item $n$, the size of the board
+      \item Set of pairs $P$, where pairs $(x,y)$ representing money earned/lost when making a move from square x to y for all possible legal moves.
+      \end{itemize}
+      Post-Conditions:
+      \begin{itemize}
+      \item Set of pairs $S$, where $(x,y)$ representing moves in order to get from the bottom of the board to the top with a maximum profit.
+      \end{itemize}
+      (b) \\
+      Let $d[i,j]$ represent the maximum profit earned to square $(i,j)$, then
+      \begin{equation}
+        \begin{aligned}
+          d[i,j] &=
+          \begin{cases}
+            0, \text{if $j=0$} \\
+            \text{max}(d[i,j-1],d[i-1,j-1]) + p(i,j), \text{ if $i = n-1$} \\
+            \text{max}(d[i,j-1],d[i+1,j-1]) + p(i,j), \text{ if $i = 0$} \\
+            \text{max}(d[i,j-1],d[i-1,j-1],d[i+1,j-1]) + p(i,j), \text{ otherwise} \\
+          \end{cases}
+        \end{aligned}
+      \end{equation}
+      (c) \\
+      \begin{algorithm}
+        \caption{Find the maximum profit to square $(i,j)$ recursivley}
+        \begin{algorithmic}[1]
+          \Function{FMPR}{$(i,j),n,p$}
+          \If{$j = 0$}
+          \State{\Return{$0$}}
+          \EndIf
+          \State{$\downarrow = (i,j-1)$}
+          \State{$\swarrow = (i-1,j-1)$}
+          \State{$\searrow =(i+1,j-1)$}
+          \If{$i = n-1$}
+          \State{
+            \Return{
+              \Call{max}{\Call{FMPR}{$\downarrow$},\Call{FMPR}{$\swarrow$}}$+ p(i,j)$
+            }
+          }
+          \ElsIf{$i = 0$}
+          \State{
+            \Return{
+              \Call{max}{\Call{FMPR}{$\downarrow$},\Call{FMPR}{$\searrow$}}$+ p(i,j)$
+            }
+          }
+          \Else
+          \State{
+            \Return{
+              \Call{max}{\Call{FMPR}{$\downarrow$},\Call{FMPR}{$\swarrow$},\Call{FMPR}{$\searrow$}}$+ p(i,j)$
+            }
+          }
+          \EndIf
+          \EndFunction
+          \Function{Driver}{$n,p$}
+          \State{$m=0$}\Comment{Max profit tracker}
+          \State{$t=0$}
+          \For{$i=0,i<n,i++$}
+          \State{$t=$\Call{FMPR}{$(1,n-1),n,p$}}
+          \If{$t>m$}
+          $m=t$
+          \EndIf
+          \EndFor
+          \State{\Return{$m$}}
+          \EndFunction
+        \end{algorithmic}
+      \end{algorithm} \\
+      (d) \\
+      \begin{equation}
+        \begin{aligned}
+          T(N) \le 3T(N-1) + c, \text{worst case $0 < i < n-1$}
+        \end{aligned}
+      \end{equation} \\
+      (e) \\
+      Substitution Method: \\
+      \begin{equation}
+        \begin{aligned}
+          T(1) &\le c \\
+          T(2) &\le 3T(2-1) + c \\
+          T(2) &\le 3T(1) + c \\
+          T(2) &\le 3c + c \\
+          T(3) &\le 3T(3-1) + c \\
+          T(3) &\le 3T(2) + c \\
+          T(3) &\le 3(3c+c) + c \\
+          T(4) &\le 3T(4-1) + c \\
+          T(4) &\le 3T(3) + c \\
+          T(4) &\le 3(3(3c+c)+c) + c \\
+          T(N) &\le c3^N
+        \end{aligned}
+      \end{equation} \\
+      We guess that $T(N) \in O(3^N)$ \\
+
+      Theorem: there exists constants $a$ and $n_0$ such that
+      $$T(N) \le a3^N \texttt{ for all } N \ge n_0$$
+
+      Base Case: ($N \le 1$) \\
+      For any $N \le 1$, $T(n)$ is bounded by some constant, call it $d$. \\
+      As long as $a>d$, we have that
+      $$n_0 \le N \le 1 \implies T(N) \le d \le a \le a3^N$$
+
+      Induction Hypothesis: ($N > 1$) \\
+      assume $$T(k) < a3^k \texttt{ for all } k < n$$
+
+      \begin{equation}
+        \begin{aligned}
+          T(N) &\le 3T(N-1) + c \\ 
+          &\le a*3^N + c \\ 
+        \end{aligned}
+      \end{equation}
+      As long as $a$ meets the critirea to satisfy the inequality, which it can. Then $T(N) \in O(3^N)$.
+    \end{answer}
+    (f) \\
+    
+    \begin{algorithm}
+        \caption{Find the maximum profit to square $(i,j)$ dynamically}
+        \begin{algorithmic}[1]
+          \Function{FMP}{$n,p$}
+          \State{d[n,n]}\Comment{Represents max profit to square $(i,j)$}
+          \State{s[n,n]}\Comment{Steps taken}
+          \State{m=0}\Comment{Index of last square giving max profit}
+          \For{$i=0,i<n,i++$}
+          \For{$j=0,j<n,j++$}
+          \State{$d[i,j] = 0$}
+          \EndFor
+          \EndFor
+          \State{$\downarrow = d[i,j-1]$}
+          \State{$\swarrow = d[i-1,j-1]$}
+          \State{$\searrow = d[i+1,j-1]$}
+          \For{$i=0,i<n,i++$}
+          \For{$j=1,j<n,j++$}
+          \If{$i=0$}
+          \If{$\downarrow > \searrow$}
+          \State{$d[i,j] = \downarrow + p(i,j)$}
+          \State{$s[i,j] = \downarrow$}
+          \Else
+          \State{$d[i,j] = \searrow + p(i,j)$}
+          \State{$s[i,j] = \searrow$}
+          \EndIf
+          \ElsIf{$i=n-1$}
+          \If{$\downarrow > \swarrow$}
+          \State{$d[i,j] = \downarrow + p(i,j)$}
+          \State{$s[i,j] = \downarrow$}
+          \Else
+          \State{$d[i,j] = \swarrow + p(i,j)$}
+          \State{$s[i,j] = \swarrow$}
+          \EndIf
+          \Else
+          \If{$\downarrow > \swarrow AND \downarrow > \searrow$}
+          \State{$d[i,j] = \downarrow + p(i,j)$}
+          \State{$s[i,j] = \downarrow$}
+          \ElsIf{$\swarrow > downarrow AND \swarrow > searrow$}
+          \State{$d[i,j] = \swarrow + p(i,j)$}
+          \State{$s[i,j] = \swarrow$}
+          \Else
+          \State{$d[i,j] = \searrow + p(i,j)$}
+          \State{$s[i,j] = \searrow$}
+          \EndIf
+          \EndIf
+          \If{$j=n-1 AND i > 0$}
+          \If{$d[i,j] > d[i,m]$}
+          \State{$m = i$}
+          \EndIf
+          \EndIf
+          \EndFor
+          \EndFor
+          \State{\Call{Print}{Greates profit is $d[m,n-1]$, in quare $(m,n-1)$and the path from it is}}
+          \State{\Call{PrintPath}{$s,n,m$}}
+          \EndFunction
+          \Function{PrintPath}{$s,n,m$}
+          \For{$i=n-1,i>=0,i--$}
+          \If{$s[m,i]=\searrow$}
+          \State{$m=m+1$}
+          \ElsIf{$s[m,i]=\swarrow$}
+          \State{$m=m-1$}
+          \EndIf
+          \State{\Call{Print}{$(m,i) \to (m,i-1)$}}
+          \EndFor
+          \EndFunction
+        \end{algorithmic}
+      \end{algorithm}
+  \end{problem}
+\end{problemlist}
+\end{document}

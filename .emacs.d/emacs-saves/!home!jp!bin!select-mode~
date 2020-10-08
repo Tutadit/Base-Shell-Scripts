@@ -1,0 +1,11 @@
+#!/usr/bin/bash
+
+hola=0
+
+RES_WIDTH=1920
+RES_HEIGHT=1080
+
+BAR_HEIGHT=40
+
+. palette
+

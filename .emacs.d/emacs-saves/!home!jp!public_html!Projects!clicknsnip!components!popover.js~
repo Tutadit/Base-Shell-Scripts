@@ -1,0 +1,54 @@
+import React, {useState, setState} from 'react';
+import {RiArrowDropRightLine,
+       RiArrowDropDownLine} from 'react-icons/ri';
+import { motion } from "framer-motion";
+
+class Popover extends React.Component {
+    constructor(props) {
+        super(props);
+        this.setShow = this.setShow.bind(this);
+        this.state = {
+            show:false
+        };
+    }
+
+    setShow() {
+        this.setState({
+            show:!this.state.show
+        });
+    }
+    
+    render() {        
+        const variants = {
+            hidden: {
+                opacity:0.,
+                transform:'scale(0.8)'                
+            },
+            visible: {
+                opacity:1,
+                transform:'scale(1)'
+            },
+        };
+
+        
+        return (
+	    <div className={'popover ' + 'popover-' + this.props.position }>
+              <div className="popover-overlay"/>
+              <a className="popover-handle"
+                 onClick={(e)=>{this.setShow();}}>
+                {this.state.show && this.props.handleShow }
+                {!this.state.show && this.props.handle}
+              </a>
+              <motion.div
+                initial={'hidden'}
+                variants={variants}
+                animate={this.state.show ? 'visible' : 'hidden'} 
+                className="popover-content">
+                {this.props.children}
+              </motion.div>
+	    </div>
+        );
+    }
+}
+
+export default Popover;

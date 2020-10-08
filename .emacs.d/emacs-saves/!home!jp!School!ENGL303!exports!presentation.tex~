@@ -1,0 +1,37 @@
+% Created 2020-03-31 Tue 17:51
+% Intended LaTeX compiler: pdflatex
+\documentclass[11pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{graphicx}
+\usepackage{grffile}
+\usepackage{longtable}
+\usepackage{wrapfig}
+\usepackage{rotating}
+\usepackage[normalem]{ulem}
+\usepackage{amsmath}
+\usepackage{textcomp}
+\usepackage{amssymb}
+\usepackage{capt-of}
+\usepackage{hyperref}
+\date{\today}
+\title{}
+\hypersetup{
+ pdfauthor={},
+ pdftitle={},
+ pdfkeywords={},
+ pdfsubject={},
+ pdfcreator={Emacs 26.3 (Org mode 9.1.9)}, 
+ pdflang={English}}
+\begin{document}
+
+\tableofcontents
+
+\section{The effects of globalization on post colonial theory}
+\label{sec:orgbc1e3c0}
+With the way the world is connected it seems as if cultures are merging, shifting, and driving towards a universality to the point where we might ask, is postcolonial theory becoming less relevant in the age of globalization? To answer that we must look into the way globalization came to be and how it affects the world today. Way back then, in the birth of the 20th century, the world of global trade began, and with it globalization bloomed. Since then globalization has been part of the ongoing history of capitalist evolution and expansion. It's goal was to reduce the world into a global consciousness. To those embedded in the capitalistic culture it was a blessing, money rushed into their countries and it seemed as if anyone could get a hold of it. But some weren't so lucky, companies realized that they could exploit workers from third world nations in order to produce for next to nothing. Capitalism became the colonizer, those who opposed it were and are still seen as the enemy.
+
+But this is all over and done, with the internet and social media people are now able to speak up against the sins of capitalism, right? This is somewhat true, people have gone against the greedy western culture, standing up for their cultures and values that might not agree with the western idea. But the fruit of colonialism is still alive and well, flowing through the heart of the western people. And we don't have to look far in order to see this, just recently the RCMP arrested members of the Wet'suwet'en nation for trespassing. Which is great! Justice being served for those who dare step into private land, except they weren't in private land, they were home, in their own land. So why did they get arrested? Well because they were protesting against the building of the Coastal GasLink pipeline through their sacred land. It is easy to see how the Wet'suwet'en people are wrong, the pipeline is going to help the economy! And we are not going to spend more money going around their land just because they don't want it. But wait, doesn't that sound familiar? Forcing capitalistic culture onto other cultures, completely disregarding the values of those in it? It is kind of like we want to establish control and settling over the land of Wet'suwet'en, and isn't that the very definition of colonization? 
+
+As we can see, nowadays colonialism is alive and well, with capitalism and the state of the economy being placed as the highest values of society, trumping over anything that dares to oppose it. Okay, so then what? How do we stop colonialism? This ain't no easy answer, colonialism is rooted in the stubbornness and supercilious way of human kind, but with proper education and critical thinking we can come far in the way of merging cultures, learning from each other and accepting the values of others. 
+\end{document}

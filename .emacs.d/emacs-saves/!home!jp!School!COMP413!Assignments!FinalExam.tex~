@@ -1,0 +1,39 @@
+\documentclass{cpsc413Solutions}
+\usepackage{amsmath}
+
+\coursetitle{Design and Analysis of Algorithms}
+\courselabel{CPSC 413}
+\exercisesheet{Problem Set \#[1]}{}
+\student{Juan Pablo Lozano Sarmiento - 30022579}
+\semester{Winter 2020}
+
+\begin{document}
+
+\team{}
+\sources{}
+
+\begin{problemlist}
+\pbitem [1st problem]
+\begin{problem}
+\begin{answer}
+Your answer here to Part a here!
+\end{answer}
+
+\begin{answer}
+Your answer here to Part b here!
+\end{answer}
+\end{problem}
+
+
+\pbitem [2nd problem]
+\begin{problem}
+\begin{answer}
+Your answer here!
+\end{answer}
+\end{problem}
+
+\end{problemlist}
+
+
+
+\end{document}

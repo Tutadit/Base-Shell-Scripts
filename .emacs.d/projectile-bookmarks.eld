@@ -1,0 +1,1 @@
+("~/School/CPSC501/cpsc501-assignment-1/" "~/public_html/Projects/clicknsnip/" "~/public_html/Projects/cns_backend/")

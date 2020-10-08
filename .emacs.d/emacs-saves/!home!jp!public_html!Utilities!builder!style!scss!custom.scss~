@@ -1,0 +1,449 @@
+@import url('https://fonts.googleapis.com/css2?family=Arvo:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+
+$white:    #fff;
+$gray-100: #f8f9fa;
+$gray-200: #e9ecef;
+$gray-300: #dee2e6;
+$gray-400: #ced4da;
+$gray-500: #adb5bd;
+$gray-600: #6c757d;
+$gray-700: #495057;
+$gray-800: #343a40;
+$gray-900: #212529;
+$black:    #000;
+
+$blue:    #007bff;
+$indigo:  #6610f2;
+$purple:  #5302a7;
+$light-purple: #6C03D9;
+$dark-purple: #6e00ff;
+$darker-purple: #37016e;
+$pink:    #e83e8c;
+$light-red: #ee1151;
+$red:     #dc3545;
+$orange:  #fd7e14;
+$yellow:  #ffc107;
+$green:   #28a745;
+$teal:    #20c997;
+$cyan:    #17a2b8;
+
+$blue:         #2D3142;
+$blue-shade:   #42728A;
+$blue-shaded:  #28567B;
+$base:         $white;
+$secondary:    #28A7B8;
+$secondary-shaded: #65655E;
+$accent:       #EAC435;
+$third:        #345995;
+$fourth:       #D2374F;
+
+$amazon:#ff9900;
+$walmart:#0072CE;
+$costco:#e31837;
+
+$click-color:#E0BD52;
+$n-color:#6AB1B4;
+$snip-color:#E0BD52;
+
+$body-bg-color: $base;
+$btn-background: $blue;
+$btn-hover-background: $blue-shade;
+$btn-hover-color: $white;
+$btn-color: $white;
+
+$new-price-color: $fourth;
+
+$card-color:$black;
+$card-bg:$white;
+$indicator-background:$white;
+
+$dropdown-color:$white;
+$dropdown-bg: $blue-shade;
+$dropdown-link-hover-bg:$blue-shaded;
+$dropdown-link-hover-color:$white;
+
+$nav-background:$blue;
+$nav-link-hover-background: $blue-shade;
+$nav-toggler-color: $white;
+$nav-link-hover-color: $white;
+$nav-link-color:$white;
+$nav-hot-deals-background:$fourth;
+$nav-search-btn-background: $fourth;
+$nav-search-btn-color:$white;
+$nav-searchbar-color:$white;
+$nav-searchbar-background:$blue-shade;
+$nav-color:$white;
+
+
+$btn-see-all-color:$black;
+$btn-see-all-background:$secondary;
+
+$navbar-padding-y: 0;
+$navbar-padding-x: 0;
+
+$nav-link-padding-y: 1rem;
+$navbar-brand-padding-x: 1.5rem;
+$navbar-brand-padding-y: 0rem;
+$navbar-brand-font-size: 1.5rem;
+
+$dropdown-border-radius:0rem;
+$dropdown-padding-y:0rem;
+$dropdown-border-width:0rem;
+$dropdown-item-padding-y:0.9rem;
+
+
+@mixin box-shadow($property) {
+    -webkit-box-shadow: $property;
+    -moz-box-shadow: $property;
+    box-shadow: $property;
+}
+
+body {
+    background-color: $body-bg-color !important;
+}
+
+.navbar {
+    background-color: $nav-background;
+    color:$nav-color;
+
+    .click {
+	color:$click-color;
+	
+	margin-right:-3px;
+    }
+    .n {
+	color:$n-color;
+	
+	margin-right:-3px;
+	vertical-align:sub;
+    }
+    .snip {
+	color:$snip-color;
+	
+    }
+    a.navbar-brand {
+	padding: $navbar-brand-padding-y $navbar-brand-padding-x;
+	font-family: 'Arvo', serif;
+    }
+
+
+    #search_bar {
+	background-color: $nav-searchbar-background;
+	border-radius:0;
+	border:none;
+	color:$nav-searchbar-color;
+	margin:0;
+    }
+
+    .search-form .btn {
+	color:$nav-search-btn-color;
+	border:none;
+	border-radius:0;
+	background-color: $nav-search-btn-background;
+    }
+
+    .hot-deals .btn {
+	border:none;
+	border-radius:0;
+	background-color:$nav-hot-deals-background;
+	padding:1rem;
+    }
+
+    a {
+	color:$nav-link-color;
+	font-weight:bold;
+    }
+
+    .navbar-nav {
+	a {
+	    text-transform: uppercase;
+	}
+	.nav-link:hover,
+	.nav-link:focus {
+	    color: $nav-link-hover-color;
+	    background-color: $nav-link-hover-background !important;
+	}
+    }
+
+    .navbar-toggler-icon {
+	color: $nav-toggler-color;
+	font-size: 2rem;
+	vertical-align: middle;
+	width:auto;
+	height:auto;    
+    }
+}
+
+@media (max-width: 767.98px) {
+    .products {
+	.card {
+	    display:inline-block;
+	    width:100%;
+	    margin-bottom:1rem;
+	    .image {
+		max-height:5rem;
+		min-height:5rem;
+		float:left;
+		width:30%;
+		margin-top:3.5rem;
+	    }
+	    .card-title {
+		font-size:1rem;
+		font-weight:600;
+	    }
+	    .card-body {
+		float:right;
+		width:70%;
+	    }
+	    .dropdown-menu {
+		width: 100%;
+	    }
+	    .dropdown-menu.show {
+		top:-2px !important;
+		left:4px !important;
+	    }
+	    .product-info {
+		width: 75%;
+		float:left;
+	    }
+	    .product-options {
+		width: 25%;
+		float:right;
+		.po-btn-group {
+		    width: 100%;
+		    flex-direction: column;
+		    align-items: flex-start;
+		    justify-content: center;
+
+		    > .btn,
+		    > .btn-group {
+			width: 100%;
+		    }
+
+		    > .btn:not(:first-child),
+		    > .btn-group:not(:first-child) {
+			margin-top: -1px;
+			margin-left:0;
+			border-top: 1px $blue-shade solid;
+		    }
+
+		}
+	    }
+	}
+    }
+}
+
+@media (max-width: 992.00px) {
+    .products .card {
+	.image {
+	    height: 9rem !important;
+	}
+	span.new-price::before {
+	    content: "\A";
+	    white-space: pre;
+	}
+    }
+}
+
+@media (max-width: 575.98px) {
+    .navbar {
+	padding-top: 0.6rem !important;
+	padding-bottom: 0.6rem !important;
+	
+	.navbar-collapse a {
+	    padding-left: 2rem;
+	}
+	#search_bar {
+	    padding: 2rem;
+	    width:88%;
+	}
+	.search-form {
+	    margin-bottom: 0.3rem;
+	    .btn {
+		width:12%;
+		padding:1.2rem;
+	    }
+	}
+	.hot-deals .btn {
+	    width:100%;
+	    text-align: center;
+	}
+    }
+
+    .products {
+	.carousel-control-prev,
+	.carousel-control-next {
+	    display:none;
+	}
+	.carousel-indicators {
+	    bottom:-2.2rem !important;
+	    li {
+		height:15px;
+	    }	
+	}
+	.card .card-title {
+	    font-size:0.9rem;
+	    font-weight:500;
+	}
+    }
+   
+}
+
+.dropdown-item {
+    color:$dropdown-color !important;
+}
+
+.products {
+    .carousel-indicators {
+	bottom: -2.5rem;
+	li {
+	    background-color:$indicator-background;
+	}
+    }
+
+    .carousel-inner {
+	overflow-y: visible;
+    }
+
+    .carousel-control-next {
+	right: -9%;
+	width:9%;
+    }
+
+    .carousel-control-prev {
+	left: -9%;
+	width:9%;
+    }
+
+    .btn {
+	width: 50%;
+	border-radius:0;
+	background-color:$btn-background;
+	padding:1rem;
+	color:$btn-color;
+	font-weight:bold;
+    }
+
+    .btn:hover,
+    .btn:active {
+	background-color:$btn-hover-background;
+	color:$btn-hover-color;
+    }
+
+    .card {
+	@include box-shadow(0px 0px 3px 0px rgba(0,0,0,0.75));
+	border:none;
+	.image {
+	    height:15rem;
+	    img {
+		width: auto;
+		max-height: 100%;
+		max-width:100%;
+		display: block;
+		margin: auto;
+	    }
+	}
+    }
+
+    .old-price {
+	text-decoration: line-through;
+    }
+
+    .new-price {
+	color:$new-price-color;
+	font-weight: bold;
+    }
+
+    .btn-see-all {
+	float:right;
+	width:auto;
+	background-color:$btn-see-all-background;
+	color:$btn-see-all-color;
+    }
+
+    .product-heading {
+	float:left;
+	font-size:3rem;
+	height:2rem;
+	margin-top:0.9rem;
+    }
+
+    .product-options .btn-group {
+	width: 100%;
+    }
+}
+
+.provider {
+    .provider-info {
+	display:flex;
+	
+    }
+    .amazon {
+	background-color:$amazon;
+    }
+
+    .walmart {
+	background-color:$walmart;
+    }
+
+    .costco {
+	background-color:$costco;
+    }
+    
+    .provider-products {
+	display:block;
+	@include box-shadow(inset 0px 0px 3px 0px rgba(0,0,0,0.75));
+	padding:1rem;
+    }
+}
+
+.form-control::placeholder {
+    color: #FFF !important;
+    opacity: 1;
+}
+
+.dropdown-toggle::after {
+    content:none !important;
+}
+
+
+.sidebar {
+    .condition {
+	.regular-checkbox {
+	    -webkit-appearance: none;
+	    background-color: #fafafa;
+	    border: 1px solid #cacece;
+	    padding: 9px;
+	    display: inline-block;
+	    position: relative;
+	    vertical-align:sub;
+	}
+	.regular-checkbox:active, .regular-checkbox:checked:active {
+	    box-shadow: 0 1px 2px rgba(0,0,0,0.05), inset 0px 1px 3px rgba(0,0,0,0.1);
+	}
+	
+	.regular-checkbox:checked {
+	    background-color: #e9ecee;
+	    border: 1px solid #adb8c0;
+	    box-shadow: 0 1px 2px rgba(0,0,0,0.05), inset 0px -15px 10px -12px rgba(0,0,0,0.05), inset 15px 10px -12px rgba(255,255,255,0.1);
+	    color: #99a1a7;
+	}
+
+	.regular-checkbox:checked:after {
+	    font-size: 14px;
+	    position: absolute;
+	    top: 0px;
+	    left: 3px;
+	    color: #99a1a7;
+	}
+
+	.checkbox-holder {
+	    width:100%;
+	}
+
+	label {
+	    vertical-align:middle;
+	}
+	
+    }
+}

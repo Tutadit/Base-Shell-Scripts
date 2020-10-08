@@ -1,0 +1,13 @@
+function ImageCarousel(props) {
+    return(
+	<div className="image-carousel">
+          {props.images.map((image)=>{
+              return (
+                  <img src={image.src} />
+              );
+          })}
+        </div>
+    );
+}
+
+export default ImageCarousel;

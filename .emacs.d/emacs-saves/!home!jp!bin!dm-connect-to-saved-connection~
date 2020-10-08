@@ -1,0 +1,7 @@
+#!/bin/bash
+
+. palette
+
+dmenu_path | dmenu -h 50 -uh 2 -uc $CC_LIGHT_TONE -o 85 -fn "Roboto:style=bold" -o 0.68 -nb $CC_DARK_TONE -sb $CC_MID_TONE_1 -sf $CC_LIGHT_TONE -nf "#FFFFFF" "$@" -p "" | ${SHELL:-"/bin/bash"} &
+
+# dmenu_path | dmenu -h 50 -uh 2 -uc $CC_LIGHT_TONE -o 85 -fn "-*-terminus-*-r-bold--1" -o 0.8 -nb "#212428" -sb $CC_DARK_TONE -sf "#FFFFFF" -nf "#FFFFFF" "$@" -p ":" | ${SHELL:-"/bin/bash"} &

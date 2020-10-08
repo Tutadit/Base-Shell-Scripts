@@ -1,0 +1,171 @@
+\documentclass{cpsc413Solutions}
+\usepackage{amsmath}
+\usepackage{algorithm}
+\usepackage[noend]{algpseudocode}
+\coursetitle{Design and Analysis of Algorithms}
+\courselabel{CPSC 413}
+\exercisesheet{Problem Set \#[4]}{}
+\student{Juan Pablo Lozano Sarmiento - 30022579}
+\semester{Winter 2020}
+
+\begin{document}
+
+\team{}
+\sources{}
+
+\begin{problemlist}
+\pbitem [1st problem]
+\begin{problem}
+\begin{answer}
+  Let $c$ by an integer $>1$ \\
+  Let $c_i$ be the denomination of value $c^i$ where $i\ge 0$ \\
+  Let $S=\{n_1,...,n_i\}$ be the set of number of coins for each denomination returned by the greedy algorithm. \\
+  Let $S'=\{n'_1,...,n'_i\}$ be some optimal set of number of coins for each denomination. \\
+  Suppose that the solution from the greedy algorithm is different from some optimal solution and let $k \in {1,...,i}$ be
+  the largest index such that $n_k \neq n'_k$, so that $n_j = n'_j$ for $k < j \le i$ \\
+  Then $n_k > n'_k$ because the greedy algorithm would have chosen the largest number of coins possible, Thus \\
+  $\sum_{i=0}^{k-1}n'_ic_i \geq c_k$ \\
+  Because the optimal solution has to make up for at least one coin of denomination $c_k$ as compared to the greedy solution \\
+  Note that any optimal solution must satisfy a minimal amount of coins \\
+  The set of denominations is ${c^0,c^1,c^2,...}$ \\
+  Therefore, $c^i = c*c^i-1$ for all $i \geq 1$ \\
+  If $n'_i > c$ then \\
+  \begin{equation}
+    \begin{aligned}
+      n'_ic^i &= (c + d)c^i \texttt{where d is some number}  \geq 1 \\
+      &=c*c^i+d \\
+      &=c^{i+1}+d \\
+    \end{aligned}
+  \end{equation}
+  $c^{i+1}$ is the denomination following $c^i$, meaning there is a greater than minimal amount of $c^i$ coins \\
+  Therefore $S'$ cannot differ from $S$.  
+\end{answer}
+\end{problem}
+
+
+\pbitem [2nd problem]
+\begin{problem}
+  \begin{answer}
+    (a) Pre-Conditions: \\
+    $n$ Number of houses scattered \\
+    $H$ Array of size $n$, where $H[i]$ is the distance of house $i$ from the start of the road \\
+    Post-Conditions: \\
+    $B$ Array of size $m$ representing towers to be placed at $B[i]$ along the road, $m$ is minimal.
+  \end{answer}
+  \begin {answer}
+    (b)
+    \begin{algorithm}
+      \caption{Get Minimal Bases}
+        \begin{algorithmic}[1]
+          \Function{GetBases}{$H,n$}
+          \State{\Call{sort}{$H$}}
+          \State{$b=0$}
+          \State{$B[b] = H[0]+4$}
+          \For{$i=i;i<n,i++$}
+          \If{$H[i]>B[b]+4$}
+          \State{$b++$}
+          \State{$B[b]=H[i]+4$}
+          \EndIf
+          \EndFor
+          \EndFunction
+        \end{algorithmic}
+      \end{algorithm}      
+
+  \end{answer}
+
+  \begin {answer}
+    (c) We got a road of distance $d$. All houses must be within $4$ miles of a base. The first tower must be no farther than $4$ mils from the first
+    house. We have to place a tower that will cover the first house. Placing it 4 miles from the first house getting the most range twards other houses as possible. We then find the next house not covered by any tower and place a tower 4 miles from it towards the other not covered houses. 
+  \end{answer}
+
+  \begin {answer}
+    (d) No, another solution would be going at it from the last house of the road and working towards the start.
+  \end{answer}
+  \begin {answer}
+    (e) Proof of optimality: \\
+    Let $B=\{d_1,...,d_k\}$ be the distances of the bases selected by the greedy algorithm. \\
+    Let $B'=\{d'_1,...,d'_k\}$ be optimal distances of the bases \\
+    Base Case: $d_1 \geq d'_1$ because the greedy algorithm places $d_1$ as far from the first house as possible \\
+    IH: assume $d_k \geq d'_k$ \\
+    Show $d_{k+1} \geq d'_{k+1}$ \\
+    By the algorithm, $d_{k+1}$ is placed 4 miles after the next house not covered by any of $d_k,d_{k-1},d_{k-2},d_1$ \\
+    Therefore $d_{k+1}\geq d'_{k+1}$ \\
+    Suppose $k > m$ \\
+    We know that $d'_m$, the last base selected by the optimal solution, covers the last house on the road. \\
+    We also know that $d_m \geq d'_m$ \\
+    Meaninf $d_m$ will also cover the last house, and by the algorithm this
+    would be the last base placed. \\
+    Therefore $k=m$   
+  \end{answer}
+  \begin{answer}
+    (f) Sorting: $\in \Theta(n \lg n)$ \\
+    For loop: \\
+    * Constant Time \\
+    * Iterates $n-1$ times \\
+    * Total time $\Theta(n)$ \\
+    Tight run-time $= \Theta(n \lg n) + \Theta(n) \in \Theta(n \lg n)$
+  \end{answer}
+\end{problem}
+\pbitem [3nd problem]
+\begin{problem}
+  \begin{answer}
+    (a) Pre-Conditions: \\
+    $n$ nuber of books overdue \\
+    $T$ Array of pairs $(b,t_b)$ where $b$ is the book and $t_b$ is the time it takes to read book $b$ \\
+    Post-Conditions: \\
+    $R$ Ordered set of books to read
+  \end{answer}
+  \begin{answer}
+    (b) $t_1=10,t_2=5,t_3=8$ \\
+    Optimal solution: $t_2,t_3,t_1$ \\
+    Total Owing: $5(3)+8(2)+10=41$
+  \end{answer}
+  \begin{answer}
+    (c)
+    \begin{algorithm}
+      \caption{Get Minimal Overdue Payment}
+        \begin{algorithmic}[1]
+          \Function{GetBookOrder}{$T,n$}
+          \State{\Call{sort}{$T$}}\texttt{ By time in ascending order }
+          \For{$i=i;i<n,i++$}
+          \State{$R[i]=First(T[i]$}
+          \EndFor
+          \State{Return R}
+          \EndFunction
+        \end{algorithmic}
+      \end{algorithm}      
+  \end{answer}
+  \begin{answer}
+    Because you are only allowed to read one book at a time, and they charge you \$1 a day for each book, they way to read all books while minimizing the cost is to return books as quick as possible, so you read the fastest books first.
+  \end{answer}
+  \begin{answer}
+    (e) Proof \\
+    Let $R={b_0,...,b_k}$ be the set of books to read in order returned by the greedy algorithm. \\
+    Let $R'={b'_0,...,b'_k}$ be an optimal set of books to read in order. \\
+    Assume $R \neq R'$, firther let $j$ be the first instance in which $b_j \neq b'_j$ so that $b_i=b'_i$ for $1\leq i < j$ \\
+    Let $T(b)$ be the time it takes to read book $b$ \\
+    Let $T'(b')$ be the time it takes to read book $b'$ \\
+    $T(b_j) < T'(b'_j)$ because the algorithm picks smallest times first \\
+    Total money owed: \\
+    $\sum_{i=0}^{n}T(i)(n-i)$ \\
+    $T(0)*n+T(i)*(n-1)+...+T(b_{j-1})(n-j-1) = T'(0)*n+T'(i)*(n-1)+...+T'(b'_{j-1})(n-j-1) = $ \\
+    $T(b_j)(n-j) < T(b'_j)(n-j)$
+    Thus, the optimal solution would be greater than the greedy solution. This can't be, meaning optimal is equal to
+    greedy.
+  \end{answer}
+  \begin{answer}
+    (f) Bound: \\
+    Sorting: $\in \Theta(n \lg n)$ \\
+    For loop: \\
+    * Constant Time \\
+    * Iterates $n$ times \\
+    * Total time $\Theta(n)$ \\
+    Tight run-time $= \Theta(n \lg n) + \Theta(n) \in \Theta(n \lg n)$
+
+  \end{answer}
+\end{problem}
+\end{problemlist}
+
+
+
+\end{document}

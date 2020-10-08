@@ -1,0 +1,16 @@
+/*
+ * Several utility functions
+ */
+#include "util.h"
+
+/*
+ * Because the J-- specifications allow nul characters
+ * as part of literal strings the standard strcpy
+ * could not be used. 
+ */
+void copy_string(char *src, char* dst, int len) {
+  int i;
+  for(i = 0; i < len; i++) {
+    dst[i] = src[i];
+  }
+}

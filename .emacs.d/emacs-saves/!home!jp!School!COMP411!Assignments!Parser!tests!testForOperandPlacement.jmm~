@@ -1,0 +1,17 @@
+// Test to make sure all operands follow the proper order
+int x = 1 + 2;
+int x = 1 - 2;
+int x = 1 * 2;
+int x = 1 / 2;
+int x = 1 % 2;
+int x = 1 < 2;
+int x = 1 > 2;
+int x = 1 <= 2;
+int x = 1 >= 2;
+int x = 1 == 2;
+int x = 1 && 2;
+int x = 1 || 2;
+int x = !1;
+int x = -1;
+int x = ( 1 + 2 ) * 3;
+int x = 1 * (1 + 2);

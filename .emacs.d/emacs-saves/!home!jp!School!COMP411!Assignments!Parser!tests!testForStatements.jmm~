@@ -1,0 +1,19 @@
+//
+// Test for all types of statements
+// Also test for a mix of statements within each other
+//
+int main() {
+    if( x < 3) {
+	break;
+    }
+
+    if( y >= ( 1 + 5 + g) ) {
+	return;
+    } else {
+	return y;
+    }
+
+    while( x == y && y-1 = 4 || true ) {
+	return false;
+    }
+}

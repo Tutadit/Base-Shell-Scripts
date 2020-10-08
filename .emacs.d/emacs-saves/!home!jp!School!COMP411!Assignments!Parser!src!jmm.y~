@@ -1,0 +1,251 @@
+%{
+#include <stdio.h>
+#include "util.h"
+#include "absyn.h"
+#include "errormsg.h"
+
+int yylex(void); /* function prototype */
+
+A_global_declarations absyn_root;
+
+void yyerror(char *s) {
+    error(col_num,s);
+}
+
+%}
+
+%union {
+    A_literal literal;
+    A_type type;
+    A_global_declarations  global_declarations;	
+    A_global_declaration  global_declaration;
+    A_var_dec  var_dec;
+    A_id  id;
+    A_func_dec func_dec;
+    A_func_head func_head;			
+    A_func_decor  func_decor;
+    A_formal_param_list  formal_param_list;
+    A_formal_param  formal_param;
+    A_main_dec  main_dec;
+    A_main_func_dec  main_func_dec;
+    A_block  block;
+    A_block_statements block_statements;
+    A_block_statement block_statement;  
+    A_statement statement;
+    A_state_exp  state_exp;
+    A_primary primary;
+    A_argumentlist argumentlist;
+    A_functioninvocation functioninvocation;
+    A_postfixexpression postfixexpression;
+    A_unaryexpression unaryexpression;
+    A_multiplicativeexpression multiplicativeexpression;
+    A_additiveexpression additiveexpression;
+    A_relationalexpression relationalexpression;
+    A_equalityexpression equalityexpression;
+    A_conditionalandexpression conditionalandexpression;
+    A_conditionalorexpression conditionalorexpression;
+    A_assignmentexpression assignmentexpression;
+    A_assignment assignment;
+    A_exp exp;    
+    int ival;
+    string sval;    
+}
+
+%token <sval> ID LITERAL
+%token <ival> NUMBER
+%token
+  INT BOOLEAN VOID
+  PLUS MINUS TIMES DIVIDE MODULUS LT GT LE GE EQ NEQ AND OR ASSIGN BANG
+  BREAK RETURN IF ELSE WHILE
+  LPAREN RPAREN LBRACE RBRACE SEMICOLON COMMA
+  TRUE FALSE
+
+%type <literal>  literal
+%type <type>  type
+%type <global_declarations>  globaldeclarations	start
+%type <global_declaration>  globaldeclaration	
+%type <var_dec> variabledeclaration
+%type <id> identifier
+%type <func_dec> functiondeclaration
+%type <func_head> functionheader		
+%type <func_decor> functiondeclarator
+%type <formal_param_list> formalparameterlist
+%type <formal_param> formalparameter
+%type <main_dec> mainfunctiondeclaration
+%type <main_func_dec> mainfunctiondeclarator
+%type <block> block
+%type <block_statements> blockstatements
+%type <block_statement> blockstatement 
+%type <statement> statement
+%type <state_exp>  statementexpression
+%type <primary> primary
+%type <argumentlist> argumentlist
+%type <functioninvocation> functioninvocation
+%type <postfixexpression> postfixexpression
+%type <unaryexpression> unaryexpression
+%type <multiplicativeexpression> multiplicativeexpression
+%type <additiveexpression> additiveexpression
+%type <relationalexpression> relationalexpression
+%type <equalityexpression> equalityexpression
+%type <conditionalandexpression> conditionalandexpression
+%type <conditionalorexpression> conditionalorexpression	
+%type <assignmentexpression> assignmentexpression
+%type <assignment> assignment 			
+%type <exp> expression
+			
+				
+%left 		    SEMICOLON
+%right 		    ASSIGN
+%left 		    OR
+%left 		    AND
+%nonassoc 	    EQ NEQ LT LE GT GE
+%left 		    PLUS MINUS
+%left 		    TIMES DIVIDE
+%right 		    UMINUS
+
+%start start
+
+%%
+
+start           : {absyn_root = NULL;}
+                | globaldeclarations {absyn_root = $1;}
+                ;
+
+literal         : NUMBER  { $$ = A_NumLit(col_num, $1);}
+                | LITERAL { $$ = A_LitLit(col_num, $1);}
+                | TRUE    { $$ = A_TrueLit(col_num); }
+                | FALSE   { $$ = A_FalseLit(col_num);}
+                ;
+
+type            : BOOLEAN { $$ = A_BoolType(col_num);}
+                | INT     { $$ = A_IntType(col_num); }
+                ;
+
+globaldeclarations      : globaldeclaration { $$ = A_GloGloDecs(col_num,$1);}
+                        | globaldeclarations globaldeclaration { $$ = A_GlosGloDecs(col_num,$1,$2);}
+                        ;
+
+globaldeclaration       : variabledeclaration { $$ = A_VarGloDec(col_num,$1);}
+                        | functiondeclaration { $$ = A_FunGloDec(col_num,$1);}
+                        | mainfunctiondeclaration { $$ = A_MainGloDec(col_num,$1);}
+                        ;
+
+variabledeclaration     : type identifier SEMICOLON { $$ = A_VarDec(col_num, $1, $2);}
+                        ;
+
+identifier              : ID {$$ = A_Id(col_num, $1);}
+                        ;
+
+functiondeclaration     : functionheader block { $$ = A_FuncDec(col_num, $1, $2);}
+                        ;
+
+functionheader          : type functiondeclarator { $$ = A_TypeFuncHead(col_num, $1, $2);}
+                        | VOID functiondeclarator { $$ = A_VoidFuncHead(col_num, $2);}
+                        ;
+
+functiondeclarator      : identifier LPAREN formalparameterlist RPAREN { $$ = A_FuncDecor(col_num, $1, $3);}
+                        | identifier LPAREN RPAREN { $$ = A_EmptyFuncDecor(col_num, $1);}
+                        ;
+
+formalparameterlist     : formalparameter { $$ = A_SingleFormParamList(col_num, $1);}
+                        | formalparameterlist COMMA formalparameter { $$ = A_FormParamList(col_num, $1, $3);}
+                        ;
+
+formalparameter         : type identifier { $$ = A_FormParam(col_num, $1, $2);}
+                        ;
+
+mainfunctiondeclaration : mainfunctiondeclarator block { $$ = A_MainFuncDec(col_num, $1, $2);}
+                        ;
+
+mainfunctiondeclarator  : identifier LPAREN RPAREN { $$ = A_MainFunDecor(col_num, $1);}
+                        ;
+
+block                   : LBRACE blockstatements RBRACE { $$ = A_Block(col_num, $2);}
+                        | LBRACE RBRACE { $$ = A_EmptyBlock(col_num);}
+                        ;
+
+blockstatements         : blockstatement { $$ = A_SingleBlockStmnts(col_num, $1);}
+                        | blockstatements blockstatement { $$ = A_BlockStmnts(col_num, $1, $2);}
+                        ;
+
+blockstatement          : variabledeclaration { $$ = A_VarBlockState(col_num, $1);}
+                        | statement { $$ = A_StateBlockState(col_num,$1);}
+                        ;
+
+statement               : block { $$ = A_BlockState(col_num, $1); }
+                        | SEMICOLON { $$ = A_NilState(col_num); }
+                        | statementexpression SEMICOLON { $$ = A_State(col_num, $1); }
+                        | BREAK SEMICOLON { $$ = A_BreakState(col_num); }
+                        | RETURN expression SEMICOLON { $$ = A_ReturnState(col_num, $2); }
+                        | RETURN SEMICOLON { $$ = A_EmptyReturnState(col_num); }
+                        | IF LPAREN expression RPAREN statement { $$ = A_IfState(col_num, $3, $5); }
+                        | IF LPAREN expression RPAREN statement ELSE statement { $$ = A_IfElseState(col_num, $3, $5, $7); }
+                        | WHILE LPAREN expression RPAREN statement { $$ = A_WhileState(col_num, $3, $5); }
+                        ;
+
+statementexpression     : assignment  { $$ = A_AssignStateExp(col_num,$1);}
+                        | functioninvocation { $$ = A_FunInStateExp(col_num,$1);}
+                        ;
+
+primary                 : literal { $$ = A_LitPrim(col_num,$1);}
+                        | LPAREN expression RPAREN { $$ = A_ExpPrim(col_num,$2);}
+                        | functioninvocation { $$ = A_FunInPrim(col_num,$1);}
+                        ;
+
+argumentlist            : expression { $$ = A_SingleArgList(col_num, $1);}
+                        | argumentlist COMMA expression { $$ = A_ArgList(col_num,$1,$3);}
+                        ;
+
+functioninvocation      : identifier LPAREN argumentlist RPAREN { $$ = A_FuncIn(col_num,$1,$3);}
+                        | identifier LPAREN RPAREN {$$ = A_EmptyFuncIn(col_num,$1);}
+                        ;
+
+postfixexpression       : primary { $$ = A_PrimPostFixExp(col_num,$1);}
+                        | identifier { $$ = A_IdPostFixExp(col_num,$1);}
+                        ;
+
+unaryexpression         : MINUS unaryexpression { $$ = A_MinUnExp(col_num,$2);}
+                        | BANG unaryexpression { $$ = A_BangUnExp(col_num,$2);}
+                        | postfixexpression { $$ = A_PosUnExp(col_num,$1);}
+                        ;
+
+multiplicativeexpression: unaryexpression { $$ = A_UnMulExp(col_num, $1);}
+                        | multiplicativeexpression TIMES unaryexpression { $$ = A_MulMulExp(col_num, $1, $3);}
+                        | multiplicativeexpression DIVIDE unaryexpression { $$ = A_DivMulExp(col_num, $1, $3);}
+                        | multiplicativeexpression MODULUS unaryexpression { $$ = A_ModMulExp(col_num, $1, $3);}
+                        ;
+
+additiveexpression      : multiplicativeexpression { $$ = A_MulAddExp(col_num, $1);}
+                        | additiveexpression PLUS multiplicativeexpression { $$ = A_AddAddExp(col_num, $1, $3);}
+                        | additiveexpression MINUS multiplicativeexpression { $$ = A_MinAddExp(col_num, $1, $3);}
+                        ;
+
+relationalexpression    : additiveexpression { $$ = A_AddRelExp(col_num, $1);}
+                        | relationalexpression LT additiveexpression { $$ = A_LTRelExp(col_num, $1, $3);}
+                        | relationalexpression GT additiveexpression { $$ = A_GTRelExp(col_num, $1, $3);}
+                        | relationalexpression LE additiveexpression { $$ = A_LERelExp(col_num, $1, $3);}
+                        | relationalexpression GE additiveexpression { $$ = A_GERelExp(col_num, $1, $3);}
+                        ;
+
+equalityexpression      : relationalexpression { $$ = A_RatEqExp(col_num, $1 );}
+		        | equalityexpression EQ relationalexpression { $$ = A_EqEqExp(col_num, $1, $3 );}
+                        | equalityexpression NEQ relationalexpression { $$ = A_NEqEqExp(col_num, $1, $3 );}
+                        ;
+
+conditionalandexpression: equalityexpression { $$ = A_EqConAndExp(col_num,$1);}
+                        | conditionalandexpression AND equalityexpression { $$ = A_AndCondAndExp(col_num,$1,$3);}
+                        ;
+
+conditionalorexpression : conditionalandexpression { $$ = A_AndCondOrExp(col_num,$1);}
+                        | conditionalorexpression OR conditionalandexpression  { $$ = A_OrCondOrExp(col_num,$1,$3);}
+                        ;
+
+assignmentexpression    : conditionalorexpression { $$ = A_CondAssExp(col_num, $1);}
+                        | assignment  { $$ = A_AssAssExp(col_num, $1);}
+                        ;
+
+assignment              : identifier ASSIGN assignmentexpression { $$ = A_Ass(col_num,$1,$3);}
+                        ;
+
+expression              : assignmentexpression { $$ = A_AssExp(col_num,$1);}
+                        ;			

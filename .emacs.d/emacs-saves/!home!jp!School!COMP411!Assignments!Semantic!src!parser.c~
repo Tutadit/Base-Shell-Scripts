@@ -1,0 +1,41 @@
+/*
+ * Parser Driver for the J-- Language
+ * By: Juan Pablo Lozano Sarmiento
+ * ID: 30022579
+ *
+ * Sources:
+ * Andrew W. Appel and Maia Ginsburg. 2004. "Modern Compiler Implementation in C".
+ * 	Cambridge University Press, USA.
+ * 
+ */
+#include <stdio.h>
+#include <stdlib.h>
+#include "util.h"
+#include "absyn.h"
+#include "errormsg.h"
+#include "parse.h"
+#include "prabsyn.h"
+#include "semantic.h"
+
+extern int yyparse(void);
+extern A_global_declarations absyn_root;
+
+/* parse source file fname; 
+   return abstract syntax data structure */
+A_global_declarations parse(string fname) {
+  reset(fname);
+  if (yyparse() == 0) {
+    return absyn_root;
+  }
+  else return NULL;
+}
+
+int main(int argc, char **argv){
+  if(argc != 2){
+    fprintf(stderr,"usage: a.out filename\n");
+    exit(1);
+  }
+  SEM_pass(parse(argv[1]));
+  fprintf(stderr,"\n");
+  return 0;
+}

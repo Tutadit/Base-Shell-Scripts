@@ -1,0 +1,16 @@
+import {BsChevronLeft, BsChevronRight} from 'react-icons/bs';
+
+function ProductNav(props) {
+    return(
+	<div className="products-nav">
+          <a className="products-nav-handler"
+             onClick={props.handle}>
+            {props.direction == 'left' ?
+             <BsChevronLeft /> :
+             <BsChevronRight />}
+          </a>
+        </div>
+    );
+}
+
+export default ProductNav;

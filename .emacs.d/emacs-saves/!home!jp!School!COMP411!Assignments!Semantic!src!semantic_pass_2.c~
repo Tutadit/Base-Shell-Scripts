@@ -1,0 +1,506 @@
+#include <stddef.h>
+#include <stdlib.h>
+#include "util.h"
+#include "absyn.h"
+#include "errormsg.h"
+#include "symbol.h"
+#include "types.h"
+#include "env.h"
+#include "semantic.h"
+/*--------*/
+int in_block = 0;
+int in_while = 0;
+/* local function prototypes */
+static void trans_global_decs(S_table env, A_global_declarations v);
+static void trans_global_dec(S_table env, A_global_declaration v);
+
+static void trans_var(S_table env, A_var_dec  v);
+static void trans_func_dec(S_table env, A_func_dec v);
+static void trans_main_dec (S_table env, A_main_dec  v);
+
+static Ty_ty trans_type (A_type v);
+static void trans_id(S_table env, A_id v);
+
+static void trans_func_head(S_table env, A_func_head v);
+static void trans_block (S_table env, A_block  v);
+
+static void trans_main_func_dec (S_table env, A_main_func_dec v);
+
+Ty_ty trans_literal(S_table env, A_literal v);
+static void trans_func_decor(S_table env, A_func_decor v);
+static void trans_formal_param_list (S_table env, A_formal_param_list  v);
+static void trans_block_statements (S_table env, A_block_statements v);
+static void trans_block_statement (S_table env, A_block_statement v);
+static void trans_statement (S_table env, A_statement  v);
+static void trans_state_exp (S_table env, A_state_exp  v);
+Ty_ty trans_primary (S_table env, A_primary v);
+bool trans_argumentlist (S_table env,Ty_tyList types, A_argumentlist v);
+
+Ty_ty trans_functioninvocation (S_table env, A_functioninvocation v);
+Ty_ty trans_postficexpression (S_table env, A_postfixexpression v);
+Ty_ty trans_unaryexpression (S_table env, A_unaryexpression v);
+Ty_ty trans_multiplicativeexpression (S_table env, A_multiplicativeexpression v);
+Ty_ty trans_additiveexpression (S_table env, A_additiveexpression v);
+Ty_ty trans_reationalexpression (S_table env, A_relationalexpression v);
+Ty_ty trans_equalityexpression (S_table env, A_equalityexpression v);
+Ty_ty trans_conditionalandexpression (S_table env, A_conditionalandexpression v);
+Ty_ty trans_conditionalorexpression (S_table env, A_conditionalorexpression v);
+Ty_ty trans_assignmentexpression (S_table env, A_assignmentexpression v);
+Ty_ty trans_assignment (S_table env, A_assignment v);
+Ty_ty trans_exp (S_table env, A_exp v);
+
+Ty_ty trans_literal(S_table env, A_literal v) {
+  Ty_ty ty;
+  switch (v->kind) {
+  case A_NumL:
+    ty = Ty_Int();
+    break;
+  case A_LitL:
+    ty = Ty_String();
+    break;
+  case A_TrueL:
+    ty = Ty_Bool();
+    break;
+  case A_FalseL:
+    ty = Ty_Bool();
+    break;
+  default:
+    assert(0); 
+  }
+  return ty;
+}
+static Ty_ty trans_type (A_type v) {
+  Ty_ty ty;
+  switch (v) {
+  case A_int:
+    ty = Ty_Int();
+    break;
+  case A_bool:
+    ty = Ty_Bool();
+    break;
+  case A_void:
+    ty = Ty_Void();
+    break;
+  default:
+    assert(0); 
+  }
+  return ty;
+}
+void trans_global_decs(S_table env, A_global_declarations v) {
+  if ( v != NULL ) {
+    trans_global_decs(env, v->tail);
+    trans_global_dec(env, v->head);
+  }
+}	
+static void trans_global_dec(S_table env, A_global_declaration v) {
+  switch (v->kind) {
+  case A_varDec:
+    //trans_var(env, v->u.varDec);
+    break;
+  case A_funDec:
+    trans_func_dec(env, v->u.funDec);
+    break;
+  case A_mainDec:
+    trans_main_dec(env,v->u.mainDec);
+    break;
+  default:
+    assert(0); 
+ }
+}
+static void trans_var(S_table env, A_var_dec  v) {
+  Ty_ty ty = (v->type == A_int) ? Ty_Int() : Ty_Bool();
+  if(in_block > 0) {
+    error(v->pos, "Cannot declare variable in block");
+  }
+  if(S_look(env, S_Symbol(v->id))) {
+    error(v->pos,str_cat("Redeclared variable: ",v->id));
+  } else {
+    S_enter(env, S_Symbol(v->id),E_VarEntry(ty));
+  }
+}
+static void trans_id(S_table env, A_id v) {
+}
+static void trans_func_dec(S_table env, A_func_dec v) {
+  S_beginScope(env);
+  S_enter(env,S_Symbol("type"),E_VarEntry(trans_type(v->head->type)));
+  trans_func_head(env,v->head);
+  trans_block(env,v->block);
+  S_endScope(env);
+  
+}
+static void trans_func_head(S_table env, A_func_head v) {
+  trans_func_decor(env,v->dec);
+}
+static void trans_func_decor(S_table env, A_func_decor v) {
+  if(v->params != NULL) {
+    trans_formal_param_list(env,v->params);
+  }
+}
+static void trans_formal_param_list (S_table env, A_formal_param_list  v) {
+  A_formal_param_list list = v;
+  while (list != NULL) {
+    if( S_look(env, S_Symbol(list->param->id))) {
+      error(v->param->pos, "Parameter redeclared");
+    } else {
+      S_enter(env,
+	      S_Symbol(list->param->id),
+	      E_VarEntry(trans_type(list->param->type))
+	      );
+    }
+    list = list->tail;
+  }
+}
+
+static void trans_main_dec (S_table env, A_main_dec  v) {
+  trans_main_func_dec(env, v->dec);
+  trans_block(env,v->block);
+}
+static void trans_main_func_dec (S_table env, A_main_func_dec v) {
+  trans_id(env,v->id);
+}
+static void trans_block (S_table env, A_block  v) {
+  if (v->statements != NULL) {
+    trans_block_statements(env,v->statements);
+  }
+}
+static void trans_block_statements (S_table env, A_block_statements v) {
+  if(v != NULL) {
+    trans_block_statements(env,v->tail);
+    trans_block_statement(env,v->statement);
+  }
+}
+static void trans_block_statement (S_table env, A_block_statement v) {
+  switch (v->kind) {
+  case A_varState:
+    trans_var(env, v->u.var_dec);
+    break;
+  case A_StateState:
+    trans_statement(env,v->u.statement);
+    break;
+  default:
+    assert(0); 
+ }
+}
+
+static void trans_statement (S_table env, A_statement  v) {
+  Ty_ty ty;
+  E_enventry entry;
+  
+  switch (v->kind) {
+  case A_NilSt:
+    break;
+  case A_BlockSt:
+    in_block++;
+    trans_block(env,v->u.block);
+    in_block--;
+    break;
+  case A_St:
+    trans_state_exp(env,v->u.state_exp);
+    break;
+  case A_BreakSt:
+    if (in_while == 0) {
+      error(v->pos,"break must be within a while loop");
+    }
+    break;
+  case A_ReturnSt:
+    entry = S_look(env, S_Symbol("type"));
+    ty = trans_exp(env,v->u.exp);
+    if(ty->kind != entry->u.var.ty->kind) {
+      error(v->pos,"Return type mismatch");
+    }
+    break;
+  case A_EmptyReturnSt:
+    break;
+  case A_IfSt:
+    trans_exp(env,v->u.iff.exp);
+    trans_statement(env,v->u.iff.statement);
+    break;
+  case A_IfElseSt:
+    trans_exp(env,v->u.ife.exp);
+    trans_statement(env,v->u.ife.if_body);
+    trans_statement(env,v->u.ife.else_body);
+    break;
+  case A_WhileSt:
+    trans_exp(env,v->u.whilee.exp);
+    trans_statement(env,v->u.whilee.body);
+    break;
+  default:
+    assert(0); 
+ }
+}
+static void trans_state_exp (S_table env, A_state_exp  v) {
+  switch(v->kind) {
+  case A_AssSt:
+    trans_assignment(env,v->u.assignment);
+    break;
+  case A_FunInSt:
+    trans_functioninvocation(env,v->u.invocation);
+    break;
+  default:
+    assert(0);
+  }
+}
+Ty_ty trans_primary (S_table env, A_primary v) {
+  Ty_ty ty;
+  switch(v->kind) {
+  case A_LitP:
+    ty = trans_literal(env,v->u.literal);
+    break;
+  case A_ExpP:
+    ty = trans_exp(env,v->u.exp);
+    break;
+  case A_FunInP:
+    ty = trans_functioninvocation(env,v->u.func_inv);
+    break;
+  default:
+    assert(0);
+  }
+  return ty;
+}
+bool trans_argumentlist (S_table env, Ty_tyList types, A_argumentlist v) {
+  bool fits = true;
+  Ty_ty ty;
+  A_argumentlist list = v;
+  Ty_tyList types_list = types;
+  while (list != NULL && types_list != NULL && fits) {
+    ty = trans_exp(env, v->exp);
+    if(ty->kind == types_list->head->kind) {
+      list = list->tail;
+      types_list = types_list->tail;
+    } else {
+      fits = false;
+    }
+  }
+  return fits;
+}
+Ty_ty trans_functioninvocation (S_table env, A_functioninvocation v) {
+  Ty_ty ty;
+  E_enventry entry = S_look(env,S_Symbol(v->id));
+  if(entry) {
+    if (entry->kind == E_funEntry) {
+      if (trans_argumentlist(env, entry->u.fun.formals,v->list)) {
+	ty = entry->u.fun.result;
+      } else {
+	error(v->pos,str_cat(v->id,", function call does not match function prototype"));
+      }
+    } else if (entry->kind == E_mainEntry) {
+      error(v->pos,str_cat(v->id,", Is the main function. Cannot call"));
+    } else {
+      error(v->pos,str_cat(v->id,", Is not a function. Pssibly a variable"));
+    }
+  } else {
+    error(v->pos,str_cat(v->id,", Is not a function"));
+  }
+  return ty;
+}
+Ty_ty var_entry_type(S_table env, A_id id, A_pos pos) {
+  E_enventry entry = S_look(env, S_Symbol(id));
+  Ty_ty ty;
+  if(entry != NULL ) {
+    if(entry->kind == E_varEntry) {
+      ty = entry->u.var.ty;
+    } else {
+      error(pos, str_cat("Identifier is a function:",id));
+      exit(1);
+    }
+  } else {
+    error(pos, str_cat("Identifier not found:",id));
+  }
+  return ty;
+}
+
+Ty_ty trans_postficexpression (S_table env, A_postfixexpression v) {
+  Ty_ty ty;
+  switch(v->kind) {
+  case A_PrimPo:
+    ty =trans_primary(env,v->u.primary);
+    break;
+  case A_IdPo:
+    ty = var_entry_type(env,v->u.id,v->pos);
+    break;
+  default:
+    assert(0);
+  }
+  return ty;
+}
+Ty_ty trans_unaryexpression (S_table env, A_unaryexpression v) {
+  Ty_ty ty;
+  switch(v->kind){
+  case A_MinUn:
+    ty =trans_unaryexpression(env,v->u.un_exp);
+    break;
+  case A_BangUn:
+    ty =trans_unaryexpression(env,v->u.un_exp);
+    break;
+  case A_PosUn:
+    ty =trans_postficexpression(env,v->u.pos_exp);
+    break;
+  default:
+    assert(0);
+  }
+  return ty;
+}
+Ty_ty trans_multiplicativeexpression (S_table env, A_multiplicativeexpression v) {
+  Ty_ty ty;
+  switch(v->kind){
+  case A_UnMu:
+    ty = trans_unaryexpression(env,v->u.un_exp);
+    break;
+  case A_MulMu:
+    ty =trans_multiplicativeexpression(env,v->u.ops.exp1);
+    ty =trans_unaryexpression(env,v->u.ops.exp2);
+    break;
+  case A_DivMu:
+    ty =trans_multiplicativeexpression(env,v->u.ops.exp1);
+    ty =trans_unaryexpression(env,v->u.ops.exp2);
+  case A_ModMu:
+    ty =trans_multiplicativeexpression(env,v->u.ops.exp1);
+    ty =trans_unaryexpression(env,v->u.ops.exp2);
+    break;
+  default:
+    assert(0);
+  }
+  return ty;
+}
+Ty_ty trans_additiveexpression (S_table env, A_additiveexpression v) {
+  Ty_ty ty;
+  switch(v->kind){
+  case A_MuAd:
+    ty =trans_multiplicativeexpression(env,v->u.un_exp);
+    break;
+  case A_AdAd:
+    ty =trans_additiveexpression(env,v->u.ops.op2);
+    ty =trans_multiplicativeexpression(env,v->u.ops.op1);
+    break;
+  case A_MinAd:
+    ty =trans_additiveexpression(env,v->u.ops.op2);
+    ty =trans_multiplicativeexpression(env,v->u.ops.op1);
+    break;
+  default:
+    assert(0);
+  }
+  return ty;
+}
+Ty_ty trans_reationalexpression (S_table env, A_relationalexpression v) {
+  Ty_ty ty;
+  switch(v->kind){
+  case A_AdRe:
+    ty =trans_additiveexpression(env,v->u.un_exp);
+    break;
+  case A_LTRe:
+    ty =trans_reationalexpression(env,v->u.ops.op2);
+    ty =trans_additiveexpression(env,v->u.ops.op1);
+    break;
+  case A_GTRe:
+    ty =trans_reationalexpression(env,v->u.ops.op2);
+    ty =trans_additiveexpression(env,v->u.ops.op1);    
+    break;
+  case A_LERe:
+    ty =trans_reationalexpression(env,v->u.ops.op2);
+    ty =trans_additiveexpression(env,v->u.ops.op1);
+    break;
+  case A_GERe:
+    ty =trans_reationalexpression(env,v->u.ops.op2);
+    ty =trans_additiveexpression(env,v->u.ops.op1);    
+    break;
+  default:
+    assert(0);
+  }
+  return ty;
+}
+Ty_ty trans_equalityexpression (S_table env, A_equalityexpression v) {
+  Ty_ty ty;
+  switch(v->kind){
+  case A_RaEq:
+    ty =trans_reationalexpression(env,v->u.un_exp);
+    break;
+  case A_EqEq:
+    ty = trans_equalityexpression(env,v->u.ops.op1);
+    ty = trans_reationalexpression(env,v->u.ops.op2);
+    break;
+  case A_NeEq:
+    ty = trans_equalityexpression(env,v->u.ops.op1);
+    ty = trans_reationalexpression(env,v->u.ops.op2);
+    break;
+  default:
+    assert(0);
+  }
+  return ty;
+}
+Ty_ty trans_conditionalandexpression (S_table env, A_conditionalandexpression v) {
+  Ty_ty ty;
+  switch(v->kind) {
+  case A_EqCoA:
+    ty = trans_equalityexpression(env,v->u.un_exp);
+    break;
+  case A_AnCoA:
+    ty =trans_conditionalandexpression(env,v->u.ops.op1);
+    ty = trans_equalityexpression(env,v->u.ops.op2);
+    break;
+  default:
+    assert(0);
+  }
+  return ty;
+}
+Ty_ty trans_conditionalorexpression (S_table env, A_conditionalorexpression v) {
+  Ty_ty ty;
+  switch(v->kind) {
+  case A_AnCoO:
+    ty = trans_conditionalandexpression(env,v->u.un_exp);
+    break;
+  case A_OrCoO:
+    ty = trans_conditionalorexpression(env,v->u.ops.op1);
+    ty = trans_conditionalandexpression(env,v->u.ops.op2);
+    break;
+  default:
+    assert(0);
+  }
+  return ty;
+}
+Ty_ty trans_assignmentexpression (S_table env, A_assignmentexpression v) {
+  Ty_ty ty;
+  switch(v->kind) {
+  case A_ConAs:
+    ty = trans_conditionalorexpression(env,v->u.con_exp);
+    break;
+  case A_AsAs:
+    ty = trans_assignment(env,v->u.ass_exp);
+    break;
+  default:
+    assert(0);
+  }
+  return ty;
+}
+
+Ty_ty trans_exp (S_table env, A_exp v) {
+  Ty_ty ty;
+  ty = trans_assignmentexpression(env,v->exp);
+  return ty;
+}
+
+Ty_ty trans_assignment (S_table env, A_assignment v) {
+  Ty_ty ty_exp,ty_id;
+  E_enventry entry = S_look(env,S_Symbol(v->id));
+  if(entry) {
+    if(entry->kind == E_varEntry) {
+      ty_id = entry->u.var.ty;
+      ty_exp = trans_assignmentexpression(env,v->exp);
+      if(ty_exp->kind != ty_id->kind) {
+	error(v->pos,"Attempting to assign to a type that does not match");
+	exit(1);
+      }
+    } else {
+      error(v->pos, "Identifier not assignable");
+      exit(1);
+    }
+  } else {
+    error(v->pos,"Unknown identifier");
+    exit(1);
+  }
+  return ty_id;
+}
+/* ------ */
+
+void SEM_pass_2(S_table env, A_global_declarations decs) {
+  trans_global_decs(env, decs);
+}

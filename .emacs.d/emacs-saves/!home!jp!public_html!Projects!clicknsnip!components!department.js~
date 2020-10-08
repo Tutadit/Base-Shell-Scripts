@@ -1,0 +1,53 @@
+import { Transition } from 'react-transition-group';
+import Departments from './departments';
+
+function Department(props) {
+    
+    const duration = 500;
+
+    const defaultStyle = {
+        transition: `opacity ${duration}ms ease`,
+        transition: `transform ${duration}ms ease`,
+        transform:`scale(1)`
+    };
+
+    const transitionStyles = {
+        entering: {
+            opacity: 1,            
+            transform: `scale(1)`
+        },
+        entered:  {
+            opacity: 1,
+            transform: `scale(1)`
+        },
+        exiting:  {
+            opacity: 0.5,
+            transform: `scale(0)`            
+        },
+        exited:  {
+            opacity: 0.5,
+            transform: `scale(0)`            
+        },
+    };
+    console.log(props.data);
+    return(
+        <Transition in={props.show}
+                    timeout={duration}>
+          {state => (
+              <div className="department"
+                   style={{
+                       ...defaultStyle,
+                       ...transitionStyles[state]
+                   }}>
+                <a href=""
+                   className="department_handle">                 
+                  {props.data.label}
+                </a>
+              </div>
+            
+        )}
+        </Transition>
+    );
+}
+
+export default Department;

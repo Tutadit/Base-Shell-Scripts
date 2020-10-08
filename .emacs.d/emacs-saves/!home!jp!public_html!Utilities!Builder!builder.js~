@@ -1,0 +1,19 @@
+var editor="<textarea id=\"editor\"rows=\"4\" cols=\"50\"></textarea>";
+document.getElementById("builder").innerHTML = editor;
+
+
+$.getJSON( "./html-tags.json", function( data ) {
+  var items = [];
+  $.each( data, function( key, val ) {
+      $.console.log(key + " " + val);
+  });
+});
+
+$('#editor').atwho({
+  at: "<",
+  data: ["<!--...-->;", "two", "three"],
+}).atwho({
+  at: ":",
+  data: ["+1", "-1", "smile"]
+});
+

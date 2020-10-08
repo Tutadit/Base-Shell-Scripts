@@ -1,0 +1,6 @@
+import '../style/scss/custom.scss'
+
+export default function Builder({ Component, pageProps }) {
+    return <Component {...pageProps} />
+}
+

@@ -1,0 +1,14 @@
+#!/usr/bin/bash
+
+hola=0
+
+RES_WIDTH=1920
+RES_HEIGHT=1080
+
+BAR_HEIGHT=40
+
+. palette
+
+
+echo -e "web-mode" | dmenu -h 50 -w 960 -x 480 -uh 2 -uc $CC_LIGHT_TONE -o 85 -fn "Roboto:style=bold" -o 0.68 -nb $CC_DARK_TONE -sb $CC_MID_TONE_1 -sf $CC_LIGHT_TONE -nf "#FFFFFF" "$@" -p "" | ${SHELL:-"/bin/bash"}  &
+
