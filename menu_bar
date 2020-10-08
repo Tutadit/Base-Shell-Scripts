@@ -1,0 +1,79 @@
+#!/bin/bash
+PANEL_FONT="Roboto:style=Bold:size=10"
+
+. getPalette
+
+display(){
+    
+    status="$(cat /sys/class/power_supply/BAT0/status)"
+    capacity="$(cat /sys/class/power_supply/BAT0/capacity)"
+    echo -ne "%{l}      "
+
+    if ((0<=capacity && capacity<=15))
+    then
+	battery="\uf244"
+    elif ((16<=capacity && capacity<=45))
+    then
+	battery="\uf243"
+    elif ((45<=capacity && capacity<=60))
+    then
+	battery="\uf242"
+    elif ((60<=capacity && capacity<=95))
+    then
+	battery="\uf241"
+    else
+	battery="\uf240"
+    fi 
+    
+    echo -ne "$battery"
+    echo -ne " $capacity%"
+    if [ $status == "Charging" ]; then
+	    echo -ne "\uf0e7"
+    fi
+
+    date="$(date '+%R')"
+    echo -ne "%{r}$date    "
+}
+
+ws(){
+    DESKTOPS=$(bspc query -D -m $1 --names)
+    echo -ne " %{c}"
+    for desktop in $DESKTOPS; do
+	STATUS=$(bspc wm -g | grep -P ":[OUFofu]$desktop:" -o | sed -e 's/://g' | sed -e "s/$desktop//")
+	case $STATUS in
+	    [OFU])
+		echo -ne "\uf111 "
+		;;
+	    "o")
+		echo -ne "\uf10c "
+		;;
+	    "u")
+		echo -ne "\uf06a "
+		;;
+	    "f")
+		echo -ne "\uf1db "
+		;;
+	esac
+    done
+}
+
+
+end_time=$(($(date +%s) + 10))
+current_time=$(date +%s)
+
+Monitors=$(xrandr | grep -o "^.* connected" | sed "s/ connected//")
+
+while [ $current_time -lt $end_time ]; do
+    tmp=0                                                                       
+    for m in $(echo "$Monitors"); do
+	echo -ne "%{S${tmp}}"
+	display
+	ws $m
+	echo -ne "%{F$CC_LIGHT_TONE}"
+	echo -ne "%{B$CC_DARK_TONE}"
+	let tmp=$tmp+1
+    done
+    current_time=$(date +%s)
+    echo
+done | lemonbar -g x45 -u 0 -f "$PANEL_FONT" -f "Font Awesome:size=10" 
+
