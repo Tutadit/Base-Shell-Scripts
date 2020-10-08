@@ -1,0 +1,54 @@
+#! /bin/bash
+
+. getPalette
+COLOR_FOCUS=$CC_LIGHT_TONE;
+COLOR_NORMAL=$CC_LIGHT_TONE;
+RES_WIDTH=1920
+
+external_monitor=$(xrandr --query | grep 'HDMI1')
+
+if [[ $external_monitor == *"HDMI1 connected"* ]]; then
+    xrandr --output eDP1 --primary --mode 1920x1080 --rotate normal --output HDMI1 --mode 1920x1080 --rotate normal  --right-of eDP1
+
+    bspc monitor eDP1 -d I II III IV V
+    bspc monitor HDMI1 -d VI VII VIII IX X
+    bspc rule -a firefox desktop=^6
+else
+    bspc monitor eDP1 -d I II III IV V VI VII VIII IX X
+    bspc rule -a firefox desktop=^2
+fi
+
+sxhkd &
+
+bspc config window_gap          15
+
+bspc config top_padding 45
+bspc config bottom_padding 25
+bspc config right_padding 15
+bspc config left_padding 15
+
+bspc config split_ratio          0.50
+bspc config borderless_monocle   false
+bspc config gapless_monocle      true
+bspc config focus_follows_pointer  false
+
+
+
+## bspc rule -a panel floating=on state=floating
+bspc rule -a dmenu_run state=floating
+bspc rule -a Termite:Writting desktop=^1 state=floating rectangle=1230x930+345+75 
+bspc rule -a Termite:Mail desktop=^3 state=floating rectangle=1200x930+360+75
+bspc rule -a dropdown sticky=on state=floating hidden=on rectangle=1920x400+0+0
+bspc rule -a wm-console sticky=on state=floating hidden=on rectangle=${RES_WIDTH}x400+0+680
+bspc rule -a wm-on-screen sticky=on state=floating hidden=on rectangle=800x1080+1120+0
+bspc rule -a Dunst border=off
+bspc rule -a Ferdi border=off desktop=^3 follow=off
+bspc rule -a zoom desktop=^7 follow=off
+## Web-Mode
+
+
+## AutoStart
+termite --class dropdown&
+setBackground &
+Writting &
+compton&
