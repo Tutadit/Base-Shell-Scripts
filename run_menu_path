@@ -1,0 +1,3 @@
+#!/bin/bash
+PROGRAMS=$(echo "ferdi poweroff lector discord spotify firefox maill telegram"| xargs -n1 | sort -u);
+echo "$PROGRAMS"
